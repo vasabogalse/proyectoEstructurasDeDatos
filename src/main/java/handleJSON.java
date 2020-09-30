@@ -1,4 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -12,7 +14,8 @@ public interface handleJSON<T> {
             jsonInString = mapper.writeValueAsString(o1);
 
             // write object to JSON String
-            mapper.writeValue(Paths.get(".", "src", "main","resources", jsonFile + ".json").toFile(), o1);
+            Path path = Paths.get(".", "src", "main","resources", jsonFile + ".json");
+            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), o1);
 
         } catch (Exception ex) {
             ex.printStackTrace();

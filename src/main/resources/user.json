@@ -1,4 +1,4 @@
-{
+[{
   "roles": [
     "Member",
     "Admin"
@@ -6,4 +6,14 @@
   "name": "John Deo",
   "admin": true,
   "email": "john.doe@example.com"
-}
+  },
+  {
+    "roles": [
+      "Member",
+      "Admin"
+    ],
+    "name": "John Deo",
+    "admin": true,
+    "email": "john.doe@example.com"
+  }
+]
