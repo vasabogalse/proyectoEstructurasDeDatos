@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManagement implements handleJSON {
+
     public List<Clinica> clinicList;
     public List<Psiquiatra> psychiatristsList;
     public List<Paciente> pacientsList;
@@ -13,19 +14,14 @@ public class DataManagement implements handleJSON {
     //Constructor definition with no parameters
     public DataManagement(){
         this.clinicList = new ArrayList<>();
-        this.medicamentList = new ArrayList<>();
-        this.psychiatristsList = new ArrayList<>();
-        this.pacientsList = new ArrayList<>();
-        this.clinicHistorialList = new ArrayList<>();
-        this.medicFormuleList = new ArrayList<>();
-        this.appointmentList= new ArrayList<>();
     }
+
 
     //Setters in order to assing an arrayList to the list
     public void setClinicList(List<Clinica> clinicList) {
         this.clinicList = clinicList;
     }
-
+/*
     public void setPsychiatristsList(List<Psiquiatra> psychiatristsList) {
         this.psychiatristsList = psychiatristsList;
     }
@@ -48,13 +44,13 @@ public class DataManagement implements handleJSON {
 
     public void setAppointmentList(List<Cita> appointmentList) {
         this.appointmentList = appointmentList;
-    }
+    }*/
 
     //Default getter methods
     public List<Clinica> getClinicList() {
         return clinicList;
     }
-
+/*
     public List<Psiquiatra> getPsychiatristsList() {
         return psychiatristsList;
     }
@@ -78,4 +74,5 @@ public class DataManagement implements handleJSON {
     public List<Cita> getAppointmentList() {
         return appointmentList;
     }
+    */
 }

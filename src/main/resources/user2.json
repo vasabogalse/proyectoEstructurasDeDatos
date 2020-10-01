@@ -1,1 +1,9 @@
-{"nit":1,"nombreClinica":"eps","direccion":"dir","telefono":123456,"medicamento":null,"psiquiatra":null,"coordinadorDeClinica":null}
+{
+  "nit": 1,
+  "nombreClinica": "eps",
+  "direccion": "dir",
+  "telefono": 123456,
+  "medicamento": null,
+  "psiquiatra": null,
+  "coordinadorDeClinica": null
+}
