@@ -14,7 +14,6 @@ public interface handleJSON<T> {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return jsonInString;
     }
 

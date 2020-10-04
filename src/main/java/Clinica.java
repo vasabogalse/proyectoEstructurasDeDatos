@@ -1,17 +1,16 @@
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 
 public class Clinica implements handleJSON{
     public int nit;
     public String nombreClinica;
     public String direccion;
     public int telefono;
-    public List<Clinica> clinicList;
+    public CoordinadorDeClinica coordinadorDeClinica;
+    public ArrayList<Medicamento> listaDeMedicamentos;
+    public ArrayList<Psiquiatra> listaDePsiquiatras;
 
     public Clinica(){
-        this.clinicList = new ArrayList<>();
     }
 
     public Clinica(int nit, String nombreClinica, String direccion, int telefono) {
@@ -19,10 +18,22 @@ public class Clinica implements handleJSON{
         this.nombreClinica = nombreClinica;
         this.direccion = direccion;
         this.telefono = telefono;
-        //this.medicamento = medicamento;
-        //this.psiquiatra = psiquiatra;
-        //this.coordinadorDeClinica = coordinadorDeClinica;
+        this.coordinadorDeClinica = coordinadorDeClinica;
+        this.listaDeMedicamentos = new ArrayList<>();
+        this.listaDePsiquiatras = new ArrayList<>();
     }
+
+    public Clinica(int nit, String nombreClinica, String direccion, int telefono, ArrayList<Medicamento> listaDeMedicamentos, ArrayList<Psiquiatra> listaDePsiquiatras) {
+        this.nit = nit;
+        this.nombreClinica = nombreClinica;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.coordinadorDeClinica = coordinadorDeClinica;
+        this.listaDeMedicamentos = listaDeMedicamentos;
+        this.listaDePsiquiatras = listaDePsiquiatras;
+    }
+
+    public int getNit() { return nit; }
 
     @Override
     public String toString() {
@@ -31,14 +42,6 @@ public class Clinica implements handleJSON{
                 " nombreClinica : " + nombreClinica + "," + "\n" +
                 " direccion : " + direccion + "," + "\n" +
                 " telefono : " + telefono + "\n" +
-                '}' + "\n";
-    }
-
-    public void setClinicList(List<Clinica> clinicList) {
-        this.clinicList = clinicList;
-    }
-
-    public List<Clinica> getClinicList() {
-        return clinicList;
+                '}';
     }
 }

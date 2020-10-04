@@ -1,25 +1,21 @@
 [ {
-  "nit" : 1,
-  "nombreClinica" : "eps",
-  "direccion" : "dir",
-  "telefono" : 123456,
-  "clinicList" : null
+  "nit" : 3,
+  "nombreClinica" : "bps",
+  "direccion" : "yir",
+  "telefono" : 123456
 }, {
   "nit" : 2,
-  "nombreClinica" : "eps2",
-  "direccion" : "dir2",
-  "telefono" : 879034,
-  "clinicList" : null
+  "nombreClinica" : "tps2",
+  "direccion" : "uir2",
+  "telefono" : 879034
 }, {
-  "nit" : 3,
-  "nombreClinica" : "eps3",
-  "direccion" : "dir3",
-  "telefono" : 1011121,
-  "clinicList" : null
+  "nit" : 1,
+  "nombreClinica" : "cps3",
+  "direccion" : "mir3",
+  "telefono" : 1011121
 }, {
   "nit" : 4,
-  "nombreClinica" : "eps4",
-  "direccion" : "dir4",
-  "telefono" : 7865744,
-  "clinicList" : null
+  "nombreClinica" : "dps4",
+  "direccion" : "air4",
+  "telefono" : 786
 } ]
