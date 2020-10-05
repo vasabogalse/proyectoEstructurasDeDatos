@@ -1,29 +1,26 @@
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+
 
 public class HistorialClinico implements handleJSON{
-    public static Scanner input = new Scanner(System.in);
 
     public int idHistClinico;
     public String antecedentes;
     public String procedimientos;
     public String recomendaciones;
-    // public Psiquiatra psiquiatra;
-    //public FormulaMedica formulaMedica;
-    //public Paciente paciente;
+    public Psiquiatra psiquiatra;
+    public Paciente paciente;
+    public ArrayList<FormulaMedica> listaForMedicas;
 
-    public List<HistorialClinico> HistList;
 
-    public HistorialClinico(){
-        this.HistList = new ArrayList<>();
-    }
+    HistorialClinico(){ }
 
     public HistorialClinico(int idHistClinico, String antecedentes, String procedimientos, String recomendaciones) {
         this.idHistClinico = idHistClinico;
         this.antecedentes = antecedentes;
         this.procedimientos = procedimientos;
         this.recomendaciones = recomendaciones;
+        /* this.listaForMedicas = null;*/
     }
 
     @Override
@@ -36,34 +33,51 @@ public class HistorialClinico implements handleJSON{
                 '}'+ "\n";
     }
 
-    public static void  crearHistClinico(){
 
+    public static void  crearHistClinico(){
+        ArrayList<HistorialClinico> ListaHistClinicos;
+        ListaHistClinicos = SistemaDeGestionClinica.histClinicos;
         int idHist = 0;
-        for (HistorialClinico histClinico : SistemaDeGestionClinica.HistClinicosJava){
+        for (HistorialClinico histClinico : ListaHistClinicos){
             idHist = histClinico.idHistClinico;
         }
 
+        SistemaDeGestionClinica.input.nextLine();
         System.out.println("El paciente ya se encuentra registrado en el sistema,por favor diligencie la historia clinica.");
         System.out.println("Antecedentes: ");
-        String antecedentes = input.nextLine();
+        String antecedentes = SistemaDeGestionClinica.input.nextLine();
         System.out.println("Recomendaciones: ");
-        String recomendaciones = input.nextLine();
+        String recomendaciones = SistemaDeGestionClinica.input.nextLine();
         System.out.println("Procedimientos: ");
-        String procedimientos = input.nextLine();
+        String procedimientos = SistemaDeGestionClinica.input.nextLine();
 
         idHist++;
         HistorialClinico nuevoHistClinico = new HistorialClinico(idHist,antecedentes,procedimientos,recomendaciones);
 
-        SistemaDeGestionClinica.histClinicos.add(nuevoHistClinico);
-        System.out.println("La historia clinica se creó correctamente con el id: " + idHist);
-        SistemaDeGestionClinica.histGuar.writeJSON(SistemaDeGestionClinica.histClinicos, "historialesClinicos");
-        ArrayList<HistorialClinico> HistClinicosJava = SistemaDeGestionClinica.histGuar.readJSON(HistorialClinico.class, "historialesClinicos");
 
+        ListaHistClinicos.add(nuevoHistClinico);
+        System.out.println("La historia clinica se creó correctamente con el id: " + idHist);
+
+        HistorialClinico histGuar = new HistorialClinico();
+
+        histGuar.writeJSON(ListaHistClinicos, "historialesClinicos");
+
+        ListaHistClinicos = histGuar.readJSON(HistorialClinico.class, "historialesClinicos");
+
+        SistemaDeGestionClinica.histClinicos = ListaHistClinicos;
         System.out.println(SistemaDeGestionClinica.histClinicos.toString());
+
+
     }
 
-    public static void editarHistClinico(){}
+    public static void editarHistClinico(){ }
+
     public static void borrarHistClinico(){}
+
     public static void verHistClinico(){}
+
+
+
+
 
 }

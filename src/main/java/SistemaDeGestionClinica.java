@@ -8,6 +8,8 @@ public class SistemaDeGestionClinica {
     public static ArrayList<Clinica> clinicas = new ArrayList<>();
     public static ArrayList<Paciente> pacientes = new ArrayList<>();
     public static ArrayList<HistorialClinico> histClinicos = new ArrayList<>();
+    public static ArrayList<Psiquiatra> psiquiatras = new ArrayList<>();
+
 
 
     public static Clinica clGuar = new Clinica(); // create an object from the class require - constructor vacío para guardar
@@ -34,6 +36,9 @@ public class SistemaDeGestionClinica {
         HistorialClinico historial2 = new HistorialClinico(2, "cancer","quimioterapia","dieta");
         HistorialClinico historial3 = new HistorialClinico(3, "cancer","quimioterapia","dieta");
 
+        Psiquiatra psiquiatra1 = new Psiquiatra("1","psi1","osorio");
+        Psiquiatra psiquiatra2 = new Psiquiatra("2","psi2","cano");
+
         //Add objects to an array
         clinicas.add(clinica1);
         clinicas.add(clinica2);
@@ -47,6 +52,11 @@ public class SistemaDeGestionClinica {
         histClinicos.add(historial1);
         histClinicos.add(historial2);
         histClinicos.add(historial3);
+
+        psiquiatras.add(psiquiatra1);
+        psiquiatras.add(psiquiatra2);
+
+        Psiquiatra.asignarPsiquiatra(paciente1);
 
         clGuar.writeJSON(clinicas, "clinicas"); // serialization of objects
         // single Obj Ex: String obj2 = clinica2.writeJSON(clinica1,"user2");
@@ -90,6 +100,55 @@ public class SistemaDeGestionClinica {
         }
 
         // MENÚ PACIENTE.
+        label:
+        while (true) {
+            System.out.println();
+            System.out.println("Menú paciente, escoja una opción:");
+            System.out.println("1. registrar paciente.");
+            System.out.println("2. ingresar paciente.");
+            System.out.println("3. editar paciente.");
+            System.out.println("4. eliminar paciente.");
+            System.out.println("5. ver paciente.");
+            System.out.println("6. cambiar psiquiatra.");
+            System.out.println("7. registrar emociones.");
+            System.out.println("8. asignar Psiquiatra Defecto.");
+            System.out.println("9. programar Cita.");
+            System.out.println("10. asignar psiquiatra.");
+            System.out.println("0. Salir.");
+            option = input.next();
+            switch (option) {
+                case "1":
+                    Paciente.registrarPaciente();
+                    break;
+                case "2":
+                    Paciente.ingresarPaciente();
+                    break;
+                case "3":
+                    Paciente.editarPaciente();
+                    break;
+                case "4":
+                    Paciente.eliminarPaciente();
+                case "5":
+                    Paciente.verPaciente();
+                case "6":
+                    Paciente.cambiarPsiquiatra();
+                case "7":
+                    Paciente.registrarEmociones();
+                case "8":
+                    Paciente.asignarPsiquiatraDefecto();
+                    break;
+                case "9":
+                    Paciente.programarCita();
+                case "10":
+                    //SistemaDeGestionClinica.asignarPsiquiatra();
+                    break;
+                case "0":
+                    break label;
+            }
+        }
+
+
+
 
 
 
