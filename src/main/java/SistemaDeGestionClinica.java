@@ -8,11 +8,43 @@ public class SistemaDeGestionClinica {
     public static ArrayList<Clinica> clinicas = new ArrayList<>();
     public static ArrayList<Psiquiatra> psiquiatras = new ArrayList<>();
     public static ArrayList<String> pacientes = new ArrayList<>();
-    public static ArrayList<String> medicamentos = new ArrayList<>();
+    public static ArrayList<Medicamento> medicamentos = new ArrayList<>();
+    public static ArrayList<CoordinadorDeClinica> coordinadores = new ArrayList<>();
 
     public static void main(String[] args) {
+
         Clinica cl = new Clinica(); // create an object from the class require
         clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
+
+        Medicamento med = new Medicamento();
+        medicamentos = med.readJSON(Medicamento.class, "medicamentos");
+
+        CoordinadorDeClinica coord = new CoordinadorDeClinica();
+        coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
+
+        System.out.println("---------------------------------------");
+        System.out.println(coordinadores.get(0).clinicaCoordinador);
+
+//        Clinica cl = new Clinica(); // create an object from the class require
+//        clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
+//
+//        Medicamento med = new Medicamento();
+//        medicamentos = med.readJSON(Medicamento.class, "medicamentos");
+//
+//        CoordinadorDeClinica coord = new CoordinadorDeClinica();
+//        coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
+
+
+
+
+
+
+
+
+
+
+
+
 
         // create objects
         /*Clinica clinica1 = new Clinica(1, "eps", "dir", 123456);
@@ -40,8 +72,8 @@ public class SistemaDeGestionClinica {
         //Collections.sort(clinicas, ClinicSort.directionOrder);
         //System.out.println(clinicas);
 
-        Collections.sort(clinicas, ClinicSort.telOrder);
-        System.out.println(clinicas);
+//        Collections.sort(clinicas, ClinicSort.telOrder);
+//        System.out.println(clinicas);
 
         // menú de ingreso al sistema
         //String opcionIngreso;

@@ -6,7 +6,7 @@ public class Clinica implements handleJSON{
     public String nombreClinica;
     public String direccion;
     public int telefono;
-    public CoordinadorDeClinica coordinadorDeClinica;
+//    public CoordinadorDeClinica coordinadorDeClinica;
     public ArrayList<Medicamento> listaDeMedicamentos;
     public ArrayList<Psiquiatra> listaDePsiquiatras;
 
@@ -18,7 +18,7 @@ public class Clinica implements handleJSON{
         this.nombreClinica = nombreClinica;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.coordinadorDeClinica = coordinadorDeClinica;
+//        this.coordinadorDeClinica = coordinadorDeClinica;
         this.listaDeMedicamentos = new ArrayList<>();
         this.listaDePsiquiatras = new ArrayList<>();
     }
@@ -28,7 +28,7 @@ public class Clinica implements handleJSON{
         this.nombreClinica = nombreClinica;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.coordinadorDeClinica = coordinadorDeClinica;
+//        this.coordinadorDeClinica = coordinadorDeClinica;
         this.listaDeMedicamentos = listaDeMedicamentos;
         this.listaDePsiquiatras = listaDePsiquiatras;
     }

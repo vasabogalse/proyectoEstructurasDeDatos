@@ -1,22 +1,27 @@
 import com.fasterxml.jackson.annotation.JsonTypeId;
+
+import java.nio.file.LinkPermission;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class CoordinadorDeClinica {
-    @JsonTypeId
+public class CoordinadorDeClinica implements handleJSON{
     public String contrasenaCoordinador;
     public String emailCoordinador;
     public Clinica clinicaCoordinador;
 
-    @Override
-    public String toString() {
-        return "{" + "\n" +
-                " emailCoordinador : " + emailCoordinador + "," + "\n" +
-                " contrasenaCoordinador : " + contrasenaCoordinador + "," + "\n" +
-                " clinicaCoordinador : " + clinicaCoordinador + "," + "\n" +
-                "}";
+    public CoordinadorDeClinica() {
     }
+
+    public static void main(String[] args) {
+        CoordinadorDeClinica coor = new CoordinadorDeClinica();
+        coor.suministrarMedicamentos();
+
+
+    }
+
 
 //    public static void main(String[] args) {
 //
@@ -57,6 +62,9 @@ public class CoordinadorDeClinica {
 //        }
 //
 //    }
+
+
+
     public void editarClinica() {
         Scanner input = new Scanner(System.in);
         System.out.println("¿Qué atributo desea cambiar?");
@@ -223,21 +231,111 @@ public class CoordinadorDeClinica {
     }
 
     public void suministrarMedicamentos() {
+        Scanner input = new Scanner(System.in);
         System.out.println("Para visualizar los medicamentos de la clínica, escoja respecto a cual" +
-                " atributo los quiere organizar: ");
+                " atributo los quiere que estén organizados: ");
         System.out.println("1. Nombre");
         System.out.println("2. Cantidad");
+        String optcompa = input.next();
 
-        Collections.sort(clinicaCoordinador.listaDeMedicamentos, new MedicamentoComparatorNombre());
 
 
+        if (optcompa.equals("1")) {
+            Collections.sort(clinicaCoordinador.listaDeMedicamentos, new MedicamentoComparatorNombre());
+        }
+        else if (optcompa.equals("2")) {
+            Collections.sort(clinicaCoordinador.listaDeMedicamentos, new MedicamentoComparatorCantidad());
+        }
+        else {
+            System.out.println("Ingresó una opción inválida");
+            return;
+        }
+
+        Medicamento med = new Medicamento();
+        med.listarMedicamento(clinicaCoordinador);
+        med.notificarCantidad(clinicaCoordinador);
+//        ArrayList<Medicamento> medicamentosCoord = (ArrayList) SistemaDeGestionClinica.medicamentos.clone();
+
+        System.out.println("¿Qué desea hacer?");
+        System.out.println("1. Agregar suministros de un medicamento existente");
+        System.out.println("2. Agregar un medicamento nuevo");
+
+        String optadd = input.next();
+        if (optadd.equals("1")) {
+            System.out.println("¿A qué medicamento le desea aumentar la cantidad?");
+            System.out.println("Recuerde ingresar el número correspondiente al medicamento según el listado mostrado");
+            int optmed = input.nextInt();
+            if (optmed < 1 || optmed > clinicaCoordinador.listaDeMedicamentos.size()) {
+                System.out.println("Ha ingresado un numero fuera del rango de medicamentos disponibles");
+                return;
+            }
+
+            System.out.println("Ingrese la cantidad de unidades a agregar al medicamento " +
+                    clinicaCoordinador.listaDeMedicamentos.get(optmed - 1).nombreMedicamento);
+            int cantidadSum = input.nextInt();
+            if (cantidadSum < 1) {
+                System.out.println("Tiene que ingresar como mínimo una unidad");
+                return;
+            }
+
+            clinicaCoordinador.listaDeMedicamentos.get(optmed - 1).cantidadDisponible += cantidadSum;
+            for (Clinica clinicaJson : SistemaDeGestionClinica.clinicas) {
+                if (clinicaJson.nit == clinicaCoordinador.nit) {
+                    clinicaJson.listaDeMedicamentos = clinicaCoordinador.listaDeMedicamentos;
+                }
+            }
+            System.out.println("Se ha suministrado el medicamento al inventario exitosamente");
+            //Actualizar el medicamento modificado a la lista de medicamentos general (la que está en sistema de gestión)
+
+        }
+        else if (optadd.equals("2")) {
+            System.out.println("Ingrese el nombre del medicamento a adicionar al inventario: ");
+            String nombre = input.nextLine();
+
+            System.out.println("Ingrese la cantidad de unidades disponibles del medicamento: ");
+            int cantidad = input.nextInt();
+            if (cantidad < 1) {
+                System.out.println("La cantidad debe ser igual o mayor a una unidad");
+                return;
+            }
+
+            int id = clinicaCoordinador.listaDeMedicamentos.size() + 1;
+            Clinica clinica = clinicaCoordinador;
+
+            Medicamento nuevoMedicamento = new Medicamento(id, nombre, cantidad, clinica);
+            clinicaCoordinador.listaDeMedicamentos.add(nuevoMedicamento);
+
+            //Agregar el medicamento creado a la lista de medicamentos general (la que está en sistema de gestión)
+            SistemaDeGestionClinica.medicamentos.add(nuevoMedicamento);
+
+            System.out.println("Medicamento creado e ingresado a inventario con éxito");
+
+        }
+        else {
+            System.out.println("Ingresó una opción inválida");
+            return;
+        }
     }
 
     public void borrarMedicamento() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Los medicamentos para su clínica son: ");
+        Medicamento med = new Medicamento();
+        med.listarMedicamento(clinicaCoordinador);
+
+        System.out.println("Ingrese el número del medicamento que desea eliminar: ");
+
 
     }
 
-
+    @Override
+    public String toString() {
+        return "{" + "\n" +
+                " emailCoordinador : " + emailCoordinador + "," + "\n" +
+                " contrasenaCoordinador : " + contrasenaCoordinador + "," + "\n" +
+                " clinicaCoordinador : " + clinicaCoordinador + "," + "\n" +
+                "}";
+    }
 
 }
 
