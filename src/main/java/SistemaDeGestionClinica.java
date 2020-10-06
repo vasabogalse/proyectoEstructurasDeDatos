@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -23,7 +24,27 @@ public class SistemaDeGestionClinica {
         coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
 
         System.out.println("---------------------------------------");
+
+        coordinadores.get(0).clinicaCoordinador = clinicas.get(0);
+        coordinadores.get(1).clinicaCoordinador = clinicas.get(1);
+        coordinadores.get(2).clinicaCoordinador = clinicas.get(2);
+        coordinadores.get(3).clinicaCoordinador = clinicas.get(3);
+
         System.out.println(coordinadores.get(0).clinicaCoordinador);
+        System.out.println(medicamentos.get(0));
+        System.out.println(clinicas.get(0));
+
+        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(0));
+        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(1));
+        clinicas.get(1).listaDeMedicamentos.add(medicamentos.get(3));
+        clinicas.get(2).listaDeMedicamentos.add(medicamentos.get(4));
+        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(2));
+        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(1));
+
+        coord.writeJSON(coordinadores, "coordinadores");
+
+
+
 
 //        Clinica cl = new Clinica(); // create an object from the class require
 //        clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)

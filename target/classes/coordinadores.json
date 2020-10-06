@@ -2,16 +2,18 @@
   "contrasenaCoordinador" : "master1",
   "emailCoordinador" : "coordinador1@gmail.com",
   "clinicaCoordinador" : {
-    "nit" : 1,
-    "nombreClinica" : "cps3",
-    "direccion" : "mir3",
-    "telefono" : 1011121,
-    "listaDeMedicamentos" :  [ {
-      "idMedicamento" : 1,
-      "nombreMedicamento" : "Medicamento #1",
-      "cantidadDisponible" : 100
-    }
-    ]
+    "nit" : 3,
+    "nombreClinica" : "bps",
+    "direccion" : "yir",
+    "telefono" : 123456,
+    "listaDeMedicamentos" : [ {
+      "idMedicamento" : 3,
+      "nombreMedicamento" : "Medicamento #3",
+      "cantidadDisponible" : 300,
+      "formulaMedica" : null,
+      "clinica" : null
+    } ],
+    "listaDePsiquiatras" : null
   }
 }, {
   "contrasenaCoordinador" : "master2",
@@ -21,44 +23,47 @@
     "nombreClinica" : "tps2",
     "direccion" : "uir2",
     "telefono" : 879034,
-    "listaDeMedicamentos" :  [ {
+    "listaDeMedicamentos" : [ {
       "idMedicamento" : 2,
       "nombreMedicamento" : "Medicamento #2",
-      "cantidadDisponible" : 200
-    }
-    ]
+      "cantidadDisponible" : 200,
+      "formulaMedica" : null,
+      "clinica" : null
+    } ],
+    "listaDePsiquiatras" : null
   }
-
-} , {
+}, {
   "contrasenaCoordinador" : "master3",
   "emailCoordinador" : "coordinador3@gmail.com",
   "clinicaCoordinador" : {
-    "nit" : 3,
-    "nombreClinica" : "bps",
-    "direccion" : "yir",
-    "telefono" : 123456,
+    "nit" : 1,
+    "nombreClinica" : "cps3",
+    "direccion" : "mir3",
+    "telefono" : 1011121,
     "listaDeMedicamentos" : [ {
-      "idMedicamento" : 3,
-      "nombreMedicamento" : "Medicamento #3",
-      "cantidadDisponible" : 300
-    }
-    ]
+      "idMedicamento" : 1,
+      "nombreMedicamento" : "Medicamento #1",
+      "cantidadDisponible" : 100,
+      "formulaMedica" : null,
+      "clinica" : null
+    } ],
+    "listaDePsiquiatras" : null
   }
 }, {
   "contrasenaCoordinador" : "master4",
   "emailCoordinador" : "coordinador4@gmail.com",
-  "clinicaCoordinador" :  {
+  "clinicaCoordinador" : {
     "nit" : 4,
     "nombreClinica" : "dps4",
     "direccion" : "air4",
     "telefono" : 786,
-    "listaDeMedicamentos" :  [ {
+    "listaDeMedicamentos" : [ {
       "idMedicamento" : 4,
       "nombreMedicamento" : "Medicamento #4",
-      "cantidadDisponible" : 400
-    }
-    ]
+      "cantidadDisponible" : 400,
+      "formulaMedica" : null,
+      "clinica" : null
+    } ],
+    "listaDePsiquiatras" : null
   }
-
-}
-]
+} ]
