@@ -13,15 +13,17 @@ public class SistemaDeGestionClinica {
     public static ArrayList<CoordinadorDeClinica> coordinadores = new ArrayList<>();
 
     public static void main(String[] args) {
+        handleDB db = new handleDB();
+        db.readAllJSON();
 
-        Clinica cl = new Clinica(); // create an object from the class require
-        clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
-
-        Medicamento med = new Medicamento();
-        medicamentos = med.readJSON(Medicamento.class, "medicamentos");
-
-        CoordinadorDeClinica coord = new CoordinadorDeClinica();
-        coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
+//        Clinica cl = new Clinica(); // create an object from the class require
+//        clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
+//
+//        Medicamento med = new Medicamento();
+//        medicamentos = med.readJSON(Medicamento.class, "medicamentos");
+//
+//        CoordinadorDeClinica coord = new CoordinadorDeClinica();
+//        coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
 
         System.out.println("---------------------------------------");
 
@@ -30,7 +32,7 @@ public class SistemaDeGestionClinica {
         coordinadores.get(2).clinicaCoordinador = clinicas.get(2);
         coordinadores.get(3).clinicaCoordinador = clinicas.get(3);
 
-        coord.writeJSON(coordinadores, "coordinadores");
+//        coord.writeJSON(coordinadores, "coordinadores");
 
 
 

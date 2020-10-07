@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
+import java.beans.MethodDescriptor;
 import java.lang.reflect.Array;
 import java.nio.file.LinkPermission;
 import java.util.ArrayList;
@@ -10,16 +11,23 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class CoordinadorDeClinica implements handleJSON{
-    public int cedulaCoordinador;
-    public String contrasenaCoordinador;
-    public String emailCoordinador;
-    public Clinica clinicaCoordinador;
+    public static int cedulaCoordinador;
+    public static String contrasenaCoordinador;
+    public static String emailCoordinador;
+    public static Clinica clinicaCoordinador;
 
     public CoordinadorDeClinica() {
     }
 
 
     public static void main(String[] args) {
+
+        handleDB db = new handleDB();
+        ArrayList<Clinica> clinicas = db.getClinicas();
+        ArrayList<CoordinadorDeClinica> coordinadores = db.getCoordinadores();
+        ArrayList<Medicamento> medicamentos = db.getMedicamentos();
+
+
 
         //Leyendo Json
         Clinica cl = new Clinica(); // create an object from the class require
@@ -113,7 +121,6 @@ public class CoordinadorDeClinica implements handleJSON{
             }
             else if (cambio.equals("3")) {
                 System.out.println("Ingrese el nuevo teléfono de la clínica:");
-                input.nextLine();
                 int telefono = input.nextInt();
                 clinicaCoordinador.telefono = telefono;
                 System.out.println("Se ha cambiado el teléfono de la clinica exitosamente");
@@ -131,8 +138,11 @@ public class CoordinadorDeClinica implements handleJSON{
 
     }
 
-    public void borrarClinica() {
+    public static void borrarClinica() {
         Scanner input = new Scanner(System.in);
+        handleDB db = new handleDB();
+        ArrayList<Clinica> clinicas = db.getClinicas();
+        ArrayList<CoordinadorDeClinica> coordinadores = db.getCoordinadores();
 
 
         while(true) {
@@ -159,20 +169,33 @@ public class CoordinadorDeClinica implements handleJSON{
                 "y personas de esta clínica a otra clínica ");
         System.out.println("Ingrese el NIT de la clínica a la que quiere realizar el traslado: ");
         int nitTras = input.nextInt();
+        Collections.sort(clinicas, ClinicSort.nitOrder);
         //sacar lista de clínicas del json y mostrarlas acá
-        for (int i = 0; i < SistemaDeGestionClinica.clinicas.size(); i++) {
-            if (SistemaDeGestionClinica.clinicas.get(i).nit == nitDel) {
-                int iDel = i;
-                break;
-            }
+        int indexDel = Collections.binarySearch(SistemaDeGestionClinica.clinicas, new Clinica(nitDel, "cl", "dir", 123), ClinicSort.nitOrder);
+        if (indexDel < 0) {
+            System.out.println("La clínica a eliminar no se encuentra en la base de datos");
+            return;
+        }
+        int indexTras = Collections.binarySearch(SistemaDeGestionClinica.clinicas, new Clinica(nitTras, "cl", "dir", 123), ClinicSort.nitOrder);
+        if (indexDel < 0) {
+            System.out.println("La clínica a la que se trasladará la información no se encuentra en la base de datos");
+            return;
         }
 
-        for (int i = 0; i < SistemaDeGestionClinica.clinicas.size(); i++) {
-            if (SistemaDeGestionClinica.clinicas.get(i).nit == nitTras) {
-
-                break;
-            }
+        for (Medicamento medicamento : clinicas.get(indexDel).listaDeMedicamentos) {
+            clinicas.get(indexTras).listaDeMedicamentos.add(medicamento);
         }
+
+        for (Psiquiatra psiquiatra : clinicas.get(indexDel).listaDePsiquiatras) {
+            clinicas.get(indexTras).listaDePsiquiatras.add(psiquiatra);
+        }
+
+        clinicas.remove(indexDel);
+        db.appendArrayToJSON("clinicas");
+        System.out.println("Se ha realizado la transferencia de información exitosamente");
+        System.out.println("Se ha eliminado la clínica");
+
+
 
 
 
@@ -184,15 +207,19 @@ public class CoordinadorDeClinica implements handleJSON{
 
         //Pedir datos y validar los necesarios
         System.out.println("Ingrese el primer nombre (y segundo si tiene) del psiquiatra a registrar:");
+        input.nextLine();
         String nombres = input.nextLine();
 
         System.out.println("Ingrese los apellidos del psiquiatra a registrar:");
+        input.nextLine();
         String apellidos = input.nextLine();
 
         System.out.println("Ingrese el email del psiquiatra a registrar:");
+        input.nextLine();
         String email = input.nextLine();
 
         System.out.println("Ingrese la contraseña del psiquiatra a registrar:");
+        input.nextLine();
         String contrasena = input.nextLine();
 
         System.out.println("Ingrese el sexo del(la) psiquiatra: ");
@@ -214,6 +241,7 @@ public class CoordinadorDeClinica implements handleJSON{
         }
 
         System.out.println("Ingrese la dirección del psiquiatra a registrar:");
+        input.nextLine();
         String direccion = input.nextLine();
 
         System.out.println("Ingrese la edad del psiquiatra a registrar:");
@@ -344,6 +372,7 @@ public class CoordinadorDeClinica implements handleJSON{
         }
         else if (optadd.equals("2")) {
             System.out.println("Ingrese el nombre del medicamento a adicionar al inventario: ");
+            input.nextLine();
             String nombre = input.nextLine();
 
             System.out.println("Ingrese la cantidad de unidades disponibles del medicamento: ");
