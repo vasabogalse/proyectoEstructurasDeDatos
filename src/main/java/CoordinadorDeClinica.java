@@ -168,7 +168,7 @@ public class CoordinadorDeClinica implements handleJSON{
 
         for (int i = 0; i < SistemaDeGestionClinica.clinicas.size(); i++) {
             if (SistemaDeGestionClinica.clinicas.get(i).nit == nitTras) {
-                
+
                 break;
             }
         }
