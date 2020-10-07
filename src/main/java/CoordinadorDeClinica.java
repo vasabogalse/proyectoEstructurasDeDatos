@@ -16,9 +16,26 @@ public class CoordinadorDeClinica implements handleJSON{
     }
 
     public static void main(String[] args) {
-        CoordinadorDeClinica coor = new CoordinadorDeClinica();
-        coor.suministrarMedicamentos();
 
+        //Leyendo Json
+        Clinica cl = new Clinica(); // create an object from the class require
+        SistemaDeGestionClinica.clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
+
+        Medicamento med = new Medicamento();
+        SistemaDeGestionClinica.medicamentos = med.readJSON(Medicamento.class, "medicamentos");
+
+        CoordinadorDeClinica coord = new CoordinadorDeClinica();
+        SistemaDeGestionClinica.coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
+
+        //Objetos para prueba
+        CoordinadorDeClinica coordinadorDePrueba = SistemaDeGestionClinica.coordinadores.get(0);
+        ArrayList<Medicamento> medicamentosPrueba = new ArrayList<>();
+        medicamentosPrueba.add(SistemaDeGestionClinica.medicamentos.get(0));
+        medicamentosPrueba.add(SistemaDeGestionClinica.medicamentos.get(1));
+        coordinadorDePrueba.clinicaCoordinador.coordinadorDeClinica = coordinadorDePrueba;
+        coordinadorDePrueba.clinicaCoordinador.listaDeMedicamentos = medicamentosPrueba;
+
+        coordinadorDePrueba.editarClinica();
 
 
     }
@@ -76,6 +93,7 @@ public class CoordinadorDeClinica implements handleJSON{
 
         if (cambio.equals("1")) {
             System.out.println("Ingrese el nuevo nombre de la clínica:");
+            input.nextLine();
             String nombre = input.nextLine();
             clinicaCoordinador.nombreClinica = nombre;
             //Código para cambiar el nombre de la clínica en los respectivos JSON!
