@@ -1,2 +1,2 @@
-public class Psiquiatra {
+public class Psiquiatra extends handleDB {
 }

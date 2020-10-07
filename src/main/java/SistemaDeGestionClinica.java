@@ -5,14 +5,28 @@ import java.util.Scanner;
 
 public class SistemaDeGestionClinica {
     public static Scanner sc = new Scanner(System.in);
-    public static ArrayList<Clinica> clinicas = new ArrayList<>();
-    public static ArrayList<Psiquiatra> psiquiatras = new ArrayList<>();
-    public static ArrayList<String> pacientes = new ArrayList<>();
-    public static ArrayList<String> medicamentos = new ArrayList<>();
 
     public static void main(String[] args) {
-        Clinica cl = new Clinica(); // create an object from the class require
-        clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
+        handleDB db = new handleDB();
+        db.readAllJSON();
+
+        System.out.println("Clinicas");
+        System.out.println(db.getClinicas());
+
+        Clinica clinica2 = new Clinica(5, "eps2", "dir2", 879034);
+        db.appendObject(clinica2, "clinicas");
+
+
+
+
+
+        //cl.listarClinicas();
+
+
+        //System.out.println(ClinicSort.nitOrder.getClass());
+
+        //Clinica cl = new Clinica(); // create an object from the class require
+        //clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
 
         // create objects
         /*Clinica clinica1 = new Clinica(1, "eps", "dir", 123456);
@@ -29,7 +43,6 @@ public class SistemaDeGestionClinica {
         //cl.writeJSON(clinicas, "clinicas"); // serialization of objects
         // single Obj Ex: String obj2 = clinica2.writeJSON(clinica1,"user2");
 
-
         /** Ordenamiento según atributos primarios de clase Clínica**/
         //Collections.sort(clinicas, ClinicSort.nitOrder);
         //System.out.println(clinicas);
@@ -40,12 +53,12 @@ public class SistemaDeGestionClinica {
         //Collections.sort(clinicas, ClinicSort.directionOrder);
         //System.out.println(clinicas);
 
-        Collections.sort(clinicas, ClinicSort.telOrder);
-        System.out.println(clinicas);
+        //Collections.sort(clinicas, ClinicSort.telOrder);
+        //System.out.println(clinicas);
 
         // menú de ingreso al sistema
-        //String opcionIngreso;
-  /*      while(true){
+        /*String opcionIngreso;
+        while(true){
             System.out.println("1. Ingresar al sistema");
             System.out.println("2. Registrarse como paciente en el sistema");
             System.out.println("0. Salir");
@@ -59,9 +72,9 @@ public class SistemaDeGestionClinica {
             } else{
                 System.out.println("\nValor ingresado incorrecto. Vuelve a intentarlo o presiona 0 para salir\n");
             }
-        }
+        }*/
 
-   */
+
     }
 
 }

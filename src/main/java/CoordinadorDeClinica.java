@@ -1,11 +1,9 @@
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import com.sun.javafx.beans.IDProperty;
-
-public class CoordinadorDeClinica {
-    @JsonTypeId
+public class CoordinadorDeClinica extends handleDB {
     public String emailCoordinador;
     public String contrasenaCoordinador;
     public Clinica clinicaCoordinador;
+
+    public CoordinadorDeClinica() { }
 
     public CoordinadorDeClinica(String emailCoordinador, String contrasenaCoordinador, Clinica clinicaCoordinador) {
         this.emailCoordinador = emailCoordinador;
@@ -25,9 +23,12 @@ public class CoordinadorDeClinica {
     // metodos de la clase
     public void editarClinica(){
 
+
     }
 
+
     public void borrarClinica(){
+        //deleteObject();
 
     }
 

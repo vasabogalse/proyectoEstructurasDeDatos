@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Paciente implements handleJSON{
+public class Paciente extends handleDB {
     public String primerNombre;
     public String segundoNombre;
     public int edadPsiquiatra;
@@ -10,8 +10,6 @@ public class Paciente implements handleJSON{
     public String email;
     public String clave;
 
-
-
-
+    public Paciente() { }
 }
 

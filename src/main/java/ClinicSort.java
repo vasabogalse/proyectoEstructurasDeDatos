@@ -20,12 +20,13 @@ public class ClinicSort{
         }
     };
 
-    static final Comparator<Clinica> directionOrder = new Comparator<Clinica>() {
-        @Override
+    //static final Comparator<Clinica> directionOrder = new Comparator<Clinica>() {
+       /* @Override
         public int compare(Clinica c1, Clinica c2) {
             return c1.direccion.compareTo(c2.direccion);
-        }
-    };
+        }*/
+        Comparator<Clinica> dirOrder = (Clinica o1, Clinica o2) -> {return o1.direccion.compareTo(o2.direccion);};
+   // };
 
     static final Comparator<Clinica> telOrder = new Comparator<Clinica>() {
         @Override

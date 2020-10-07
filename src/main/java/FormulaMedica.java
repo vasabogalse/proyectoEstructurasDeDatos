@@ -1,2 +1,3 @@
-public class FormulaMedica {
+public class FormulaMedica extends handleDB {
+    public FormulaMedica() { }
 }

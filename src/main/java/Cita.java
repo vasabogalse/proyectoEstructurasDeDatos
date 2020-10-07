@@ -1,2 +1,3 @@
-public class Cita {
+public class Cita extends handleDB {
+    public Cita() { }
 }

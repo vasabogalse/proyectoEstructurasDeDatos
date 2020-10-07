@@ -1,41 +1,37 @@
 [ {
-  "nit" : 1,
-  "nombreClinica" : "eps",
-  "direccion" : "dir",
-  "telefono" : 123456
+  "emailCoordinador" : "coordinador1@gmail.com",
+  "contrasenaCoordinador" : "eps1",
+  "clinicaCoordinador" : {
+    "nit" : 3,
+    "nombreClinica" : "bps",
+    "direccion" : "yir",
+    "telefono" : 123456
+  }
 }, {
-  "nit" : 2,
-  "nombreClinica" : "eps2",
-  "direccion" : "dir2",
-  "telefono" : 879034
+  "emailCoordinador" : "coordinador2@gmail.com",
+  "contrasenaCoordinador" : "eps2",
+  "clinicaCoordinador" : {
+    "nit" : 2,
+    "nombreClinica" : "tps2",
+    "direccion" : "uir2",
+    "telefono" : 879034
+  }
 }, {
-  "nit" : 3,
-  "nombreClinica" : "eps3",
-  "direccion" : "dir3",
-  "telefono" : 1011121
+  "emailCoordinador" : "coordinador3@gmail.com",
+  "contrasenaCoordinador" : "eps3",
+  "clinicaCoordinador" : {
+    "nit" : 1,
+    "nombreClinica" : "cps3",
+    "direccion" : "mir3",
+    "telefono" : 1011121
+  }
 }, {
-  "nit" : 4,
-  "nombreClinica" : "eps4",
-  "direccion" : "dir4",
-  "telefono" : 7865744
-}, {
-  "nit" : 1,
-  "nombreClinica" : "eps",
-  "direccion" : "dir",
-  "telefono" : 123456
-}, {
-  "nit" : 2,
-  "nombreClinica" : "eps2",
-  "direccion" : "dir2",
-  "telefono" : 879034
-}, {
-  "nit" : 3,
-  "nombreClinica" : "eps3",
-  "direccion" : "dir3",
-  "telefono" : 1011121
-}, {
-  "nit" : 4,
-  "nombreClinica" : "eps4",
-  "direccion" : "dir4",
-  "telefono" : 7865744
+  "emailCoordinador" : "coordinador3@gmail.com",
+  "contrasenaCoordinador" : "eps3",
+  "clinicaCoordinador" : {
+    "nit" : 4,
+    "nombreClinica" : "dps4",
+    "direccion" : "air4",
+    "telefono" : 786
+  }
 } ]
