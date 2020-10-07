@@ -1,10 +1,7 @@
-import sun.java2d.SurfaceDataProxy;
-import java.util.Scanner;
-
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 
-public class Clinica extends handleDB {
+public class Clinica implements handleJSON{
     public int nit;
     public String nombreClinica;
     public String direccion;
@@ -12,6 +9,8 @@ public class Clinica extends handleDB {
     public CoordinadorDeClinica coordinadorDeClinica;
     public ArrayList<Medicamento> listaDeMedicamentos;
     public ArrayList<Psiquiatra> listaDePsiquiatras;
+
+    handleDB db = new handleDB();
 
     public Clinica(){
     }
@@ -38,6 +37,42 @@ public class Clinica extends handleDB {
 
     public int getNit() { return nit; }
 
+    public void verificarCoordinadorClinica(String email, String contrasena){
+        // busqueda lineal o binarySearch?
+        for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
+            if(coordinador.contrasenaCoordinador.equals(contrasena)){
+                // menuCoordinador();
+            }
+        }
+    }
+
+    public void verClinica(){
+
+    }
+
+    // primero se ejecuta esta para ordenar el arreglo
+    public void ordenarClinicas(String atributo, String orden){
+        if(atributo.equals("1")){
+            if(orden.equals("1")){
+                Collections.sort(db.getClinicas(), ClinicSort.nitOrder);
+            } else {
+                Collections.sort(db.getClinicas(), ClinicSort.nitOrder.reversed());
+            }
+        } // los otros casos
+    }
+
+    // luego se ejecuta esta para poder imprimir el arreglo ordenado
+    public void listarClinicas(String atributo, String orden){
+        ordenarClinicas(atributo, orden);
+        int i = 0;
+        for(Clinica clinica : db.getClinicas()){
+            System.out.println("______________________________");
+            System.out.println("        Clinica " + (i + 1));
+            System.out.println("------------------------------");
+            System.out.println(clinica);
+        }
+    }
+
     @Override
     public String toString() {
         return "{" + "\n" +
@@ -46,38 +81,5 @@ public class Clinica extends handleDB {
                 " direccion : " + direccion + "," + "\n" +
                 " telefono : " + telefono + "\n" +
                 '}';
-    }
-
-    public static void listarClinicas(){
-        Scanner sc = new Scanner(System.in);
-        handleDB db = new handleDB();
-        String optClinica = " ";
-        while(true){
-            System.out.println("Listado de clínicas");
-            System.out.println("-------------------------------");
-            System.out.println("Seleccione una categoría de listado:");
-            System.out.println("1. Listar por nit");
-            System.out.println("2. Listar por nombre");
-            System.out.println("3. Listar por dirección");
-            System.out.println("4. Listar por teléfono");
-            System.out.println("5. Listar por psiquiatras");
-            System.out.println("6. Listar por medicamentos");
-            optClinica = sc.next();
-            if(optClinica.equals("1")){
-                // ordenarListaNit
-            } else if(optClinica.equals("2")){
-                //ordenarLista
-            } else if(optClinica.equals("3")){
-                //ordenarLista
-            }
-        }
-        //System.out.println("Listado de las Clínicas existentes:");
-        //System.out.println("---------------------------------------------");
-        //System.out.println(db.clinicas);
-        //int i = 0;
-        //for(Clinica clinica : db.getClinicas()){
-          //  System.out.println((i+1) + ". " + clinica);
-            //i++;
-       // }
     }
 }

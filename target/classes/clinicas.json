@@ -2,20 +2,24 @@
   "nit" : 3,
   "nombreClinica" : "bps",
   "direccion" : "yir",
-  "telefono" : 123456
+  "telefono" : 123456,
+  "coordinadorDeClinica" : null,
+  "listaDeMedicamentos" : null,
+  "listaDePsiquiatras" : null
 }, {
   "nit" : 2,
   "nombreClinica" : "tps2",
   "direccion" : "uir2",
-  "telefono" : 879034
+  "telefono" : 879034,
+  "coordinadorDeClinica" : null,
+  "listaDeMedicamentos" : null,
+  "listaDePsiquiatras" : null
 }, {
-  "nit" : 1,
-  "nombreClinica" : "cps3",
-  "direccion" : "mir3",
-  "telefono" : 1011121
-}, {
-  "nit" : 4,
-  "nombreClinica" : "dps4",
-  "direccion" : "air4",
-  "telefono" : 786
+  "nit" : 6,
+  "nombreClinica" : "eps2",
+  "direccion" : "dir2",
+  "telefono" : 879034,
+  "coordinadorDeClinica" : null,
+  "listaDeMedicamentos" : [ ],
+  "listaDePsiquiatras" : [ ]
 } ]

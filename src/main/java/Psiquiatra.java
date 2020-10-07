@@ -1,2 +1,2 @@
-public class Psiquiatra extends handleDB {
+public class Psiquiatra implements handleJSON {
 }

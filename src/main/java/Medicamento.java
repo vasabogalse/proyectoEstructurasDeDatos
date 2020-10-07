@@ -1,3 +1,3 @@
-public class Medicamento extends handleDB {
+public class Medicamento implements handleJSON {
     public Medicamento() { }
 }

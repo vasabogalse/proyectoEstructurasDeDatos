@@ -1,3 +1,3 @@
-public class FormulaMedica extends handleDB {
+public class FormulaMedica implements handleJSON {
     public FormulaMedica() { }
 }

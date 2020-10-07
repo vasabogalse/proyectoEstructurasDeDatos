@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Paciente extends handleDB {
+public class Paciente implements handleJSON {
     public String primerNombre;
     public String segundoNombre;
     public int edadPsiquiatra;

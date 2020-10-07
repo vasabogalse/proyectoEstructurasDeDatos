@@ -1,3 +1,3 @@
-public class HistorialClinico extends handleDB {
+public class HistorialClinico implements handleJSON {
     public HistorialClinico() { }
 }

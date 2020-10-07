@@ -1,7 +1,9 @@
-public class CoordinadorDeClinica extends handleDB {
+public class CoordinadorDeClinica implements handleJSON {
     public String emailCoordinador;
     public String contrasenaCoordinador;
     public Clinica clinicaCoordinador;
+
+    handleDB db = new handleDB();
 
     public CoordinadorDeClinica() { }
 

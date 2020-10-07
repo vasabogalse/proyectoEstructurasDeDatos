@@ -1,3 +1,3 @@
-public class Cita extends handleDB {
+public class Cita implements handleJSON {
     public Cita() { }
 }

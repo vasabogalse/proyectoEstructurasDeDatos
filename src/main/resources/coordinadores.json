@@ -25,13 +25,4 @@
     "direccion" : "mir3",
     "telefono" : 1011121
   }
-}, {
-  "emailCoordinador" : "coordinador3@gmail.com",
-  "contrasenaCoordinador" : "eps3",
-  "clinicaCoordinador" : {
-    "nit" : 4,
-    "nombreClinica" : "dps4",
-    "direccion" : "air4",
-    "telefono" : 786
-  }
 } ]

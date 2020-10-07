@@ -1,9 +1,7 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.function.Function;
 
 public class handleDB implements handleJSON {
+    // arreglos de estado actual de los JSON y operativos
     public static ArrayList<Clinica> clinicas = new ArrayList<>();
     public static ArrayList<Psiquiatra> psiquiatras = new ArrayList<>();
     public static ArrayList<CoordinadorDeClinica> coordinadores = new ArrayList<>();
@@ -15,34 +13,28 @@ public class handleDB implements handleJSON {
 
     public handleDB(){ }
 
+    // getters
     public ArrayList<Clinica> getClinicas() {
         return clinicas;
     }
-
     public ArrayList<Psiquiatra> getPsiquiatras() {
         return psiquiatras;
     }
-
     public ArrayList<CoordinadorDeClinica> getCoordinadores() {
         return coordinadores;
     }
-
     public ArrayList<Paciente> getPacientes() {
         return pacientes;
     }
-
     public ArrayList<Medicamento> getMedicamentos() {
         return medicamentos;
     }
-
     public ArrayList<Cita> getCitas() {
         return citas;
     }
-
     public ArrayList<FormulaMedica> getFormulas() {
         return formulas;
     }
-
     public ArrayList<HistorialClinico> getHistoriales() {
         return historiales;
     }
@@ -84,94 +76,89 @@ public class handleDB implements handleJSON {
          System.out.println(historiales);
     }
 
-    public <T> void appendObject(T o1, String jsonFile){
+    public <T> void updateJSON(T o1, String jsonFile){
         switch (jsonFile){
             case "clinicas":
-                Clinica clinica = new Clinica();
                 clinicas.add((Clinica) o1);
+                break;
+            case "psiquiatras":
+                psiquiatras.add((Psiquiatra) o1);
+                break;
+            case "pacientes":
+                pacientes.add((Paciente) o1);
+            case "medicamentos":
+                medicamentos.add((Medicamento) o1);
+            case "formulas":
+                formulas.add((FormulaMedica) o1);
+            case "citas":
+                citas.add((Cita) o1);
+            case "historiales":
+                historiales.add((HistorialClinico) o1);
+        }
+        appendArrayToJSON(jsonFile);
+    }
+
+    public void appendArrayToJSON(String jsonFile){
+        switch (jsonFile) {
+            case "clinicas":
+                Clinica clinica = new Clinica();
                 clinica.writeJSON(clinicas, "clinicas");
+                break;
             case "psiquiatras":
                 Psiquiatra psiquiatra = new Psiquiatra();
-                psiquiatras.add((Psiquiatra) o1);
-                psiquiatra.writeJSON(psiquiatras,"psiquiatras");
+                psiquiatra.writeJSON(psiquiatras, "psiquiatras");
+                break;
             case "pacientes":
                 Paciente paciente = new Paciente();
-                pacientes.add((Paciente) o1);
                 paciente.writeJSON(pacientes, "pacientes");
+                break;
             case "medicamentos":
                 Medicamento medicamento = new Medicamento();
-                medicamentos.add((Medicamento) o1);
-                medicamento.writeJSON(medicamento, "medicamentos");
+                medicamento.writeJSON(medicamento, "medicamento");
+                break;
             case "formulas":
-                FormulaMedica formulaMedica = new FormulaMedica();
-                formulas.add((FormulaMedica) o1);
-                formulaMedica.writeJSON(formulaMedica, "formulas");
+                FormulaMedica formula = new FormulaMedica();
+                formula.writeJSON(formulas, "formulas");
+                break;
             case "citas":
                 Cita cita = new Cita();
-                citas.add((Cita) o1);
-                cita.writeJSON(cita, "citas");
+                cita.writeJSON(citas, "citas");
+                break;
             case "historiales":
-                HistorialClinico historialClinico = new HistorialClinico();
-                historiales.add((HistorialClinico) o1);
-                historialClinico.writeJSON(historialClinico, "historiales");
+                HistorialClinico historial = new HistorialClinico();
+                historial.writeJSON(historiales, "historiales");
+                break;
         }
     }
 
-    public void deleteObject(int index, String jsonFile){
+    public void deleteObjectInArray(int index, String jsonFile){
         switch (jsonFile){
             case "clinicas":
                 clinicas.remove(index);
-                Clinica clinica = new Clinica();
-                clinica.writeJSON(clinicas, "clinicas");
+                appendArrayToJSON("clinicas");
+                break;
             case "psiquiatras":
                 psiquiatras.remove(index);
-                Psiquiatra psiquiatra = new Psiquiatra();
-                psiquiatra.writeJSON(psiquiatras,"psiquiatras");
+                appendArrayToJSON("psquiatras");
+                break;
             case "pacientes":
                 pacientes.remove(index);
-                Paciente paciente = new Paciente();
-                paciente.writeJSON(pacientes, "pacientes");
+                break;
             case "medicamentos":
                 medicamentos.remove(index);
-                Medicamento medicamento = new Medicamento();
-                medicamento.writeJSON(medicamento, "medicamentos");
+                break;
             case "formulas":
                 formulas.remove(index);
-                FormulaMedica formulaMedica = new FormulaMedica();
-                formulaMedica.writeJSON(formulaMedica, "formulas");
+                break;
             case "citas":
                 citas.remove(index);
-                Cita cita = new Cita();
-                cita.writeJSON(cita, "citas");
+                break;
             case "historiales":
                 historiales.remove(index);
-                HistorialClinico historialClinico = new HistorialClinico();
-                historialClinico.writeJSON(historialClinico, "historiales");
+                break;
         }
+        appendArrayToJSON(jsonFile);
     }
-
-    public <T> void orderArrays(String jsonFile, Function<T, String> func){
-        switch (jsonFile){
-            case "clinicas":
-                Clinica clinica = new Clinica();
-                //Collections.sort(clinicas, func.apply);
-            case "psiquiatras":
-                Psiquiatra psiquiatra = new Psiquiatra();
-            case "pacientes":
-                Paciente paciente = new Paciente();
-            case "medicamentos":
-                Medicamento medicamento = new Medicamento();
-            case "formulas":
-                FormulaMedica formulaMedica = new FormulaMedica();
-            case "citas":
-                Cita cita = new Cita();
-                cita.writeJSON(cita, "citas");
-            case "historiales":
-                HistorialClinico historialClinico = new HistorialClinico();
-        }
-    }
-
-    // listar cada una de las clases: Son por lo menos 7 métodos de ordenamiento
 
     @Override
     public String toString() {
