@@ -23,7 +23,7 @@ public class Clinica implements handleJSON{
         this.listaDePsiquiatras = new ArrayList<>();
     }
 
-    public Clinica(int nit, String nombreClinica, String direccion, int telefono, CoordinadorDeClinica coordinadorDeClinica, ArrayList<Medicamento> listaDeMedicamentos, ArrayList<Psiquiatra> listaDePsiquiatras) {
+    public Clinica(int nit, String nombreClinica, String direccion, int telefono, ArrayList<Medicamento> listaDeMedicamentos, ArrayList<Psiquiatra> listaDePsiquiatras) {
         this.nit = nit;
         this.nombreClinica = nombreClinica;
         this.direccion = direccion;

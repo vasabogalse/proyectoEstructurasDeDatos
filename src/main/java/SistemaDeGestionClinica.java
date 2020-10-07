@@ -30,18 +30,42 @@ public class SistemaDeGestionClinica {
         coordinadores.get(2).clinicaCoordinador = clinicas.get(2);
         coordinadores.get(3).clinicaCoordinador = clinicas.get(3);
 
-        System.out.println(coordinadores.get(0).clinicaCoordinador);
-        System.out.println(medicamentos.get(0));
-        System.out.println(clinicas.get(0));
-
-        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(0));
-        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(1));
-        clinicas.get(1).listaDeMedicamentos.add(medicamentos.get(3));
-        clinicas.get(2).listaDeMedicamentos.add(medicamentos.get(4));
-        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(2));
-        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(1));
-
         coord.writeJSON(coordinadores, "coordinadores");
+
+
+
+        clinicas.get(0).coordinadorDeClinica = coordinadores.get(0);
+        clinicas.get(1).coordinadorDeClinica = coordinadores.get(1);
+        clinicas.get(2).coordinadorDeClinica = coordinadores.get(2);
+        clinicas.get(3).coordinadorDeClinica = coordinadores.get(3);
+
+        System.out.println(clinicas.get(0));
+//        cl.writeJSON(clinicas, "clinicas");
+
+
+
+
+
+//        Clinica clAux = clinicas.get(0);
+//        clAux.coordinadorDeClinica = coordinadores.get(0);
+//        System.out.println(clAux.coordinadorDeClinica);
+//        System.out.println(clinicas.get(0).coordinadorDeClinica);
+//        System.out.println(clinicas.get(1).coordinadorDeClinica);
+//        clinicas.get(1).coordinadorDeClinica = coordinadores.get(0);
+//        System.out.println(clinicas.get(1).coordinadorDeClinica);
+
+
+
+
+//
+//        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(0));
+//        clinicas.get(0).listaDeMedicamentos.add(medicamentos.get(1));
+//        clinicas.get(1).listaDeMedicamentos.add(medicamentos.get(3));
+//        clinicas.get(2).listaDeMedicamentos.add(medicamentos.get(4));
+//        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(2));
+//        clinicas.get(3).listaDeMedicamentos.add(medicamentos.get(1));
+
+
 
 
 

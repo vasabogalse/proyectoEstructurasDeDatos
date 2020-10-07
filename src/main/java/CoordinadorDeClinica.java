@@ -20,6 +20,7 @@ public class CoordinadorDeClinica implements handleJSON{
         coor.suministrarMedicamentos();
 
 
+
     }
 
 
@@ -333,7 +334,7 @@ public class CoordinadorDeClinica implements handleJSON{
         return "{" + "\n" +
                 " emailCoordinador : " + emailCoordinador + "," + "\n" +
                 " contrasenaCoordinador : " + contrasenaCoordinador + "," + "\n" +
-                " clinicaCoordinador : " + clinicaCoordinador + "," + "\n" +
+                " clinicaCoordinador : " + clinicaCoordinador.nombreClinica + "," + "\n" +
                 "}";
     }
 

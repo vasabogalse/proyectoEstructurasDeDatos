@@ -19,6 +19,7 @@ public class Medicamento implements handleJSON{
     @Override
 
     public String toString() {
+
         return "- " + nombreMedicamento + ": " + cantidadDisponible;
     }
 
