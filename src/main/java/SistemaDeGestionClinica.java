@@ -66,18 +66,60 @@ public class SistemaDeGestionClinica {
 
     // este es como para que me ingresen los datos y mandar los datos a verificar
     public static void menuPrincipal(){
-        while(true){
+        /*while(true){
             // menu registrar paciente
             // mirar menu de Innis
-        }
+        }*/
 
+        String opt = "";
+        while (true) {
+            System.out.println("Bienvenido al Sistema de Gestión de Clinicas Psquiatricas");
+            System.out.println("Recuerde que para acceder a las funciones del sistema es necesario estar logueado con su usuario y contraseña.");
+            System.out.println("Si usted es un paciente perteneciente a la clinica y no posee un usuario es necesario que haga el proceso de registro.");
+            System.out.println("Elija una opción:");
+            System.out.println("1. Soy un paciente y quiero registrarme en el sistema.");
+            System.out.println("2. Soy un paciente registrado y quiero ingresar al sistema.");
+            System.out.println("3. Soy parte del personal de la clinica y quiero ingresar al sistema.");
+            System.out.println("0. Salir");
+            opt = sc.next();
+            switch (opt) {
+                case "1":
+                    //registroUsuario();
+                    break;
+                case "2":
+                    //ingresarPaciente();
+                    break;
+                case "3":
+                    //verificacion();
+                    break;
+                case "0":
+                    break;
+                    // este metodo llama a ingreso usuario, ingreso usuario toma datos y los envía a verificacion
+                // finalmente verificarUsuario manda a los menus correspondientes
+            }
+        }
+    }
+
+    public void ingresoUsuario(String opt){
+        boolean coordinador = false;
+        if(opt.equals("2")){
+            System.out.println("Ingrese su cédula");
+            int cedula = sc.nextInt();
+            verificarUsuarios(cedula,"paciente");
+        } else if(opt.equals("3")){
+
+        }
     }
 
     // verificar a que clase de usuario pertenece y mandarle su menu
-    public static void verificarUsuarios() {
+    public static void verificarUsuarios(int clavePrimaria,String tipoUsuario) {
         // me tienen que enviar la opcion para saber de una vez porque arreglo tirarme
         // y un identificador único para hacer la validacion
+
+        // menuPaciente(cedula)
+        // buscarnomre
     }
+
     public static void menuCoordinador() {
         String opcion = "";
         while (true) {

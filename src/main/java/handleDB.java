@@ -86,14 +86,19 @@ public class handleDB implements handleJSON {
                 break;
             case "pacientes":
                 pacientes.add((Paciente) o1);
+                break;
             case "medicamentos":
                 medicamentos.add((Medicamento) o1);
+                break;
             case "formulas":
                 formulas.add((FormulaMedica) o1);
+                break;
             case "citas":
                 citas.add((Cita) o1);
+                break;
             case "historiales":
                 historiales.add((HistorialClinico) o1);
+                break;
         }
         appendArrayToJSON(jsonFile);
     }
@@ -135,11 +140,9 @@ public class handleDB implements handleJSON {
         switch (jsonFile){
             case "clinicas":
                 clinicas.remove(index);
-                appendArrayToJSON("clinicas");
                 break;
             case "psiquiatras":
                 psiquiatras.remove(index);
-                appendArrayToJSON("psquiatras");
                 break;
             case "pacientes":
                 pacientes.remove(index);

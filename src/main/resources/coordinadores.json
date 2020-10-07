@@ -1,4 +1,5 @@
 [ {
+  "cedulaCoordinador" : 12345678,
   "emailCoordinador" : "coordinador1@gmail.com",
   "contrasenaCoordinador" : "eps1",
   "clinicaCoordinador" : {
@@ -8,6 +9,7 @@
     "telefono" : 123456
   }
 }, {
+  "cedulaCoordinador" : 12345338,
   "emailCoordinador" : "coordinador2@gmail.com",
   "contrasenaCoordinador" : "eps2",
   "clinicaCoordinador" : {
@@ -17,6 +19,7 @@
     "telefono" : 879034
   }
 }, {
+  "cedulaCoordinador" : 123555348,
   "emailCoordinador" : "coordinador3@gmail.com",
   "contrasenaCoordinador" : "eps3",
   "clinicaCoordinador" : {

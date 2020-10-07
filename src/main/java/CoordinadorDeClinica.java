@@ -1,4 +1,5 @@
 public class CoordinadorDeClinica implements handleJSON {
+    public int cedulaCoordinador;
     public String emailCoordinador;
     public String contrasenaCoordinador;
     public Clinica clinicaCoordinador;
@@ -7,7 +8,8 @@ public class CoordinadorDeClinica implements handleJSON {
 
     public CoordinadorDeClinica() { }
 
-    public CoordinadorDeClinica(String emailCoordinador, String contrasenaCoordinador, Clinica clinicaCoordinador) {
+    public CoordinadorDeClinica(int cedulaCoordinador, String emailCoordinador, String contrasenaCoordinador, Clinica clinicaCoordinador) {
+        this.cedulaCoordinador = cedulaCoordinador;
         this.emailCoordinador = emailCoordinador;
         this.contrasenaCoordinador = contrasenaCoordinador;
         this.clinicaCoordinador = clinicaCoordinador;
