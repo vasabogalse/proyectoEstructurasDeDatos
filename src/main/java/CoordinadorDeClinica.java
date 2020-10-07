@@ -142,6 +142,7 @@ public class CoordinadorDeClinica implements handleJSON{
             String borrar = input.next();
             if (!borrar.equals("1") || !borrar.equals("2")) {
                 System.out.println("Ha ingresado una opción inválida");
+                continue;
             }
             else if (borrar.equals("2")) {
                 return;
