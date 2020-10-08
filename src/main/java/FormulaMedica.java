@@ -1,2 +1,4 @@
-public class FormulaMedica {
+public class FormulaMedica implements handleJSON {
+    public FormulaMedica() {
+    }
 }

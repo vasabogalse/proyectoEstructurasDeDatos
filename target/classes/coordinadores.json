@@ -1,49 +1,31 @@
 [ {
-  "contrasenaCoordinador" : "master1",
+  "cedulaCoordinador" : 12345678,
   "emailCoordinador" : "coordinador1@gmail.com",
+  "contrasenaCoordinador" : "eps1",
   "clinicaCoordinador" : {
     "nit" : 3,
     "nombreClinica" : "bps",
     "direccion" : "yir",
-    "telefono" : 123456,
-    "coordinadorDeClinica" : null,
-    "listaDeMedicamentos" : null,
-    "listaDePsiquiatras" : null
+    "telefono" : 123456
   }
 }, {
-  "contrasenaCoordinador" : "master2",
+  "cedulaCoordinador" : 12345338,
   "emailCoordinador" : "coordinador2@gmail.com",
+  "contrasenaCoordinador" : "eps2",
   "clinicaCoordinador" : {
     "nit" : 2,
     "nombreClinica" : "tps2",
     "direccion" : "uir2",
-    "telefono" : 879034,
-    "coordinadorDeClinica" : null,
-    "listaDeMedicamentos" : null,
-    "listaDePsiquiatras" : null
+    "telefono" : 879034
   }
 }, {
-  "contrasenaCoordinador" : "master3",
+  "cedulaCoordinador" : 123555348,
   "emailCoordinador" : "coordinador3@gmail.com",
+  "contrasenaCoordinador" : "eps3",
   "clinicaCoordinador" : {
     "nit" : 1,
     "nombreClinica" : "cps3",
     "direccion" : "mir3",
-    "telefono" : 1011121,
-    "coordinadorDeClinica" : null,
-    "listaDeMedicamentos" : null,
-    "listaDePsiquiatras" : null
-  }
-}, {
-  "contrasenaCoordinador" : "master4",
-  "emailCoordinador" : "coordinador4@gmail.com",
-  "clinicaCoordinador" : {
-    "nit" : 4,
-    "nombreClinica" : "dps4",
-    "direccion" : "air4",
-    "telefono" : 786,
-    "coordinadorDeClinica" : null,
-    "listaDeMedicamentos" : null,
-    "listaDePsiquiatras" : null
+    "telefono" : 1011121
   }
 } ]

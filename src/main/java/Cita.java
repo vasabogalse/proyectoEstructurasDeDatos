@@ -1,2 +1,4 @@
-public class Cita {
+public class Cita implements handleJSON {
+    public Cita() {
+    }
 }

@@ -1,2 +1,4 @@
-public class HistorialClinico {
+public class HistorialClinico implements handleJSON {
+    public HistorialClinico() {
+    }
 }

@@ -11,10 +11,10 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class CoordinadorDeClinica implements handleJSON{
-    public static int cedulaCoordinador;
-    public static String contrasenaCoordinador;
-    public static String emailCoordinador;
-    public static Clinica clinicaCoordinador;
+    public int cedulaCoordinador;
+    public String contrasenaCoordinador;
+    public String emailCoordinador;
+    public Clinica clinicaCoordinador;
 
     public CoordinadorDeClinica() {
     }
@@ -23,32 +23,9 @@ public class CoordinadorDeClinica implements handleJSON{
     public static void main(String[] args) {
 
         handleDB db = new handleDB();
-        ArrayList<Clinica> clinicas = db.getClinicas();
-        ArrayList<CoordinadorDeClinica> coordinadores = db.getCoordinadores();
-        ArrayList<Medicamento> medicamentos = db.getMedicamentos();
+        db.readAllJSON();
 
 
-
-        //Leyendo Json
-        Clinica cl = new Clinica(); // create an object from the class require
-        SistemaDeGestionClinica.clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
-        ArrayList<Clinica> clinicasCoor = new ArrayList<>();
-
-        Medicamento med = new Medicamento();
-        SistemaDeGestionClinica.medicamentos = med.readJSON(Medicamento.class, "medicamentos");
-        ArrayList<Medicamento> medicamentosCoor = new ArrayList<>();
-
-        CoordinadorDeClinica coord = new CoordinadorDeClinica();
-        SistemaDeGestionClinica.coordinadores = coord.readJSON(CoordinadorDeClinica.class, "coordinadores");
-        ArrayList<CoordinadorDeClinica> coordinadoresCoor = new ArrayList<>();
-
-        //Objetos para prueba
-        CoordinadorDeClinica coordinadorDePrueba = SistemaDeGestionClinica.coordinadores.get(0);
-        ArrayList<Medicamento> medicamentosPrueba = new ArrayList<>();
-        medicamentosPrueba.add(SistemaDeGestionClinica.medicamentos.get(0));
-        medicamentosPrueba.add(SistemaDeGestionClinica.medicamentos.get(1));
-        coordinadorDePrueba.clinicaCoordinador.coordinadorDeClinica = coordinadorDePrueba;
-        coordinadorDePrueba.clinicaCoordinador.listaDeMedicamentos = medicamentosPrueba;
 
 
 
@@ -65,27 +42,27 @@ public class CoordinadorDeClinica implements handleJSON{
             System.out.println("6. borrar medicamento");
             System.out.println("0. salir");
             String option = input.next();
-            if (option.equals("1")) {
-               coordinadorDePrueba.editarClinica();
-            }
-            else if (option.equals("2")) {
-                coordinadorDePrueba.borrarClinica();
-            }
-            else if(option.equals("3")){
-                coordinadorDePrueba.registrarPsiquiatra();
-            }
-            else if(option.equals("4")){
-                coordinadorDePrueba.borrarPsiquiatra();
-            }
-            else if(option.equals("5")){
-                coordinadorDePrueba.suministrarMedicamentos();
-            }
-            else if(option.equals("6")){
-                coordinadorDePrueba.borrarMedicamento();
-            }
-            else if(option.equals("0")){
-                break;
-            }
+//            if (option.equals("1")) {
+//               coordinadorDePrueba.editarClinica();
+//            }
+//            else if (option.equals("2")) {
+//                coordinadorDePrueba.borrarClinica();
+//            }
+//            else if(option.equals("3")){
+//                coordinadorDePrueba.registrarPsiquiatra();
+//            }
+//            else if(option.equals("4")){
+//                coordinadorDePrueba.borrarPsiquiatra();
+//            }
+//            else if(option.equals("5")){
+//                coordinadorDePrueba.suministrarMedicamentos();
+//            }
+//            else if(option.equals("6")){
+//                coordinadorDePrueba.borrarMedicamento();
+//            }
+//            else if(option.equals("0")){
+//                break;
+//            }
 
         }
 
@@ -138,7 +115,7 @@ public class CoordinadorDeClinica implements handleJSON{
 
     }
 
-    public static void borrarClinica() {
+    public void borrarClinica() {
         Scanner input = new Scanner(System.in);
         handleDB db = new handleDB();
         ArrayList<Clinica> clinicas = db.getClinicas();
@@ -171,12 +148,12 @@ public class CoordinadorDeClinica implements handleJSON{
         int nitTras = input.nextInt();
         Collections.sort(clinicas, ClinicSort.nitOrder);
         //sacar lista de clínicas del json y mostrarlas acá
-        int indexDel = Collections.binarySearch(SistemaDeGestionClinica.clinicas, new Clinica(nitDel, "cl", "dir", 123), ClinicSort.nitOrder);
+        int indexDel = Collections.binarySearch(db.getClinicas(), new Clinica(nitDel, "cl", "dir", 123), ClinicSort.nitOrder);
         if (indexDel < 0) {
             System.out.println("La clínica a eliminar no se encuentra en la base de datos");
             return;
         }
-        int indexTras = Collections.binarySearch(SistemaDeGestionClinica.clinicas, new Clinica(nitTras, "cl", "dir", 123), ClinicSort.nitOrder);
+        int indexTras = Collections.binarySearch(db.getClinicas(), new Clinica(nitTras, "cl", "dir", 123), ClinicSort.nitOrder);
         if (indexDel < 0) {
             System.out.println("La clínica a la que se trasladará la información no se encuentra en la base de datos");
             return;
@@ -314,6 +291,7 @@ public class CoordinadorDeClinica implements handleJSON{
 
     public void suministrarMedicamentos() {
         Scanner input = new Scanner(System.in);
+        handleDB db = new handleDB();
         System.out.println("Para visualizar los medicamentos de la clínica, escoja respecto a cual" +
                 " atributo los quiere que estén organizados: ");
         System.out.println("1. Nombre");
@@ -361,7 +339,7 @@ public class CoordinadorDeClinica implements handleJSON{
             }
 
             clinicaCoordinador.listaDeMedicamentos.get(optmed - 1).cantidadDisponible += cantidadSum;
-            for (Clinica clinicaJson : SistemaDeGestionClinica.clinicas) {
+            for (Clinica clinicaJson : db.getClinicas()) {
                 if (clinicaJson.nit == clinicaCoordinador.nit) {
                     clinicaJson.listaDeMedicamentos = clinicaCoordinador.listaDeMedicamentos;
                 }
@@ -389,7 +367,7 @@ public class CoordinadorDeClinica implements handleJSON{
             clinicaCoordinador.listaDeMedicamentos.add(nuevoMedicamento);
 
             //Agregar el medicamento creado a la lista de medicamentos general (la que está en sistema de gestión)
-            SistemaDeGestionClinica.medicamentos.add(nuevoMedicamento);
+            db.getMedicamentos().add(nuevoMedicamento);
 
             System.out.println("Medicamento creado e ingresado a inventario con éxito");
 
