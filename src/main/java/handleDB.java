@@ -57,23 +57,6 @@ public class handleDB implements handleJSON {
         citas = cita.readJSON(Cita.class, "citas");
         formulas = formulaMedica.readJSON(FormulaMedica.class,"formulas");
         historiales = historialClinico.readJSON(HistorialClinico.class,"historiales");
-
-         System.out.println("Clinicas");
-         System.out.println(clinicas);
-         System.out.println("Psiquiatras");
-         System.out.println(psiquiatras);
-         System.out.println("Coordinadores");
-         System.out.println(coordinadores);
-         System.out.println("Pacientes");
-         System.out.println(pacientes);
-         System.out.println("Medicamentos");
-         System.out.println(medicamentos);
-         System.out.println("Citas");
-         System.out.println(citas);
-         System.out.println("Formulas");
-         System.out.println(formulas);
-         System.out.println("Historiales");
-         System.out.println(historiales);
     }
 
     public <T> void updateJSON(T o1, String jsonFile){

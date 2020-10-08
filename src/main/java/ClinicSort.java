@@ -40,4 +40,43 @@ public class ClinicSort{
             }
         }
     };
+
+    static final Comparator<Paciente> idOrderPaciente = new Comparator<Paciente>() {
+        @Override
+        public int compare(Paciente p1, Paciente p2) {
+            if(p1.idPaciente < p2.idPaciente){
+                return -1;
+            } else if(p1.idPaciente == p2.idPaciente){
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    };
+
+    static final Comparator<Psiquiatra> idOrderPsiquiatra = new Comparator<Psiquiatra>() {
+        @Override
+        public int compare(Psiquiatra p1, Psiquiatra p2) {
+            if(p1.getIdPsiquiatra() < p2.getIdPsiquiatra()){
+                return -1;
+            } else if(p1.getIdPsiquiatra() == p2.getIdPsiquiatra()){
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    };
+
+    static final Comparator<CoordinadorDeClinica> idOrderPCoordinador = new Comparator<CoordinadorDeClinica>() {
+        @Override
+        public int compare(CoordinadorDeClinica c1, CoordinadorDeClinica c2) {
+            if(c1.getCedulaCoordinador()< c2.getCedulaCoordinador()){
+                return -1;
+            } else if(c1.getCedulaCoordinador() == c2.getCedulaCoordinador()){
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    };
 }

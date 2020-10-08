@@ -15,9 +15,42 @@ public class CoordinadorDeClinica implements handleJSON {
         this.clinicaCoordinador = clinicaCoordinador;
     }
 
+    public int getCedulaCoordinador() {
+        return cedulaCoordinador;
+    }
+
+    public void setCedulaCoordinador(int cedulaCoordinador) {
+        this.cedulaCoordinador = cedulaCoordinador;
+    }
+
+    public String getEmailCoordinador() {
+        return emailCoordinador;
+    }
+
+    public void setEmailCoordinador(String emailCoordinador) {
+        this.emailCoordinador = emailCoordinador;
+    }
+
+    public String getContrasenaCoordinador() {
+        return contrasenaCoordinador;
+    }
+
+    public void setContrasenaCoordinador(String contrasenaCoordinador) {
+        this.contrasenaCoordinador = contrasenaCoordinador;
+    }
+
+    public Clinica getClinicaCoordinador() {
+        return clinicaCoordinador;
+    }
+
+    public void setClinicaCoordinador(Clinica clinicaCoordinador) {
+        this.clinicaCoordinador = clinicaCoordinador;
+    }
+
     @Override
     public String toString() {
         return "{" + "\n" +
+                " cedulaCoordinador : " + cedulaCoordinador + "," + "\n" +
                 " emailCoordinador : " + emailCoordinador + "," + "\n" +
                 " contrasenaCoordinador : " + contrasenaCoordinador + "," + "\n" +
                 " clinicaCoordinador : " + clinicaCoordinador + "," + "\n" +

@@ -15,6 +15,14 @@
   "listaDeMedicamentos" : null,
   "listaDePsiquiatras" : null
 }, {
+  "nit" : 6,
+  "nombreClinica" : "eps2",
+  "direccion" : "dir2",
+  "telefono" : 879034,
+  "coordinadorDeClinica" : null,
+  "listaDeMedicamentos" : [ ],
+  "listaDePsiquiatras" : [ ]
+}, {
   "nit" : 5,
   "nombreClinica" : "eps2",
   "direccion" : "dir2",

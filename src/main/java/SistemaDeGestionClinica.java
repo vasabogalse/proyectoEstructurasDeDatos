@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SistemaDeGestionClinica {
-    public static Scanner sc = new Scanner(System.in);
+    public static Scanner input = new Scanner(System.in);
+    public static handleDB db = new handleDB();
 
     public static void main(String[] args) {
         // carga automáticamente el contenido de los JSON
-        handleDB db = new handleDB();
         db.readAllJSON();
-
-        // datos de prueba de la clase Clinica
+/*
+        //datos de prueba de la clase Clinica
         Clinica clinica2 = new Clinica(5, "eps2", "dir2", 879034);
         Clinica clinica3 = new Clinica(6, "eps2", "dir2", 879034);
 
@@ -21,16 +20,6 @@ public class SistemaDeGestionClinica {
 
         // elimina un objeto del array y actualiza el JSON para que no tenga dicho objeto
         db.deleteObjectInArray(2, "clinicas");
-
-        /**------------------------------------------------------------------**/
-
-
-        /**------------------------------------------------------------------**/
-
-        //cl.listarClinicas();
-
-
-        //System.out.println(ClinicSort.nitOrder.getClass());
 
         //Clinica cl = new Clinica(); // create an object from the class require
         //clinicas = cl.readJSON(Clinica.class,"clinicas"); // deserialization of JSON file (read file)
@@ -62,79 +51,126 @@ public class SistemaDeGestionClinica {
 
         //Collections.sort(clinicas, ClinicSort.telOrder);
         //System.out.println(clinicas);
+
+        menuPrincipal();
     }
 
+    //La opción de guardar deben estar en los métodos de las clases, que es donde se modifican todos los array
+    //Primero deben preguntar si desea guardar los camibios hechos y que si no no se guargan al salir
     // este es como para que me ingresen los datos y mandar los datos a verificar
     public static void menuPrincipal(){
-        /*while(true){
-            // menu registrar paciente
-            // mirar menu de Innis
-        }*/
-
         String opt = "";
         while (true) {
-            System.out.println("Bienvenido al Sistema de Gestión de Clinicas Psquiatricas");
+            System.out.println("__________________________________________________________________________________________________________________________");
+            System.out.println("                       **Bienvenido al Sistema de Gestión de Clinicas Psquiatricas**");
             System.out.println("Recuerde que para acceder a las funciones del sistema es necesario estar logueado con su usuario y contraseña.");
             System.out.println("Si usted es un paciente perteneciente a la clinica y no posee un usuario es necesario que haga el proceso de registro.");
-            System.out.println("Elija una opción:");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Selccione una opción:");
             System.out.println("1. Soy un paciente y quiero registrarme en el sistema.");
-            System.out.println("2. Soy un paciente registrado y quiero ingresar al sistema.");
-            System.out.println("3. Soy parte del personal de la clinica y quiero ingresar al sistema.");
+            System.out.println("2. Soy un usuario registrado y quiero ingresar al sistema.");
             System.out.println("0. Salir");
-            opt = sc.next();
-            switch (opt) {
-                case "1":
-                    //registroUsuario();
+            opt = input.next();
+            if(opt.equals("1")){
+                //registroUsuario();
+            } else if(opt.equals("2")){
+                ingresoUsuario(opt);
+            } else if(opt.equals("0")){
+                System.out.println("¡Al salir perderás todos tus cambios!");
+                System.out.println("Desea guardar los cambios hechos hasta el momento antes de salir: S/N");
+                String guardar = input.next();
+                if(guardar.toLowerCase().equals("s")){
+                    // guardarTodo()
                     break;
-                case "2":
-                    //ingresarPaciente();
-                    break;
-                case "3":
-                    //verificacion();
-                    break;
-                case "0":
-                    break;
-                    // este metodo llama a ingreso usuario, ingreso usuario toma datos y los envía a verificacion
-                // finalmente verificarUsuario manda a los menus correspondientes
+                } else if(guardar.toLowerCase().equals("n")){
+                    System.exit(0);
+                } else {
+                    System.out.println("Respuesta incorrecta. Escribe 'S' si quieres guardar los cambios y 'N' si los quieres descartar");
+                }
+
             }
         }
     }
 
-    public void ingresoUsuario(String opt){
-        boolean coordinador = false;
+    public static void ingresoUsuario(String opt){
+        System.out.println("Ingrese su cédula:");
+        int cedula= input.nextInt();
+        System.out.println("Ingrese su contraseña");
+        String clave = input.next();
         if(opt.equals("2")){
-            System.out.println("Ingrese su cédula");
-            int cedula = sc.nextInt();
-            verificarUsuarios(cedula,"paciente");
-        } else if(opt.equals("3")){
-
+            gestionarMenus(cedula, clave);
         }
     }
 
-    // verificar a que clase de usuario pertenece y mandarle su menu
-    public static void verificarUsuarios(int clavePrimaria,String tipoUsuario) {
-        // me tienen que enviar la opcion para saber de una vez porque arreglo tirarme
-        // y un identificador único para hacer la validacion
+    public static String vertificarUsuarios(int cedula, String clave){
+        String usuario = null;
+        int indexCoordinador = 0;
+        for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
+            if(coordinador.getCedulaCoordinador() == cedula && coordinador.getContrasenaCoordinador().equals(clave)){
+                usuario = "coordinador";
+                break;
+            }
+        }
+        for(Psiquiatra psiquiatra : db.getPsiquiatras()){
+            if(psiquiatra.getIdPsiquiatra() == cedula && psiquiatra.getClavePsiquiatra().equals(clave)){
+                usuario = "psiquiatra";
+                break;
+            }
+        }
+        for(Paciente paciente : db.getPacientes()){
+            if(paciente.getIdPaciente() == cedula && paciente.getContrasena().equals(clave)){
+                usuario = "paciente";
+                break;
+            }
+        }
+        return usuario;
+    }
 
-        // menuPaciente(cedula)
-        // buscarnomre
+    public static void gestionarMenus(int cedula, String clave) {
+        String usuario = vertificarUsuarios(cedula,clave);
+        System.out.println(usuario);
+
+        if(usuario != null){
+            if(usuario.equals("coordinador")){
+                menuCoordinador();
+            } else if(usuario.equals("psiquiatra")){
+                // menuPsiquiatra(cedula u objecto que buscamos)
+                return;
+            } else if (usuario.equals("paciente")){
+                // menuPaciente(cedula u objeto encontrado)
+                return;
+            }
+        } else{
+            System.out.println("Cédula o contraseña inválida");
+        }
     }
 
     public static void menuCoordinador() {
         String opcion = "";
         while (true) {
-            System.out.println("Bienvenido Coordinador ?");
+            System.out.println("__________________________________________");
+            System.out.println("    Bienvenido Coordinador ?");
+            System.out.println("------------------------------------------");
             System.out.println("Seleccione una opción: ");
             System.out.println("1. Gestionar clínica");
             System.out.println("2. Gestionar psiquiatras");
             System.out.println("3. Listar clínicas en el sistema");
-            opcion = sc.next();
+            System.out.println("4. Regresar al ingreso al sistema");
+            System.out.println("5. Salir y terminar todo");
+            System.out.println("------------------------------------------");
+            opcion = input.next();
             if (opcion.equals("1")) {
-                // menuGestionarClinicia();
+                menuGestionarClinica();
+                return;
             } else if (opcion.equals("2")) {
-                // menuGestionarPsiquiatras()
+                menuGestionarPsiquiatras();
+                return;
             } else if (opcion.equals("3")) {
                 // cl.listarClinicas();
+            } else if(opcion.equals("4")){
+                return;
+            } else if(opcion.equals("5")){
+                System.exit(0);
             } else {
                 System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
             }
@@ -144,11 +180,17 @@ public class SistemaDeGestionClinica {
     public static void menuGestionarClinica(){
         String opClinica = " ";
         while(true){
+            System.out.println("____________________________________________________");
+            System.out.println("            Menú de gestión de clínica");
+            System.out.println("----------------------------------------------------");
+            System.out.println("Seleccione una opción");
             System.out.println("1. Editar la clínica que administra");
             System.out.println("2. Borrar la clínica que administra");
             System.out.println("3. Ingresar medicamentos a la clínica");
             System.out.println("4. Borrar un medicamento que usa la clínica");
-            opClinica = sc.next();
+            System.out.println("0. Regresar al menú de utilidades de coordinador");
+            System.out.println("----------------------------------------------------");
+            opClinica = input.next();
             if(opClinica.equals("1")){
                 // cl.editarClinica(param1, param2 ..)
                 return;
@@ -161,19 +203,27 @@ public class SistemaDeGestionClinica {
             } else if(opClinica.equals("4")){
                 // cl.borrarMedicamento(params ..)
                 return;
+            } else if(opClinica.equals("0")){
+                menuCoordinador();
             } else {
                 System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
             }
         }
     }
 
-    public static void menuGestionasPsiquiatras(){
+    public static void menuGestionarPsiquiatras(){
         String opPsiquiatra = " ";
         while (true) {
+            System.out.println("___________________________________________________");
+            System.out.println("          Menú de gestión de psiquiatras");
+            System.out.println("---------------------------------------------------");
             System.out.println("1. Registrar un psiquiatra a la clínica");
             System.out.println("2. Borrar un psiquiatra de la clínica");
             System.out.println("3. Listar psquiatras de la clínica que administra");
-            opPsiquiatra = sc.next();
+            System.out.println("0. Regresar al menú de utilidades de coordinador ");
+            System.out.println("----------------------------------------------------");
+
+            opPsiquiatra = input.next();
             if (opPsiquiatra.equals("1")) {
                 // ps.registrarPsiquiatra(params ...)
                 return;
@@ -183,6 +233,8 @@ public class SistemaDeGestionClinica {
             } else if (opPsiquiatra.equals("3")) {
                 // ps.listarPsiquiatras(params);
                 return;
+            } else if(opPsiquiatra.equals("0")){
+                menuCoordinador();
             } else {
                 System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
             }
