@@ -105,7 +105,7 @@ public class CoordinadorDeClinica implements handleJSON{
             }
 
             else if (cambio.equals("0")) {
-                break;
+                return;
             }
             else {
                 System.out.println("Ha ingresado una opción inválida");
@@ -127,7 +127,7 @@ public class CoordinadorDeClinica implements handleJSON{
             System.out.println("1. Sí");
             System.out.println("2. No");
             String borrar = input.next();
-            if (!borrar.equals("1") || !borrar.equals("2")) {
+            if (!borrar.equals("1") && !borrar.equals("2")) {
                 System.out.println("Ha ingresado una opción inválida");
                 continue;
             }
@@ -159,16 +159,16 @@ public class CoordinadorDeClinica implements handleJSON{
             return;
         }
 
-        for (Medicamento medicamento : clinicas.get(indexDel).listaDeMedicamentos) {
+
+        for (Medicamento medicamento : db.getClinicas().get(indexDel).listaDeMedicamentos) {
             clinicas.get(indexTras).listaDeMedicamentos.add(medicamento);
         }
 
-        for (Psiquiatra psiquiatra : clinicas.get(indexDel).listaDePsiquiatras) {
+        for (Psiquiatra psiquiatra : db.getClinicas().get(indexDel).listaDePsiquiatras) {
             clinicas.get(indexTras).listaDePsiquiatras.add(psiquiatra);
         }
 
-        clinicas.remove(indexDel);
-        db.appendArrayToJSON("clinicas");
+        db.getClinicas().remove(indexDel);
         System.out.println("Se ha realizado la transferencia de información exitosamente");
         System.out.println("Se ha eliminado la clínica");
 
@@ -199,7 +199,7 @@ public class CoordinadorDeClinica implements handleJSON{
         input.nextLine();
         String contrasena = input.nextLine();
 
-        System.out.println("Ingrese el sexo del(la) psiquiatra: ");
+        System.out.println("Ingrese el sexo del(de la) psiquiatra: ");
         System.out.println("1. Masculino");
         System.out.println("2. Femenino");
         System.out.println("3. Otro");
@@ -314,7 +314,7 @@ public class CoordinadorDeClinica implements handleJSON{
         Medicamento med = new Medicamento();
         med.listarMedicamento(clinicaCoordinador);
         med.notificarCantidad(clinicaCoordinador);
-//        ArrayList<Medicamento> medicamentosCoord = (ArrayList) SistemaDeGestionClinica.medicamentos.clone();
+
 
         System.out.println("¿Qué desea hacer?");
         System.out.println("1. Agregar suministros de un medicamento existente");

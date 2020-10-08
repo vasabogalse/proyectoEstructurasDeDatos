@@ -133,6 +133,10 @@ public class handleDB implements handleJSON {
                 HistorialClinico historial = new HistorialClinico();
                 historial.writeJSON(historiales, "historiales");
                 break;
+            case "coordinadores":
+                CoordinadorDeClinica coordinador = new CoordinadorDeClinica();
+                coordinador.writeJSON(coordinadores, "coordinadores");
+                break;
         }
     }
 
