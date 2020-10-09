@@ -1,14 +1,7 @@
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
-
-import java.beans.MethodDescriptor;
-import java.lang.reflect.Array;
-import java.nio.file.LinkPermission;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class CoordinadorDeClinica implements handleJSON{
     public int cedulaCoordinador;
@@ -322,30 +315,43 @@ public class CoordinadorDeClinica implements handleJSON{
 
         String optadd = input.next();
         if (optadd.equals("1")) {
-            System.out.println("¿A qué medicamento le desea aumentar la cantidad?");
-            System.out.println("Recuerde ingresar el número correspondiente al medicamento según el listado mostrado");
-            int optmed = input.nextInt();
-            if (optmed < 1 || optmed > clinicaCoordinador.listaDeMedicamentos.size()) {
+            System.out.println("Ingrese el id del medicamento al que le desea aumentar la cantidad: ");
+            int idMed = input.nextInt();
+            if (idMed < 1 || idMed > clinicaCoordinador.listaDeMedicamentos.size()) {
                 System.out.println("Ha ingresado un numero fuera del rango de medicamentos disponibles");
                 return;
             }
 
+            for (int i = 0; i < clinicaCoordinador.listaDeMedicamentos.size(); i++) {
+                if (clinicaCoordinador.listaDeMedicamentos.get(i).idMedicamento == idMed) {
+                    idMed = i;
+                    break;
+                }
+            }
+
             System.out.println("Ingrese la cantidad de unidades a agregar al medicamento " +
-                    clinicaCoordinador.listaDeMedicamentos.get(optmed - 1).nombreMedicamento);
+                    clinicaCoordinador.listaDeMedicamentos.get(idMed).nombreMedicamento);
             int cantidadSum = input.nextInt();
             if (cantidadSum < 1) {
                 System.out.println("Tiene que ingresar como mínimo una unidad");
                 return;
             }
 
-            clinicaCoordinador.listaDeMedicamentos.get(optmed - 1).cantidadDisponible += cantidadSum;
-            for (Clinica clinicaJson : db.getClinicas()) {
-                if (clinicaJson.nit == clinicaCoordinador.nit) {
-                    clinicaJson.listaDeMedicamentos = clinicaCoordinador.listaDeMedicamentos;
+            clinicaCoordinador.listaDeMedicamentos.get(idMed).cantidadDisponible += cantidadSum;
+            for (int i = 0; i < db.getClinicas().size(); i++) {
+                if (db.getClinicas().get(i).nit == clinicaCoordinador.nit) {
+                    for (int j = 0; j < db.getClinicas().get(i).listaDeMedicamentos.size(); j++) {
+                        if (db.getClinicas().get(i).listaDeMedicamentos.get(j).idMedicamento == idMed) {
+                            db.getClinicas().get(i).listaDeMedicamentos.get(j).cantidadDisponible += cantidadSum;
+                            break;
+                        }
+                    }
+                    break;
                 }
             }
             System.out.println("Se ha suministrado el medicamento al inventario exitosamente");
             //Actualizar el medicamento modificado a la lista de medicamentos general (la que está en sistema de gestión)
+
 
         }
         else if (optadd.equals("2")) {
@@ -369,6 +375,14 @@ public class CoordinadorDeClinica implements handleJSON{
             //Agregar el medicamento creado a la lista de medicamentos general (la que está en sistema de gestión)
             db.getMedicamentos().add(nuevoMedicamento);
 
+            //Agregar el medicamento al json de clinicas
+//            for (int i = 0; i < db.getClinicas().size(); i++) {
+//                if (db.getClinicas().get(i).nit == clinicaCoordinador.nit) {
+//                    db.getClinicas().get(i).listaDeMedicamentos.add(nuevoMedicamento);
+//                }
+//
+//            }
+
             System.out.println("Medicamento creado e ingresado a inventario con éxito");
 
         }
@@ -379,13 +393,34 @@ public class CoordinadorDeClinica implements handleJSON{
     }
 
     public void borrarMedicamento() {
+        handleDB db = new handleDB();
         Scanner input = new Scanner(System.in);
-        System.out.println("Los medicamentos para su clínica son: ");
         Medicamento med = new Medicamento();
         med.listarMedicamento(clinicaCoordinador);
 
-        System.out.println("Ingrese el número del medicamento que desea eliminar: ");
 
+        System.out.println("Ingrese el id del medicamento que desea eliminar: ");
+        int idMedDel = input.nextInt();
+        while (idMedDel < 0) {
+            System.out.println("Ha ingresado un id negativo, intente de nuevo");
+            idMedDel = input.nextInt();
+        }
+
+        for (int i = 0; i < db.getMedicamentos().size(); i++) {
+            if (db.getMedicamentos().get(i).idMedicamento == idMedDel) {
+                db.getMedicamentos().remove(i);
+                for (int j = 0; j < clinicaCoordinador.listaDeMedicamentos.size(); j++) {
+                    if (clinicaCoordinador.listaDeMedicamentos.get(j).idMedicamento == idMedDel) {
+                        clinicaCoordinador.listaDeMedicamentos.remove(j);
+                    }
+                }
+                System.out.println("Se ha eliminado el medicamento exitosamente");
+                break;
+            }
+            else {
+                System.out.println("No se encontró ningún medicamento con el id " + idMedDel);
+            }
+        }
 
     }
 

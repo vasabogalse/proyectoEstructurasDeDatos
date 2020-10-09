@@ -25,10 +25,9 @@ public class Medicamento implements handleJSON{
 
     public void listarMedicamento(Clinica clinicaCoordinador) {
         handleDB db = new handleDB();
-        System.out.println("A continuación verá cada medicamento con el numero respectivo con el que lo seleccionara" +
-                ", el nombre y la cantidad disponible");
-        for (int i = 0; i < clinicaCoordinador.listaDeMedicamentos.size(); i++) {
-            System.out.println((i + 1) + " - " + nombreMedicamento + ": " + cantidadDisponible);
+        System.out.println("A continuación verá cada medicamento con su id al frente");
+        for (Medicamento medicamento : clinicaCoordinador.listaDeMedicamentos) {
+            System.out.println(medicamento.nombreMedicamento + " - id: " + medicamento.idMedicamento);
         }
 
     }
