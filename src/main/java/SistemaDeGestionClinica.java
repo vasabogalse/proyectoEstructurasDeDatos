@@ -51,10 +51,17 @@ public class SistemaDeGestionClinica {
         lisMedCl4.add(db.getMedicamentos().get(3));
         lisMedCl4.add(db.getMedicamentos().get(0));
         db.getClinicas().get(3).listaDeMedicamentos = lisMedCl4;
-        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
+//        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
 
-        db.getCoordinadores().get(0).suministrarMedicamentos();
-        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
+//        db.getCoordinadores().get(0).suministrarMedicamentos();
+//        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
+
+
+        //Linea con problema:
+        //Guardar ArrayList de clinicas en el json clínica:
+        db.appendArrayToJSON("clinicas");
+
+
 
 
 
