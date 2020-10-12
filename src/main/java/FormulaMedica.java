@@ -79,7 +79,7 @@ public class FormulaMedica implements handleJSON{
         }
         db.updateJSON(formulaMedica, "formulas");
         System.out.println();
-        System.out.println("La fórmula médica se creó correctamente con el id: " + formulaMedica.getIdFormulaMedica());
+        System.out.println("La fórmula médica se creó correctamente con el id: " + formulaMedica.getIdFormulaMedica()+".");
         System.out.println();
     }
 
@@ -104,7 +104,7 @@ public class FormulaMedica implements handleJSON{
                     count++;
                 } else {
                     System.out.println();
-                    System.out.println("No hay médicamentos registrados en esta fórmula médica");
+                    System.out.println("No hay médicamentos registrados en esta fórmula médica.");
                     System.out.println("---------------------------------------------------------------------------------");
                     count++;
                     break;
@@ -113,13 +113,13 @@ public class FormulaMedica implements handleJSON{
         }
         if (count==0){
             System.out.println();
-        System.out.println("Primero ingrese alguna fórmula médica");
+        System.out.println("Primero ingrese alguna fórmula médica.");
         }
     }
 
     public void borrarFormulaMedica(){
         System.out.println();
-        System.out.println("Ingrese el id de la fórmula médica que desea borrar");
+        System.out.println("Ingrese el id de la fórmula médica que desea borrar:");
         SistemaDeGestionClinica.input.nextLine();
         String idFM = SistemaDeGestionClinica.input.nextLine();
         int numFM =0;
