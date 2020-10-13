@@ -10,6 +10,10 @@ public class SistemaDeGestionClinica {
     public static ArrayList<String> formulasMedicas = new ArrayList<>();
     public static ArrayList<String> citas = new ArrayList<>();
     public static ArrayList<String> medicamentos = new ArrayList<>();
+    
+    public static Paciente paciente = new Paciente();
+    public static Psiquiatra psiquiatra = new Psiquiatra();
+    public static HistorialClinico historialClinico = new HistorialClinico();
 
     //Menú inicial
     public static void main(String[] args) {
