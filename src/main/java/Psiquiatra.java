@@ -1,36 +1,88 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Psiquiatra implements handleJSON {
-
-    public String idPsiquiatra;
+    public int idPsiquiatra;
     public String nombres;
     public String apellidos;
-    public ArrayList<HistorialClinico> ListaHistClinicos;
-    public ArrayList<Paciente> ListaPacientes;
+    public String emailPsiquiatra;
+    public String clavePsiquiatra;
+    public ArrayList<Integer> listaHistoriales = new ArrayList<>();
+    public ArrayList<Paciente> listaPacientes = new ArrayList<>();
 
+    handleDB db = new handleDB();
 
-    public Psiquiatra(String idPsiquiatra, String nombres, String apellidos) {
+    public void setIdPsiquiatra(int idPsiquiatra) {
         this.idPsiquiatra = idPsiquiatra;
+    }
+
+    public void setNombres(String nombres) {
         this.nombres = nombres;
+    }
+
+    public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-        this.ListaPacientes = new ArrayList<>();
     }
 
-    public static void asignarPsiquiatra(Paciente paciente){
-        Collections.sort(SistemaDeGestionClinica.psiquiatras, PsiquiatraSort.NumPacientes);
+    public void setEmailPsiquiatra(String emailPsiquiatra) {
+        this.emailPsiquiatra = emailPsiquiatra;
+    }
 
-        // ListaPacientes.add(paciente);
-        paciente.setPsiquiatra(SistemaDeGestionClinica.psiquiatras.get(0));
+    public void setClavePsiquiatra(String clavePsiquiatra) {
+        this.clavePsiquiatra = clavePsiquiatra;
     }
 
 
-    @Override
-    public String toString() {
-        return "Psiquiatra{" +
-                "idPsiquiatra='" + idPsiquiatra + '\'' +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                '}';
+    public int getIdPsiquiatra() {
+        return idPsiquiatra;
     }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getEmailPsiquiatra() {
+        return emailPsiquiatra;
+    }
+
+    public String getClavePsiquiatra() {
+        return clavePsiquiatra;
+    }
+
+    public ArrayList<Paciente> getListaPacientes() {
+        return listaPacientes;
+    }
+
+    public ArrayList<Integer> getListaHistoriales() {
+        return listaHistoriales;
+    }
+
+    public void crearPsiquiatra(){
+        Psiquiatra psiquiatra = new Psiquiatra();
+        System.out.println("Id");
+        int id = SistemaDeGestionClinica.input.nextInt();
+        SistemaDeGestionClinica.input.nextLine();
+        System.out.println("Nombre");
+        String nombre = SistemaDeGestionClinica.input.nextLine();
+        System.out.println("Apellidos");
+        String apellidos = SistemaDeGestionClinica.input.nextLine();
+        System.out.println("Email");
+        String email = SistemaDeGestionClinica.input.nextLine();
+        System.out.println("clave");
+        String clave = SistemaDeGestionClinica.input.nextLine();
+
+        psiquiatra.setIdPsiquiatra(id);
+        psiquiatra.setNombres(nombre);
+        psiquiatra.setApellidos(apellidos);
+        psiquiatra.setEmailPsiquiatra(email);
+        psiquiatra.setClavePsiquiatra(clave);
+        db.updateJSON(psiquiatra, "psiquiatras");
+    }
+
+
+
+
 }
