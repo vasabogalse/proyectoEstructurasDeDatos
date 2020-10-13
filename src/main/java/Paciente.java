@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Paciente implements handleJSON {
 
-    public String idPaciente;
+    public int idPaciente;
     public String nombres;
     public String apellidos;
     public String email;
@@ -14,77 +16,161 @@ public class Paciente implements handleJSON {
     public String nombreContactoEmergencia;
     public String telefonoContactoEmergencia;
     public int numLlamadas;
-    public Psiquiatra psiquiatra;
+    public int psiquiatra;
     public ArrayList<Integer> estados;
-    public ArrayList<Cita> listaCitas;
-    public HistorialClinico historialClinico;
+    public ArrayList<Cita> listaCitas = new ArrayList<>();
+    public int historialClinico;
 
-    // Recibe estados
-    public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaNacimiento, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
+    handleDB db = new handleDB();
+    public Paciente(){};
+    public static Paciente paciente = new Paciente();
+
+    public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public void setNombres(String nombres) {
         this.nombres = nombres;
+    }
+
+    public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void setNombreContactoEmergencia(String nombreContactoEmergencia) {
         this.nombreContactoEmergencia = nombreContactoEmergencia;
+    }
+
+    public void setTelefonoContactoEmergencia(String telefonoContactoEmergencia) {
         this.telefonoContactoEmergencia = telefonoContactoEmergencia;
-        this.numLlamadas = 0;
-        this.estados = null;
-       /* this.listaCitas = null;
-        this.historialClinico = null;*/
+    }
+
+    public void setPsiquiatra(int psiquiatra) {
+        this.psiquiatra = psiquiatra;
+    }
+
+    public void setHistorialClinico(int historialClinico) {
+        this.historialClinico = historialClinico;
+    }
+
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getNombreContactoEmergencia() {
+        return nombreContactoEmergencia;
+    }
+
+    public String getTelefonoContactoEmergencia() {
+        return telefonoContactoEmergencia;
+    }
+
+    public int getNumLlamadas() {
+        return numLlamadas;
+    }
+
+    public int getPsiquiatra() {
+        return psiquiatra;
+    }
+
+    public ArrayList<Integer> getEstados() {
+        return estados;
+    }
+
+    public ArrayList<Cita> getListaCitas() {
+        return listaCitas;
+    }
+
+    public int getHistorialClinico() {
+        return historialClinico;
     }
 
     @Override
     public String toString() {
-        return "{" + "\n" +
-                "Cédula=" + idPaciente + "," + "\n" +
-                "nombres=" + nombres + "," + "\n" +
-                "apellidos=" + apellidos + "," + "\n" +
-                "email=" + email + "," + "\n" +
-                "contrasena=" + contrasena + "," + "\n" +
-                "direccion=" + direccion + "," + "\n" +
-                "edad=" + edad + "," + "\n" +
-                "fechaNacimiento=" + fechaNacimiento + "," + "\n" +
-                "telefono=" + telefono + "," + "\n" +
-                "nombreContactoEmergencia=" + nombreContactoEmergencia + "," + "\n" +
-                "telefonoContactoEmergencia=" + telefonoContactoEmergencia + "," + "\n" +
-                "numLlamadas=" + numLlamadas + "," + "\n" +
-                "estados=" + estados + "," + "\n" +
-                "Psiquiatra=" + psiquiatra + "\n" +
-                '}'+ "\n";
+        return "Paciente{" +
+                "idPaciente=" + idPaciente +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", edad=" + edad +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", nombreContactoEmergencia='" + nombreContactoEmergencia + '\'' +
+                ", telefonoContactoEmergencia='" + telefonoContactoEmergencia + '\'' +
+                ", numLlamadas=" + numLlamadas +
+                ", psiquiatra=" + psiquiatra +
+                ", estados=" + estados +
+                ", listaCitas=" + listaCitas +
+                ", historialClinico=" + historialClinico +
+                '}';
     }
 
-    Paciente(){
-        idPaciente = null;
-        nombres = null;
-        apellidos= null ;
-        email= null ;
-        contrasena= null ;
-        direccion= null ;
-        edad= 0;
-        fechaNacimiento= null;
-        telefono = null;
-        nombreContactoEmergencia = null;
-        telefonoContactoEmergencia = null;
-
-    }
-
-    public void setPsiquiatra(Psiquiatra psiquiatra) {
-        this.psiquiatra = psiquiatra;
-    }
-
-    public static void registrarPaciente(){
-        ArrayList<Paciente> ListaPacientes;
-        ListaPacientes = SistemaDeGestionClinica.pacientes;
+    public  void registrarPaciente() {
+        Paciente paciente = new Paciente();
 
         SistemaDeGestionClinica.input.nextLine();
         System.out.println("Bienvenido al sistema, por favor registre la siguiente información: ");
         System.out.println("Cédula: ");
-        String idPaciente = SistemaDeGestionClinica.input.nextLine();
+        int idPaciente = SistemaDeGestionClinica.input.nextInt();
+        SistemaDeGestionClinica.input.nextLine();
 
         System.out.println("Nombres: ");
         String nombres = SistemaDeGestionClinica.input.nextLine();
@@ -101,7 +187,7 @@ public class Paciente implements handleJSON {
         String fecha = SistemaDeGestionClinica.input.nextLine();
 
         System.out.println("Teléfono: ");
-        String teléfono = SistemaDeGestionClinica.input.nextLine();
+        String telefono = SistemaDeGestionClinica.input.nextLine();
 
         System.out.println("Dirección: ");
         String direccion = SistemaDeGestionClinica.input.nextLine();
@@ -118,37 +204,29 @@ public class Paciente implements handleJSON {
         System.out.println("Contraseña para el ingreso al sistema: ");
         String contrasena = SistemaDeGestionClinica.input.nextLine();
 
-        Paciente nuevoPaciente = new Paciente(idPaciente,nombres,apellidos,correo,contrasena,direccion,edad,fecha,teléfono,nombreContacto,TelContacto);
-        Psiquiatra.asignarPsiquiatra(nuevoPaciente);
-        ListaPacientes.add(nuevoPaciente);
-
-        Paciente paciGuar = new Paciente();
-        paciGuar.writeJSON(ListaPacientes, "pacientes");
-
-        ListaPacientes = paciGuar.readJSON(Paciente.class, "pacientes");
-
-        SistemaDeGestionClinica.pacientes = ListaPacientes;
-        System.out.println(SistemaDeGestionClinica.pacientes.toString());
+        paciente.setIdPaciente(idPaciente);
+        paciente.setNombres(nombres);
+        paciente.setApellidos(apellidos);
+        paciente.setEdad(edad);
+        paciente.setFechaNacimiento(fecha);
+        paciente.setTelefono(telefono);
+        paciente.setDireccion(direccion);
+        paciente.setEmail(correo);
+        paciente.setNombreContactoEmergencia(nombreContacto);
+        paciente.setTelefonoContactoEmergencia(TelContacto);
+        paciente.setContrasena(contrasena);
+        asignarPsiquiatra(paciente);
+        db.appendArrayToJSON("psiquiatras");
+        db.updateJSON(paciente,"pacientes");
+        System.out.println("Registro exitoso ¡Bienvenido!");
     }
 
-    public static void ingresarPaciente(){}
-
-    public static void editarPaciente(){
-        System.out.println("Ingrese su cédula para validar la acción");
-        String cedula = SistemaDeGestionClinica.input.nextLine();
-
-        for (Paciente paciente : SistemaDeGestionClinica.pacientes){
-            if ((!cedula.equals(paciente.idPaciente))){
-                System.out.println("Cédula no registrada en el sistema");
-                return;
-            }
-        }
-
+    public  void editarPaciente(Paciente paciente){
         String option;
         label:
         while (true) {
             System.out.println();
-            System.out.println("Escoja la información que desea editar:");
+            System.out.println("Escoja la información que desea modificar:");
             System.out.println("1. Nombres.");
             System.out.println("2. Apellidos.");
             System.out.println("3. Fecha de nacimiento.");
@@ -158,85 +236,139 @@ public class Paciente implements handleJSON {
             System.out.println("7. Nombre del contacto de emergencia.");
             System.out.println("8. Teléfono del contacto de emergencia.");
             System.out.println("9. Contraseña para el ingreso al sistema.");
+            System.out.println("0. Regresar.");
             option = SistemaDeGestionClinica.input.next();
             switch (option) {
                 case "1":
-
+                    System.out.println("Nombre antiguo:" + paciente.getNombres() + ".Ingrese la información actualizada:");
+                    String nomNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setNombres(nomNuevo);
+                    System.out.println(paciente.getNombres());
                     break;
                 case "2":
-
+                    System.out.println("Apellido antiguo:" + paciente.getApellidos() + ".Ingrese la información actualizada:");
+                    String apeNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setApellidos(apeNuevo);
+                    System.out.println(paciente.getApellidos());
                     break;
                 case "3":
-
+                    System.out.println("Fecha de nacimiento antigua:" + paciente.getFechaNacimiento()+ ".Ingrese la información actualizada:");
+                    String fechaNueva = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setFechaNacimiento(fechaNueva);
+                    System.out.println(paciente.getFechaNacimiento());
                     break;
                 case "4":
-
+                    System.out.println("Teléfono antiguo:" + paciente.getTelefono() +".Ingrese la información actualizada:");
+                    String telNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setTelefono(telNuevo);
+                    System.out.println(paciente.getTelefono());
+                    break;
                 case "5":
-
+                    System.out.println("Dirección antigua:" + paciente.getDireccion()+".Ingrese la información actualizada:");
+                    String dirNueva = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setDireccion(dirNueva);
+                    System.out.println(paciente.getDireccion());
+                    break;
                 case "6":
-
+                    System.out.println("Correo electrónico antiguo:" + paciente.getEmail()+".Ingrese la información actualizada:");
+                    String emailNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setEmail(emailNuevo);
+                    System.out.println(paciente.getEmail());
+                    break;
                 case "7":
-
+                    System.out.println("Nombre de contacto antiguo:" + paciente.getNombreContactoEmergencia()+".Ingrese la información actualizada:");
+                    String nomContNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setNombreContactoEmergencia(nomContNuevo);
+                    System.out.println(paciente.getNombreContactoEmergencia());
+                    break;
                 case "8":
-
+                    System.out.println("Teléfono de contacto antiguo:" + paciente.getTelefonoContactoEmergencia()+".Ingrese la información actualizada:");
+                    String telContNuevo = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setTelefonoContactoEmergencia(telContNuevo);
+                    System.out.println(paciente.getTelefonoContactoEmergencia());
                     break;
                 case "9":
-
+                    System.out.println("Contraseña antigua:" + paciente.getContrasena()+".Ingrese la información actualizada:");
+                    String Contraseña = SistemaDeGestionClinica.input.nextLine();
+                    paciente.setContrasena(Contraseña);
+                    System.out.println(paciente.getContrasena());
                     break;
                 case "0":
                     break label;
             }
         }
-
+        db.appendArrayToJSON("pacientes");
+        System.out.println("Modificación exitoso.");
     }
 
-
-    public static void eliminarPaciente(){
-        System.out.println("Ingrese su cédula para validar la acción");
-        String cedula = SistemaDeGestionClinica.input.nextLine();
-
-        for (Paciente paciente : SistemaDeGestionClinica.pacientes){
-            if ((!cedula.equals(paciente.idPaciente))){
-                System.out.println("Cédula no registrada en el sistema");
-                return;
+    public  void eliminarPaciente(Paciente paciente){
+        db.getPacientes().remove(paciente);
+        for (Psiquiatra psiquiatra : db.getPsiquiatras()){
+            if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                psiquiatra.getListaPacientes().remove(paciente);
             }
         }
-
-        //SistemaDeGestionClinica.pacientes.removeElement();
+        db.appendArrayToJSON("pacientes");
+        db.appendArrayToJSON("psiquiatras");
+        System.out.println("Se eliminó exitosamente el perfil.");
     }
 
-    public static void verPaciente(){
-        System.out.println("Ingrese su cédula para validar la acción");
-        String cedula = SistemaDeGestionClinica.input.nextLine();
+    public  void verPaciente(Paciente paciente){
+        System.out.println(paciente.toString());
+    }
 
-        for (Paciente paciente : SistemaDeGestionClinica.pacientes){
-            if ((!cedula.equals(paciente.idPaciente))){
-                System.out.println("Cédula no registrada en el sistema");
-                return;
+    public  void cambiarPsiquiatra(Paciente paciente) {
+        Psiquiatra psiAntiguo = new Psiquiatra();
+
+        for (Psiquiatra psiquiatra : db.getPsiquiatras()){
+            if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres());
+                psiAntiguo = psiquiatra;
+                psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
             }
         }
-        // Llamar al paciente para mostrar información.
-        System.out.println();
+        paciente.setPsiquiatra(0);
+        asignarPsiquiatra(paciente);
+
+
+        if (psiAntiguo.getIdPsiquiatra() == paciente.getPsiquiatra()){
+            for (Psiquiatra psiquiatra : db.getPsiquiatras()){
+                if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                    System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres() + psiquiatra.getIdPsiquiatra());
+                    psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
+                }
+            }
+            asignarPsiquiatra(paciente);
+        }
+
+        db.appendArrayToJSON("pacientes");
+        db.appendArrayToJSON("psiquiatras");
+        
     }
-
-
-    public static void cambiarPsiquiatra(){}
 
     public static void registrarEmociones(){
-        System.out.println("Ingrese su cédula para validar la acción");
-        String cedula = SistemaDeGestionClinica.input.nextLine();
 
-        for (Paciente paciente : SistemaDeGestionClinica.pacientes){
-            if ((!cedula.equals(paciente.idPaciente))){
-                System.out.println("Cédula no registrada en el sistema");
-                return;
-            }
-        }
     }
 
-    public static void asignarPsiquiatraDefecto(){}
+    public static void programarCita(Paciente paciente){
+        Cita ct = new Cita();
+        ct.crearCita(paciente);
+    }
 
-    public static void programarCita(){}
+    public  void asignarPsiquiatra(Paciente paciente){
+        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.Apellidos);
+        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.NumPacientes);
+        Psiquiatra psiqui;
+
+        if (paciente.getPsiquiatra() == 0){
+            psiqui = db.getPsiquiatras().get(0);
+        }else{
+            psiqui =db.getPsiquiatras().get(1);
+        }
+        psiqui.listaPacientes.add(paciente);
+        paciente.setPsiquiatra(psiqui.getIdPsiquiatra());
+    }
+
 
 
 
