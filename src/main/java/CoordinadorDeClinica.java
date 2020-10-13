@@ -367,9 +367,10 @@ public class CoordinadorDeClinica implements handleJSON{
             }
 
             int id = clinicaCoordinador.listaDeMedicamentos.size() + 1;
-            Clinica clinica = clinicaCoordinador;
+            int nitClinicaMed = clinicaCoordinador.nit;
 
-            Medicamento nuevoMedicamento = new Medicamento(id, nombre, cantidad, clinica);
+
+            Medicamento nuevoMedicamento = new Medicamento(id, nombre, cantidad, nitClinicaMed);
             clinicaCoordinador.listaDeMedicamentos.add(nuevoMedicamento);
 
             //Agregar el medicamento creado a la lista de medicamentos general (la que está en sistema de gestión)

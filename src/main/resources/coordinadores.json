@@ -4,24 +4,17 @@
   "emailCoordinador" : "coordinador1@gmail.com",
   "clinicaCoordinador" : {
     "nit" : 3,
-    "nombreClinica" : "clínica de prueba",
+    "nombreClinica" : "bps",
     "direccion" : "yir",
     "telefono" : 123456,
-    "coordinadorDeClinica" : {
-      "cedulaCoordinador" : 12345678,
-      "contrasenaCoordinador" : "eps1",
-      "emailCoordinador" : "coordinador1@gmail.com",
-      "clinicaCoordinador" : {
-        "nit" : 3,
-        "nombreClinica" : "bps",
-        "direccion" : "yir",
-        "telefono" : 123456,
-        "coordinadorDeClinica" : null,
-        "listaDeMedicamentos" : null,
-        "listaDePsiquiatras" : null
-      }
-    },
-    "listaDeMedicamentos" : null,
+    "cedCoorDeClinica" : 12345678,
+    "listaDeMedicamentos" : [ {
+      "idMedicamento" : 1,
+      "nombreMedicamento" : "Medicamento #1",
+      "cantidadDisponible" : 100,
+      "formulaMedica" : null,
+      "nitClinicaMed" : 3
+    } ],
     "listaDePsiquiatras" : null
   }
 }, {
@@ -33,21 +26,14 @@
     "nombreClinica" : "tps2",
     "direccion" : "uir2",
     "telefono" : 879034,
-    "coordinadorDeClinica" : {
-      "cedulaCoordinador" : 12345338,
-      "contrasenaCoordinador" : "eps2",
-      "emailCoordinador" : "coordinador2@gmail.com",
-      "clinicaCoordinador" : {
-        "nit" : 2,
-        "nombreClinica" : "tps2",
-        "direccion" : "uir2",
-        "telefono" : 879034,
-        "coordinadorDeClinica" : null,
-        "listaDeMedicamentos" : null,
-        "listaDePsiquiatras" : null
-      }
-    },
-    "listaDeMedicamentos" : null,
+    "cedCoorDeClinica" : 12345338,
+    "listaDeMedicamentos" : [ {
+      "idMedicamento" : 2,
+      "nombreMedicamento" : "Medicamento #2",
+      "cantidadDisponible" : 200,
+      "formulaMedica" : null,
+      "nitClinicaMed" : 2
+    } ],
     "listaDePsiquiatras" : null
   }
 }, {
@@ -59,21 +45,14 @@
     "nombreClinica" : "cps3",
     "direccion" : "mir3",
     "telefono" : 1011121,
-    "coordinadorDeClinica" : {
-      "cedulaCoordinador" : 123555348,
-      "contrasenaCoordinador" : "eps3",
-      "emailCoordinador" : "coordinador3@gmail.com",
-      "clinicaCoordinador" : {
-        "nit" : 1,
-        "nombreClinica" : "cps3",
-        "direccion" : "mir3",
-        "telefono" : 1011121,
-        "coordinadorDeClinica" : null,
-        "listaDeMedicamentos" : null,
-        "listaDePsiquiatras" : null
-      }
-    },
-    "listaDeMedicamentos" : null,
+    "cedCoorDeClinica" : 123555348,
+    "listaDeMedicamentos" : [ {
+      "idMedicamento" : 3,
+      "nombreMedicamento" : "Medicamento #3",
+      "cantidadDisponible" : 300,
+      "formulaMedica" : null,
+      "nitClinicaMed" : 1
+    } ],
     "listaDePsiquiatras" : null
   }
 }, {
@@ -85,21 +64,14 @@
     "nombreClinica" : "dps4",
     "direccion" : "air4",
     "telefono" : 786,
-    "coordinadorDeClinica" : {
-      "cedulaCoordinador" : 6565145,
-      "contrasenaCoordinador" : "eps4",
-      "emailCoordinador" : "coordinador4@gmail.com",
-      "clinicaCoordinador" : {
-        "nit" : 4,
-        "nombreClinica" : "dps4",
-        "direccion" : "air4",
-        "telefono" : 786,
-        "coordinadorDeClinica" : null,
-        "listaDeMedicamentos" : null,
-        "listaDePsiquiatras" : null
-      }
-    },
-    "listaDeMedicamentos" : null,
+    "cedCoorDeClinica" : 6565145,
+    "listaDeMedicamentos" : [ {
+      "idMedicamento" : 4,
+      "nombreMedicamento" : "Medicamento #4",
+      "cantidadDisponible" : 400,
+      "formulaMedica" : null,
+      "nitClinicaMed" : 4
+    } ],
     "listaDePsiquiatras" : null
   }
 } ]

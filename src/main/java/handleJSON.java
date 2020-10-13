@@ -23,7 +23,7 @@ public interface handleJSON<T> {
             ObjectMapper mapper = new ObjectMapper(); // create object mapper instance
             Path path = Paths.get(".", "src", "main","resources", jsonFile + ".json");
             ArrayList<T> myObjects = mapper.readValue(path.toFile(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, className)); // overload readValue method
-            System.out.println(myObjects.toString());
+//            System.out.println(myObjects.toString());
             //System.out.println(myObjects.getClass().getName());
             //myObjects.forEach(obj -> System.out.println(obj.getClass().getName()));
             objs = myObjects;

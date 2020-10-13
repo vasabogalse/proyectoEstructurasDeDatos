@@ -99,6 +99,9 @@ public class handleDB implements handleJSON {
             case "historiales":
                 historiales.add((HistorialClinico) o1);
                 break;
+            case "coordinadores":
+                coordinadores.add((CoordinadorDeClinica) o1);
+                break;
         }
         appendArrayToJSON(jsonFile);
     }

@@ -3,14 +3,14 @@ public class Medicamento implements handleJSON{
     public String nombreMedicamento;
     public int cantidadDisponible;
     public FormulaMedica formulaMedica;
-    public Clinica clinica;
+    public int nitClinicaMed;
 
-    public Medicamento(int idMedicamento, String nombreMedicamento, int cantidadDisponible,  Clinica clinica) {
+    public Medicamento(int idMedicamento, String nombreMedicamento, int cantidadDisponible, int nitClinicaMed) {
         this.idMedicamento = idMedicamento;
         this.nombreMedicamento = nombreMedicamento;
         this.cantidadDisponible = cantidadDisponible;
         this.formulaMedica = null;
-        this.clinica = clinica;
+        this.nitClinicaMed = nitClinicaMed;
     }
 
     public Medicamento() {
@@ -23,11 +23,11 @@ public class Medicamento implements handleJSON{
         return "- " + nombreMedicamento + ": " + cantidadDisponible;
     }
 
-    public void listarMedicamento(Clinica clinicaCoordinador) {
+    public void listarMedicamento(Clinica clinica) {
         handleDB db = new handleDB();
-        System.out.println("A continuación verá cada medicamento con su id al frente");
-        for (Medicamento medicamento : clinicaCoordinador.listaDeMedicamentos) {
-            System.out.println(medicamento.nombreMedicamento + " - id: " + medicamento.idMedicamento);
+        System.out.println("A continuación verá cada medicamento con su id y cantidad al frente");
+        for (Medicamento medicamento : clinica.listaDeMedicamentos) {
+            System.out.println(medicamento.nombreMedicamento + " - id: " + medicamento.idMedicamento + ", cantidad: " + medicamento.cantidadDisponible);
         }
 
     }
@@ -36,7 +36,7 @@ public class Medicamento implements handleJSON{
         for (Medicamento medicamentoClinica : clinicaCoordinador.listaDeMedicamentos) {
             if (medicamentoClinica.cantidadDisponible < 50) {
                 System.out.println("Notificación: el medicamento " + medicamentoClinica.nombreMedicamento + "sólo tiene " +
-                        medicamentoClinica.cantidadDisponible + "unidades disponibles!");
+                        medicamentoClinica.cantidadDisponible + "unidades disponibles.");
             }
         }
     }
