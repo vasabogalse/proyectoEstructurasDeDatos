@@ -15,9 +15,7 @@ public class Paciente implements handleJSON {
     public String telefono;
     public String nombreContactoEmergencia;
     public String telefonoContactoEmergencia;
-    public int numLlamadas;
     public int psiquiatra;
-    public ArrayList<Integer> estados;
     public ArrayList<Cita> listaCitas = new ArrayList<>();
     public int historialClinico;
 
@@ -121,17 +119,10 @@ public class Paciente implements handleJSON {
         return telefonoContactoEmergencia;
     }
 
-    public int getNumLlamadas() {
-        return numLlamadas;
-    }
-
     public int getPsiquiatra() {
         return psiquiatra;
     }
 
-    public ArrayList<Integer> getEstados() {
-        return estados;
-    }
 
     public ArrayList<Cita> getListaCitas() {
         return listaCitas;
@@ -139,6 +130,10 @@ public class Paciente implements handleJSON {
 
     public int getHistorialClinico() {
         return historialClinico;
+    }
+
+    public void setListaCitas(ArrayList<Cita> listaCitas) {
+        this.listaCitas = listaCitas;
     }
 
     @Override
@@ -155,9 +150,7 @@ public class Paciente implements handleJSON {
                 ", telefono='" + telefono + '\'' +
                 ", nombreContactoEmergencia='" + nombreContactoEmergencia + '\'' +
                 ", telefonoContactoEmergencia='" + telefonoContactoEmergencia + '\'' +
-                ", numLlamadas=" + numLlamadas +
                 ", psiquiatra=" + psiquiatra +
-                ", estados=" + estados +
                 ", listaCitas=" + listaCitas +
                 ", historialClinico=" + historialClinico +
                 '}';
@@ -234,6 +227,9 @@ public class Paciente implements handleJSON {
         asignarPsiquiatra(paciente);
         db.appendArrayToJSON("psiquiatras");
         db.updateJSON(paciente,"pacientes");
+
+        System.out.println("Por favor diligencie el registro de emociones para completar la creación del perfil.");
+        registrarEmociones(paciente);
         System.out.println("Registro exitoso ¡Bienvenido!");
     }
 
@@ -399,11 +395,179 @@ public class Paciente implements handleJSON {
 
     }
 
-    public static void registrarEmociones(){
+    public  void registrarEmociones(Paciente paciente) {
+        int count = 0;
+        System.out.println();
+        System.out.println("Nos preocupamos por tu bienestar. Tus emociones son muy importantes para nosostros.");
+        System.out.println();
+        System.out.println("Para que puedas compartirnos cómo te sientes te invitamos a contestar el siguiente cuestionario.");
+        System.out.println("Lee detenidamente las preguntas y respóndelas todas.");
+        while (true) {
+            System.out.println();
+            System.out.println("Mi estado de ánimo  durante los últimos días ha sido: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. Positivo. Me he sentido bien.");
+            System.out.println("2. Neutral. He tenido días mejores.");
+            System.out.println("3. Negativo. Me siento triste la mayor parte del día");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 1;
+                    break;
+                case "2":
+                    count += 2;
+                    break;
+                case "3":
+                    count += 3;
+                    break;
+            }
+            break;
+        }
+        while (true) {
+            System.out.println();
+            System.out.println("Cuando pienso en el futuro: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. Pensar en el futuro me aterra.");
+            System.out.println("2. Soy optimista, tengo muchos planes que cumplir.");
+            System.out.println("3. No me preocupo por el futuro");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 3;
+                    break;
+                case "2":
+                    count += 1;
+                    break;
+                case "3":
+                    count += 2;
+                    break;
+            }
+            break;
+        }
 
+        while (true) {
+            System.out.println();
+            System.out.println("Cuando me comparo con otras personas: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. A veces gano yo. Otras ganan ellos.");
+            System.out.println("2. Me siento inferior.");
+            System.out.println("3. Me siento satisfecho conmigo mismo");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 2;
+                    break;
+                case "2":
+                    count += 3;
+                    break;
+                case "3":
+                    count += 1;
+                    break;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println();
+            System.out.println("En lo que respecta a mis hábitos de sueño: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. Puedo dormir todo el día o no conciliar el sueño en toda la noche.");
+            System.out.println("2. Duermo como siempre.");
+            System.out.println("3. Me despierto a vces a la mitad de la noche y no puedo dormir nuevamente");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 3;
+                    break;
+                case "2":
+                    count += 1;
+                    break;
+                case "3":
+                    count += 2;
+                    break;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.println();
+            System.out.println("En lo que respecta a mi apetito: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. Es igual que siempre.");
+            System.out.println("2. Ha sido algo irregular, pero me estoy alimentando.");
+            System.out.println("3. No siento deseo de comer o no puedo parar de comer");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 1;
+                    break;
+                case "2":
+                    count += 2;
+                    break;
+                case "3":
+                    count += 3;
+                    break;
+            }
+            break;
+        }
+        while (true) {
+            System.out.println();
+            System.out.println("En lo que respecta a mi capacidad de trabajo y energía: ");
+            System.out.println();
+            System.out.println("Elije una opción");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println("1. Siento que mi rendimiento ha disminuido algo sin motivo aparente.");
+            System.out.println("2. No noto diferencia");
+            System.out.println("3. Estoy tan cansado que soy incapaz de hacer nada.");
+            System.out.println("-----------------------------------------------------------------------------------------------");
+            System.out.println();
+            String opcion = SistemaDeGestionClinica.input.next();
+            switch (opcion) {
+                case "1":
+                    count += 2;
+                    break;
+                case "2":
+                    count += 1;
+                    break;
+                case "3":
+                    count += 3;
+                    break;
+            }
+            break;
+        }
+        if(count==18){
+            Cita citas = new Cita();
+            citas.mensajeEmergencia();
+            citas.crearEmergencia(paciente);
+        }else{
+            System.out.println();
+            System.out.println("Muchas gracias por llenar el cuestionario, nos alegra saber cómo te sientes");
+            System.out.println("¡No olvides volver la próxima semana!");
+            System.out.println();
+        }
     }
 
-    public static void programarCita(Paciente paciente){
+   public static void programarCita(Paciente paciente){
         Cita ct = new Cita();
         ct.crearCita(paciente);
     }
