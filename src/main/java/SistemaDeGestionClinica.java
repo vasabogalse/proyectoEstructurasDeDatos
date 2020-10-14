@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SistemaDeGestionClinica {
@@ -67,11 +66,11 @@ public class SistemaDeGestionClinica {
     public static void menuPrincipal(){
         String opt = "";
         while (true) {
-            System.out.println("__________________________________________________________________________________________________________________________");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             System.out.println("                       **Bienvenido al Sistema de Gestión de Clinicas Psquiatricas**");
             System.out.println("Recuerde que para acceder a las funciones del sistema es necesario estar logueado con su usuario y contraseña.");
             System.out.println("Si usted es un paciente perteneciente a la clinica y no posee un usuario es necesario que haga el proceso de registro.");
-            System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             System.out.println();
             System.out.println("Seleccione una opción:");
             System.out.println("1. Soy un paciente y quiero registrarme en el sistema.");
@@ -167,9 +166,9 @@ public class SistemaDeGestionClinica {
         label:
         while (true) {
             System.out.println();
-            System.out.println("__________________________________________");
+            System.out.println("-----------------------------------------------------------------------------");
             System.out.println("    Bienvenido " + paciente.getNombres() + " " + paciente.getApellidos());
-            System.out.println("------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------");
             System.out.println("Ha ingresado al sistema en el rol de PACIENTE.");
             System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
             System.out.println();
@@ -180,7 +179,7 @@ public class SistemaDeGestionClinica {
             System.out.println("4. Buscar información en el sistema.");
             System.out.println("5. Diagnóstico de incosistencias.");
             System.out.println("0. Cancelar");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             option = input.next();
             switch (option) {
@@ -217,9 +216,9 @@ public class SistemaDeGestionClinica {
         label:
         while (true) {
             System.out.println();
-            System.out.println("____________________________________________________");
-            System.out.println("            Menú perfil.");
-            System.out.println("----------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
+            System.out.println("                             Menú perfil.");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             System.out.println("Seleccione una opción:");
             System.out.println("1. Modificar mis datos personales.");
@@ -227,7 +226,7 @@ public class SistemaDeGestionClinica {
             System.out.println("3. Cambiar de especialista.");
             System.out.println("4. Eliminar perfil.");
             System.out.println("0. Cancelar");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             option = input.next();
             switch (option) {
@@ -261,9 +260,10 @@ public class SistemaDeGestionClinica {
         String option;
         label:
         while (true) {
-            System.out.println("____________________________________________________");
-            System.out.println("            Menú de citas.");
-            System.out.println("----------------------------------------------------");
+            System.out.println();
+            System.out.println("-------------------------------------------------------------------------------");
+            System.out.println("                            Menú de citas.");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             System.out.println("Seleccione una opción:");
             System.out.println("1. Programar una cita.");
@@ -271,7 +271,7 @@ public class SistemaDeGestionClinica {
             System.out.println("3. Reagendar alguna cita.");
             System.out.println("4. Cancelar alguna cita agendada");
             System.out.println("0. Cancelar");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             option = input.next();
             switch (option) {
@@ -302,15 +302,15 @@ public class SistemaDeGestionClinica {
         String option;
         label:
         while (true) {
-            System.out.println("____________________________________________________");
-            System.out.println("            Menú de búsqueda.");
-            System.out.println("----------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
+            System.out.println("                             Menú de búsqueda.");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             System.out.println("Seleccione una opción:");
             System.out.println("1. Citas.");
             System.out.println("2. Registro diaro de emociones.");
             System.out.println("0. Cancelar");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             option = input.next();
             switch (option) {
@@ -343,9 +343,9 @@ public class SistemaDeGestionClinica {
         label:
         while (true) {
             System.out.println();
-            System.out.println("__________________________________________");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println("    Bienvenido " + psiquiatra.getNombres() + " " + psiquiatra.getApellidos());
-            System.out.println("------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println("Ha ingresado al sistema en el rol de PSIQUIATRA.");
             System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
             System.out.println();
@@ -356,7 +356,7 @@ public class SistemaDeGestionClinica {
             System.out.println("4. Buscar información en el sistema.");
             System.out.println("5. Diagnóstico de incosistencias.");
             System.out.println("0. Cancelar");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             option = input.next();
             switch (option) {
@@ -394,14 +394,14 @@ public class SistemaDeGestionClinica {
                 label:
                 while (true) {
                     System.out.println();
-                    System.out.println("____________________________________________________");
-                    System.out.println("            Menú perfil."); //NO SE CÓMO PONERLE :)
-                    System.out.println("----------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
+                    System.out.println("                            Menú perfil."); //NO SE CÓMO PONERLE :)
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     System.out.println("Seleccione una opción:");
                     System.out.println("1. Modificar mis datos personales.");
                     System.out.println("0. Cancelar");
-                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     option = input.next();
                     switch (option) {
@@ -426,16 +426,16 @@ public class SistemaDeGestionClinica {
                 label:
                 while (true) {
                     System.out.println();
-                    System.out.println("____________________________________________________");
-                    System.out.println("            Menú de citas.");
-                    System.out.println("----------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
+                    System.out.println("                            Menú de citas.");
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     System.out.println("Seleccione una opción:");
                     System.out.println("1. Ver un listado de las citas agendadas.");
                     System.out.println("2. Atender o cancelar alguna cita.");
                     System.out.println("3. Atender o cancelar citas prioritarias");
                     System.out.println("0. Cancelar");
-                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     option = input.next();
                     switch (option) {
@@ -464,16 +464,16 @@ public class SistemaDeGestionClinica {
                 label:
                 while (true) {
                     System.out.println();
-                    System.out.println("____________________________________________________");
-                    System.out.println("            Menú de historial clinico");
-                    System.out.println("----------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
+                    System.out.println("                       Menú de historial clinico");
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     System.out.println("Seleccione una opción:");
                     System.out.println("1. Crear un nuevo historial clínico a algún paciente.");
                     System.out.println("2. Ver el historial clínico de algún paciente.");
                     System.out.println("3. Modificar el historial clínico de algún paciente.");
                     System.out.println("0. Cancelar");
-                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------");
                     System.out.println();
                     option = input.next();
                     switch (option) {
@@ -505,15 +505,15 @@ public class SistemaDeGestionClinica {
             label:
             while (true) {
                 System.out.println();
-                System.out.println("____________________________________________________");
-                System.out.println("            Menú de búsqueda.");
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("                             Menú de búsqueda.");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Citas.");
                 System.out.println("2. Historial Clínico.");
                 System.out.println("0. Cancelar");
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 option = input.next();
                 switch (option) {
@@ -547,9 +547,9 @@ public class SistemaDeGestionClinica {
         String opcion = "";
         while (true) {
             System.out.println();
-            System.out.println("__________________________________________");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println("    Bienvenido " /* + coordinador.getNombres() + " " + coordinador.getApellidos()*/); //NO SE SI IRÁ NOMBRE
-            System.out.println("------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println("Ha ingresado al sistema en el rol de COORDINADOR.");
             System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
             System.out.println();
@@ -559,7 +559,7 @@ public class SistemaDeGestionClinica {
             System.out.println("3. Listar clínicas en el sistema");
             System.out.println("4. Regresar al ingreso al sistema");
             System.out.println("0. Cancelar");
-            System.out.println("------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
             opcion = input.next();
             if (opcion.equals("1")) {
@@ -592,9 +592,9 @@ public class SistemaDeGestionClinica {
             String opClinica = " ";
             while(true){
                 System.out.println();
-                System.out.println("____________________________________________________");
-                System.out.println("            Menú de gestión de clínica");
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("                         Menú de gestión de clínica");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Editar la clínica que administra");
@@ -602,7 +602,7 @@ public class SistemaDeGestionClinica {
                 System.out.println("3. Ingresar medicamentos a la clínica");
                 System.out.println("4. Borrar un medicamento que usa la clínica");
                 System.out.println("0. Regresar al menú de utilidades de coordinador"); //cancelar
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 opClinica = input.next();
                 if(opClinica.equals("1")){
@@ -637,16 +637,16 @@ public class SistemaDeGestionClinica {
             String opPsiquiatra = " ";
             while (true) {
                 System.out.println();
-                System.out.println("___________________________________________________");
-                System.out.println("          Menú de gestión de psiquiatras");
-                System.out.println("---------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("                          Menú de gestión de psiquiatras");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Registrar un psiquiatra a la clínica");
                 System.out.println("2. Borrar un psiquiatra de la clínica");
                 System.out.println("3. Listar psquiatras de la clínica que administra");
                 System.out.println("0. Regresar al menú de utilidades de coordinador ");//cancelar
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
 
                 opPsiquiatra = input.next();
                 if (opPsiquiatra.equals("1")) {
@@ -679,16 +679,16 @@ public class SistemaDeGestionClinica {
             label:
             while (true) {
                 System.out.println();
-                System.out.println("____________________________________________________");
-                System.out.println("            Menú de control medicamentos.");
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("                      Menú de control medicamentos.");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Ver un listado con los medicamentos disponibles en mi clinica.");
                 System.out.println("2. Actualizar el inventario de medicamentos disponibles en mi clinica.");
                 System.out.println("0. Cancelar");
                 System.out.println();
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 option = input.next();
                 switch (option) {
                     case "1":
@@ -715,14 +715,14 @@ public class SistemaDeGestionClinica {
             label:
             while (true) {
                 System.out.println();
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println("Para actualizar el inventario de medicamentos elija una opción:");
                 System.out.println();
                 System.out.println("1. Ingresar un nuevo medicamento al inventario.");
                 System.out.println("2. Actualizar las unidades disponibles de algún medicamento en el inventario.");
                 System.out.println("3. Eliminar algún medicamento del inventario.");
                 System.out.println("0. Cancelar");
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 option = input.next();
                 switch (option) {
@@ -751,16 +751,16 @@ public class SistemaDeGestionClinica {
             label:
             while (true) {
                 System.out.println();
-                System.out.println("____________________________________________________");
-                System.out.println("            Menú de búsqueda.");
-                System.out.println("----------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("                           Menú de búsqueda.");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Clínica.");
                 System.out.println("2. Psiquiatra.");
                 System.out.println("3. Medicamentos.");
                 System.out.println("0. Cancelar");
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------");
                 System.out.println();
                 option = input.next();
                 switch (option) {
@@ -788,5 +788,3 @@ public class SistemaDeGestionClinica {
         System.out.println("HAY QUE HACER ESTO");
     }
 }
-
-
