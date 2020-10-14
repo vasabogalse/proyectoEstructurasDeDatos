@@ -14,6 +14,12 @@
       "cantidadDisponible" : 500,
       "formulaMedica" : null,
       "nitClinicaMed" : 3
+    }, {
+      "idMedicamento" : 2,
+      "nombreMedicamento" : "Medicamento #2",
+      "cantidadDisponible" : 200,
+      "formulaMedica" : null,
+      "nitClinicaMed" : 3
     } ],
     "listaDePsiquiatras" : null
   }
@@ -21,21 +27,7 @@
   "cedulaCoordinador" : 12345338,
   "contrasenaCoordinador" : "eps2",
   "emailCoordinador" : "coordinador2@gmail.com",
-  "clinicaCoordinador" : {
-    "nit" : 2,
-    "nombreClinica" : "tps2",
-    "direccion" : "uir2",
-    "telefono" : 879034,
-    "cedCoorDeClinica" : 12345338,
-    "listaDeMedicamentos" : [ {
-      "idMedicamento" : 2,
-      "nombreMedicamento" : "Medicamento #2",
-      "cantidadDisponible" : 200,
-      "formulaMedica" : null,
-      "nitClinicaMed" : 2
-    } ],
-    "listaDePsiquiatras" : null
-  }
+  "clinicaCoordinador" : null
 }, {
   "cedulaCoordinador" : 123555348,
   "contrasenaCoordinador" : "eps3",

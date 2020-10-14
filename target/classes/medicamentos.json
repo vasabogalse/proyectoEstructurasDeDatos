@@ -9,7 +9,7 @@
   "nombreMedicamento" : "Medicamento #2",
   "cantidadDisponible" : 200,
   "formulaMedica" : null,
-  "nitClinicaMed" : 2
+  "nitClinicaMed" : 3
 }, {
   "idMedicamento" : 3,
   "nombreMedicamento" : "Medicamento #3",

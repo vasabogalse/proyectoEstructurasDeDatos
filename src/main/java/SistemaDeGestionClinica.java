@@ -62,7 +62,7 @@ public class SistemaDeGestionClinica {
         db.appendArrayToJSON("medicamentos");
         db.appendArrayToJSON("clinicas");
 
-        db.getCoordinadores().get(1).borrarClinica();
+//        db.getCoordinadores().get(1).borrarClinica();
 
 
 
