@@ -202,7 +202,12 @@ public class Paciente implements handleJSON {
         String TelContacto = SistemaDeGestionClinica.input.nextLine();
 
         System.out.println("Contraseña para el ingreso al sistema: ");
-        String contrasena = SistemaDeGestionClinica.input.nextLine();
+        String contrasena;
+        contrasena = SistemaDeGestionClinica.input.nextLine();
+
+        System.out.println("Por favor confirme la contraseña");
+        String contrasenaConfir;
+        contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
 
         paciente.setIdPaciente(idPaciente);
         paciente.setNombres(nombres);
@@ -214,7 +219,18 @@ public class Paciente implements handleJSON {
         paciente.setEmail(correo);
         paciente.setNombreContactoEmergencia(nombreContacto);
         paciente.setTelefonoContactoEmergencia(TelContacto);
-        paciente.setContrasena(contrasena);
+
+        while(true){
+            if (contrasena.equals(contrasenaConfir)){
+                paciente.setContrasena(contrasena);
+                break;
+            }
+                System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
+                contrasena = SistemaDeGestionClinica.input.nextLine();
+                System.out.println("Por favor confirme la contraseña");
+                contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+        }
+
         asignarPsiquiatra(paciente);
         db.appendArrayToJSON("psiquiatras");
         db.updateJSON(paciente,"pacientes");
@@ -240,77 +256,114 @@ public class Paciente implements handleJSON {
             option = SistemaDeGestionClinica.input.next();
             switch (option) {
                 case "1":
-                    System.out.println("Nombre antiguo:" + paciente.getNombres() + ".Ingrese la información actualizada:");
+                    System.out.println("Nombre antiguo: " + paciente.getNombres() +". Ingrese la información actualizada:");
                     String nomNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setNombres(nomNuevo);
-                    System.out.println(paciente.getNombres());
                     break;
                 case "2":
-                    System.out.println("Apellido antiguo:" + paciente.getApellidos() + ".Ingrese la información actualizada:");
+                    System.out.println("Apellido antiguo: " + paciente.getApellidos() + ". Ingrese la información actualizada:");
                     String apeNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setApellidos(apeNuevo);
-                    System.out.println(paciente.getApellidos());
                     break;
                 case "3":
-                    System.out.println("Fecha de nacimiento antigua:" + paciente.getFechaNacimiento()+ ".Ingrese la información actualizada:");
+                    System.out.println("Fecha de nacimiento antigua: " + paciente.getFechaNacimiento()+ " .Ingrese la información actualizada:");
                     String fechaNueva = SistemaDeGestionClinica.input.nextLine();
                     paciente.setFechaNacimiento(fechaNueva);
-                    System.out.println(paciente.getFechaNacimiento());
                     break;
                 case "4":
-                    System.out.println("Teléfono antiguo:" + paciente.getTelefono() +".Ingrese la información actualizada:");
+                    System.out.println("Teléfono antiguo: " + paciente.getTelefono() +". Ingrese la información actualizada:");
                     String telNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setTelefono(telNuevo);
-                    System.out.println(paciente.getTelefono());
                     break;
                 case "5":
-                    System.out.println("Dirección antigua:" + paciente.getDireccion()+".Ingrese la información actualizada:");
+                    System.out.println("Dirección antigua: " + paciente.getDireccion()+". Ingrese la información actualizada:");
                     String dirNueva = SistemaDeGestionClinica.input.nextLine();
                     paciente.setDireccion(dirNueva);
-                    System.out.println(paciente.getDireccion());
                     break;
                 case "6":
-                    System.out.println("Correo electrónico antiguo:" + paciente.getEmail()+".Ingrese la información actualizada:");
+                    System.out.println("Correo electrónico antiguo: " + paciente.getEmail()+". Ingrese la información actualizada:");
                     String emailNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setEmail(emailNuevo);
-                    System.out.println(paciente.getEmail());
                     break;
                 case "7":
-                    System.out.println("Nombre de contacto antiguo:" + paciente.getNombreContactoEmergencia()+".Ingrese la información actualizada:");
+                    System.out.println("Nombre de contacto antiguo: " + paciente.getNombreContactoEmergencia()+". Ingrese la información actualizada:");
                     String nomContNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setNombreContactoEmergencia(nomContNuevo);
-                    System.out.println(paciente.getNombreContactoEmergencia());
                     break;
                 case "8":
-                    System.out.println("Teléfono de contacto antiguo:" + paciente.getTelefonoContactoEmergencia()+".Ingrese la información actualizada:");
+                    System.out.println("Teléfono de contacto antiguo: " + paciente.getTelefonoContactoEmergencia()+". Ingrese la información actualizada:");
                     String telContNuevo = SistemaDeGestionClinica.input.nextLine();
                     paciente.setTelefonoContactoEmergencia(telContNuevo);
-                    System.out.println(paciente.getTelefonoContactoEmergencia());
                     break;
                 case "9":
-                    System.out.println("Contraseña antigua:" + paciente.getContrasena()+".Ingrese la información actualizada:");
-                    String Contraseña = SistemaDeGestionClinica.input.nextLine();
-                    paciente.setContrasena(Contraseña);
-                    System.out.println(paciente.getContrasena());
-                    break;
+                    SistemaDeGestionClinica.input.nextLine();
+                    System.out.println("Ingrese su contraseña actual.");
+                    String contraConfirm;
+                    contraConfirm = SistemaDeGestionClinica.input.nextLine();
+
+                    if (paciente.getContrasena().equals(contraConfirm)){
+                        System.out.println("Ingrese nueva contraseña. ");
+                        String contrasena;
+                        contrasena = SistemaDeGestionClinica.input.nextLine();
+
+                        System.out.println("Por favor confirme la contraseña.");
+                        String contrasenaConfir;
+                        contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+                        while(true){
+                            if (contrasena.equals(contrasenaConfir)){
+                                paciente.setContrasena(contrasena);
+                                break;
+                            }
+                            System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
+                            contrasena = SistemaDeGestionClinica.input.nextLine();
+                            System.out.println("Por favor confirme la contraseña");
+                            contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+                        }
+                    }else{
+                        System.out.println("Contraseña incorrecta.");
+                        break;
+                    }
                 case "0":
                     break label;
             }
         }
         db.appendArrayToJSON("pacientes");
-        System.out.println("Modificación exitoso.");
+        System.out.println("Modificación exitosa.");
     }
 
     public  void eliminarPaciente(Paciente paciente){
-        db.getPacientes().remove(paciente);
-        for (Psiquiatra psiquiatra : db.getPsiquiatras()){
-            if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
-                psiquiatra.getListaPacientes().remove(paciente);
+        System.out.println("¿Está seguro que desea eliminar su usuario? Y/N");
+        while (true){
+            String opcion = SistemaDeGestionClinica.input.next();
+            if (opcion.equals("Y")||opcion.equals("y")) {
+                int indice = 0;
+                for (Paciente paci: db.getPacientes()){
+                    if (paciente.getIdPaciente() == paci.getIdPaciente()){
+                        indice= db.getPacientes().indexOf(paci);
+                    }
+                }
+
+                //Elimina relación con psiquiatra
+                for (Psiquiatra psiquiatra : db.getPsiquiatras()){
+                    if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                        psiquiatra.getListaPacientes().removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
+                    }
+                }
+
+                // Elimina relación con historial clinico
+                HistorialClinico hist = new HistorialClinico();
+                hist.borrarHistClinico(paciente);
+
+                //FALTA ELIMINAR RELACIÓN CON CITA
+
+                db.deleteObjectInArray(indice,"pacientes");
+                db.appendArrayToJSON("psiquiatras");
+                System.out.println("Se eliminó exitosamente el perfil.");
+            }else if (opcion.equals("N")||opcion.equals("n")){
+                break;
             }
+            return;
         }
-        db.appendArrayToJSON("pacientes");
-        db.appendArrayToJSON("psiquiatras");
-        System.out.println("Se eliminó exitosamente el perfil.");
     }
 
     public  void verPaciente(Paciente paciente){
@@ -343,7 +396,7 @@ public class Paciente implements handleJSON {
 
         db.appendArrayToJSON("pacientes");
         db.appendArrayToJSON("psiquiatras");
-        
+
     }
 
     public static void registrarEmociones(){
