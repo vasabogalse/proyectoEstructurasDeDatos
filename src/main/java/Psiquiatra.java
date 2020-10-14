@@ -8,6 +8,7 @@ public class Psiquiatra implements handleJSON {
     public String clavePsiquiatra;
     public ArrayList<Integer> listaHistoriales = new ArrayList<>();
     public ArrayList<Paciente> listaPacientes = new ArrayList<>();
+    public ArrayList<Cita> listaCitas = new ArrayList<>();
 
     handleDB db = new handleDB();
 
