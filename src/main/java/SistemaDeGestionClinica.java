@@ -1,9 +1,13 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SistemaDeGestionClinica {
     public static Scanner input = new Scanner(System.in);
     public static handleDB db = new handleDB();
+    public static Paciente paciente = new Paciente();
+    public static Psiquiatra psiquiatra = new Psiquiatra();
+    public static HistorialClinico historialClinico = new HistorialClinico();
+    public static CoordinadorDeClinica coordinador = new CoordinadorDeClinica();
 
     public static void main(String[] args) {
         // carga automáticamente el contenido de los JSON
@@ -53,11 +57,13 @@ public class SistemaDeGestionClinica {
         //System.out.println(clinicas);
 
         menuPrincipal();
+        //HistorialClinico.crearHistClinico();
     }
 
     //La opción de guardar deben estar en los métodos de las clases, que es donde se modifican todos los array
     //Primero deben preguntar si desea guardar los camibios hechos y que si no no se guargan al salir
     // este es como para que me ingresen los datos y mandar los datos a verificar
+
     public static void menuPrincipal(){
         String opt = "";
         while (true) {
@@ -66,20 +72,21 @@ public class SistemaDeGestionClinica {
             System.out.println("Recuerde que para acceder a las funciones del sistema es necesario estar logueado con su usuario y contraseña.");
             System.out.println("Si usted es un paciente perteneciente a la clinica y no posee un usuario es necesario que haga el proceso de registro.");
             System.out.println("---------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("Selccione una opción:");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
             System.out.println("1. Soy un paciente y quiero registrarme en el sistema.");
             System.out.println("2. Soy un usuario registrado y quiero ingresar al sistema.");
             System.out.println("0. Salir");
             opt = input.next();
             if(opt.equals("1")){
-                //registroUsuario();
+                paciente.registrarEmociones();
             } else if(opt.equals("2")){
-                ingresoUsuario(opt);
+               ingresoUsuario(opt);
             } else if(opt.equals("0")){
                 System.out.println("¡Al salir perderás todos tus cambios!");
-                System.out.println("Desea guardar los cambios hechos hasta el momento antes de salir: S/N");
+                System.out.println("Desea guardar los cambios hechos hasta el momento antes de salir: Y/N");
                 String guardar = input.next();
-                if(guardar.toLowerCase().equals("s")){
+                if(guardar.toLowerCase().equals("y")){
                     // guardarTodo()
                     break;
                 } else if(guardar.toLowerCase().equals("n")){
@@ -87,7 +94,6 @@ public class SistemaDeGestionClinica {
                 } else {
                     System.out.println("Respuesta incorrecta. Escribe 'S' si quieres guardar los cambios y 'N' si los quieres descartar");
                 }
-
             }
         }
     }
@@ -102,7 +108,7 @@ public class SistemaDeGestionClinica {
         }
     }
 
-    public static String vertificarUsuarios(int cedula, String clave){
+        public static String vertificarUsuarios(int cedula, String clave){
         String usuario = null;
         int indexCoordinador = 0;
         for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
@@ -126,7 +132,7 @@ public class SistemaDeGestionClinica {
         return usuario;
     }
 
-    public static void gestionarMenus(int cedula, String clave) {
+        public static void gestionarMenus(int cedula, String clave) {
         String usuario = vertificarUsuarios(cedula,clave);
         System.out.println(usuario);
 
@@ -134,10 +140,20 @@ public class SistemaDeGestionClinica {
             if(usuario.equals("coordinador")){
                 menuCoordinador();
             } else if(usuario.equals("psiquiatra")){
-                // menuPsiquiatra(cedula u objecto que buscamos)
+                for (Psiquiatra ps : db.getPsiquiatras()){
+                    if (cedula == ps.getIdPsiquiatra()){
+                        psiquiatra = ps;
+                    }
+                }
+                menuRolPquiatra(psiquiatra);
                 return;
             } else if (usuario.equals("paciente")){
-                // menuPaciente(cedula u objeto encontrado)
+                for (Paciente pc : db.getPacientes()){
+                    if (cedula == pc.getIdPaciente()){
+                        paciente = pc;
+                    }
+                }
+                menuRolPaciente(paciente);
                 return;
             }
         } else{
@@ -145,19 +161,406 @@ public class SistemaDeGestionClinica {
         }
     }
 
-    public static void menuCoordinador() {
+    // Para el paciente
+   public static void menuRolPaciente(Paciente paciente) {
+        String option;
+        label:
+        while (true) {
+            System.out.println();
+            System.out.println("__________________________________________");
+            System.out.println("    Bienvenido " + paciente.getNombres() + " " + paciente.getApellidos());
+            System.out.println("------------------------------------------");
+            System.out.println("Ha ingresado al sistema en el rol de PACIENTE.");
+            System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Perfil.");
+            System.out.println("2. Citas.");
+            System.out.println("3. Registro emociones.");
+            System.out.println("4. Buscar información en el sistema.");
+            System.out.println("5. Diagnóstico de incosistencias.");
+            System.out.println("0. Cancelar");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+            option = input.next();
+            switch (option) {
+                case "1":
+                    menuPerfilPaciente(paciente);
+                    break;
+                case "2":
+                    menuCitaPaciente(paciente);
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    menuBucarPaciente(paciente);
+                    break;
+                case "5":
+                    inconsistenciasPaciente(paciente);
+                    break;
+                case "0":
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break label;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+                            break;
+                        }
+                    }
+            }
+        }
+    }
+
+        public static void menuPerfilPaciente(Paciente paciente) {
+        String option;
+        label:
+        while (true) {
+            System.out.println();
+            System.out.println("____________________________________________________");
+            System.out.println("            Menú perfil.");
+            System.out.println("----------------------------------------------------");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Modificar mis datos personales.");
+            System.out.println("2. Ver mis datos personales.");
+            System.out.println("3. Cambiar de especialista.");
+            System.out.println("4. Eliminar perfil.");
+            System.out.println("0. Cancelar");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+            option = input.next();
+            switch (option) {
+                case "1":
+                    paciente.editarPaciente(paciente);
+                    break;
+                case "2":
+                    paciente.verPaciente(paciente);
+                    break;
+                case "3":
+                   paciente.cambiarPsiquiatra(paciente);
+                    break;
+                case "4":
+                   paciente.eliminarPaciente(paciente);
+                    break;
+                case "0":
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break label;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+                            break;
+                        }
+                    }
+            }
+        }
+    }
+
+        public static void menuCitaPaciente(Paciente paciente) {
+        String option;
+        label:
+        while (true) {
+            System.out.println("____________________________________________________");
+            System.out.println("            Menú de citas.");
+            System.out.println("----------------------------------------------------");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Programar una cita.");
+            System.out.println("2. Ver citas agendadas.");
+            System.out.println("3. Reagendar alguna cita.");
+            System.out.println("4. Cancelar alguna cita agendada");
+            System.out.println("0. Cancelar");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+            option = input.next();
+            switch (option) {
+                case "1":
+               //     paciente.programarCita(paciente);
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "0":
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break label;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+                            break;
+                        }
+                    }
+            }
+        }
+    }
+
+        public static void menuBucarPaciente(Paciente paciente){
+        String option;
+        label:
+        while (true) {
+            System.out.println("____________________________________________________");
+            System.out.println("            Menú de búsqueda.");
+            System.out.println("----------------------------------------------------");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Citas.");
+            System.out.println("2. Registro diaro de emociones.");
+            System.out.println("0. Cancelar");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+            option = input.next();
+            switch (option) {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "0":
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break label;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+                            break;
+                        }
+                    }
+            }
+        }
+    }
+
+        public static void inconsistenciasPaciente(Paciente paciente){
+             System.out.println("HAY QUE HACER ESTO");
+        }
+
+
+    //Para psiquiatra
+   public static void menuRolPquiatra(Psiquiatra psiquiatra) {
+        String option;
+        label:
+        while (true) {
+            System.out.println();
+            System.out.println("__________________________________________");
+            System.out.println("    Bienvenido " + psiquiatra.getNombres() + " " + psiquiatra.getApellidos());
+            System.out.println("------------------------------------------");
+            System.out.println("Ha ingresado al sistema en el rol de PSIQUIATRA.");
+            System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
+            System.out.println();
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Perfil.");
+            System.out.println("2. Citas.");
+            System.out.println("3. Historial Clínico.");
+            System.out.println("4. Buscar información en el sistema.");
+            System.out.println("5. Diagnóstico de incosistencias.");
+            System.out.println("0. Cancelar");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+            option = input.next();
+            switch (option) {
+                case "1":
+                    menuPerfilPsiquiatra();
+                    break;
+                case "2":
+                    menuCitaPsiquiatra();
+                    break;
+                case "3":
+                    menuHistorialClinico(psiquiatra);
+                    break;
+                case "4":
+                    menuBucarPsiquiatra();
+                    break;
+                case "5":
+                   // inconsistenciasPsiquiatra();
+                    break;
+                case "0":
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break label;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+                            break;
+                        }
+                    }
+            }
+        }
+    }
+
+        public static void menuPerfilPsiquiatra() {
+                String option;
+                label:
+                while (true) {
+                    System.out.println();
+                    System.out.println("____________________________________________________");
+                    System.out.println("            Menú perfil."); //NO SE CÓMO PONERLE :)
+                    System.out.println("----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("Seleccione una opción:");
+                    System.out.println("1. Modificar mis datos personales.");
+                    System.out.println("0. Cancelar");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println();
+                    option = input.next();
+                    switch (option) {
+                        case "1":
+                            break;
+                        case "0":
+                            while(true) {
+                                System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                                String opccion = input.next();
+                                if (opccion.equals("Y")||opccion.equals("y")) {
+                                    break label;
+                                } else if (opccion.equals("N")||opccion.equals("n")) {
+                                    break;
+                                }
+                            }
+                    }
+                }
+            }
+
+        public static void menuCitaPsiquiatra() {
+                String option;
+                label:
+                while (true) {
+                    System.out.println();
+                    System.out.println("____________________________________________________");
+                    System.out.println("            Menú de citas.");
+                    System.out.println("----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("Seleccione una opción:");
+                    System.out.println("1. Ver un listado de las citas agendadas.");
+                    System.out.println("2. Atender o cancelar alguna cita.");
+                    System.out.println("3. Atender o cancelar citas prioritarias");
+                    System.out.println("0. Cancelar");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println();
+                    option = input.next();
+                    switch (option) {
+                        case "1":
+                            break;
+                        case "2":
+                            break;
+                        case "3":
+                            break;
+                        case "0":
+                            while(true) {
+                                System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                                String opccion = input.next();
+                                if (opccion.equals("Y")||opccion.equals("y")) {
+                                    break label;
+                                } else if (opccion.equals("N")||opccion.equals("n")) {
+                                    break;
+                                }
+                            }
+                    }
+                }
+            }
+
+        public static void menuHistorialClinico(Psiquiatra psiquiatra) {
+                String option;
+                label:
+                while (true) {
+                    System.out.println();
+                    System.out.println("____________________________________________________");
+                    System.out.println("            Menú de historial clinico");
+                    System.out.println("----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("Seleccione una opción:");
+                    System.out.println("1. Crear un nuevo historial clínico a algún paciente.");
+                    System.out.println("2. Ver el historial clínico de algún paciente.");
+                    System.out.println("3. Modificar el historial clínico de algún paciente.");
+                    System.out.println("0. Cancelar");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println();
+                    option = input.next();
+                    switch (option) {
+                        case "1":
+                        historialClinico.crearHistClinico(psiquiatra);
+                            break;
+                        case "2":
+                        historialClinico.verHistClinico(psiquiatra);
+                            break;
+                        case "3":
+                        historialClinico.editarHistClinico(psiquiatra);
+                            break;
+                        case "0":
+                            while(true) {
+                                System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                                String opccion = input.next();
+                                if (opccion.equals("Y")||opccion.equals("y")) {
+                                    break label;
+                                } else if (opccion.equals("N")||opccion.equals("n")) {
+                                    break;
+                                }
+                            }
+                    }
+                }
+            }
+
+        public static void menuBucarPsiquiatra(){
+            String option;
+            label:
+            while (true) {
+                System.out.println();
+                System.out.println("____________________________________________________");
+                System.out.println("            Menú de búsqueda.");
+                System.out.println("----------------------------------------------------");
+                System.out.println();
+                System.out.println("Seleccione una opción:");
+                System.out.println("1. Citas.");
+                System.out.println("2. Historial Clínico.");
+                System.out.println("0. Cancelar");
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
+                option = input.next();
+                switch (option) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "0":
+                        while(true) {
+                            System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                            String opccion = input.next();
+                            if (opccion.equals("Y")||opccion.equals("y")) {
+                                break label;
+                            } else if (opccion.equals("N")||opccion.equals("n")) {
+                                break;
+                            }
+                        }
+                }
+            }
+        }
+
+        public static void inconsistenciasPsiquiatra(){
+            System.out.println("HAY QUE HACER ESTO");
+        }
+
+
+    //Para el coordinador
+   public static void menuCoordinador() {
         String opcion = "";
         while (true) {
+            System.out.println();
             System.out.println("__________________________________________");
-            System.out.println("    Bienvenido Coordinador ?");
+            System.out.println("    Bienvenido " /* + coordinador.getNombres() + " " + coordinador.getApellidos()*/); //NO SE SI IRÁ NOMBRE
             System.out.println("------------------------------------------");
+            System.out.println("Ha ingresado al sistema en el rol de COORDINADOR.");
+            System.out.println("Se encuentra en el menú principal. ¿A cuál sub-menú quiere ingresar?");
+            System.out.println();
             System.out.println("Seleccione una opción: ");
             System.out.println("1. Gestionar clínica");
             System.out.println("2. Gestionar psiquiatras");
             System.out.println("3. Listar clínicas en el sistema");
             System.out.println("4. Regresar al ingreso al sistema");
-            System.out.println("5. Salir y terminar todo");
+            System.out.println("0. Cancelar");
             System.out.println("------------------------------------------");
+            System.out.println();
             opcion = input.next();
             if (opcion.equals("1")) {
                 menuGestionarClinica();
@@ -169,76 +572,220 @@ public class SistemaDeGestionClinica {
                 // cl.listarClinicas();
             } else if(opcion.equals("4")){
                 return;
-            } else if(opcion.equals("5")){
-                System.exit(0);
+            } else if(opcion.equals("0")){
+                while(true) {
+                    System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                    String opccion = input.next();
+                    if (opccion.equals("Y")||opccion.equals("y")) {
+                        break;
+                    } else if (opccion.equals("N")||opccion.equals("n")) {
+
+                    }
+                }
             } else {
                 System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
             }
         }
     }
 
-    public static void menuGestionarClinica(){
-        String opClinica = " ";
-        while(true){
-            System.out.println("____________________________________________________");
-            System.out.println("            Menú de gestión de clínica");
-            System.out.println("----------------------------------------------------");
-            System.out.println("Seleccione una opción");
-            System.out.println("1. Editar la clínica que administra");
-            System.out.println("2. Borrar la clínica que administra");
-            System.out.println("3. Ingresar medicamentos a la clínica");
-            System.out.println("4. Borrar un medicamento que usa la clínica");
-            System.out.println("0. Regresar al menú de utilidades de coordinador");
-            System.out.println("----------------------------------------------------");
-            opClinica = input.next();
-            if(opClinica.equals("1")){
-                // cl.editarClinica(param1, param2 ..)
-                return;
-            } else if(opClinica.equals("2")){
-                // cl.borraClinica(params..)
-                return;
-            } else if(opClinica.equals("3")){
-                // cl.ingresarMedicamentos(params)..
-                return;
-            } else if(opClinica.equals("4")){
-                // cl.borrarMedicamento(params ..)
-                return;
-            } else if(opClinica.equals("0")){
-                menuCoordinador();
-            } else {
-                System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
+        public static void menuGestionarClinica(){
+            String opClinica = " ";
+            while(true){
+                System.out.println();
+                System.out.println("____________________________________________________");
+                System.out.println("            Menú de gestión de clínica");
+                System.out.println("----------------------------------------------------");
+                System.out.println();
+                System.out.println("Seleccione una opción:");
+                System.out.println("1. Editar la clínica que administra");
+                System.out.println("2. Borrar la clínica que administra");
+                System.out.println("3. Ingresar medicamentos a la clínica");
+                System.out.println("4. Borrar un medicamento que usa la clínica");
+                System.out.println("0. Regresar al menú de utilidades de coordinador"); //cancelar
+                System.out.println("----------------------------------------------------");
+                System.out.println();
+                opClinica = input.next();
+                if(opClinica.equals("1")){
+                    // cl.editarClinica(param1, param2 ..)
+                    return;
+                } else if(opClinica.equals("2")){
+                    // cl.borraClinica(params..)
+                    return;
+                } else if(opClinica.equals("3")){
+                    // cl.ingresarMedicamentos(params)..
+                    return;
+                } else if(opClinica.equals("4")){
+                    // cl.borrarMedicamento(params ..)
+                    return;
+                } else if(opClinica.equals("0")){
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+
+                        }
+                    }
+                } else {
+                    System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
+                }
             }
-        }
     }
 
-    public static void menuGestionarPsiquiatras(){
-        String opPsiquiatra = " ";
-        while (true) {
-            System.out.println("___________________________________________________");
-            System.out.println("          Menú de gestión de psiquiatras");
-            System.out.println("---------------------------------------------------");
-            System.out.println("1. Registrar un psiquiatra a la clínica");
-            System.out.println("2. Borrar un psiquiatra de la clínica");
-            System.out.println("3. Listar psquiatras de la clínica que administra");
-            System.out.println("0. Regresar al menú de utilidades de coordinador ");
-            System.out.println("----------------------------------------------------");
+        public static void menuGestionarPsiquiatras(){
+            String opPsiquiatra = " ";
+            while (true) {
+                System.out.println();
+                System.out.println("___________________________________________________");
+                System.out.println("          Menú de gestión de psiquiatras");
+                System.out.println("---------------------------------------------------");
+                System.out.println();
+                System.out.println("Seleccione una opción:");
+                System.out.println("1. Registrar un psiquiatra a la clínica");
+                System.out.println("2. Borrar un psiquiatra de la clínica");
+                System.out.println("3. Listar psquiatras de la clínica que administra");
+                System.out.println("0. Regresar al menú de utilidades de coordinador ");//cancelar
+                System.out.println("----------------------------------------------------");
 
-            opPsiquiatra = input.next();
-            if (opPsiquiatra.equals("1")) {
-                // ps.registrarPsiquiatra(params ...)
-                return;
-            } else if (opPsiquiatra.equals("2")) {
-                // ps.borrarPsiquiatra(params ...)
-                return;
-            } else if (opPsiquiatra.equals("3")) {
-                // ps.listarPsiquiatras(params);
-                return;
-            } else if(opPsiquiatra.equals("0")){
-                menuCoordinador();
-            } else {
-                System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
+                opPsiquiatra = input.next();
+                if (opPsiquiatra.equals("1")) {
+                    // ps.registrarPsiquiatra(params ...)
+                    return;
+                } else if (opPsiquiatra.equals("2")) {
+                    // ps.borrarPsiquiatra(params ...)
+                    return;
+                } else if (opPsiquiatra.equals("3")) {
+                    // ps.listarPsiquiatras(params);
+                    return;
+                } else if(opPsiquiatra.equals("0")){
+                    while(true) {
+                        System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                        String opccion = input.next();
+                        if (opccion.equals("Y")||opccion.equals("y")) {
+                            break;
+                        } else if (opccion.equals("N")||opccion.equals("n")) {
+
+                        }
+                    }
+                } else {
+                    System.out.println("Opción incorrecta. Intenta seleccionando otra opción");
+                }
             }
         }
+
+        public static void menuMedicamentos() {
+            String option;
+            label:
+            while (true) {
+                System.out.println();
+                System.out.println("____________________________________________________");
+                System.out.println("            Menú de control medicamentos.");
+                System.out.println("----------------------------------------------------");
+                System.out.println();
+                System.out.println("Seleccione una opción:");
+                System.out.println("1. Ver un listado con los medicamentos disponibles en mi clinica.");
+                System.out.println("2. Actualizar el inventario de medicamentos disponibles en mi clinica.");
+                System.out.println("0. Cancelar");
+                System.out.println();
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                option = input.next();
+                switch (option) {
+                    case "1":
+                        break;
+                    case "2":
+                      //  menuActualizarMedicamentos();
+                        break;
+                    case "0":
+                        while(true) {
+                            System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                            String opccion = input.next();
+                            if (opccion.equals("Y")||opccion.equals("y")) {
+                                break label;
+                            } else if (opccion.equals("N")||opccion.equals("n")) {
+                                break;
+                            }
+                        }
+                }
+            }
+    }
+
+        public static void menuActualizarMedicamentos() {
+            String option;
+            label:
+            while (true) {
+                System.out.println();
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Para actualizar el inventario de medicamentos elija una opción:");
+                System.out.println();
+                System.out.println("1. Ingresar un nuevo medicamento al inventario.");
+                System.out.println("2. Actualizar las unidades disponibles de algún medicamento en el inventario.");
+                System.out.println("3. Eliminar algún medicamento del inventario.");
+                System.out.println("0. Cancelar");
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
+                option = input.next();
+                switch (option) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "0":
+                        while(true) {
+                            System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                            String opccion = input.next();
+                            if (opccion.equals("Y")||opccion.equals("y")) {
+                                break label;
+                            } else if (opccion.equals("N")||opccion.equals("n")) {
+                                break;
+                            }
+                        }
+                }
+            }
+        }
+
+        public static void menuBucarCoordinador() {
+            String option;
+            label:
+            while (true) {
+                System.out.println();
+                System.out.println("____________________________________________________");
+                System.out.println("            Menú de búsqueda.");
+                System.out.println("----------------------------------------------------");
+                System.out.println();
+                System.out.println("Seleccione una opción:");
+                System.out.println("1. Clínica.");
+                System.out.println("2. Psiquiatra.");
+                System.out.println("3. Medicamentos.");
+                System.out.println("0. Cancelar");
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+                System.out.println();
+                option = input.next();
+                switch (option) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "0":
+                        while(true) {
+                            System.out.println("¿Está seguro de que desea cancelar está acción?  Y/N");
+                            String opccion = input.next();
+                            if (opccion.equals("Y")||opccion.equals("y")) {
+                                break label;
+                            } else if (opccion.equals("N")||opccion.equals("n")) {
+                                break;
+                            }
+                        }
+                }
+            }
+    }
+
+        public static void inconsistenciasCoordinador(){
+        System.out.println("HAY QUE HACER ESTO");
     }
 }
 
