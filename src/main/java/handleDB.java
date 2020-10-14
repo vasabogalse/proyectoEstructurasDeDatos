@@ -122,7 +122,7 @@ public class handleDB implements handleJSON {
                 break;
             case "medicamentos":
                 Medicamento medicamento = new Medicamento();
-                medicamento.writeJSON(medicamento, "medicamentos");
+                medicamento.writeJSON(medicamentos, "medicamentos");
                 break;
             case "formulas":
                 FormulaMedica formula = new FormulaMedica();

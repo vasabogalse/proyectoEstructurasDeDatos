@@ -56,26 +56,13 @@ public class SistemaDeGestionClinica {
         db.getMedicamentos().get(2).nitClinicaMed = db.getClinicas().get(2).nit;
         db.getMedicamentos().get(3).nitClinicaMed = db.getClinicas().get(3).nit;
 
+
         //Agregando listas a los json
         db.appendArrayToJSON("coordinadores");
         db.appendArrayToJSON("medicamentos");
         db.appendArrayToJSON("clinicas");
 
-
-
-//        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
-
-//        db.getCoordinadores().get(0).suministrarMedicamentos();
-//        System.out.println(db.getClinicas().get(0).listaDeMedicamentos);
-
-
-        //Linea con problema:
-        //Guardar ArrayList de clinicas en el json clínica:
-//        db.appendArrayToJSON("clinicas");
-
-
-
-
+        db.getCoordinadores().get(1).borrarClinica();
 
 
 

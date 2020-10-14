@@ -4,7 +4,13 @@
   "direccion" : "yir",
   "telefono" : 123456,
   "cedCoorDeClinica" : 12345678,
-  "listaDeMedicamentos" : null,
+  "listaDeMedicamentos" : [ {
+    "idMedicamento" : 1,
+    "nombreMedicamento" : "Medicamento #1",
+    "cantidadDisponible" : 500,
+    "formulaMedica" : null,
+    "nitClinicaMed" : 3
+  } ],
   "listaDePsiquiatras" : null
 }, {
   "nit" : 2,
@@ -12,7 +18,13 @@
   "direccion" : "uir2",
   "telefono" : 879034,
   "cedCoorDeClinica" : 12345338,
-  "listaDeMedicamentos" : null,
+  "listaDeMedicamentos" : [ {
+    "idMedicamento" : 2,
+    "nombreMedicamento" : "Medicamento #2",
+    "cantidadDisponible" : 200,
+    "formulaMedica" : null,
+    "nitClinicaMed" : 2
+  } ],
   "listaDePsiquiatras" : null
 }, {
   "nit" : 1,
@@ -20,7 +32,13 @@
   "direccion" : "mir3",
   "telefono" : 1011121,
   "cedCoorDeClinica" : 123555348,
-  "listaDeMedicamentos" : null,
+  "listaDeMedicamentos" : [ {
+    "idMedicamento" : 3,
+    "nombreMedicamento" : "Medicamento #3",
+    "cantidadDisponible" : 49,
+    "formulaMedica" : null,
+    "nitClinicaMed" : 1
+  } ],
   "listaDePsiquiatras" : null
 }, {
   "nit" : 4,
@@ -28,6 +46,12 @@
   "direccion" : "air4",
   "telefono" : 786,
   "cedCoorDeClinica" : 6565145,
-  "listaDeMedicamentos" : null,
+  "listaDeMedicamentos" : [ {
+    "idMedicamento" : 4,
+    "nombreMedicamento" : "Medicamento #4",
+    "cantidadDisponible" : 400,
+    "formulaMedica" : null,
+    "nitClinicaMed" : 4
+  } ],
   "listaDePsiquiatras" : null
 } ]

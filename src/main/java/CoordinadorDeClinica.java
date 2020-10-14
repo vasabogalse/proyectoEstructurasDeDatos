@@ -64,6 +64,7 @@ public class CoordinadorDeClinica implements handleJSON{
 
 
     public void editarClinica() {
+        handleDB db = new handleDB();
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -79,6 +80,7 @@ public class CoordinadorDeClinica implements handleJSON{
                 String nombre = input.nextLine();
                 clinicaCoordinador.nombreClinica = nombre;
                 System.out.println("Se ha cambiado el nombre de la clinica exitosamente");
+                break;
                 //Código para cambiar el nombre de la clínica en los respectivos JSON!
             }
             else if (cambio.equals("2")) {
@@ -87,6 +89,7 @@ public class CoordinadorDeClinica implements handleJSON{
                 String direccion = input.nextLine();
                 clinicaCoordinador.direccion = direccion;
                 System.out.println("Se ha cambiado la dirección de la clinica exitosamente");
+                break;
                 //Código para cambiar la dirección de la clínica en los respectivos JSON!
             }
             else if (cambio.equals("3")) {
@@ -94,6 +97,7 @@ public class CoordinadorDeClinica implements handleJSON{
                 int telefono = input.nextInt();
                 clinicaCoordinador.telefono = telefono;
                 System.out.println("Se ha cambiado el teléfono de la clinica exitosamente");
+                break;
                 //Código para cambiar el teléfono de la clínica en los respectivos JSON!
             }
 
@@ -105,13 +109,24 @@ public class CoordinadorDeClinica implements handleJSON{
                 continue;
             }
         }
+        //Modificando json coordinadores
+        db.appendArrayToJSON("coordinadores");
+
+        //Modificar json de clínicas
+        for (int i = 0; i < db.getClinicas().size(); i++) {
+            if (db.getClinicas().get(i).nit == clinicaCoordinador.nit) {
+                db.getClinicas().set(i, clinicaCoordinador);
+                db.appendArrayToJSON("clinicas");
+                break;
+            }
+        }
 
     }
 
     public void borrarClinica() {
         Scanner input = new Scanner(System.in);
         handleDB db = new handleDB();
-        ArrayList<Clinica> clinicas = db.getClinicas();
+
         ArrayList<CoordinadorDeClinica> coordinadores = db.getCoordinadores();
 
 
@@ -133,13 +148,12 @@ public class CoordinadorDeClinica implements handleJSON{
         }
 
 
-        System.out.println("Ingrese el NIT de la clínica a borrar: ");
-        int nitDel = input.nextInt();
+        int nitDel = clinicaCoordinador.nit;
         System.out.println("Antes de borrar la clínica, debe trsladar los datos, bienes " +
                 "y personas de esta clínica a otra clínica ");
         System.out.println("Ingrese el NIT de la clínica a la que quiere realizar el traslado: ");
         int nitTras = input.nextInt();
-        Collections.sort(clinicas, ClinicSort.nitOrder);
+        Collections.sort(db.getClinicas(), ClinicSort.nitOrder);
         //sacar lista de clínicas del json y mostrarlas acá
         int indexDel = Collections.binarySearch(db.getClinicas(), new Clinica(nitDel, "cl", "dir", 123), ClinicSort.nitOrder);
         if (indexDel < 0) {
@@ -152,16 +166,47 @@ public class CoordinadorDeClinica implements handleJSON{
             return;
         }
 
-
+        //Traslado de medicamentos
         for (Medicamento medicamento : db.getClinicas().get(indexDel).listaDeMedicamentos) {
-            clinicas.get(indexTras).listaDeMedicamentos.add(medicamento);
+            db.getClinicas().get(indexTras).listaDeMedicamentos.add(medicamento);
+            //Actualizar nit del medicamento que está en la lista de la clínica
+            medicamento.nitClinicaMed = db.getClinicas().get(indexTras).nit;
         }
 
-        for (Psiquiatra psiquiatra : db.getClinicas().get(indexDel).listaDePsiquiatras) {
-            clinicas.get(indexTras).listaDePsiquiatras.add(psiquiatra);
+        //Actualizar nit de los medicamentos del json medicamentos
+        for (int i = 0; i < db.getMedicamentos().size(); i++) {
+            if (db.getMedicamentos().get(i).nitClinicaMed == nitDel) {
+                db.getMedicamentos().get(i).nitClinicaMed = nitTras;
+            }
+
         }
 
-        db.getClinicas().remove(indexDel);
+//        //Traslado psiquiatras
+//        for (Psiquiatra psiquiatra : db.getClinicas().get(indexDel).listaDePsiquiatras) {
+//            db.getClinicas().get(indexTras).listaDePsiquiatras.add(psiquiatra);
+//            //Actualizar nit de la clinica del psiquiatra que está en la lista de la clínica
+//            psiquiatra.nitClinicaPsi = nitTras;
+//        }
+//        //Actualizar nit de la clinica de cada psiquiatra en el json psiquiatras
+//        for (int i = 0; i < db.getPsiquiatras().size(); i++) {
+//            if (db.getPsiquiatras().get(i).nitClinicaPsi == nitDel) {
+//                db.getPsiquiatras().get(i).nitClinicaPsi = nitTras;
+//            }
+//        }
+
+        //Actualizar json de medicamentos y psiquiatras
+        db.appendArrayToJSON("medicamentos");
+//        db.appendArrayToJSON("psiquiatras");
+
+        //Eliminar clínica del json de clínicas
+        db.deleteObjectInArray(indexDel, "clinicas");
+
+        //eliminar clínica del atributo del coordinadores y actualizar coordinadores en json coordinadores
+        clinicaCoordinador = null;
+        db.appendArrayToJSON("coordinadores");
+
+        //
+
         System.out.println("Se ha realizado la transferencia de información exitosamente");
         System.out.println("Se ha eliminado la clínica");
 
@@ -336,6 +381,7 @@ public class CoordinadorDeClinica implements handleJSON{
                 System.out.println("Tiene que ingresar como mínimo una unidad");
                 return;
             }
+
 
             clinicaCoordinador.listaDeMedicamentos.get(idMed).cantidadDisponible += cantidadSum;
             for (int i = 0; i < db.getClinicas().size(); i++) {

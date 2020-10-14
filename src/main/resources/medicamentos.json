@@ -1,7 +1,25 @@
-{
-  "idMedicamento" : 0,
-  "nombreMedicamento" : null,
-  "cantidadDisponible" : 0,
+[ {
+  "idMedicamento" : 1,
+  "nombreMedicamento" : "Medicamento #1",
+  "cantidadDisponible" : 500,
   "formulaMedica" : null,
-  "nitClinicaMed" : 0
-}
+  "nitClinicaMed" : 3
+}, {
+  "idMedicamento" : 2,
+  "nombreMedicamento" : "Medicamento #2",
+  "cantidadDisponible" : 200,
+  "formulaMedica" : null,
+  "nitClinicaMed" : 3
+}, {
+  "idMedicamento" : 3,
+  "nombreMedicamento" : "Medicamento #3",
+  "cantidadDisponible" : 49,
+  "formulaMedica" : null,
+  "nitClinicaMed" : 1
+}, {
+  "idMedicamento" : 4,
+  "nombreMedicamento" : "Medicamento #4",
+  "cantidadDisponible" : 400,
+  "formulaMedica" : null,
+  "nitClinicaMed" : 4
+} ]
