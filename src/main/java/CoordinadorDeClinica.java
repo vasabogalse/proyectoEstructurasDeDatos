@@ -181,18 +181,18 @@ public class CoordinadorDeClinica implements handleJSON{
 
         }
 
-//        //Traslado psiquiatras
-//        for (Psiquiatra psiquiatra : db.getClinicas().get(indexDel).listaDePsiquiatras) {
-//            db.getClinicas().get(indexTras).listaDePsiquiatras.add(psiquiatra);
-//            //Actualizar nit de la clinica del psiquiatra que está en la lista de la clínica
-//            psiquiatra.nitClinicaPsi = nitTras;
-//        }
-//        //Actualizar nit de la clinica de cada psiquiatra en el json psiquiatras
-//        for (int i = 0; i < db.getPsiquiatras().size(); i++) {
-//            if (db.getPsiquiatras().get(i).nitClinicaPsi == nitDel) {
-//                db.getPsiquiatras().get(i).nitClinicaPsi = nitTras;
-//            }
-//        }
+        //Traslado psiquiatras
+        for (Psiquiatra psiquiatra : db.getClinicas().get(indexDel).listaDePsiquiatras) {
+            db.getClinicas().get(indexTras).listaDePsiquiatras.add(psiquiatra);
+            //Actualizar nit de la clinica del psiquiatra que está en la lista de la clínica
+            psiquiatra.nitClinicaPsi = nitTras;
+        }
+        //Actualizar nit de la clinica de cada psiquiatra en el json psiquiatras
+        for (int i = 0; i < db.getPsiquiatras().size(); i++) {
+            if (db.getPsiquiatras().get(i).nitClinicaPsi == nitDel) {
+                db.getPsiquiatras().get(i).nitClinicaPsi = nitTras;
+            }
+        }
 
         //Actualizar json de medicamentos y psiquiatras
         db.appendArrayToJSON("medicamentos");
