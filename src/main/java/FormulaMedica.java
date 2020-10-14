@@ -175,6 +175,21 @@ public class FormulaMedica implements handleJSON{
                             db.appendArrayToJSON("medicamentos");
                             db.deleteObjectInArray(posicion, "medicamentoFormulaMedica");
                         }
+                        
+                         //Quitar relación con historial clinico.
+                        int posiFor = 0;
+                        int posiHist = 0;
+                        for (HistorialClinico hist: db.getHistoriales()){
+                            for (FormulaMedica forMedHist: hist.getFormulaMedica()){
+                                if (forMedHist.getIdFormulaMedica() == ForMed.getIdFormulaMedica()){
+                                    posiFor = hist.getFormulaMedica().indexOf(forMedHist);
+                                    posiHist = db.getHistoriales().indexOf(hist);
+                                }
+                            }
+                        }
+                        db.getHistoriales().get(posiHist).getFormulaMedica().remove(posiFor);
+                        db.appendArrayToJSON("historiales");
+           
                         db.deleteObjectInArray(index, "formulas");
                         System.out.println("Fórmula médica borrada con exito.");
                         return;
