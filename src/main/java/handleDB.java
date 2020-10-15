@@ -10,6 +10,7 @@ public class handleDB implements handleJSON {
     public static ArrayList<Cita> citas = new ArrayList<>();
     public static ArrayList<FormulaMedica> formulas = new ArrayList<>();
     public static ArrayList<HistorialClinico> historiales = new ArrayList<>();
+    public static ArrayList<MedicamentoFormulaMedica> medicamentoForMed = new ArrayList<>();
 
     public handleDB(){ }
 
@@ -38,6 +39,7 @@ public class handleDB implements handleJSON {
     public ArrayList<HistorialClinico> getHistoriales() {
         return historiales;
     }
+    public ArrayList<MedicamentoFormulaMedica> getMedicamentoForMed() { return medicamentoForMed; }
 
     public void readAllJSON(){
         Clinica clinica = new Clinica();
@@ -48,6 +50,7 @@ public class handleDB implements handleJSON {
         Cita cita = new Cita();
         FormulaMedica formulaMedica = new FormulaMedica();
         HistorialClinico historialClinico = new HistorialClinico();
+        MedicamentoFormulaMedica medicamentoFormulaMedica = new MedicamentoFormulaMedica();
 
         clinicas = clinica.readJSON(Clinica.class,"clinicas");
         psiquiatras = psiquiatra.readJSON(Psiquiatra.class,"psiquiatras");
@@ -57,6 +60,7 @@ public class handleDB implements handleJSON {
         citas = cita.readJSON(Cita.class, "citas");
         formulas = formulaMedica.readJSON(FormulaMedica.class,"formulas");
         historiales = historialClinico.readJSON(HistorialClinico.class,"historiales");
+        medicamentoForMed = medicamentoFormulaMedica.readJSON(MedicamentoFormulaMedica.class, "medicamentoFormulaMedica");
     }
 
     public <T> void updateJSON(T o1, String jsonFile){
@@ -81,6 +85,9 @@ public class handleDB implements handleJSON {
                 break;
             case "historiales":
                 historiales.add((HistorialClinico) o1);
+                break;
+            case "medicamentoFormulaMedica" :
+                medicamentoForMed.add((MedicamentoFormulaMedica) o1);
                 break;
         }
         appendArrayToJSON(jsonFile);
@@ -116,6 +123,10 @@ public class handleDB implements handleJSON {
                 HistorialClinico historial = new HistorialClinico();
                 historial.writeJSON(historiales, "historiales");
                 break;
+            case "medicamentoFormulaMedica" :
+                MedicamentoFormulaMedica medicamentoFormulaMedica = new MedicamentoFormulaMedica();
+                medicamentoFormulaMedica.writeJSON(medicamentoForMed, "medicamentoFormulaMedica");
+                break;
         }
     }
 
@@ -142,8 +153,21 @@ public class handleDB implements handleJSON {
             case "historiales":
                 historiales.remove(index);
                 break;
+            case "medicamentoFormulaMedica" :
+                medicamentoForMed.remove(index);
+                break;
         }
         appendArrayToJSON(jsonFile);
+    }
+
+    public Paciente buscarPaciente(String id){
+        Paciente paciente = new Paciente();
+        for (Paciente pc : pacientes){
+            if (pc.getIdPaciente().equals(id)){
+                paciente=pc;
+            }
+        }
+        return paciente;
     }
 
     @Override

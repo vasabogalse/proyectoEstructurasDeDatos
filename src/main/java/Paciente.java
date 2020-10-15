@@ -23,36 +23,36 @@ public class Paciente implements handleJSON {
     Scanner input = new Scanner(System.in);
     public static Paciente paciente = new Paciente();
 
-    public Paciente(){};
+    public Paciente(){ };
 
-    public void setIdPaciente(String idPaciente) { this.idPaciente = idPaciente; }
-    public void setNombres(String nombres) { this.nombres = nombres; }
-    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
-    public void setEmail(String email) { this.email = email; }
-    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
-    public void setEdad(int edad) { this.edad = edad; }
-    public void setFechaNacimiento(String fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
-    public void setNombreContactoEmergencia(String nombreContactoEmergencia) { this.nombreContactoEmergencia = nombreContactoEmergencia; }
-    public void setTelefonoContactoEmergencia(String telefonoContactoEmergencia) { this.telefonoContactoEmergencia = telefonoContactoEmergencia; }
-    public void setPsiquiatra(String psiquiatra) { this.psiquiatra = psiquiatra; }
-    public void setHistorialClinico(int historialClinico) { this.historialClinico = historialClinico; }
     public String getIdPaciente() { return idPaciente; }
+    public void setIdPaciente(String idPaciente) { this.idPaciente = idPaciente; }
     public String getNombres() { return nombres; }
+    public void setNombres(String nombres) { this.nombres = nombres; }
     public String getApellidos() { return apellidos; }
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
     public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
     public String getContrasena() { return contrasena; }
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
     public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
     public int getEdad() { return edad; }
-    public String getFechaNacimiento() { return fechaNacimiento;}
+    public void setEdad(int edad) { this.edad = edad; }
+    public String getFechaNacimiento() { return fechaNacimiento; }
+    public void setFechaNacimiento(String fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
     public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
     public String getNombreContactoEmergencia() { return nombreContactoEmergencia; }
+    public void setNombreContactoEmergencia(String nombreContactoEmergencia) { this.nombreContactoEmergencia = nombreContactoEmergencia; }
     public String getTelefonoContactoEmergencia() { return telefonoContactoEmergencia; }
-    public String getPsiquiatra() { return psiquiatra; }
+    public void setTelefonoContactoEmergencia(String telefonoContactoEmergencia) { this.telefonoContactoEmergencia = telefonoContactoEmergencia; }
+    public String getPsiquiatra() { return psiquiatra;}
+    public void setPsiquiatra(String psiquiatra) { this.psiquiatra = psiquiatra; }
     public ArrayList<Cita> getListaCitas() { return listaCitas; }
-    public int getHistorialClinico() { return historialClinico; }
-    public void setListaCitas(ArrayList<Cita> listaCitas) { this.listaCitas = listaCitas; }
+    public void setListaCitas(ArrayList<Cita> listaCitas) {  this.listaCitas = listaCitas; }
+    public int getHistorialClinico() { return historialClinico;  }
+    public void setHistorialClinico(int historialClinico) { this.historialClinico = historialClinico; }
 
     @Override
     public String toString() {
@@ -73,15 +73,13 @@ public class Paciente implements handleJSON {
                 ", historialClinico : " + historialClinico +
                 '}';
     }
-/*
+
     public void registrarPaciente() {
         Paciente paciente = new Paciente();
 
-        input.nextLine();
         System.out.println("Bienvenido al sistema, por favor registre la siguiente información: ");
         System.out.println("Cédula:");
-        String cedula = input.nextLine();
-        input.nextLine();
+        String cedula = input.next();
         char [] arr = cedula.toCharArray();
         String cadena = "";
         for (char digito : arr) {
@@ -95,15 +93,13 @@ public class Paciente implements handleJSON {
         String idPaciente = cadena;
 
         System.out.println("Nombres: ");
-        String nombres = input.nextLine();
+        String nombres = input.next();
 
         System.out.println("Apellidos: ");
-        String apellidos = input.nextLine();
+        String apellidos = input.next();
 
         System.out.println("Edad: ");
         int edad = input.nextInt();
-
-        input.nextLine();
 
         System.out.println("fecha de nacimiento: ");
         String fecha = input.nextLine();
@@ -115,7 +111,7 @@ public class Paciente implements handleJSON {
         String direccion = input.nextLine();
 
         System.out.println("Correo electrónico: ");
-        String correo = input.nextLine();
+        String correo = input.next();
 
         System.out.println("Nombre del contacto de emergencia: ");
         String nombreContacto = input.nextLine();
@@ -124,10 +120,10 @@ public class Paciente implements handleJSON {
         String TelContacto = input.nextLine();
 
         System.out.println("Contraseña para el ingreso al sistema: ");
-        String contrasena = input.nextLine();
+        String contrasena = input.next();
 
         System.out.println("Por favor confirme la contraseña");
-        String contrasenaConfir = input.nextLine();
+        String contrasenaConfir = input.next();
 
         paciente.setIdPaciente(idPaciente);
         paciente.setNombres(nombres);
@@ -146,9 +142,9 @@ public class Paciente implements handleJSON {
                 break;
             }
             System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
-            contrasena = SistemaDeGestionClinica.input.nextLine();
+            contrasena = input.nextLine();
             System.out.println("Por favor confirme la contraseña");
-            contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+            contrasenaConfir = input.nextLine();
         }
 
         asignarPsiquiatra(paciente);
@@ -176,46 +172,46 @@ public class Paciente implements handleJSON {
             System.out.println("8. Teléfono del contacto de emergencia.");
             System.out.println("9. Contraseña para el ingreso al sistema.");
             System.out.println("0. Regresar.");
-            option = SistemaDeGestionClinica.input.next();
+            option = input.next();
             switch (option) {
                 case "1":
                     System.out.println("Nombre antiguo: " + paciente.getNombres() +". Ingrese la información actualizada:");
-                    String nomNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String nomNuevo = input.nextLine();
                     paciente.setNombres(nomNuevo);
                     break;
                 case "2":
                     System.out.println("Apellido antiguo: " + paciente.getApellidos() + ". Ingrese la información actualizada:");
-                    String apeNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String apeNuevo = input.nextLine();
                     paciente.setApellidos(apeNuevo);
                     break;
                 case "3":
                     System.out.println("Fecha de nacimiento antigua: " + paciente.getFechaNacimiento()+ " .Ingrese la información actualizada:");
-                    String fechaNueva = SistemaDeGestionClinica.input.nextLine();
+                    String fechaNueva = input.nextLine();
                     paciente.setFechaNacimiento(fechaNueva);
                     break;
                 case "4":
                     System.out.println("Teléfono antiguo: " + paciente.getTelefono() +". Ingrese la información actualizada:");
-                    String telNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String telNuevo = input.nextLine();
                     paciente.setTelefono(telNuevo);
                     break;
                 case "5":
                     System.out.println("Dirección antigua: " + paciente.getDireccion()+". Ingrese la información actualizada:");
-                    String dirNueva = SistemaDeGestionClinica.input.nextLine();
+                    String dirNueva = input.nextLine();
                     paciente.setDireccion(dirNueva);
                     break;
                 case "6":
                     System.out.println("Correo electrónico antiguo: " + paciente.getEmail()+". Ingrese la información actualizada:");
-                    String emailNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String emailNuevo = input.nextLine();
                     paciente.setEmail(emailNuevo);
                     break;
                 case "7":
                     System.out.println("Nombre de contacto antiguo: " + paciente.getNombreContactoEmergencia()+". Ingrese la información actualizada:");
-                    String nomContNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String nomContNuevo = input.nextLine();
                     paciente.setNombreContactoEmergencia(nomContNuevo);
                     break;
                 case "8":
                     System.out.println("Teléfono de contacto antiguo: " + paciente.getTelefonoContactoEmergencia()+". Ingrese la información actualizada:");
-                    String telContNuevo = SistemaDeGestionClinica.input.nextLine();
+                    String telContNuevo = input.nextLine();
                     paciente.setTelefonoContactoEmergencia(telContNuevo);
                     break;
                 case "9":
@@ -227,22 +223,22 @@ public class Paciente implements handleJSON {
                     if (paciente.getContrasena().equals(contraConfirm)){
                         System.out.println("Ingrese nueva contraseña. ");
                         String contrasena;
-                        contrasena = SistemaDeGestionClinica.input.nextLine();
+                        contrasena = input.nextLine();
 
                         System.out.println("Por favor confirme la contraseña.");
                         String contrasenaConfir;
-                        contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+                        contrasenaConfir = input.nextLine();
                         while(true){
                             if (contrasena.equals(contrasenaConfir)){
                                 paciente.setContrasena(contrasena);
                                 break;
                             }
                             System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
-                            contrasena = SistemaDeGestionClinica.input.nextLine();
+                            contrasena = input.nextLine();
                             System.out.println("Por favor confirme la contraseña");
-                            contrasenaConfir = SistemaDeGestionClinica.input.nextLine();
+                            contrasenaConfir = input.nextLine();
                         }
-                    }else{
+                    } else{
                         System.out.println("Contraseña incorrecta.");
                         break;
                     }
@@ -257,7 +253,7 @@ public class Paciente implements handleJSON {
     public  void eliminarPaciente(Paciente paciente){
         System.out.println("¿Está seguro que desea eliminar su usuario? Y/N");
         while (true){
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             if (opcion.equals("Y")||opcion.equals("y")) {
                 int indice = 0;
                 for (Paciente paci: db.getPacientes()){
@@ -269,15 +265,22 @@ public class Paciente implements handleJSON {
                 //Elimina relación con psiquiatra
                 for (Psiquiatra psiquiatra : db.getPsiquiatras()){
                     if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
-                        psiquiatra.getListaPacientes().removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
+                        psiquiatra.getListaPacientes().removeIf(pc -> (pc == paciente.idPaciente));
                     }
                 }
 
                 // Elimina relación con historial clinico
                 HistorialClinico hist = new HistorialClinico();
-                //hist.borrarHistClinico(paciente);
+                hist.borrarHistClinico(paciente);
 
-                //FALTA ELIMINAR RELACIÓN CON CITA
+                //Eliminar relación cita
+                int posicion=0;
+                for (Cita ct : db.getCitas()){
+                    if (ct.paciente.equals(paciente.getIdPaciente())){
+                        posicion= db.getCitas().indexOf(ct);
+                    }
+                    db.deleteObjectInArray(posicion,"cita");
+                }
 
                 db.deleteObjectInArray(indice,"pacientes");
                 db.appendArrayToJSON("psiquiatras");
@@ -300,18 +303,18 @@ public class Paciente implements handleJSON {
             if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
                 System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres());
                 psiAntiguo = psiquiatra;
-                psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
+                psiquiatra.listaPacientes.removeIf(pc -> (pc == paciente.idPaciente));
             }
         }
-        //paciente.setPsiquiatra(0);
-        asignarPsiquiatra(paciente);
 
+        paciente.setPsiquiatra(null);
+        asignarPsiquiatra(paciente);
 
         if (psiAntiguo.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
             for (Psiquiatra psiquiatra : db.getPsiquiatras()){
                 if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
                     System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres() + psiquiatra.getIdPsiquiatra());
-                    psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
+                    psiquiatra.listaPacientes.removeIf(pc -> (pc == paciente.idPaciente));
                 }
             }
             asignarPsiquiatra(paciente);
@@ -319,7 +322,6 @@ public class Paciente implements handleJSON {
 
         db.appendArrayToJSON("pacientes");
         db.appendArrayToJSON("psiquiatras");
-
     }
 
     public  void registrarEmociones(Paciente paciente) {
@@ -340,7 +342,7 @@ public class Paciente implements handleJSON {
             System.out.println("3. Negativo. Me siento triste la mayor parte del día");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 1;
@@ -365,7 +367,7 @@ public class Paciente implements handleJSON {
             System.out.println("3. No me preocupo por el futuro");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 3;
@@ -391,7 +393,7 @@ public class Paciente implements handleJSON {
             System.out.println("3. Me siento satisfecho conmigo mismo");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 2;
@@ -414,10 +416,10 @@ public class Paciente implements handleJSON {
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println("1. Puedo dormir todo el día o no conciliar el sueño en toda la noche.");
             System.out.println("2. Duermo como siempre.");
-            System.out.println("3. Me despierto a vces a la mitad de la noche y no puedo dormir nuevamente");
+            System.out.println("3. Me despierto a veces a la mitad de la noche y no puedo dormir nuevamente");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 3;
@@ -443,7 +445,7 @@ public class Paciente implements handleJSON {
             System.out.println("3. No siento deseo de comer o no puedo parar de comer");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 1;
@@ -468,7 +470,7 @@ public class Paciente implements handleJSON {
             System.out.println("3. Estoy tan cansado que soy incapaz de hacer nada.");
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println();
-            String opcion = SistemaDeGestionClinica.input.next();
+            String opcion = input.next();
             switch (opcion) {
                 case "1":
                     count += 2;
@@ -494,25 +496,24 @@ public class Paciente implements handleJSON {
         }
     }
 
-    public static void programarCita(Paciente paciente){
+    public  void programarCita(Paciente paciente){
         Cita ct = new Cita();
         ct.crearCita(paciente);
     }
 
     public  void asignarPsiquiatra(Paciente paciente){
-        //Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.Apellidos);
-        //Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.NumPacientes);
+        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.Apellidos);
+        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.NumPacientes);
         Psiquiatra psiqui;
 
-        /*
-        if (paciente.getPsiquiatra() == 0){
+        psiqui = db.getPsiquiatras().get(0);
+      /* if (paciente.getPsiquiatra().equals(null)){
             psiqui = db.getPsiquiatras().get(0);
         }else{
             psiqui = db.getPsiquiatras().get(1);
-        }
-        psiqui.listaPacientes.add(paciente);
+        }*/
+        psiqui.listaPacientes.add(paciente.getIdPaciente());
         paciente.setPsiquiatra(psiqui.getIdPsiquiatra());
-
-         */
-    //}
+    }
 }
+

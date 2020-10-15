@@ -19,7 +19,7 @@ public class Psiquiatra implements handleJSON {
     public ArrayList<Integer> historiales;
     public ArrayList<Integer> citas;
     public int clinicaPsiquiatra;
-    public ArrayList<String> listaPacientes;
+    public ArrayList<String> listaPacientes = new ArrayList<>();
 
     handleDB db = new handleDB();
     Scanner input = new Scanner(System.in);
@@ -422,10 +422,12 @@ public class Psiquiatra implements handleJSON {
     }
 
     public void listarPsiquiatrasEnClinica(CoordinadorDeClinica coordinador){
+        System.out.println("Hola");
         Clinica cl = new Clinica();
         cl.setNit(coordinador.getClinicaCoordinador());
         Collections.sort(db.getClinicas(), ClinicSort.nitOrder);
         int indexClinica = Collections.binarySearch(db.getClinicas(), cl, ClinicSort.nitOrder);
+        System.out.println("el index: " + indexClinica);
 
         int c = 1;
         if(db.getClinicas().get(indexClinica).getListaDePsiquiatras().size() > 0){
@@ -448,5 +450,14 @@ public class Psiquiatra implements handleJSON {
             System.out.println("No hay psiquiatras en la clínica. Debes registrar algunos primero");
         }
 
+    }
+
+    public void verCitasAsignadas(Psiquiatra psiquiatra){
+        if(!psiquiatra.getCitas().isEmpty()){
+            for(int cita : psiquiatra.getCitas()){
+
+            }
+
+        }
     }
 }
