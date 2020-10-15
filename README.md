@@ -1,3 +1,5 @@
+<img src="https://www.flaticon.es/svg/static/icons/svg/2913/2913008.svg" width="1500" height="200" />
+
 # Sistema de Gestión de Clínica de Salud Mental
 
 Este sistema ha sido diseñado como herramienta para la interacción y un acompañamiento cercano entre pacientes y personal médico (psiquiatras) de una institución de salud mental.
@@ -71,4 +73,5 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 
 - **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística.
 
-![universidad](https://lh3.googleusercontent.com/proxy/4KQpGxwaSGYx-E1ARlvhvlbPCtSox_xyJJseTW86RM3ZwMMbIfVFXQodubjlD4-y3ZYuftDkmXm93ad3bqmNJb9jxlAu8qYfY2s79H0s4XfaDfAsDVsUFpiA82KALt7eeVbf7HersWymS7rWHVYA0CuwhoqBV_O0PHBoUCRN0H7WWqmE4f4MRWaz5ocO "universidad")
+<img src="https://lh3.googleusercontent.com/proxy/4KQpGxwaSGYx-E1ARlvhvlbPCtSox_xyJJseTW86RM3ZwMMbIfVFXQodubjlD4-y3ZYuftDkmXm93ad3bqmNJb9jxlAu8qYfY2s79H0s4XfaDfAsDVsUFpiA82KALt7eeVbf7HersWymS7rWHVYA0CuwhoqBV_O0PHBoUCRN0H7WWqmE4f4MRWaz5ocO" width="1000" height="300" />
+
