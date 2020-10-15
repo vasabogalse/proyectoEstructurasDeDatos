@@ -117,63 +117,7 @@ public class Clinica implements handleJSON{
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void verificarCoordinadorClinica(String email, String contrasena){
-        // busqueda lineal o binarySearch?
-        for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
-            if(coordinador.contrasenaCoordinador.equals(contrasena)){
-                // menuCoordinador();
-            }
-        }
-    }
-
-    public void verClinica(){
-
-    }
-
-    // primero se ejecuta esta para ordenar el arreglo
-    public void ordenarClinicas(String atributo, String orden){
-        if(atributo.equals("1")){
-            if(orden.equals("1")){
-                Collections.sort(db.getClinicas(), ClinicSort.nitOrder);
-            } else {
-                Collections.sort(db.getClinicas(), ClinicSort.nitOrder.reversed());
-            }
-        } // los otros casos
-    }
-
-    // luego se ejecuta esta para poder imprimir el arreglo ordenado
-    public void listarClinicas(String atributo, String orden){
-        ordenarClinicas(atributo, orden);
-        int i = 0;
-        for(Clinica clinica : db.getClinicas()){
-            System.out.println("______________________________");
-            System.out.println("        Clinica " + (i + 1));
-            System.out.println("------------------------------");
-            System.out.println(clinica);
-        }
-    }
-
+    ss
     @Override
     public String toString() {
         return "{" + "\n" +
