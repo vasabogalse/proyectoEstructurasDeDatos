@@ -8,7 +8,7 @@ public class Cita implements handleJSON {
     public String estadoCita;
     public Boolean prioridad;
     public int paciente;
-    public int psiquitra;
+    public String psiquitra;
     public Calendar fechaCita = new GregorianCalendar();
 
     handleDB db = new handleDB();
@@ -27,8 +27,8 @@ public class Cita implements handleJSON {
     public void setPrioridad(Boolean prioridad) { this.prioridad = prioridad; }
     public int getPaciente() { return paciente; }
     public void setPaciente(int paciente) { this.paciente = paciente; }
-    public int getPsiquitra() { return psiquitra; }
-    public void setPsiquitra(int psiquitra) { this.psiquitra = psiquitra; }
+    public String getPsiquitra() { return psiquitra; }
+    public void setPsiquitra(String psiquitra) { this.psiquitra = psiquitra; }
 
     public void crearCita(Paciente paciente) {
         int idCitas = 0;

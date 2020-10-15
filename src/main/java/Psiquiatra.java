@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 public class Psiquiatra implements handleJSON {
-    public int idPsiquiatra;
+    public String idPsiquiatra;
     public String nombres;
     public String apellidos;
     public String emailPsiquiatra;
@@ -14,20 +14,20 @@ public class Psiquiatra implements handleJSON {
     public String Sexo;
     public String direccion;
     public int edad;
-    public String fechaNacimiento;
+    public Date fechaNacimiento;
     public int tel;
     public ArrayList<HistorialClinico> historiales;
     public ArrayList<Paciente> pacientes;
     public ArrayList<Cita> citas;
     public Clinica clinicaPsiquiatra;
+    public ArrayList<Paciente> listaPacientes;
 
     handleDB db = new handleDB();
-    Psiquiatra ps = new Psiquiatra();
     Scanner input = new Scanner(System.in);
 
     public Psiquiatra(){ }
 
-    public Psiquiatra(int idPsiquiatra, String emailPsiquiatra, String clavePsiquiatra) {
+    public Psiquiatra(String idPsiquiatra, String emailPsiquiatra, String clavePsiquiatra) {
         this.idPsiquiatra = idPsiquiatra;
         this.emailPsiquiatra = emailPsiquiatra;
         this.clavePsiquiatra = clavePsiquiatra;
@@ -43,8 +43,8 @@ public class Psiquiatra implements handleJSON {
     public void setDireccion(String direccion) { this.direccion = direccion; }
     public int getEdad() { return edad; }
     public void setEdad(int edad) { this.edad = edad; }
-    public String getFechaNacimiento() { return fechaNacimiento; }
-    public void setFechaNacimiento(String fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
+    public Date getFechaNacimiento() { return fechaNacimiento; }
+    public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
     public int getTel() { return tel; }
     public void setTel(int tel) { this.tel = tel; }
     public ArrayList<HistorialClinico> getHistoriales() { return historiales; }
@@ -53,14 +53,16 @@ public class Psiquiatra implements handleJSON {
     public void setPacientes(ArrayList<Paciente> pacientes) { this.pacientes = pacientes; }
     public Clinica getClinicaPsiquiatra() { return clinicaPsiquiatra; }
     public void setClinicaPsiquiatra(Clinica clinicaPsiquiatra) { this.clinicaPsiquiatra = clinicaPsiquiatra; }
-    public int getIdPsiquiatra() { return idPsiquiatra; }
-    public void setIdPsiquiatra(int idPsiquiatra) { this.idPsiquiatra = idPsiquiatra; }
+    public String getIdPsiquiatra() { return idPsiquiatra; }
+    public void setIdPsiquiatra(String idPsiquiatra) { this.idPsiquiatra = idPsiquiatra; }
     public String getEmailPsiquiatra() { return emailPsiquiatra; }
     public void setEmailPsiquiatra(String emailPsiquiatra) { this.emailPsiquiatra = emailPsiquiatra; }
     public String getClavePsiquiatra() { return clavePsiquiatra; }
     public void setClavePsiquiatra(String clavePsiquiatra) { this.clavePsiquiatra = clavePsiquiatra; }
     public ArrayList<Cita> getCitas() { return citas; }
     public void setCitas(ArrayList<Cita> citas) { this.citas = citas; }
+    public ArrayList<Paciente> getListaPacientes() { return listaPacientes; }
+    public void setListaPacientes(ArrayList<Paciente> listaPacientes) { this.listaPacientes = listaPacientes; }
 
     @Override
     public String toString() {
@@ -71,23 +73,37 @@ public class Psiquiatra implements handleJSON {
                 '}';
     }
 
-    public void registrarPsiquiatra() {
+    public void registrarPsiquiatra(CoordinadorDeClinica coordinador) {
+        Psiquiatra ps = new Psiquiatra();
+
+        System.out.println("Ingrese la cédula del psiquiatra:");
+        input.nextInt();
+        String cedula =  input.nextLine();
+
+        char [] arr = cedula.toCharArray();
+        String cadena = "";
+        for (char digito : arr) {
+            if (Character.isDigit(digito)) { //Verifica que haya un número
+                cadena += digito;
+            } else if (cadena.equals("")) {
+                System.out.println("Dato inválido.");
+                return;
+            }
+        }
+        String idPsiquiatra = cadena;
+
         System.out.println("Ingrese el primer nombre (y segundo nombre si tiene) del psiquiatra a registrar:");
         input.nextLine();
         String nombres = input.nextLine();
-
         System.out.println("Ingrese los apellidos del psiquiatra a registrar:");
         input.nextLine();
         String apellidos = input.nextLine();
-
         System.out.println("Ingrese el email del psiquiatra a registrar:");
         input.nextLine();
         String email = input.nextLine();
-
         System.out.println("Ingrese la contraseña del psiquiatra a registrar:");
         input.nextLine();
         String contrasena = input.nextLine();
-
         System.out.println("Por favor confirme la contraseña");
         String contrasenaConfir = input.nextLine();
 
@@ -102,7 +118,6 @@ public class Psiquiatra implements handleJSON {
                 contrasenaConfir = input.nextLine();
             }
         }
-
         String sexo = "";
         while(true) {
             System.out.println("Ingrese el sexo del(de la) psiquiatra: ");
@@ -123,7 +138,6 @@ public class Psiquiatra implements handleJSON {
                 System.out.println("Ingresó una respuesta inválida. Por favor elija una opción");
             }
         }
-
         int edad = 0;
         while(true) {
             System.out.println("Ingrese la edad del psiquiatra a registrar:");
@@ -136,7 +150,6 @@ public class Psiquiatra implements handleJSON {
                 break;
             }
         }
-
         int aaaa = 0;
         while(true) {
             System.out.println("Ingrese el año de nacimiento");
@@ -148,7 +161,6 @@ public class Psiquiatra implements handleJSON {
                 break;
             }
         }
-
         int mm = 0;
         while(true) {
             System.out.println("Ingrese el mes de nacimiento en número");
@@ -159,17 +171,19 @@ public class Psiquiatra implements handleJSON {
                 break;
             }
         }
-
         int dd = 0;
         while(true){
             System.out.println("Ingrese el día de nacimiento");
             dd = input.nextInt();
             if (dd > 31 || dd < 1) {
                 System.out.println("Día de nacimiento inválido. Por favor vuelva a ingresar el día de nacimiento");
+            } else {
+                break;
             }
         }
-        String fecha = String.valueOf(aaaa) + "-" + String.valueOf(mm) + "-" + String.valueOf(dd);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+
+        String fecha =  String.valueOf(dd) + "-" + String.valueOf(mm) + "-" + String.valueOf(aaaa) ;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
         Date fechaNacimiento = null;
         try {
             //Parsing the String
@@ -192,14 +206,42 @@ public class Psiquiatra implements handleJSON {
                 break;
             }
         }
+
+        System.out.println("¿Desea registrar el psiquitra? Y/N");
+        String guardarPsiquiatra = input.next().toLowerCase();
+        if(guardarPsiquiatra.equals("y")){
+            ps.setIdPsiquiatra(idPsiquiatra);
+            ps.setNombres(nombres);
+            ps.setApellidos(apellidos);
+            ps.setEmailPsiquiatra(email);
+            ps.setEdad(edad);
+            ps.setSexo(sexo);
+            ps.setFechaNacimiento(fechaNacimiento);
+            ps.setTel(telefono);
+            ps.setDireccion(direccion);
+            ps.setClinicaPsiquiatra(coordinador.clinicaCoordinador);
+            db.updateJSON(ps, "psiquiatras");
+
+            for(int i = 0; i <= db.getClinicas().size(); i++){
+                if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
+                    db.getClinicas().get(i).getListaDePsiquiatras().add(ps);
+                    break;
+                }
+            }
+            db.appendArrayToJSON("clinicas");
+
+            for(CoordinadorDeClinica co : db.getCoordinadores()){
+                if(co.getCedulaCoordinador().equals(coordinador.getCedulaCoordinador())){
+                    coordinador.getClinicaCoordinador().getListaDePsiquiatras().add(ps);
+                }
+            }
+            db.appendArrayToJSON("coordinadores");
+        } else {
+            System.out.println("Los cambios realizados se perderán");
+        }
     }
 
-    public void editarPsiquiatra(int idPsiquiatra) {
-        Collections.sort(db.getPsiquiatras(), ClinicSort.idOrderPsiquiatra);
-        Psiquiatra ps = new Psiquiatra();
-        ps.setIdPsiquiatra(idPsiquiatra);
-        int indexPsiquiatra = Collections.binarySearch(db.getPsiquiatras(), ps, ClinicSort.idOrderPsiquiatra);
-        ps = db.getPsiquiatras().get(indexPsiquiatra);
+    public void editarPsiquiatra(String idPsiquiatra) {
         String opt = "";
         String guardarCambio = "";
         String correoNuevo = "", claveNueva = "", direccionNueva = "";
@@ -234,7 +276,7 @@ public class Psiquiatra implements handleJSON {
             } else if(opt.equals("0")){
                 return;
             }else {
-                System.out.println("Ingresaste una opción incorrecta");
+                System.out.println("Ingresaste una opción incorrecta. Por favor vuelve a elegir una opción");
             }
             System.out.println("¿Desea cambiar guardar el cambio? Y/N: ");
             guardarCambio = input.next().toLowerCase();
@@ -242,7 +284,7 @@ public class Psiquiatra implements handleJSON {
                 switch (opt) {
                     case "1":
                         for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra == idPsiquiatra) {
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
                                 db.getPsiquiatras().get(i).setEmailPsiquiatra(correoNuevo);
                                 break;
                             }
@@ -250,7 +292,7 @@ public class Psiquiatra implements handleJSON {
                         break;
                     case "2":
                         for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra == idPsiquiatra) {
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
                                 db.getPsiquiatras().get(i).setClavePsiquiatra(claveNueva);
                                 break;
                             }
@@ -258,7 +300,7 @@ public class Psiquiatra implements handleJSON {
                         break;
                     case "3":
                         for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra == idPsiquiatra) {
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
                                 db.getPsiquiatras().get(i).setDireccion(direccionNueva);
                                 break;
                             }
@@ -266,7 +308,7 @@ public class Psiquiatra implements handleJSON {
                         break;
                     case "4":
                         for(int i = 0; i <= db.getPsiquiatras().size(); i++) {
-                            if (db.getPsiquiatras().get(i).idPsiquiatra == idPsiquiatra) {
+                            if (db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
                                 db.getPsiquiatras().get(i).setTel(nuevoTelefono);
                                 break;
                             }
@@ -278,6 +320,65 @@ public class Psiquiatra implements handleJSON {
                 System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
                 break;
             }
+        }
+    }
+
+    public void borrarPsiquiatra(CoordinadorDeClinica coordinador) {
+        System.out.println("Ingrese el id del psiquiatra que desea eliminar de su clínica");
+        String cedula = input.nextLine();
+
+        char [] arr = cedula.toCharArray();
+        String cadena = "";
+        for (char digito : arr) {
+            if (Character.isDigit(digito)) { //Verifica que haya un número
+                cadena += digito;
+            } else if (cadena.equals("")) {
+                System.out.println("Dato inválido.");
+                return;
+            }
+        }
+        String idPsiquiatra = cadena;
+
+        // elimina psiquiatra del JSON psiquiatras y mira por existencia
+        Boolean psExiste = false;
+        for(int l = 0; l <= db.getPsiquiatras().size(); l++){
+            if(db.getPsiquiatras().get(l).getIdPsiquiatra().equals(idPsiquiatra)){
+                db.deleteObjectInArray(l, "psiquiatras");
+                psExiste = true;
+                break;
+            }
+        }
+
+        if(psExiste == true) {
+            int k = 0;
+            // elimina psiquiatra de la clínica que tiene el JSON de coordinador
+            for(Psiquiatra psiquiatra : coordinador.getClinicaCoordinador().getListaDePsiquiatras()){
+                k++;
+                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                    coordinador.getClinicaCoordinador().getListaDePsiquiatras().remove(k);
+                    break;
+                }
+            }
+            db.appendArrayToJSON("coordinadores");
+
+            int i = 0, j = 0;
+            // elimina psiquiatra de del arreglo de psiquiatras en la clínica
+            for(Clinica clinica : db.getClinicas()){
+                i++;
+                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                    j++;
+                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                        clinica.getListaDePsiquiatras().remove(j);
+                        break;
+                    }
+                }
+            }
+            db.appendArrayToJSON("clinicas");
+
+            System.out.println("El psiquiatra se elímino del sistema");
+        } else {
+            System.out.println("No esta registrado en el sistema un psiquiatra con cédula: " + idPsiquiatra);
+            return;
         }
     }
 }

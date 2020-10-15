@@ -78,7 +78,7 @@ public class SistemaDeGestionClinica {
             System.out.println("0. Salir");
             opt = input.next();
             if(opt.equals("1")){
-                paciente.registrarEmociones();
+                //paciente.registrarEmociones();
             } else if(opt.equals("2")){
                ingresoUsuario(opt);
             } else if(opt.equals("0")){
@@ -99,7 +99,8 @@ public class SistemaDeGestionClinica {
 
     public static void ingresoUsuario(String opt){
         System.out.println("Ingrese su cédula:");
-        int cedula= input.nextInt();
+        String cedula= input.nextLine();
+        input.nextLine();
         System.out.println("Ingrese su contraseña");
         String clave = input.next();
         if(opt.equals("2")){
@@ -107,17 +108,17 @@ public class SistemaDeGestionClinica {
         }
     }
 
-        public static String vertificarUsuarios(int cedula, String clave){
+        public static String vertificarUsuarios(String cedula, String clave){
         String usuario = null;
         int indexCoordinador = 0;
         for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
-            if(coordinador.getCedulaCoordinador() == cedula && coordinador.getContrasenaCoordinador().equals(clave)){
+            if(coordinador.getCedulaCoordinador().equals(cedula) && coordinador.getContrasenaCoordinador().equals(clave)){
                 usuario = "coordinador";
                 break;
             }
         }
         for(Psiquiatra psiquiatra : db.getPsiquiatras()){
-            if(psiquiatra.getIdPsiquiatra() == cedula && psiquiatra.getClavePsiquiatra().equals(clave)){
+            if(psiquiatra.getIdPsiquiatra().equals(cedula) && psiquiatra.getClavePsiquiatra().equals(clave)){
                 usuario = "psiquiatra";
                 break;
             }
@@ -131,7 +132,7 @@ public class SistemaDeGestionClinica {
         return usuario;
     }
 
-        public static void gestionarMenus(int cedula, String clave) {
+        public static void gestionarMenus(String cedula, String clave) {
         String usuario = vertificarUsuarios(cedula,clave);
         System.out.println(usuario);
 
@@ -478,13 +479,13 @@ public class SistemaDeGestionClinica {
                     option = input.next();
                     switch (option) {
                         case "1":
-                        historialClinico.crearHistClinico(psiquiatra);
+                        //historialClinico.crearHistClinico(psiquiatra);
                             break;
                         case "2":
-                        historialClinico.verHistClinico(psiquiatra);
+                        //historialClinico.verHistClinico(psiquiatra);
                             break;
                         case "3":
-                        historialClinico.editarHistClinico(psiquiatra);
+                        //historialClinico.editarHistClinico(psiquiatra);
                             break;
                         case "0":
                             while(true) {

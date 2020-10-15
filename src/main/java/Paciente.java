@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class Paciente implements handleJSON {
-    public int idPaciente;
+    public String idPaciente;
     public String nombres;
     public String apellidos;
     public String email;
@@ -15,7 +15,7 @@ public class Paciente implements handleJSON {
     public String telefono;
     public String nombreContactoEmergencia;
     public String telefonoContactoEmergencia;
-    public int psiquiatra;
+    public String psiquiatra;
     public ArrayList<Cita> listaCitas = new ArrayList<>();
     public int historialClinico;
 
@@ -25,7 +25,7 @@ public class Paciente implements handleJSON {
 
     public Paciente(){};
 
-    public void setIdPaciente(int idPaciente) { this.idPaciente = idPaciente; }
+    public void setIdPaciente(String idPaciente) { this.idPaciente = idPaciente; }
     public void setNombres(String nombres) { this.nombres = nombres; }
     public void setApellidos(String apellidos) { this.apellidos = apellidos; }
     public void setEmail(String email) { this.email = email; }
@@ -36,9 +36,9 @@ public class Paciente implements handleJSON {
     public void setTelefono(String telefono) { this.telefono = telefono; }
     public void setNombreContactoEmergencia(String nombreContactoEmergencia) { this.nombreContactoEmergencia = nombreContactoEmergencia; }
     public void setTelefonoContactoEmergencia(String telefonoContactoEmergencia) { this.telefonoContactoEmergencia = telefonoContactoEmergencia; }
-    public void setPsiquiatra(int psiquiatra) { this.psiquiatra = psiquiatra; }
+    public void setPsiquiatra(String psiquiatra) { this.psiquiatra = psiquiatra; }
     public void setHistorialClinico(int historialClinico) { this.historialClinico = historialClinico; }
-    public int getIdPaciente() { return idPaciente; }
+    public String getIdPaciente() { return idPaciente; }
     public String getNombres() { return nombres; }
     public String getApellidos() { return apellidos; }
     public String getEmail() { return email; }
@@ -49,7 +49,7 @@ public class Paciente implements handleJSON {
     public String getTelefono() { return telefono; }
     public String getNombreContactoEmergencia() { return nombreContactoEmergencia; }
     public String getTelefonoContactoEmergencia() { return telefonoContactoEmergencia; }
-    public int getPsiquiatra() { return psiquiatra; }
+    public String getPsiquiatra() { return psiquiatra; }
     public ArrayList<Cita> getListaCitas() { return listaCitas; }
     public int getHistorialClinico() { return historialClinico; }
     public void setListaCitas(ArrayList<Cita> listaCitas) { this.listaCitas = listaCitas; }
@@ -80,8 +80,19 @@ public class Paciente implements handleJSON {
         input.nextLine();
         System.out.println("Bienvenido al sistema, por favor registre la siguiente información: ");
         System.out.println("Cédula:");
-        int idPaciente = input.nextInt();
+        String cedula = input.nextLine();
         input.nextLine();
+        char [] arr = cedula.toCharArray();
+        String cadena = "";
+        for (char digito : arr) {
+            if (Character.isDigit(digito)) { //Verifica que haya un número
+                cadena += digito;
+            } else if (cadena.equals("")) {
+                System.out.println("Dato inválido.");
+                return;
+            }
+        }
+        String idPaciente = cadena;
 
         System.out.println("Nombres: ");
         String nombres = input.nextLine();
@@ -257,7 +268,7 @@ public class Paciente implements handleJSON {
 
                 //Elimina relación con psiquiatra
                 for (Psiquiatra psiquiatra : db.getPsiquiatras()){
-                    if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                    if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
                         psiquiatra.getListaPacientes().removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
                     }
                 }
@@ -286,7 +297,7 @@ public class Paciente implements handleJSON {
         Psiquiatra psiAntiguo = new Psiquiatra();
 
         for (Psiquiatra psiquiatra : db.getPsiquiatras()){
-            if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+            if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
                 System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres());
                 psiAntiguo = psiquiatra;
                 psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
@@ -296,9 +307,9 @@ public class Paciente implements handleJSON {
         asignarPsiquiatra(paciente);
 
 
-        if (psiAntiguo.getIdPsiquiatra() == paciente.getPsiquiatra()){
+        if (psiAntiguo.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
             for (Psiquiatra psiquiatra : db.getPsiquiatras()){
-                if (psiquiatra.getIdPsiquiatra() == paciente.getPsiquiatra()){
+                if (psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
                     System.out.println("El nombre de su médico actual es:" + psiquiatra.getNombres() + psiquiatra.getIdPsiquiatra());
                     psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
                 }
@@ -496,7 +507,7 @@ public class Paciente implements handleJSON {
         if (paciente.getPsiquiatra() == 0){
             psiqui = db.getPsiquiatras().get(0);
         }else{
-            psiqui =db.getPsiquiatras().get(1);
+            psiqui = db.getPsiquiatras().get(1);
         }
         psiqui.listaPacientes.add(paciente);
         paciente.setPsiquiatra(psiqui.getIdPsiquiatra());
