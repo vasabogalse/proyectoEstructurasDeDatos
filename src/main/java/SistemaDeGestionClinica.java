@@ -60,7 +60,7 @@ public class SistemaDeGestionClinica {
         db.appendArrayToJSON("medicamentos");
         db.appendArrayToJSON("clinicas");
 
-        menuPrincipal();
+//        menuPrincipal();
 /*
         //datos de prueba de la clase Clinica
         Clinica clinica2 = new Clinica(5, "eps2", "dir2", 879034);
@@ -693,7 +693,17 @@ public class SistemaDeGestionClinica {
     }
 
     public static void menuGestionarPsiquiatras(){
+        int iActivo = 0;
+        Clinica clinicaCoordinador = new Clinica();
+        for (int i = 0; i < db.getCoordinadores().size(); i++) {
+            if (db.getCoordinadores().get(i).getCedulaCoordinador() == cedulaActiva) {
+                clinicaCoordinador = db.getCoordinadores().get(i).clinicaCoordinador;
+                break;
+            }
+        }
+
         String opPsiquiatra = " ";
+        Psiquiatra ps = new Psiquiatra();
         while (true) {
             System.out.println();
             System.out.println("-------------------------------------------------------------------------------");
@@ -709,7 +719,7 @@ public class SistemaDeGestionClinica {
 
             opPsiquiatra = input.next();
             if (opPsiquiatra.equals("1")) {
-                // ps.registrarPsiquiatra(params ...)
+                ps.registrarPsiquiatra(clinicaCoordinador);
                 return;
             } else if (opPsiquiatra.equals("2")) {
                 // ps.borrarPsiquiatra(params ...)
