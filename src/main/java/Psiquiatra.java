@@ -241,7 +241,7 @@ public class Psiquiatra implements handleJSON {
         }
     }
 
-    public void editarPsiquiatra(String idPsiquiatra) {
+    public void editarPsiquiatra(CoordinadorDeClinica coordinador) {
         String opt = "";
         String guardarCambio = "";
         String correoNuevo = "", claveNueva = "", direccionNueva = "";
@@ -249,77 +249,175 @@ public class Psiquiatra implements handleJSON {
         System.out.println("__________________________________________________");
         System.out.println("            Editar perfil de psicólogo");
         System.out.println("--------------------------------------------------");
-        while(true){
-            System.out.println("Selecciones el campo a editar/actualizar");
-            System.out.println("1. Correo");
-            System.out.println("2. Contraseña");
-            System.out.println("3. Dirección");
-            System.out.println("4. Teléfono");
-            System.out.println("0. Regresar al menú principal");
-            System.out.println("----------------------------------------------");
-            opt = input.next();
-            if(opt.equals("1")){
-                System.out.println("Ingrese el nuevo correo electrónico:");
-                correoNuevo = input.next().toLowerCase();
+        System.out.println();
+        System.out.println("Por favor ingrese la cédula del psicologo que desea editar:");
+        String idPsiquiatra = input.next();
+
+        Boolean psExiste = false;
+        for(Psiquiatra psiquiatra : db.getPsiquiatras()){
+            if(psiquiatra.getIdPsiquiatra().equals(idPsiquiatra)){
+                psExiste = true;
                 break;
-            } else if(opt.equals("2")) {
-                System.out.println("Ingrese la nueva contraseña");
-                claveNueva = input.next();
-            } else if(opt.equals("3")){
-                System.out.println("Ingrese la nueva dirección");
-                direccionNueva = input.next().toLowerCase();
-                break;
-            } else if(opt.equals("4")) {
-                System.out.println("Ingrese el nuevo teléfono");
-                nuevoTelefono = input.nextInt();
-                break;
-            } else if(opt.equals("0")){
-                return;
-            }else {
-                System.out.println("Ingresaste una opción incorrecta. Por favor vuelve a elegir una opción");
             }
-            System.out.println("¿Desea cambiar guardar el cambio? Y/N: ");
-            guardarCambio = input.next().toLowerCase();
-            if(guardarCambio.equals("y")){
-                switch (opt) {
-                    case "1":
-                        for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                db.getPsiquiatras().get(i).setEmailPsiquiatra(correoNuevo);
-                                break;
-                            }
-                        }
-                        break;
-                    case "2":
-                        for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                db.getPsiquiatras().get(i).setClavePsiquiatra(claveNueva);
-                                break;
-                            }
-                        }
-                        break;
-                    case "3":
-                        for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                db.getPsiquiatras().get(i).setDireccion(direccionNueva);
-                                break;
-                            }
-                        }
-                        break;
-                    case "4":
-                        for(int i = 0; i <= db.getPsiquiatras().size(); i++) {
-                            if (db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                db.getPsiquiatras().get(i).setTel(nuevoTelefono);
-                                break;
-                            }
-                        }
-                        break;
+        }
+
+        if(psExiste){
+            while(true){
+                System.out.println();
+                System.out.println("Selecciones el campo a editar/actualizar");
+                System.out.println("1. Correo");
+                System.out.println("2. Contraseña");
+                System.out.println("3. Dirección");
+                System.out.println("4. Teléfono");
+                System.out.println("0. Regresar al menú principal");
+                System.out.println("----------------------------------------------");
+                opt = input.next();
+                if(opt.equals("1")){
+                    System.out.println("Ingrese el nuevo correo electrónico:");
+                    correoNuevo = input.next().toLowerCase();
+                    break;
+                } else if(opt.equals("2")) {
+                    System.out.println("Ingrese la nueva contraseña");
+                    claveNueva = input.next();
+                } else if(opt.equals("3")){
+                    System.out.println("Ingrese la nueva dirección");
+                    direccionNueva = input.next().toLowerCase();
+                    break;
+                } else if(opt.equals("4")) {
+                    System.out.println("Ingrese el nuevo teléfono");
+                    nuevoTelefono = input.nextInt();
+                    break;
+                } else if(opt.equals("0")){
+                    return;
+                }else {
+                    System.out.println("Ingresaste una opción incorrecta. Por favor vuelve a elegir una opción");
                 }
-                db.appendArrayToJSON("psiquiatras");
-            } else if(guardarCambio.equals("n")){
-                System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
-                break;
+                System.out.println("¿Desea cambiar guardar el cambio? Y/N: ");
+                guardarCambio = input.next().toLowerCase();
+                if(guardarCambio.equals("y")){
+                    switch (opt) {
+                        case "1":
+                            // guardar cambios en el arreglo de psiquiatras
+                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
+                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                    db.getPsiquiatras().get(i).setEmailPsiquiatra(correoNuevo);
+                                    break;
+                                }
+                            }
+
+                            // guardar cambios en el JSON de clinicas
+                            for(Clinica clinica : db.getClinicas()){
+                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                        psiquiatra.setEmailPsiquiatra(correoNuevo);
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // guardar cambios en el coordinador que tiene el psiquiatra
+                            for(CoordinadorDeClinica co: db.getCoordinadores()){
+                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
+                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
+                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                            psiquiatra.setEmailPsiquiatra(correoNuevo);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case "2":
+                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
+                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                    db.getPsiquiatras().get(i).setClavePsiquiatra(claveNueva);
+                                    break;
+                                }
+                            }
+                            for(Clinica clinica : db.getClinicas()){
+                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                        psiquiatra.setClavePsiquiatra(claveNueva);
+                                        break;
+                                    }
+                                }
+                            }
+                            for(CoordinadorDeClinica co: db.getCoordinadores()){
+                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
+                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
+                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                            psiquiatra.setClavePsiquiatra(claveNueva);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case "3":
+                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
+                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                    db.getPsiquiatras().get(i).setDireccion(direccionNueva);
+                                    break;
+                                }
+                            }
+                            for(Clinica clinica : db.getClinicas()){
+                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                        psiquiatra.setDireccion(direccionNueva);
+                                        break;
+                                    }
+                                }
+                            }
+                            for(CoordinadorDeClinica co: db.getCoordinadores()){
+                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
+                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
+                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                            psiquiatra.setDireccion(direccionNueva);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case "4":
+                            for(int i = 0; i <= db.getPsiquiatras().size(); i++) {
+                                if (db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                    db.getPsiquiatras().get(i).setTel(nuevoTelefono);
+                                    break;
+                                }
+                            }
+
+                            for(Clinica clinica : db.getClinicas()){
+                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                        psiquiatra.setTel(nuevoTelefono);
+                                        break;
+                                    }
+                                }
+                            }
+
+                            for(CoordinadorDeClinica co: db.getCoordinadores()){
+                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
+                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
+                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                            psiquiatra.setTel(nuevoTelefono);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    db.appendArrayToJSON("psiquiatras");
+                    db.appendArrayToJSON("clinicas");
+                    db.appendArrayToJSON("coordinadores");
+                } else if(guardarCambio.equals("n")){
+                    System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
+                    break;
+                }
             }
+        } else {
+            System.out.println("El psicólogo con cédula: " + idPsiquiatra + " no se esta registrado en el sistema");
         }
     }
 

@@ -9,7 +9,6 @@
   "telefono" : 2345678,
   "nombreContactoEmergencia" : "Julian",
   "telefonoContactoEmergencia" : 3456789,
-  "numLlamadas" : 0,
   "psiquiatra" : null
 },{
   "idPaciente" : 4534567,
@@ -22,6 +21,5 @@
   "telefono" : 2665678,
   "nombreContactoEmergencia" : "Carlos",
   "telefonoContactoEmergencia" : 3856789,
-  "numLlamadas" : 0,
   "psiquiatra" : null
 } ]

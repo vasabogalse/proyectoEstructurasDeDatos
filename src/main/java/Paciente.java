@@ -73,7 +73,7 @@ public class Paciente implements handleJSON {
                 ", historialClinico : " + historialClinico +
                 '}';
     }
-
+/*
     public void registrarPaciente() {
         Paciente paciente = new Paciente();
 
@@ -275,7 +275,7 @@ public class Paciente implements handleJSON {
 
                 // Elimina relación con historial clinico
                 HistorialClinico hist = new HistorialClinico();
-                hist.borrarHistClinico(paciente);
+                //hist.borrarHistClinico(paciente);
 
                 //FALTA ELIMINAR RELACIÓN CON CITA
 
@@ -303,7 +303,7 @@ public class Paciente implements handleJSON {
                 psiquiatra.listaPacientes.removeIf(pc -> (pc.idPaciente == paciente.idPaciente));
             }
         }
-        paciente.setPsiquiatra(0);
+        //paciente.setPsiquiatra(0);
         asignarPsiquiatra(paciente);
 
 
@@ -500,10 +500,11 @@ public class Paciente implements handleJSON {
     }
 
     public  void asignarPsiquiatra(Paciente paciente){
-        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.Apellidos);
-        Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.NumPacientes);
+        //Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.Apellidos);
+        //Collections.sort(db.getPsiquiatras(), PsiquiatraOrdenar.NumPacientes);
         Psiquiatra psiqui;
 
+        /*
         if (paciente.getPsiquiatra() == 0){
             psiqui = db.getPsiquiatras().get(0);
         }else{
@@ -511,9 +512,7 @@ public class Paciente implements handleJSON {
         }
         psiqui.listaPacientes.add(paciente);
         paciente.setPsiquiatra(psiqui.getIdPsiquiatra());
-    }
 
-
-
-
+         */
+    //}
 }

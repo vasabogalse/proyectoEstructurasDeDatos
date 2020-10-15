@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.Scanner;
 
 public class SistemaDeGestionClinica {
@@ -110,8 +112,8 @@ public class SistemaDeGestionClinica {
 
         public static String vertificarUsuarios(String cedula, String clave){
         String usuario = null;
-        int indexCoordinador = 0;
         for(CoordinadorDeClinica coordinador : db.getCoordinadores()){
+            System.out.println(coordinador.getCedulaCoordinador());
             if(coordinador.getCedulaCoordinador().equals(cedula) && coordinador.getContrasenaCoordinador().equals(clave)){
                 usuario = "coordinador";
                 break;
@@ -138,14 +140,20 @@ public class SistemaDeGestionClinica {
 
         if(usuario != null){
             if(usuario.equals("coordinador")){
-                menuCoordinador();
+                for(CoordinadorDeClinica co : db.getCoordinadores()){
+                    if(cedula.equals(co.getCedulaCoordinador())){
+                        coordinador = co;
+                        break;
+                    }
+                }
+                menuCoordinador(coordinador);
             } else if(usuario.equals("psiquiatra")){
                 for (Psiquiatra ps : db.getPsiquiatras()){
                     if (cedula == ps.getIdPsiquiatra()){
                         psiquiatra = ps;
                     }
                 }
-                menuRolPquiatra(psiquiatra);
+                //menuRolPquiatra(psiquiatra);
                 return;
             } else if (usuario.equals("paciente")){
                 for (Paciente pc : db.getPacientes()){
@@ -153,14 +161,14 @@ public class SistemaDeGestionClinica {
                         paciente = pc;
                     }
                 }
-                menuRolPaciente(paciente);
+                //menuRolPaciente(paciente);
                 return;
             }
         } else{
             System.out.println("Cédula o contraseña inválida");
         }
     }
-
+/*
     // Para el paciente
    public static void menuRolPaciente(Paciente paciente) {
         String option;
@@ -541,10 +549,10 @@ public class SistemaDeGestionClinica {
         public static void inconsistenciasPsiquiatra(){
             System.out.println("HAY QUE HACER ESTO");
         }
-
+*/
 
     //Para el coordinador
-   public static void menuCoordinador() {
+   public static void menuCoordinador(CoordinadorDeClinica coordinador) {
         String opcion = "";
         while (true) {
             System.out.println();
@@ -567,7 +575,7 @@ public class SistemaDeGestionClinica {
                 menuGestionarClinica();
                 return;
             } else if (opcion.equals("2")) {
-                menuGestionarPsiquiatras();
+                menuGestionarPsiquiatras(coordinador);
                 return;
             } else if (opcion.equals("3")) {
                 // cl.listarClinicas();
@@ -634,7 +642,7 @@ public class SistemaDeGestionClinica {
             }
     }
 
-        public static void menuGestionarPsiquiatras(){
+        public static void menuGestionarPsiquiatras(CoordinadorDeClinica coordinador){
             String opPsiquiatra = " ";
             while (true) {
                 System.out.println();
@@ -651,7 +659,7 @@ public class SistemaDeGestionClinica {
 
                 opPsiquiatra = input.next();
                 if (opPsiquiatra.equals("1")) {
-                    // ps.registrarPsiquiatra(params ...)
+                    psiquiatra.registrarPsiquiatra(coordinador);
                     return;
                 } else if (opPsiquiatra.equals("2")) {
                     // ps.borrarPsiquiatra(params ...)
