@@ -55,7 +55,7 @@ El paciente es el individuo interesado en el servicio que ofrece la clínica de 
 
 Sus atributos especificos se detallan a continuación:
 ### Psiquiatra
-- Asiganción automática de psiquiatra: El paciente recibirá un psiquiatra por defecto al ingresar al sistema por primera vez, si este psiquiatra no es de su agrado puede cambiarlo sin ningún problema.
+- Asiganción automática de psiquiatra: El paciente recibirá un psiquiatra por defecto al ingresar al sistema por primera vez.
 
 ### Citas
 - Menejo de citas: La principal ventaja de este sistema con respecto a otros es que se le permitirá al paciente llenar un cuestionario donde, con preguntas de selección simple, él podrá expresar sus emociones. A través de estas respuestas el sistema determinará si el paciente se encuentra en una situación de riesgo y automáticamente se le asignará una cita prioritaria, de otro modo el paciente tiene la libertad de agendar una cita con su psiquiatra asignado en el momento en que el especialista este disponible.
