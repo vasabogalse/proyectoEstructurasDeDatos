@@ -15,7 +15,7 @@ Dentro del sistema se podrán acceder a distintas funciones dependiendo del rol 
 - Tener algún entorno de desarrollo de su elección.
 
 ## Contenido📦
-[TOCM]
+
 ## Módulo Coordinador de Clínica.
 
 El Coordinador de Clínica funge la función de administrador, puede gestionar al personal psiquiátrico, el inventario de médicamentos y la información de la clínica a la que pertenece.
