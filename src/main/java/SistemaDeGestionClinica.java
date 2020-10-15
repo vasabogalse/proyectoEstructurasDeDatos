@@ -8,7 +8,7 @@ public class SistemaDeGestionClinica {
     public static Paciente paciente = new Paciente();
     public static Psiquiatra psiquiatra = new Psiquiatra();
     public static HistorialClinico historialClinico = new HistorialClinico();
-    public static CoordinadorDeClinica coordinador = new CoordinadorDeClinica();
+    public static CoordinadorDeClinica cdr = new CoordinadorDeClinica();
 
     public static void main(String[] args) {
         // carga automáticamente el contenido de los JSON
@@ -101,10 +101,12 @@ public class SistemaDeGestionClinica {
 
     public static void ingresoUsuario(String opt){
         System.out.println("Ingrese su cédula:");
-        String cedula= input.nextLine();
-        input.nextLine();
+        String cedula = input.next();
+        System.out.println("su cedula es: " + cedula);
         System.out.println("Ingrese su contraseña");
         String clave = input.next();
+        System.out.println("su contra es: " + clave);
+        System.out.println("La contraseña es :" + clave);
         if(opt.equals("2")){
             gestionarMenus(cedula, clave);
         }
@@ -142,11 +144,11 @@ public class SistemaDeGestionClinica {
             if(usuario.equals("coordinador")){
                 for(CoordinadorDeClinica co : db.getCoordinadores()){
                     if(cedula.equals(co.getCedulaCoordinador())){
-                        coordinador = co;
+                        cdr = co;
                         break;
                     }
                 }
-                menuCoordinador(coordinador);
+                menuCoordinador(cdr);
             } else if(usuario.equals("psiquiatra")){
                 for (Psiquiatra ps : db.getPsiquiatras()){
                     if (cedula == ps.getIdPsiquiatra()){
@@ -652,8 +654,9 @@ public class SistemaDeGestionClinica {
                 System.out.println();
                 System.out.println("Seleccione una opción:");
                 System.out.println("1. Registrar un psiquiatra a la clínica");
-                System.out.println("2. Borrar un psiquiatra de la clínica");
-                System.out.println("3. Listar psquiatras de la clínica que administra");
+                System.out.println("2. Editar un psiquiatra de su clínica");
+                System.out.println("3. Borrar un psiquiatra de la clínica");
+                System.out.println("4. Listar psquiatras de la clínica que administra");
                 System.out.println("0. Regresar al menú de utilidades de coordinador ");//cancelar
                 System.out.println("-------------------------------------------------------------------------------");
 
@@ -662,9 +665,12 @@ public class SistemaDeGestionClinica {
                     psiquiatra.registrarPsiquiatra(coordinador);
                     return;
                 } else if (opPsiquiatra.equals("2")) {
-                    // ps.borrarPsiquiatra(params ...)
+                    psiquiatra.editarPsiquiatra(coordinador);
                     return;
                 } else if (opPsiquiatra.equals("3")) {
+                    // ps.borrarPsiquiatra(params ...)
+                    return;
+                } else if (opPsiquiatra.equals("4")) {
                     // ps.listarPsiquiatras(params);
                     return;
                 } else if(opPsiquiatra.equals("0")){

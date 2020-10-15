@@ -7,7 +7,7 @@ public class Clinica implements handleJSON{
     public String nombreClinica;
     public String direccion;
     public int telefono;
-    public CoordinadorDeClinica coordinadorDeClinica;
+    public String coordinadorDeClinica;
     public ArrayList<Medicamento> listaDeMedicamentos;
     public ArrayList<Psiquiatra> listaDePsiquiatras;
 
@@ -17,7 +17,7 @@ public class Clinica implements handleJSON{
     public Clinica(){
     }
 
-    public Clinica(int nit, String nombreClinica, String direccion, int telefono) {
+    public Clinica(int nit, String nombreClinica, String direccion, int telefono, ArrayList<Medicamento> listaDeMedicamentos, ArrayList<Psiquiatra> listaDePsiquiatras) {
         this.nit = nit;
         this.nombreClinica = nombreClinica;
         this.direccion = direccion;
@@ -27,16 +27,6 @@ public class Clinica implements handleJSON{
         this.listaDePsiquiatras = new ArrayList<>();
     }
 
-    public Clinica(int nit, String nombreClinica, String direccion, int telefono, ArrayList<Medicamento> listaDeMedicamentos, ArrayList<Psiquiatra> listaDePsiquiatras) {
-        this.nit = nit;
-        this.nombreClinica = nombreClinica;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.coordinadorDeClinica = coordinadorDeClinica;
-        this.listaDeMedicamentos = listaDeMedicamentos;
-        this.listaDePsiquiatras = listaDePsiquiatras;
-    }
-
     public void setNit(int nit) { this.nit = nit; }
     public String getNombreClinica() { return nombreClinica; }
     public void setNombreClinica(String nombreClinica) { this.nombreClinica = nombreClinica; }
@@ -44,8 +34,8 @@ public class Clinica implements handleJSON{
     public void setDireccion(String direccion) { this.direccion = direccion; }
     public int getTelefono() { return telefono; }
     public void setTelefono(int telefono) { this.telefono = telefono; }
-    public CoordinadorDeClinica getCoordinadorDeClinica() { return coordinadorDeClinica; }
-    public void setCoordinadorDeClinica(CoordinadorDeClinica coordinadorDeClinica) { this.coordinadorDeClinica = coordinadorDeClinica; }
+    public String getCoordinadorDeClinica() { return coordinadorDeClinica; }
+    public void setCoordinadorDeClinica(String coordinadorDeClinica) { this.coordinadorDeClinica = coordinadorDeClinica; }
     public ArrayList<Medicamento> getListaDeMedicamentos() { return listaDeMedicamentos; }
     public void setListaDeMedicamentos(ArrayList<Medicamento> listaDeMedicamentos) { this.listaDeMedicamentos = listaDeMedicamentos; }
     public ArrayList<Psiquiatra> getListaDePsiquiatras() { return listaDePsiquiatras; }
@@ -55,7 +45,7 @@ public class Clinica implements handleJSON{
     public void editarClinica(CoordinadorDeClinica coordinador) {
         int indexClinicaCoordinador = 0;
         for (int i = 0; i < db.getClinicas().size(); i++) {
-            if (db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
+            if (db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador()) {
                 indexClinicaCoordinador = i;
                 break;
             }
@@ -94,14 +84,8 @@ public class Clinica implements handleJSON{
                 switch (cambio) {
                     case "1":
                         for(int i = 0; i <= db.getClinicas().size(); i++){
-                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
+                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador()) {
                                 db.getClinicas().get(i).setNombreClinica(nombre);
-                                break;
-                            }
-                        }
-                        for(int i = 0; i <= db.getCoordinadores().size(); i++){
-                            if(db.getCoordinadores().get(i).getCedulaCoordinador() == coordinador.getCedulaCoordinador()){
-                                db.getCoordinadores().get(i).getClinicaCoordinador().setNombreClinica(nombre);
                                 break;
                             }
                         }
@@ -109,14 +93,8 @@ public class Clinica implements handleJSON{
                         break;
                     case "2":
                         for(int i = 0; i <= db.getClinicas().size(); i++){
-                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
+                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador()) {
                                 db.getClinicas().get(i).setDireccion(direccion);
-                                break;
-                            }
-                        }
-                        for(int i = 0; i <= db.getCoordinadores().size(); i++){
-                            if(db.getCoordinadores().get(i).getCedulaCoordinador() == coordinador.getCedulaCoordinador()){
-                                db.getCoordinadores().get(i).getClinicaCoordinador().setDireccion(direccion);
                                 break;
                             }
                         }
@@ -124,14 +102,8 @@ public class Clinica implements handleJSON{
                         break;
                     case "3":
                         for(int i = 0; i <= db.getClinicas().size(); i++){
-                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
+                            if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador()) {
                                 db.getClinicas().get(i).setTelefono(telefono);
-                                break;
-                            }
-                        }
-                        for(int i = 0; i <= db.getCoordinadores().size(); i++){
-                            if(db.getCoordinadores().get(i).getCedulaCoordinador() == coordinador.getCedulaCoordinador()){
-                                db.getCoordinadores().get(i).getClinicaCoordinador().setTelefono(telefono);
                                 break;
                             }
                         }
@@ -139,7 +111,6 @@ public class Clinica implements handleJSON{
                         break;
                 }
                 db.appendArrayToJSON("clinicas");
-                db.appendArrayToJSON("coordinadores");
             } else if(guardarCambio.equals("n")){
                 System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
                 break;

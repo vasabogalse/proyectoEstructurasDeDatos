@@ -1,31 +1,11 @@
 [ {
-  "cedulaCoordinador" : 12345678,
-  "emailCoordinador" : "coordinador1@gmail.com",
-  "contrasenaCoordinador" : "eps1",
-  "clinicaCoordinador" : {
-    "nit" : 3,
-    "nombreClinica" : "bps",
-    "direccion" : "yir",
-    "telefono" : 123456
-  }
-}, {
   "cedulaCoordinador" : 12345338,
   "emailCoordinador" : "coordinador2@gmail.com",
   "contrasenaCoordinador" : "eps2",
-  "clinicaCoordinador" : {
-    "nit" : 2,
-    "nombreClinica" : "tps2",
-    "direccion" : "uir2",
-    "telefono" : 879034
-  }
+  "clinicaCoordinador" : 6
 }, {
   "cedulaCoordinador" : 123555348,
   "emailCoordinador" : "coordinador3@gmail.com",
   "contrasenaCoordinador" : "eps3",
-  "clinicaCoordinador" : {
-    "nit" : 1,
-    "nombreClinica" : "cps3",
-    "direccion" : "mir3",
-    "telefono" : 1011121
-  }
+  "clinicaCoordinador" : 5
 } ]

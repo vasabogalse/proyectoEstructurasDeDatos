@@ -1,1 +1,33 @@
-[]
+[ {
+  "idPsiquiatra" : "123456",
+  "nombres" : "jero",
+  "apellidos" : "marin",
+  "emailPsiquiatra" : "jero_marin@gmail.com",
+  "clavePsiquiatra" : "ps1",
+  "Sexo" : "masculino",
+  "direccion" : "cauca",
+  "edad" : 20,
+  "fechaNacimiento" : 1580101620000,
+  "tel" : 3456789,
+  "historiales" : [ ],
+  "citas" : [ ],
+  "clinicaPsiquiatra" : 6,
+  "listaPacientes" : [ ],
+  "sexo" : "masculino"
+}, {
+  "idPsiquiatra" : "2222",
+  "nombres" : "karla",
+  "apellidos" : "lule",
+  "emailPsiquiatra" : "karla@gmail.com",
+  "clavePsiquiatra" : "ps2",
+  "Sexo" : "femenino",
+  "direccion" : "valle",
+  "edad" : 30,
+  "fechaNacimiento" : 631515840000,
+  "tel" : 456784,
+  "historiales" : null,
+  "citas" : null,
+  "clinicaPsiquiatra" : 6,
+  "listaPacientes" : null,
+  "sexo" : "femenino"
+} ]

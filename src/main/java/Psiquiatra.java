@@ -16,21 +16,31 @@ public class Psiquiatra implements handleJSON {
     public int edad;
     public Date fechaNacimiento;
     public int tel;
-    public ArrayList<HistorialClinico> historiales;
-    public ArrayList<Paciente> pacientes;
-    public ArrayList<Cita> citas;
-    public Clinica clinicaPsiquiatra;
-    public ArrayList<Paciente> listaPacientes;
+    public ArrayList<Integer> historiales;
+    public ArrayList<Integer> citas;
+    public int clinicaPsiquiatra;
+    public ArrayList<String> listaPacientes;
 
     handleDB db = new handleDB();
     Scanner input = new Scanner(System.in);
 
     public Psiquiatra(){ }
 
-    public Psiquiatra(String idPsiquiatra, String emailPsiquiatra, String clavePsiquiatra) {
+    public Psiquiatra(String idPsiquiatra, String nombres, String apellidos, String emailPsiquiatra, String clavePsiquiatra, String sexo, String direccion, int edad, Date fechaNacimiento, int tel, ArrayList<Integer> historiales, ArrayList<Paciente> pacientes, ArrayList<Integer> citas, int clinicaPsiquiatra, ArrayList<String> listaPacientes) {
         this.idPsiquiatra = idPsiquiatra;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.emailPsiquiatra = emailPsiquiatra;
         this.clavePsiquiatra = clavePsiquiatra;
+        Sexo = sexo;
+        this.direccion = direccion;
+        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.tel = tel;
+        this.historiales = new ArrayList<>();
+        this.citas = new ArrayList<>();
+        this.clinicaPsiquiatra = clinicaPsiquiatra;
+        this.listaPacientes = new ArrayList<>();
     }
 
     public String getNombres() { return nombres; }
@@ -47,22 +57,20 @@ public class Psiquiatra implements handleJSON {
     public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
     public int getTel() { return tel; }
     public void setTel(int tel) { this.tel = tel; }
-    public ArrayList<HistorialClinico> getHistoriales() { return historiales; }
-    public void setHistoriales(ArrayList<HistorialClinico> historiales) { this.historiales = historiales; }
-    public ArrayList<Paciente> getPacientes() { return pacientes; }
-    public void setPacientes(ArrayList<Paciente> pacientes) { this.pacientes = pacientes; }
-    public Clinica getClinicaPsiquiatra() { return clinicaPsiquiatra; }
-    public void setClinicaPsiquiatra(Clinica clinicaPsiquiatra) { this.clinicaPsiquiatra = clinicaPsiquiatra; }
+    public ArrayList<Integer> getHistoriales() { return historiales; }
+    public void setHistoriales(ArrayList<Integer> historiales) { this.historiales = historiales; }
+    public int getClinicaPsiquiatra() { return clinicaPsiquiatra; }
+    public void setClinicaPsiquiatra(int clinicaPsiquiatra) { this.clinicaPsiquiatra = clinicaPsiquiatra; }
     public String getIdPsiquiatra() { return idPsiquiatra; }
     public void setIdPsiquiatra(String idPsiquiatra) { this.idPsiquiatra = idPsiquiatra; }
     public String getEmailPsiquiatra() { return emailPsiquiatra; }
     public void setEmailPsiquiatra(String emailPsiquiatra) { this.emailPsiquiatra = emailPsiquiatra; }
     public String getClavePsiquiatra() { return clavePsiquiatra; }
     public void setClavePsiquiatra(String clavePsiquiatra) { this.clavePsiquiatra = clavePsiquiatra; }
-    public ArrayList<Cita> getCitas() { return citas; }
-    public void setCitas(ArrayList<Cita> citas) { this.citas = citas; }
-    public ArrayList<Paciente> getListaPacientes() { return listaPacientes; }
-    public void setListaPacientes(ArrayList<Paciente> listaPacientes) { this.listaPacientes = listaPacientes; }
+    public ArrayList<Integer> getCitas() { return citas; }
+    public void setCitas(ArrayList<Integer> citas) { this.citas = citas; }
+    public ArrayList<String> getListaPacientes() { return listaPacientes; }
+    public void setListaPacientes(ArrayList<String> listaPacientes) { this.listaPacientes = listaPacientes; }
 
     @Override
     public String toString() {
@@ -77,8 +85,7 @@ public class Psiquiatra implements handleJSON {
         Psiquiatra ps = new Psiquiatra();
 
         System.out.println("Ingrese la cédula del psiquiatra:");
-        input.nextInt();
-        String cedula =  input.nextLine();
+        String cedula =  input.next();
 
         char [] arr = cedula.toCharArray();
         String cadena = "";
@@ -93,19 +100,15 @@ public class Psiquiatra implements handleJSON {
         String idPsiquiatra = cadena;
 
         System.out.println("Ingrese el primer nombre (y segundo nombre si tiene) del psiquiatra a registrar:");
-        input.nextLine();
-        String nombres = input.nextLine();
+        String nombres = input.next();
         System.out.println("Ingrese los apellidos del psiquiatra a registrar:");
-        input.nextLine();
-        String apellidos = input.nextLine();
+        String apellidos = input.next();
         System.out.println("Ingrese el email del psiquiatra a registrar:");
-        input.nextLine();
-        String email = input.nextLine();
+        String email = input.next();
         System.out.println("Ingrese la contraseña del psiquiatra a registrar:");
-        input.nextLine();
-        String contrasena = input.nextLine();
+        String contrasena = input.next();
         System.out.println("Por favor confirme la contraseña");
-        String contrasenaConfir = input.nextLine();
+        String contrasenaConfir = input.next();
 
         while(true){
             if (contrasena.equals(contrasenaConfir)){
@@ -113,9 +116,9 @@ public class Psiquiatra implements handleJSON {
                 break;
             } else {
                 System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
-                contrasena = input.nextLine();
+                contrasena = input.next();
                 System.out.println("Por favor confirme la contraseña");
-                contrasenaConfir = input.nextLine();
+                contrasenaConfir = input.next();
             }
         }
         String sexo = "";
@@ -193,8 +196,7 @@ public class Psiquiatra implements handleJSON {
         }
 
         System.out.println("Ingrese la dirección del psiquiatra a registrar:");
-        input.nextLine();
-        String direccion = input.nextLine().toLowerCase();
+        String direccion = input.next().toLowerCase();
 
         int telefono  = 0;
         while(true){
@@ -219,23 +221,16 @@ public class Psiquiatra implements handleJSON {
             ps.setFechaNacimiento(fechaNacimiento);
             ps.setTel(telefono);
             ps.setDireccion(direccion);
-            ps.setClinicaPsiquiatra(coordinador.clinicaCoordinador);
+            ps.setClinicaPsiquiatra(coordinador.getClinicaCoordinador());
             db.updateJSON(ps, "psiquiatras");
 
-            for(int i = 0; i <= db.getClinicas().size(); i++){
-                if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador().getNit()) {
-                    db.getClinicas().get(i).getListaDePsiquiatras().add(ps);
+            for(int i = 0; i <= db.getClinicas().size() - 1; i++){
+                if(db.getClinicas().get(i).getNit() == coordinador.getClinicaCoordinador()) {
+                        db.getClinicas().get(i).getListaDePsiquiatras().add(ps);
                     break;
                 }
             }
             db.appendArrayToJSON("clinicas");
-
-            for(CoordinadorDeClinica co : db.getCoordinadores()){
-                if(co.getCedulaCoordinador().equals(coordinador.getCedulaCoordinador())){
-                    coordinador.getClinicaCoordinador().getListaDePsiquiatras().add(ps);
-                }
-            }
-            db.appendArrayToJSON("coordinadores");
         } else {
             System.out.println("Los cambios realizados se perderán");
         }
@@ -279,6 +274,7 @@ public class Psiquiatra implements handleJSON {
                 } else if(opt.equals("2")) {
                     System.out.println("Ingrese la nueva contraseña");
                     claveNueva = input.next();
+                    break;
                 } else if(opt.equals("3")){
                     System.out.println("Ingrese la nueva dirección");
                     direccionNueva = input.next().toLowerCase();
@@ -292,129 +288,85 @@ public class Psiquiatra implements handleJSON {
                 }else {
                     System.out.println("Ingresaste una opción incorrecta. Por favor vuelve a elegir una opción");
                 }
-                System.out.println("¿Desea cambiar guardar el cambio? Y/N: ");
-                guardarCambio = input.next().toLowerCase();
-                if(guardarCambio.equals("y")){
-                    switch (opt) {
-                        case "1":
-                            // guardar cambios en el arreglo de psiquiatras
-                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                    db.getPsiquiatras().get(i).setEmailPsiquiatra(correoNuevo);
+            }
+            System.out.println("¿Desea cambiar guardar el cambio? Y/N: ");
+            guardarCambio = input.next().toLowerCase();
+            if(guardarCambio.equals("y")){
+                switch (opt) {
+                    case "1":
+                        // guardar cambios en el arreglo de psiquiatras
+                        for(int i = 0; i <= db.getPsiquiatras().size() - 1; i++){
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                db.getPsiquiatras().get(i).setEmailPsiquiatra(correoNuevo);
+                                break;
+                            }
+                        }
+
+                        // guardar cambios en el JSON de clinicas
+                        for(Clinica clinica : db.getClinicas()){
+                            for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                    psiquiatra.setEmailPsiquiatra(correoNuevo);
                                     break;
                                 }
                             }
-
-                            // guardar cambios en el JSON de clinicas
-                            for(Clinica clinica : db.getClinicas()){
-                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
-                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                        psiquiatra.setEmailPsiquiatra(correoNuevo);
-                                        break;
-                                    }
-                                }
+                        }
+                        break;
+                    case "2":
+                        for(int i = 0; i <= db.getPsiquiatras().size() - 1; i++){
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                db.getPsiquiatras().get(i).setClavePsiquiatra(claveNueva);
+                                break;
                             }
-
-                            // guardar cambios en el coordinador que tiene el psiquiatra
-                            for(CoordinadorDeClinica co: db.getCoordinadores()){
-                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
-                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
-                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                            psiquiatra.setEmailPsiquiatra(correoNuevo);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        case "2":
-                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                    db.getPsiquiatras().get(i).setClavePsiquiatra(claveNueva);
+                        }
+                        for(Clinica clinica : db.getClinicas()){
+                            for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                    psiquiatra.setClavePsiquiatra(claveNueva);
                                     break;
                                 }
                             }
-                            for(Clinica clinica : db.getClinicas()){
-                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
-                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                        psiquiatra.setClavePsiquiatra(claveNueva);
-                                        break;
-                                    }
-                                }
+                        }
+                        break;
+                    case "3":
+                        for(int i = 0; i <= db.getPsiquiatras().size() - 1; i++){
+                            if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                db.getPsiquiatras().get(i).setDireccion(direccionNueva);
+                                break;
                             }
-                            for(CoordinadorDeClinica co: db.getCoordinadores()){
-                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
-                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
-                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                            psiquiatra.setClavePsiquiatra(claveNueva);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        case "3":
-                            for(int i = 0; i <= db.getPsiquiatras().size(); i++){
-                                if(db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                    db.getPsiquiatras().get(i).setDireccion(direccionNueva);
+                        }
+                        for(Clinica clinica : db.getClinicas()){
+                            for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                    psiquiatra.setDireccion(direccionNueva);
                                     break;
                                 }
                             }
-                            for(Clinica clinica : db.getClinicas()){
-                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
-                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                        psiquiatra.setDireccion(direccionNueva);
-                                        break;
-                                    }
-                                }
+                        }
+                        break;
+                    case "4":
+                        for(int i = 0; i <= db.getPsiquiatras().size() - 1; i++) {
+                            if (db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
+                                db.getPsiquiatras().get(i).setTel(nuevoTelefono);
+                                break;
                             }
-                            for(CoordinadorDeClinica co: db.getCoordinadores()){
-                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
-                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
-                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                            psiquiatra.setDireccion(direccionNueva);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        case "4":
-                            for(int i = 0; i <= db.getPsiquiatras().size(); i++) {
-                                if (db.getPsiquiatras().get(i).idPsiquiatra.equals(idPsiquiatra)) {
-                                    db.getPsiquiatras().get(i).setTel(nuevoTelefono);
+                        }
+
+                        for(Clinica clinica : db.getClinicas()){
+                            for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
+                                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
+                                    psiquiatra.setTel(nuevoTelefono);
                                     break;
                                 }
                             }
-
-                            for(Clinica clinica : db.getClinicas()){
-                                for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
-                                    if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                        psiquiatra.setTel(nuevoTelefono);
-                                        break;
-                                    }
-                                }
-                            }
-
-                            for(CoordinadorDeClinica co: db.getCoordinadores()){
-                                if(coordinador.getCedulaCoordinador().equals(co.getCedulaCoordinador())){
-                                    for(Psiquiatra psiquiatra : co.getClinicaCoordinador().getListaDePsiquiatras()){
-                                        if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                                            psiquiatra.setTel(nuevoTelefono);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                    }
-                    db.appendArrayToJSON("psiquiatras");
-                    db.appendArrayToJSON("clinicas");
-                    db.appendArrayToJSON("coordinadores");
-                } else if(guardarCambio.equals("n")){
-                    System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
-                    break;
+                        }
+                        break;
                 }
+                db.appendArrayToJSON("psiquiatras");
+                db.appendArrayToJSON("clinicas");
+                db.appendArrayToJSON("coordinadores");
+            } else if(guardarCambio.equals("n")){
+                System.out.println("Si no cierra el sistema puede guardar sus cambios en la opción 6 del menú principal");
             }
         } else {
             System.out.println("El psicólogo con cédula: " + idPsiquiatra + " no se esta registrado en el sistema");
@@ -439,7 +391,7 @@ public class Psiquiatra implements handleJSON {
 
         // elimina psiquiatra del JSON psiquiatras y mira por existencia
         Boolean psExiste = false;
-        for(int l = 0; l <= db.getPsiquiatras().size(); l++){
+        for(int l = 0; l <= db.getPsiquiatras().size() - 1; l++){
             if(db.getPsiquiatras().get(l).getIdPsiquiatra().equals(idPsiquiatra)){
                 db.deleteObjectInArray(l, "psiquiatras");
                 psExiste = true;
@@ -448,17 +400,6 @@ public class Psiquiatra implements handleJSON {
         }
 
         if(psExiste == true) {
-            int k = 0;
-            // elimina psiquiatra de la clínica que tiene el JSON de coordinador
-            for(Psiquiatra psiquiatra : coordinador.getClinicaCoordinador().getListaDePsiquiatras()){
-                k++;
-                if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                    coordinador.getClinicaCoordinador().getListaDePsiquiatras().remove(k);
-                    break;
-                }
-            }
-            db.appendArrayToJSON("coordinadores");
-
             int i = 0, j = 0;
             // elimina psiquiatra de del arreglo de psiquiatras en la clínica
             for(Clinica clinica : db.getClinicas()){

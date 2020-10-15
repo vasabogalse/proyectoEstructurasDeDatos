@@ -55,7 +55,7 @@ public class Cita implements handleJSON {
         db.updateJSON(cita, "citas");
 
         Psiquiatra ps = new Psiquiatra();
-        ps.getCitas().add(cita);
+        ps.getCitas().add(cita.getIdCita());
         db.appendArrayToJSON("psiquiatras");
     }
 

@@ -1,33 +1,9 @@
 [ {
-  "nit" : 3,
-  "nombreClinica" : "bps",
-  "direccion" : "yir",
-  "telefono" : 123456,
-  "coordinadorDeClinica" : null,
-  "listaDeMedicamentos" : null,
-  "listaDePsiquiatras" : null
-}, {
-  "nit" : 2,
-  "nombreClinica" : "tps2",
-  "direccion" : "uir2",
-  "telefono" : 879034,
-  "coordinadorDeClinica" : null,
-  "listaDeMedicamentos" : null,
-  "listaDePsiquiatras" : null
-}, {
-  "nit" : 6,
-  "nombreClinica" : "eps2",
-  "direccion" : "dir2",
-  "telefono" : 879034,
-  "coordinadorDeClinica" : null,
-  "listaDeMedicamentos" : [ ],
-  "listaDePsiquiatras" : [ ]
-}, {
   "nit" : 5,
-  "nombreClinica" : "eps2",
-  "direccion" : "dir2",
+  "nombreClinica" : "eps3",
+  "direccion" : "dir3",
   "telefono" : 879034,
-  "coordinadorDeClinica" : null,
+  "coordinadorDeClinica" : "123555348",
   "listaDeMedicamentos" : [ ],
   "listaDePsiquiatras" : [ ]
 }, {
@@ -35,7 +11,39 @@
   "nombreClinica" : "eps2",
   "direccion" : "dir2",
   "telefono" : 879034,
-  "coordinadorDeClinica" : null,
+  "coordinadorDeClinica" : "12345338",
   "listaDeMedicamentos" : [ ],
-  "listaDePsiquiatras" : [ ]
+  "listaDePsiquiatras" : [ {
+    "idPsiquiatra" : "123456",
+    "nombres" : "jero",
+    "apellidos" : "marin",
+    "emailPsiquiatra" : "jero_marin@gmail.com",
+    "clavePsiquiatra" : "ps1",
+    "Sexo" : "masculino",
+    "direccion" : "cauca",
+    "edad" : 20,
+    "fechaNacimiento" : 1580101620000,
+    "tel" : 3456789,
+    "historiales" : null,
+    "citas" : null,
+    "clinicaPsiquiatra" : 6,
+    "listaPacientes" : null,
+    "sexo" : "masculino"
+  }, {
+    "idPsiquiatra" : "2222",
+    "nombres" : "karla",
+    "apellidos" : "lule",
+    "emailPsiquiatra" : "karla@gmail.com",
+    "clavePsiquiatra" : "ps2",
+    "Sexo" : "femenino",
+    "direccion" : "valle",
+    "edad" : 30,
+    "fechaNacimiento" : 631515840000,
+    "tel" : 456784,
+    "historiales" : null,
+    "citas" : null,
+    "clinicaPsiquiatra" : 6,
+    "listaPacientes" : null,
+    "sexo" : "femenino"
+  } ]
 } ]

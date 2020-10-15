@@ -2,13 +2,13 @@ public class CoordinadorDeClinica implements handleJSON {
     public String cedulaCoordinador;
     public String emailCoordinador;
     public String contrasenaCoordinador;
-    public Clinica clinicaCoordinador;
+    public int clinicaCoordinador;
 
     handleDB db = new handleDB();
 
     public CoordinadorDeClinica() { }
 
-    public CoordinadorDeClinica(String cedulaCoordinador, String emailCoordinador, String contrasenaCoordinador, Clinica clinicaCoordinador) {
+    public CoordinadorDeClinica(String cedulaCoordinador, String emailCoordinador, String contrasenaCoordinador, int clinicaCoordinador) {
         this.cedulaCoordinador = cedulaCoordinador;
         this.emailCoordinador = emailCoordinador;
         this.contrasenaCoordinador = contrasenaCoordinador;
@@ -21,8 +21,8 @@ public class CoordinadorDeClinica implements handleJSON {
     public void setEmailCoordinador(String emailCoordinador) { this.emailCoordinador = emailCoordinador; }
     public String getContrasenaCoordinador() { return contrasenaCoordinador; }
     public void setContrasenaCoordinador(String contrasenaCoordinador) { this.contrasenaCoordinador = contrasenaCoordinador; }
-    public Clinica getClinicaCoordinador() { return clinicaCoordinador; }
-    public void setClinicaCoordinador(Clinica clinicaCoordinador) { this.clinicaCoordinador = clinicaCoordinador; }
+    public int getClinicaCoordinador() { return clinicaCoordinador; }
+    public void setClinicaCoordinador(int clinicaCoordinador) { this.clinicaCoordinador = clinicaCoordinador; }
 
     @Override
     public String toString() {
