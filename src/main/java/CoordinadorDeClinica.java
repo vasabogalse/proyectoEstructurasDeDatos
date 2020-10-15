@@ -12,6 +12,13 @@ public class CoordinadorDeClinica implements handleJSON{
     public CoordinadorDeClinica() {
     }
 
+    public int getCedulaCoordinador() {
+        return cedulaCoordinador;
+    }
+
+    public String getContrasenaCoordinador() {
+        return contrasenaCoordinador;
+    }
 
     public static void main(String[] args) {
 
@@ -66,6 +73,13 @@ public class CoordinadorDeClinica implements handleJSON{
     public void editarClinica() {
         handleDB db = new handleDB();
         Scanner input = new Scanner(System.in);
+        int iJsonClinicas = 0;
+        for (int i = 0; i < db.getClinicas().size(); i++) {
+            if (db.getClinicas().get(i).nit == clinicaCoordinador.nit) {
+                iJsonClinicas = i;
+                break;
+            }
+        }
 
         while (true) {
             System.out.println("¿Qué atributo desea cambiar?");
@@ -79,26 +93,26 @@ public class CoordinadorDeClinica implements handleJSON{
                 input.nextLine();
                 String nombre = input.nextLine();
                 clinicaCoordinador.nombreClinica = nombre;
+                db.getClinicas().get(iJsonClinicas).nombreClinica = nombre;
                 System.out.println("Se ha cambiado el nombre de la clinica exitosamente");
                 break;
-                //Código para cambiar el nombre de la clínica en los respectivos JSON!
             }
             else if (cambio.equals("2")) {
                 System.out.println("Ingrese la nueva dirección de la clínica:");
                 input.nextLine();
                 String direccion = input.nextLine();
                 clinicaCoordinador.direccion = direccion;
+                db.getClinicas().get(iJsonClinicas).direccion = direccion;
                 System.out.println("Se ha cambiado la dirección de la clinica exitosamente");
                 break;
-                //Código para cambiar la dirección de la clínica en los respectivos JSON!
             }
             else if (cambio.equals("3")) {
                 System.out.println("Ingrese el nuevo teléfono de la clínica:");
                 int telefono = input.nextInt();
                 clinicaCoordinador.telefono = telefono;
+                db.getClinicas().get(iJsonClinicas).telefono = telefono;
                 System.out.println("Se ha cambiado el teléfono de la clinica exitosamente");
                 break;
-                //Código para cambiar el teléfono de la clínica en los respectivos JSON!
             }
 
             else if (cambio.equals("0")) {
@@ -109,17 +123,11 @@ public class CoordinadorDeClinica implements handleJSON{
                 continue;
             }
         }
-        //Modificando json coordinadores
+        //Modificando json coordinadores y clinicas
+        db.appendArrayToJSON("clinicas");
         db.appendArrayToJSON("coordinadores");
 
-        //Modificar json de clínicas
-        for (int i = 0; i < db.getClinicas().size(); i++) {
-            if (db.getClinicas().get(i).nit == clinicaCoordinador.nit) {
-                db.getClinicas().set(i, clinicaCoordinador);
-                db.appendArrayToJSON("clinicas");
-                break;
-            }
-        }
+
 
     }
 
@@ -127,7 +135,6 @@ public class CoordinadorDeClinica implements handleJSON{
         Scanner input = new Scanner(System.in);
         handleDB db = new handleDB();
 
-        ArrayList<CoordinadorDeClinica> coordinadores = db.getCoordinadores();
 
 
         while(true) {
@@ -210,11 +217,6 @@ public class CoordinadorDeClinica implements handleJSON{
         System.out.println("Se ha realizado la transferencia de información exitosamente");
         System.out.println("Se ha eliminado la clínica");
 
-
-
-
-
-
     }
 
     public void registrarPsiquiatra() {
@@ -249,7 +251,7 @@ public class CoordinadorDeClinica implements handleJSON{
             sexo = "femenino";
         }
         else if (sexo.equals("3")) {
-            sexo = "femenino";
+            sexo = "otro";
         }
         else {
             System.out.println("Ingresó una respuesta inválida");
@@ -284,7 +286,7 @@ public class CoordinadorDeClinica implements handleJSON{
             System.out.println("Día de nacimiento inválido");
             return;
         }
-        Date fechaNacimiento = new Date(año, mes - 1 , dia);
+        Date fechaNacimiento = new Date();
 
         System.out.println("Ingrese el teléfono del psiquiatra a registrar:");
         int telefono = input.nextInt();
