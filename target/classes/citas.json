@@ -1,1 +1,15 @@
-[]
+[ {
+  "idCita" : 1,
+  "estadoCita" : "Pendiente",
+  "prioridad" : false,
+  "paciente" : null,
+  "psiquitra" : "545667",
+  "fechaCita" : 1602853200693
+}, {
+  "idCita" : 2,
+  "estadoCita" : "Pendiente",
+  "prioridad" : false,
+  "paciente" : null,
+  "psiquitra" : "234345",
+  "fechaCita" : 1602783279200
+} ]

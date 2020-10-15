@@ -12,7 +12,7 @@
   "historiales" : [ ],
   "citas" : null,
   "clinicaPsiquiatra" : 6,
-  "listaPacientes" : [ null, "845674567" ],
+  "listaPacientes" : [ "845674567" ],
   "sexo" : "masculino"
 }, {
   "idPsiquiatra" : "234345",

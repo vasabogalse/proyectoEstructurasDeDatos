@@ -55,15 +55,8 @@ public class Cita implements handleJSON {
         db.updateJSON(cita, "citas");
 
         paciente.getListaCitas().add(cita.getIdCita());
-        db.appendArrayToJSON("psiquiatras");
+        db.appendArrayToJSON("pacientes");
 
-
-        for(Psiquiatra psiquiatra : db.getPsiquiatras()){
-            if(psiquiatra.getIdPsiquiatra().equals(paciente.getPsiquiatra())){
-                psiquiatra.getCitas().add(cita.getIdCita());
-                db.appendArrayToJSON("psiquiatras");
-            }
-        }
     }
 
     public void verCita(){
