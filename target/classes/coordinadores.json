@@ -8,4 +8,9 @@
   "emailCoordinador" : "coordinador3@gmail.com",
   "contrasenaCoordinador" : "eps3",
   "clinicaCoordinador" : 5
+}, {
+  "cedulaCoordinador" : 123555444,
+  "emailCoordinador" : "coordinador4@gmail.com",
+  "contrasenaCoordinador" : "eps4",
+  "clinicaCoordinador" : 4
 } ]

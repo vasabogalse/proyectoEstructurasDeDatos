@@ -1,4 +1,28 @@
 [ {
+  "nit" : 4,
+  "nombreClinica" : "eps1",
+  "direccion" : "dir1",
+  "telefono" : 45642,
+  "coordinadorDeClinica" : "123555348",
+  "listaDeMedicamentos" : [ ],
+  "listaDePsiquiatras" : [ {
+    "idPsiquiatra" : "234345",
+    "nombres" : "karla",
+    "apellidos" : "lopez",
+    "emailPsiquiatra" : "karla@gmail.com",
+    "clavePsiquiatra" : "ps3",
+    "Sexo" : "femenino",
+    "direccion" : "belen",
+    "edad" : 25,
+    "fechaNacimiento" : 789455160000,
+    "tel" : 345345,
+    "historiales" : [ ],
+    "citas" : null,
+    "clinicaPsiquiatra" : 4,
+    "listaPacientes" : [ ],
+    "sexo" : "femenino"
+  } ]
+}, {
   "nit" : 5,
   "nombreClinica" : "eps3",
   "direccion" : "dir3",
@@ -13,5 +37,37 @@
   "telefono" : 879034,
   "coordinadorDeClinica" : "12345338",
   "listaDeMedicamentos" : [ ],
-  "listaDePsiquiatras" : [ ]
+  "listaDePsiquiatras" : [ {
+    "idPsiquiatra" : "123456",
+    "nombres" : "juan",
+    "apellidos" : "pelaez",
+    "emailPsiquiatra" : "juan@gmail.com",
+    "clavePsiquiatra" : "ps1",
+    "Sexo" : "masculino",
+    "direccion" : "cesar",
+    "edad" : 20,
+    "fechaNacimiento" : 1579756080000,
+    "tel" : 234567,
+    "historiales" : [ ],
+    "citas" : null,
+    "clinicaPsiquiatra" : 6,
+    "listaPacientes" : [ ],
+    "sexo" : "masculino"
+  }, {
+    "idPsiquiatra" : "545667",
+    "nombres" : "felipe",
+    "apellidos" : "jaramillo",
+    "emailPsiquiatra" : "felipe@gmail.com",
+    "clavePsiquiatra" : "ps2",
+    "Sexo" : "masculino",
+    "direccion" : "valle",
+    "edad" : 30,
+    "fechaNacimiento" : 632984760000,
+    "tel" : 34545,
+    "historiales" : [ ],
+    "citas" : null,
+    "clinicaPsiquiatra" : 6,
+    "listaPacientes" : [ ],
+    "sexo" : "masculino"
+  } ]
 } ]

@@ -1,4 +1,28 @@
 [ {
+  "nit" : 4,
+  "nombreClinica" : "eps1",
+  "direccion" : "dir1",
+  "telefono" : 45642,
+  "coordinadorDeClinica" : "123555348",
+  "listaDeMedicamentos" : [ ],
+  "listaDePsiquiatras" : [ {
+    "idPsiquiatra" : "234345",
+    "nombres" : "karla",
+    "apellidos" : "lopez",
+    "emailPsiquiatra" : "karla@gmail.com",
+    "clavePsiquiatra" : "ps3",
+    "Sexo" : "femenino",
+    "direccion" : "belen",
+    "edad" : 25,
+    "fechaNacimiento" : 789455160000,
+    "tel" : 345345,
+    "historiales" : [ ],
+    "citas" : null,
+    "clinicaPsiquiatra" : 4,
+    "listaPacientes" : [ ],
+    "sexo" : "femenino"
+  } ]
+}, {
   "nit" : 5,
   "nombreClinica" : "eps3",
   "direccion" : "dir3",

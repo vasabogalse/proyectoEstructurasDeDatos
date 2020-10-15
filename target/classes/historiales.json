@@ -1,1 +1,9 @@
-[]
+[ {
+  "idHistClinico" : 1,
+  "antecedentes" : [ "N/A" ],
+  "procedimientos" : [ "Se recetan medicamentos" ],
+  "recomendaciones" : [ "n" ],
+  "psiquiatra" : "234345",
+  "paciente" : "234424",
+  "formulaMedica" : [ ]
+} ]

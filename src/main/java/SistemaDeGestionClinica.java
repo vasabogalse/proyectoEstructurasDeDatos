@@ -264,8 +264,7 @@ public class SistemaDeGestionClinica {
             System.out.println("Seleccione una opción:");
             System.out.println("1. Modificar mis datos personales.");
             System.out.println("2. Ver mis datos personales.");
-            System.out.println("3. Cambiar de especialista.");
-            System.out.println("4. Eliminar perfil.");
+            System.out.println("3. Eliminar perfil.");
             System.out.println("0. Cancelar");
             System.out.println("-------------------------------------------------------------------------------");
             System.out.println();
@@ -278,9 +277,6 @@ public class SistemaDeGestionClinica {
                     paciente.verPaciente(paciente);
                     break;
                 case "3":
-                   paciente.cambiarPsiquiatra(paciente);
-                    break;
-                case "4":
                    paciente.eliminarPaciente(paciente);
                     break;
                 case "0":
@@ -317,13 +313,16 @@ public class SistemaDeGestionClinica {
             option = input.next();
             switch (option) {
                 case "1":
-               //     paciente.programarCita(paciente);
+                    cita.crearCita(paciente);
                     break;
                 case "2":
+                    cita.verCita();
                     break;
                 case "3":
+                    cita.editarCita();
                     break;
                 case "4":
+                    cita.cancelarCita();
                     break;
                 case "0":
                     while(true) {

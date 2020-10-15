@@ -19,7 +19,7 @@ public class Paciente implements handleJSON {
     public String nombreContactoEmergencia;
     public String telefonoContactoEmergencia;
     public String psiquiatra;
-    public ArrayList<Cita> listaCitas = new ArrayList<>();
+    public ArrayList<Integer> listaCitas = new ArrayList<>();
     public int historialClinico;
 
     handleDB db = new handleDB();
@@ -124,11 +124,11 @@ public class Paciente implements handleJSON {
         this.psiquiatra = psiquiatra;
     }
 
-    public ArrayList<Cita> getListaCitas() {
+    public ArrayList<Integer> getListaCitas() {
         return listaCitas;
     }
 
-    public void setListaCitas(ArrayList<Cita> listaCitas) {
+    public void setListaCitas(ArrayList<Integer> listaCitas) {
         this.listaCitas = listaCitas;
     }
 
@@ -156,7 +156,7 @@ public class Paciente implements handleJSON {
                 return;
             }
         }
-        String idPsiquiatra = cadena;
+        String cedulaPaciente = cadena;
 
         input.nextLine();
         System.out.println("Nombres: ");
@@ -253,7 +253,7 @@ public class Paciente implements handleJSON {
         System.out.println("Por favor confirme la contraseña");
         String contrasenaConfir = input.nextLine();
 
-        paciente.setIdPaciente(idPaciente);
+        paciente.setIdPaciente(cedulaPaciente);
         paciente.setNombres(nombres);
         paciente.setApellidos(apellidos);
         paciente.setEdad(edad);

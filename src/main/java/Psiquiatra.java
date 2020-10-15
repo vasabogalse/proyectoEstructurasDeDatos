@@ -17,7 +17,7 @@ public class Psiquiatra implements handleJSON {
     public Date fechaNacimiento;
     public int tel;
     public ArrayList<Integer> historiales = new ArrayList<>();
-    public ArrayList<Integer> citas;
+    public ArrayList<Integer> citas = new ArrayList<>();
     public int clinicaPsiquiatra;
     public ArrayList<String> listaPacientes = new ArrayList<>();
 
