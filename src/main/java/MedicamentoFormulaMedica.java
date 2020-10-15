@@ -55,9 +55,16 @@ public class MedicamentoFormulaMedica implements handleJSON{
 
     //Creamos los métodos de Medicamentos para Formula Médica.
 
-    public void receta(){
+    public void receta(Psiquiatra psiquiatra){
         System.out.println("Elija un medicamento de la siguiente lista:");
-        // Recordar poner la lista de medicamentos.
+        Medicamento med = new Medicamento();
+        Clinica clinica = new Clinica();
+        for (Clinica cl : db.getClinicas()){
+            if (psiquiatra.getClinicaPsiquiatra() == cl.getNit()){
+                clinica=cl;
+            }
+        }
+        med.listarMedicamento(clinica);
         System.out.println();
         System.out.println("Ingrese el id del medicamento.");
         SistemaDeGestionClinica.input.nextLine();
@@ -139,6 +146,7 @@ public class MedicamentoFormulaMedica implements handleJSON{
                             medicamentoFormMed.setNombreMedicamento(medicamentoFm.getNombreMedicamento());
                             db.updateJSON(medicamentoFormMed, "medicamentoFormulaMedica");
                             medicamentoFm.setCantidadDisponible(medicamentoFm.getCantidadDisponible() - numD * numF * numT);
+                            db.getMedicamentos().add(medicamentoFm);
                             db.appendArrayToJSON("medicamentos");
                             System.out.println();
                             System.out.println("Medicamento ingresado correctamente.");

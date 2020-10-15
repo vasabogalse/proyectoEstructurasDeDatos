@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.Scanner;
+
 public class CoordinadorDeClinica implements handleJSON {
     public String cedulaCoordinador;
     public String emailCoordinador;
@@ -5,6 +8,7 @@ public class CoordinadorDeClinica implements handleJSON {
     public int clinicaCoordinador;
 
     handleDB db = new handleDB();
+    Scanner input = new Scanner(System.in);
 
     public CoordinadorDeClinica() { }
 
@@ -35,30 +39,5 @@ public class CoordinadorDeClinica implements handleJSON {
     }
 
     // metodos de la clase
-    public void editarClinica(){
 
-
-    }
-
-
-    public void borrarClinica(){
-        //deleteObject();
-
-    }
-
-    public void registrarPsiquiatra(){
-
-    }
-
-    public void borrarPsiquiatra(){
-
-    }
-
-    public void suministrarMedicamentos(){
-
-    }
-
-    public void borrarMedicamento(){
-
-    }
 }

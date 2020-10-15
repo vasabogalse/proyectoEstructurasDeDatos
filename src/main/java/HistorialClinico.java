@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class HistorialClinico implements handleJSON {
     public int idHistClinico;
@@ -14,34 +13,73 @@ public class HistorialClinico implements handleJSON {
     //Definimos el objeto del handleDB y creamos un método vacío
     handleDB db = new handleDB();
     Paciente pacienteH = new Paciente();
-    Scanner input = new Scanner(System.in);
     HistorialClinico() { }
 
     //Establecemos los get y los set
-    public int getIdHistClinico() { return idHistClinico;}
-    public void setIdHistClinico(int idHistClinico) { this.idHistClinico = idHistClinico; }
-    public ArrayList<String> getAntecedentes() { return antecedentes; }
-    public void setAntecedentes(ArrayList<String> antecedentes) { this.antecedentes = antecedentes; }
-    public ArrayList<String> getProcedimientos() { return procedimientos; }
-    public void setProcedimientos(ArrayList<String> procedimientos) { this.procedimientos = procedimientos; }
-    public ArrayList<String> getRecomendaciones() { return recomendaciones; }
-    public void setRecomendaciones(ArrayList<String> recomendaciones) { this.recomendaciones = recomendaciones; }
-    public String getPsiquiatra() { return psiquiatra; }
-    public void setPsiquiatra(String psiquiatra) {  this.psiquiatra = psiquiatra; }
-    public String getPaciente() { return paciente; }
-    public void setPaciente(String paciente) { this.paciente = paciente; }
+    public int getIdHistClinico() {
+        return idHistClinico;
+    }
+    public void setIdHistClinico(int idHistClinico) {
+        this.idHistClinico = idHistClinico;
+    }
+
+    public ArrayList<String> getAntecedentes() {
+        return antecedentes;
+    }
+    public void setAntecedentes(ArrayList<String> antecedentes) {
+        this.antecedentes = antecedentes;
+    }
+
+    public ArrayList<String> getProcedimientos() {
+        return procedimientos;
+    }
+    public void setProcedimientos(ArrayList<String> procedimientos) {
+        this.procedimientos = procedimientos;
+    }
+
+    public ArrayList<String> getRecomendaciones() {
+        return recomendaciones;
+    }
+    public void setRecomendaciones(ArrayList<String> recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+
+    public String getPsiquiatra() {
+        return psiquiatra;
+    }
+
+    public void setPsiquiatra(String psiquiatra) {
+        this.psiquiatra = psiquiatra;
+    }
+
+    public String getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(String paciente) {
+        this.paciente = paciente;
+    }
+
     public ArrayList<FormulaMedica> getFormulaMedica() { return formulaMedica; }
     public void setFormulaMedica(ArrayList<FormulaMedica> formulaMedica) { this.formulaMedica = formulaMedica; }
 
     //Creamos los métodos de historial clinico
     public void crearHistClinico(Psiquiatra psiquiatra) {
+        SistemaDeGestionClinica.input.nextLine();
         System.out.println("Ingrese la cédula del paciente");
-        String cedulaPaci = input.nextLine();
+        String cedulaPaci = SistemaDeGestionClinica.input.nextLine();
+
+        Psiquiatra ps = new Psiquiatra();
+        for (Psiquiatra medico : db.getPsiquiatras()){
+            if (medico.getIdPsiquiatra().equals(psiquiatra.getIdPsiquiatra())){
+                ps=medico;
+            }
+        }
 
         for (Paciente pacienteSis : db.getPacientes()) {
             if (pacienteSis.getIdPaciente().equals(cedulaPaci)) {
                 for (String pacienteP : psiquiatra.getListaPacientes()) {
-                    if (pacienteP == cedulaPaci) {
+                    if (pacienteP.equals(cedulaPaci) ) {
                         pacienteH = db.buscarPaciente(pacienteP);
                         if (pacienteH.getHistorialClinico() == 0) {
                             System.out.println("El paciente se encuentra en su lista de pacientes, por favor diligencie la historia clinica.");
@@ -54,6 +92,7 @@ public class HistorialClinico implements handleJSON {
                             idHist++;
                             historialClinico.setIdHistClinico(idHist);
 
+
                             System.out.println();
                             System.out.println("Ingrese algún antecedente. Si no hay antecedente digite N/A.");
                             String antecedentes = SistemaDeGestionClinica.input.nextLine();
@@ -65,8 +104,8 @@ public class HistorialClinico implements handleJSON {
                                     String opccion = SistemaDeGestionClinica.input.next();
                                     if (opccion.equals("Y") || opccion.equals("y")) {
                                         System.out.println("Ingrese algún antecedente: ");
-                                        input.nextLine();
-                                        String antecedentes1 = input.nextLine();
+                                        SistemaDeGestionClinica.input.nextLine();
+                                        String antecedentes1 = SistemaDeGestionClinica.input.nextLine();
                                         historialClinico.antecedentes.add(antecedentes1);
                                     } else if (opccion.equals("N") || opccion.equals("n")) {
                                         break;
@@ -76,7 +115,7 @@ public class HistorialClinico implements handleJSON {
                             System.out.println();
                             SistemaDeGestionClinica.input.nextLine();
                             System.out.println("Ingrese algún procedimiento. Si no hay procedimientos digite N/A. ");
-                            String procedimientos = input.nextLine();
+                            String procedimientos = SistemaDeGestionClinica.input.nextLine();
                             historialClinico.procedimientos.add(procedimientos);
                             if (!procedimientos.equals("N/A") & !procedimientos.equals("n/a") & !procedimientos.equals("N/a") & !procedimientos.equals("n/A")) {
                                 while (true) {
@@ -94,8 +133,9 @@ public class HistorialClinico implements handleJSON {
                                 }
                             }
                             System.out.println();
+                            SistemaDeGestionClinica.input.nextLine();
                             System.out.println("Ingrese alguna recomendación. Si no hay recomendaciones digite N/A. ");
-                            String recomendaciones = input.nextLine();
+                            String recomendaciones = SistemaDeGestionClinica.input.nextLine();
                             historialClinico.recomendaciones.add(recomendaciones);
                             if (!recomendaciones.equals("N/A") & !recomendaciones.equals("n/a") & !recomendaciones.equals("N/a") & !recomendaciones.equals("n/A")) {
                                 while (true) {
@@ -119,7 +159,7 @@ public class HistorialClinico implements handleJSON {
                             int cont = 1;
                             while (true) {
                                 System.out.println("¿Desea agregar una fórmula médica a este historial clinico? Y/N");
-                                String option1 = input.next();
+                                String option1 = SistemaDeGestionClinica.input.next();
                                 if (option1.equals("Y") || option1.equals("y")) {
                                     FormulaMedica fm = new FormulaMedica();
                                     fm.crearFormulaMedica(psiquiatra);
@@ -306,30 +346,41 @@ public class HistorialClinico implements handleJSON {
             if (historialClinico.getPaciente().equals( paciente.getIdPaciente())){
                 indiceHist = db.getHistoriales().indexOf(historialClinico);
 
+                Psiquiatra psi = new Psiquiatra();
                 //Eliminar relación psiquiatra
+                int posicion = 0;
                 for (Psiquiatra psiquiatra: db.getPsiquiatras()){
-                    if (historialClinico.getPsiquiatra().equals( psiquiatra.getIdPsiquiatra())){
-                        psiquiatra.getHistoriales().remove(historialClinico);
+                    if (paciente.getPsiquiatra().equals( psiquiatra.getIdPsiquiatra())){
+                        psi = psiquiatra;
+                        for (int histPs : psi.getHistoriales()){
+                            if (histPs == historialClinico.getIdHistClinico()){
+                                posicion= psi.getHistoriales().indexOf(histPs);
+                            }
+                        }
+
                     }
                 }
+                psi.getHistoriales().remove(posicion);
 
                 //Eliminar relación fórmula médica
-              /*  int idForMed;
+                int idForMed;
                 FormulaMedica formulaMedica = new FormulaMedica();
                 int size =historialClinico.getFormulaMedica().size();
                 int indice=0;
                 while (size >0){
-                    String enteroString = null;
+                    formulaMedica.verFormulaMedica();
+                  /*  String enteroString = null;
                     idForMed =historialClinico.getFormulaMedica().get(size-1).getIdFormulaMedica();
                     enteroString= Integer.toString(idForMed);
                     System.out.println(enteroString);
                     formulaMedica.borrarFormulaMedica(enteroString);
                     indice++;
-                    size--;
-                }*/
+                    size--;*/
+                }
 
             }
         }
+
         db.deleteObjectInArray(indiceHist, "historiales");
     }
 
@@ -340,8 +391,8 @@ public class HistorialClinico implements handleJSON {
                 ", antecedentes=" + antecedentes +
                 ", procedimientos=" + procedimientos +
                 ", recomendaciones=" + recomendaciones +
-                ", psiquiatra=" + psiquiatra +
-                ", paciente=" + paciente +
+                ", psiquiatra='" + psiquiatra + '\'' +
+                ", paciente='" + paciente + '\'' +
                 ", formulaMedica=" + formulaMedica +
                 '}';
     }

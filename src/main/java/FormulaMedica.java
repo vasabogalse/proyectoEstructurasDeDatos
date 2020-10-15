@@ -44,7 +44,7 @@ public class FormulaMedica implements handleJSON{
         Date fechaActual = new Date();
         formulaMedica.setFechaFormulacion(fechaActual);
         MedicamentoFormulaMedica mfm = new MedicamentoFormulaMedica();
-        mfm.receta();
+        mfm.receta(psiquiatra);
         formulaMedica.medicamentoFM.add(db.getMedicamentoForMed().get(db.getMedicamentoForMed().size() - 1));
         int index = formulaMedica.medicamentoFM.lastIndexOf(null);
         if(index == formulaMedica.medicamentoFM.size()-1){
@@ -58,7 +58,7 @@ public class FormulaMedica implements handleJSON{
             System.out.println("¿Desea agregar otro medicamento a esta fórmula médica? Y/N");
             String option1 = SistemaDeGestionClinica.input.next();
             if (option1.equals("Y") || option1.equals("y")) {
-                mfm.receta();
+                mfm.receta(psiquiatra);
                 formulaMedica.medicamentoFM.add(db.getMedicamentoForMed().get(db.getMedicamentoForMed().size() - 1));
                 int index1 = formulaMedica.medicamentoFM.lastIndexOf(null);
                 if(index1 == formulaMedica.medicamentoFM.size()-1){
