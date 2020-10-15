@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,6 +22,7 @@ public class Psiquiatra implements handleJSON {
     public Clinica clinicaPsiquiatra;
 
     handleDB db = new handleDB();
+    Psiquiatra ps = new Psiquiatra();
     Scanner input = new Scanner(System.in);
 
     public Psiquiatra(){ }
@@ -68,6 +71,129 @@ public class Psiquiatra implements handleJSON {
                 '}';
     }
 
+    public void registrarPsiquiatra() {
+        System.out.println("Ingrese el primer nombre (y segundo nombre si tiene) del psiquiatra a registrar:");
+        input.nextLine();
+        String nombres = input.nextLine();
+
+        System.out.println("Ingrese los apellidos del psiquiatra a registrar:");
+        input.nextLine();
+        String apellidos = input.nextLine();
+
+        System.out.println("Ingrese el email del psiquiatra a registrar:");
+        input.nextLine();
+        String email = input.nextLine();
+
+        System.out.println("Ingrese la contraseña del psiquiatra a registrar:");
+        input.nextLine();
+        String contrasena = input.nextLine();
+
+        System.out.println("Por favor confirme la contraseña");
+        String contrasenaConfir = input.nextLine();
+
+        while(true){
+            if (contrasena.equals(contrasenaConfir)){
+                ps.setClavePsiquiatra(contrasena);
+                break;
+            } else {
+                System.out.println("La contraseña no coincide, vuelva a ingresar la contraseña que desea.");
+                contrasena = input.nextLine();
+                System.out.println("Por favor confirme la contraseña");
+                contrasenaConfir = input.nextLine();
+            }
+        }
+
+        String sexo = "";
+        while(true) {
+            System.out.println("Ingrese el sexo del(de la) psiquiatra: ");
+            System.out.println("1. Masculino");
+            System.out.println("2. Femenino");
+            System.out.println("3. Otro");
+            sexo = input.next();
+            if (sexo.equals("1")) {
+                sexo = "masculino";
+                break;
+            } else if (sexo.equals("2")) {
+                sexo = "femenino";
+                break;
+            } else if (sexo.equals("3")) {
+                sexo = "otro";
+                break;
+            } else {
+                System.out.println("Ingresó una respuesta inválida. Por favor elija una opción");
+            }
+        }
+
+        int edad = 0;
+        while(true) {
+            System.out.println("Ingrese la edad del psiquiatra a registrar:");
+            edad = input.nextInt();
+            if (edad < 18) {
+                System.out.println("La edad ingresada es inválida, debe ser mayor a 18");
+            } else if(edad < 0 || edad > 100){
+                System.out.println("La edad deber estar entre 0 y 100 años");
+            } else {
+                break;
+            }
+        }
+
+        int aaaa = 0;
+        while(true) {
+            System.out.println("Ingrese el año de nacimiento");
+            aaaa = input.nextInt();
+            if (aaaa > 2020 || aaaa < 1920 || aaaa < 0) {
+                System.out.println("Año de nacimiento inválido. Por favor vuelva a ingresar el año de nacimiento");
+                return;
+            } else {
+                break;
+            }
+        }
+
+        int mm = 0;
+        while(true) {
+            System.out.println("Ingrese el mes de nacimiento en número");
+            mm = input.nextInt();
+            if (mm > 12 || mm < 1) {
+                System.out.println("Mes de nacimiento inválido. Por favor vuelva a ingresar el mes de nacimiento");
+            } else {
+                break;
+            }
+        }
+
+        int dd = 0;
+        while(true){
+            System.out.println("Ingrese el día de nacimiento");
+            dd = input.nextInt();
+            if (dd > 31 || dd < 1) {
+                System.out.println("Día de nacimiento inválido. Por favor vuelva a ingresar el día de nacimiento");
+            }
+        }
+        String fecha = String.valueOf(aaaa) + "-" + String.valueOf(mm) + "-" + String.valueOf(dd);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        Date fechaNacimiento = null;
+        try {
+            //Parsing the String
+            fechaNacimiento = dateFormat.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Ingrese la dirección del psiquiatra a registrar:");
+        input.nextLine();
+        String direccion = input.nextLine().toLowerCase();
+
+        int telefono  = 0;
+        while(true){
+            System.out.println("Ingrese el teléfono del psiquiatra a registrar:");
+            telefono = input.nextInt();
+            if (telefono < 0) {
+                System.out.println("El teléfono ingresado es inválido, no puede ser negativo");
+            } else {
+                break;
+            }
+        }
+    }
+
     public void editarPsiquiatra(int idPsiquiatra) {
         Collections.sort(db.getPsiquiatras(), ClinicSort.idOrderPsiquiatra);
         Psiquiatra ps = new Psiquiatra();
@@ -93,15 +219,18 @@ public class Psiquiatra implements handleJSON {
             if(opt.equals("1")){
                 System.out.println("Ingrese el nuevo correo electrónico:");
                 correoNuevo = input.next().toLowerCase();
+                break;
             } else if(opt.equals("2")) {
                 System.out.println("Ingrese la nueva contraseña");
                 claveNueva = input.next();
             } else if(opt.equals("3")){
                 System.out.println("Ingrese la nueva dirección");
                 direccionNueva = input.next().toLowerCase();
+                break;
             } else if(opt.equals("4")) {
                 System.out.println("Ingrese el nuevo teléfono");
                 nuevoTelefono = input.nextInt();
+                break;
             } else if(opt.equals("0")){
                 return;
             }else {

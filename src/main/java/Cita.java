@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 import java.util.TimeZone;
 
 public class Cita implements handleJSON {
@@ -11,51 +12,23 @@ public class Cita implements handleJSON {
     public Calendar fechaCita = new GregorianCalendar();
 
     handleDB db = new handleDB();
-    public Cita() { }
-
+    Scanner input = new Scanner(System.in);
     public static Psiquiatra psiquiatra = new Psiquiatra();
 
-    //Establecemos los get y los set
-    public int getIdCita() {
-        return idCita;
-    }
-    public void setIdCita(int idCita) {
-        this.idCita = idCita;
-    }
+    public Cita() { }
 
-    public Calendar getFechaCita() {
-        return fechaCita;
-    }
-    public void setFechaCita(Calendar fechaCita) {
-        this.fechaCita = fechaCita;
-    }
-
-    public String getEstadoCita() {
-        return estadoCita;
-    }
-    public void setEstadoCita(String estadoCita) {
-        this.estadoCita = estadoCita;
-    }
-
-    public Boolean getPrioridad() {
-        return prioridad;
-    }
-    public void setPrioridad(Boolean prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    public int getPaciente() {
-        return paciente;
-    }
-    public void setPaciente(int paciente) {
-        this.paciente = paciente;
-    }
-    public int getPsiquitra() {
-        return psiquitra;
-    }
-    public void setPsiquitra(int psiquitra) {
-        this.psiquitra = psiquitra;
-    }
+    public int getIdCita() { return idCita; }
+    public void setIdCita(int idCita) { this.idCita = idCita; }
+    public Calendar getFechaCita() { return fechaCita;  }
+    public void setFechaCita(Calendar fechaCita) { this.fechaCita = fechaCita; }
+    public String getEstadoCita() { return estadoCita; }
+    public void setEstadoCita(String estadoCita) { this.estadoCita = estadoCita; }
+    public Boolean getPrioridad() { return prioridad; }
+    public void setPrioridad(Boolean prioridad) { this.prioridad = prioridad; }
+    public int getPaciente() { return paciente; }
+    public void setPaciente(int paciente) { this.paciente = paciente; }
+    public int getPsiquitra() { return psiquitra; }
+    public void setPsiquitra(int psiquitra) { this.psiquitra = psiquitra; }
 
     public void crearCita(Paciente paciente) {
         int idCitas = 0;
@@ -67,6 +40,7 @@ public class Cita implements handleJSON {
         cita.setIdCita(idCitas);
         cita.setPrioridad(false);
         cita.setEstadoCita("Pendiente");
+        cita.setPsiquitra(paciente.getPsiquiatra());
         //paciente
         agendar();
         if(getFechaCita().get(Calendar.HOUR_OF_DAY)==0){
@@ -78,29 +52,18 @@ public class Cita implements handleJSON {
                 psiquiatra = pq;
             }
         }
-     /*   cita.setPaciente(paciente.idPaciente);
-        cita.setPsiquitra(psiquiatra.getIdPsiquiatra());
-
-        paciente.getListaCitas().add(cita);
-        psiquiatra.getListaCitas().add(cita);
-        int indice = 0;
-        for (Paciente pc : psiquiatra.getListaPacientes()){
-            if (paciente.getIdPaciente()== pc.getIdPaciente()){
-              indice = psiquiatra.getListaPacientes().indexOf(pc);
-            }
-        }
-        psiquiatra.getListaPacientes().get(indice).getListaCitas().add(cita);
-        db.appendArrayToJSON("pacientes");
-        db.appendArrayToJSON("psiquiatras");*/
         db.updateJSON(cita, "citas");
+
+        Psiquiatra ps = new Psiquiatra();
+        ps.getCitas().add(cita);
+        db.appendArrayToJSON("psiquiatras");
     }
+
     public void verCita(){
         int count = 0;
         for (Cita cita : db.getCitas()) {
             if (db.getCitas().size()>0) {
                 cita.getFechaCita().setTimeZone(TimeZone.getTimeZone("America/Bogota"));
-                System.out.println();
-                System.out.println("Paciente: " + "cedula:" );
                 System.out.println("---------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println("Id: "+cita.idCita);
@@ -118,7 +81,6 @@ public class Cita implements handleJSON {
 
                 System.out.println("Estado: "+cita.estadoCita);
                 System.out.println("Especialista: "+ psiquiatra.getNombres() + " " + psiquiatra.getApellidos() +".");
-                //System.out.println("Clinica: "+cita.psiquiatra);
                 System.out.println();
                 System.out.println("---------------------------------------------------------------------------------");
                 count++;
@@ -129,13 +91,14 @@ public class Cita implements handleJSON {
             System.out.println("Primero ingrese alguna cita.");
         }
     }
+
     public void cancelarCita(){
         for(Cita citas: db.getCitas()){
             citas.verCita();
             break;
         }
         System.out.println("Ingrese el id de la cita que desea cancelar.");
-        String idc = SistemaDeGestionClinica.input.next();
+        String idc = input.next();
         int numC = 0;
         char[] cadenaDivIdc = idc.toCharArray();
         String c = "";
@@ -158,7 +121,7 @@ public class Cita implements handleJSON {
                 System.out.println("Paciente: " + "cedula:" );
                 System.out.println("---------------------------------------------------------------------------------");
                 System.out.println();
-                System.out.println("Id: "+cita.idCita);
+                System.out.println("Id: "+ cita.idCita);
                 if (cita.prioridad.equals(false)){
                     System.out.println("Tipo: GENERAL.");
                 }else{
@@ -175,8 +138,8 @@ public class Cita implements handleJSON {
                 System.out.println();
                 System.out.println("---------------------------------------------------------------------------------");
                 while (true) {
-                    String opccion = SistemaDeGestionClinica.input.next();
-                    if (opccion.equals("Y")||opccion.equals("y")) {
+                    String opccion = input.next();
+                    if (opccion.equals("Y")|| opccion.equals("y")) {
                         int index = db.getCitas().indexOf(cita);
                         db.deleteObjectInArray(index, "citas");
                         System.out.println("Cita cancelada con exito.");
@@ -187,10 +150,11 @@ public class Cita implements handleJSON {
                 }
             }
         }
-        if(count==0) {
+        if(count == 0) {
             System.out.println("Esta cita no se encuentra en el registro.");
         }
     }
+
     public void editarCita(){
         for(Cita citas: db.getCitas()){
             citas.verCita();
@@ -221,7 +185,7 @@ public class Cita implements handleJSON {
                 db.deleteObjectInArray(index, "citas");
                 cita.setIdCita(cita.idCita);
                 cita.setPrioridad(false);
-                cita.setEstadoCita("Pendiente.");
+                cita.setEstadoCita("Pendiente");
                 agendar();
                 cita.setFechaCita(getFechaCita());
                 db.updateJSON(cita, "citas");
@@ -240,9 +204,6 @@ public class Cita implements handleJSON {
         cita.setPrioridad(true);
         cita.setEstadoCita("Pendiente.");
         agendarPrioritaria();
-        if(getFechaCita().get(Calendar.HOUR_OF_DAY)==0){
-            return;
-        }
         cita.setFechaCita(fechaCita);
 
       /*  for (Psiquiatra pq: db.getPsiquiatras()){
@@ -265,12 +226,14 @@ public class Cita implements handleJSON {
 
         db.updateJSON(cita, "citas");
     }
+
     public void mensajeEmergencia(){
         String [] mensaje = {"No estás solo en esto. Nos preocupamos por ti y queremos ayudarte." , "Pedir ayuda no es un signo de debilidad, sino de fortaleza.", "Estamos aquí para lo que necesites. ", "La depresión es un problema de salud real y tratable." ,"¿Qué podemos hacer para apoyarte?"};
         int size = mensaje.length-1;
         int numRandom = (int)Math.round(Math.random()*size);
         System.out.println(mensaje[numRandom]);
     }
+
     public void atenderCita() {
         for (Cita citas : db.getCitas()) {
             citas.verCita();
@@ -303,7 +266,7 @@ public class Cita implements handleJSON {
                     System.out.println("Marque 0 para cancelar.");
                     System.out.println();
                     System.out.println("Por favor elija una opción.");
-                    String opcion = SistemaDeGestionClinica.input.next();
+                    String opcion = input.next();
                     switch (opcion) {
                         case "1":
                             return;
@@ -334,13 +297,13 @@ public class Cita implements handleJSON {
             }
         }
     }
-    //Paciente paciente
+
     public void agendar() {
         Calendar fechaDeseada = new GregorianCalendar();
         System.out.println("Ingrese la fecha en la que desea agendar una cita. (DD/MM/YYYY)");
         System.out.println();
         System.out.println("Día:");
-        String dia = SistemaDeGestionClinica.input.next();
+        String dia = input.next();
         int numDia = 0;
         char[] cadenaDivDia = dia.toCharArray();
         String i = "";
@@ -360,7 +323,7 @@ public class Cita implements handleJSON {
             return;
         }
         System.out.println("Mes:");
-        String mes = SistemaDeGestionClinica.input.next();
+        String mes = input.next();
         int numMes = 0;
         char[] cadenaDivMes = mes.toCharArray();
         String j = "";
@@ -380,7 +343,7 @@ public class Cita implements handleJSON {
             return;
         }
         System.out.println("Año:");
-        String ano = SistemaDeGestionClinica.input.next();
+        String ano = input.next();
         int numAno = 0;
         char[] cadenaDivAno = ano.toCharArray();
         String k = "";
@@ -889,7 +852,13 @@ public class Cita implements handleJSON {
                 }
             }
         }
-        fechaCita.set(0,Calendar.JANUARY,0,0,0,0);
+        fechaCita.set(fechaPrioritaria.get(Calendar.YEAR), fechaPrioritaria.get(Calendar.MONTH), fechaPrioritaria.get(Calendar.DATE), fechaPrioritaria.get(Calendar.HOUR_OF_DAY), 0, 0);
+        if (fechaCita.get(Calendar.HOUR_OF_DAY)<12){
+            System.out.println("Su cita de emergencia ha sido agendada para el: " + fechaCita.get(Calendar.DATE) +"/" + (fechaCita.get(Calendar.MONTH)+1) +"/"+ fechaCita.get(Calendar.YEAR) + " a las: " + fechaCita.get(Calendar.HOUR) +":"+ fechaCita.get(Calendar.MINUTE)+"0 AM con el especialista: " + psiquiatra.getNombres() + " " + psiquiatra.getApellidos() +"." );
+        }else{
+            System.out.println("Su cita de emergencia ha sido agendada para el: " + fechaCita.get(Calendar.DATE) +"/" + (fechaCita.get(Calendar.MONTH)+1) +"/"+ fechaCita.get(Calendar.YEAR) + " a las: " + fechaCita.get(Calendar.HOUR) +":"+ fechaCita.get(Calendar.MINUTE)+"0 PM con el especialista: " + psiquiatra.getNombres() + " " + psiquiatra.getApellidos() +"." );
+        }
+        System.out.println("Recuerde que debe llegar al menos 15 minutos antes a la clinica:  " + "ubicada en:");
+        return;
     }
-
 }
