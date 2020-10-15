@@ -65,13 +65,13 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 - [Maven](https://maven.apache.org/ "Maven") - Manejador de dependencias
 
 ## Autores ✒️
-- **Andrés Felipe García Revuelta** - CC: 1017252071 - Ingeniería Mecánica.
+- **Andrés Felipe García Revuelta** - CC: 1017252071 - Ingeniería Mecánica - anfgarciare@unal.edu.co
 
-- **Innis Dapney Salazar García** - CC: 1036688091 - Ingeniería de Control.
+- **Innis Dapney Salazar García** - CC: 1036688091 - Ingeniería de Control - isalazar@unal.edu.co
 
-- **Valentina Sabogal Serrano** - CC: 1152472574 - Ingeniería de Control.
+- **Valentina Sabogal Serrano** - CC: 1152472574 - Ingeniería de Control - vasabogalse@unal.edu.co
 
-- **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística.
+- **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística - xcastaneda@unal.edu.co
 
 <img src="https://lh3.googleusercontent.com/proxy/4KQpGxwaSGYx-E1ARlvhvlbPCtSox_xyJJseTW86RM3ZwMMbIfVFXQodubjlD4-y3ZYuftDkmXm93ad3bqmNJb9jxlAu8qYfY2s79H0s4XfaDfAsDVsUFpiA82KALt7eeVbf7HersWymS7rWHVYA0CuwhoqBV_O0PHBoUCRN0H7WWqmE4f4MRWaz5ocO" width="1000" height="300" />
 
