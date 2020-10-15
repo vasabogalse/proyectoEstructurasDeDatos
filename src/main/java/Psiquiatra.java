@@ -407,7 +407,7 @@ public class Psiquiatra implements handleJSON {
                 for(Psiquiatra psiquiatra : clinica.getListaDePsiquiatras()){
                     j++;
                     if(psiquiatra.idPsiquiatra.equals(idPsiquiatra)){
-                        clinica.getListaDePsiquiatras().remove(j);
+                        clinica.getListaDePsiquiatras().remove(j - 1);
                         break;
                     }
                 }
@@ -419,5 +419,34 @@ public class Psiquiatra implements handleJSON {
             System.out.println("No esta registrado en el sistema un psiquiatra con cédula: " + idPsiquiatra);
             return;
         }
+    }
+
+    public void listarPsiquiatrasEnClinica(CoordinadorDeClinica coordinador){
+        Clinica cl = new Clinica();
+        cl.setNit(coordinador.getClinicaCoordinador());
+        Collections.sort(db.getClinicas(), ClinicSort.nitOrder);
+        int indexClinica = Collections.binarySearch(db.getClinicas(), cl, ClinicSort.nitOrder);
+
+        int c = 1;
+        if(db.getClinicas().get(indexClinica).getListaDePsiquiatras().size() > 0){
+            for(Psiquiatra psiquiatra : db.getClinicas().get(indexClinica).getListaDePsiquiatras()){
+                System.out.println("     Información general del psiquiatra " + c);
+                System.out.println("__________________________________________________");
+                System.out.println();
+                System.out.println("Cédula: " + psiquiatra.getIdPsiquiatra());
+                System.out.println("Nombres: " + psiquiatra.getNombres());
+                System.out.println("Apellidos: " + psiquiatra.getApellidos());
+                System.out.println("Correo: " + psiquiatra.getEmailPsiquiatra());
+                System.out.println("Fecha de nacimiento: " + psiquiatra.getFechaNacimiento());
+                System.out.println("Edad : " + psiquiatra.getEdad());
+                System.out.println("Telefono: " + psiquiatra.getTel());
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                c++;
+            }
+        } else {
+            System.out.println("No hay psiquiatras en la clínica. Debes registrar algunos primero");
+        }
+
     }
 }
