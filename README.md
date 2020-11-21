@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <img src="https://www.flaticon.es/svg/static/icons/svg/2913/2913008.svg" width="1500" height="200" />
 
 # Sistema de Gestión de Clínica de Salud Mental
@@ -72,3 +73,6 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 - **Valentina Sabogal Serrano** - CC: 1152472574 - Ingeniería de Control - vasabogalse@unal.edu.co
 
 - **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística - xcastaneda@unal.edu.co
+=======
+# proyectoEstructurasDeDatos<img src="https://www.flaticon.es/svg/static/icons/svg/2913/2913008.svg" width="1500" height="200" />
+>>>>>>> origin/Versión-2
