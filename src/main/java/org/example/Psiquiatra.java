@@ -28,7 +28,7 @@ public class Psiquiatra {
         this.idPsiquiatra = idPsiquiatra;
         this.nombres = nombres;
         this.apellidos = apellidos.toLowerCase();
-        this.emailPsiquiatra = emailPsiquiatra;
+        this.emailPsiquiatra = emailPsiquiatra.toLowerCase();
         this.clavePsiquiatra = clavePsiquiatra;
         this.Sexo = sexo;
         this.direccion = direccion;

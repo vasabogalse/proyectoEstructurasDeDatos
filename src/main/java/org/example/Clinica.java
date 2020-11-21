@@ -1,5 +1,9 @@
 package org.example;
 
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -10,9 +14,21 @@ public class Clinica{
     public String direccion;
     public int telefono;
 
+    public static Graph<Object, DefaultEdge> BD = new SimpleGraph<>(DefaultEdge.class);
     Hashtable<Integer,Clinica> ClinicaHash = new Hashtable<>();
     TreeSet<Clinica> clinicaNom = new TreeSet<>(Ordenamiento.clinicNameOrder);
     TreeSet<Clinica> clinicaTel = new TreeSet<>(Ordenamiento.telClinicOrder);
+
+    public Clinica(int nit, String nombreClinica, String direccion, int telefono) {
+        this.nit = nit;
+        this.nombreClinica = nombreClinica.toLowerCase();
+        this.direccion = direccion.toLowerCase();
+        this.telefono = telefono;
+        SistemaDeGestionClinica.BD.addVertex(this);
+        ClinicaHash.put(nit,this);
+        clinicaNom.add(this);
+        clinicaTel.add(this);
+    }
 
 
     @Override
@@ -30,17 +46,6 @@ public class Clinica{
         }else{
             return false;
         }
-    }
-
-    public Clinica(int nit, String nombreClinica, String direccion, int telefono) {
-        this.nit = nit;
-        this.nombreClinica = nombreClinica.toLowerCase();
-        this.direccion = direccion.toLowerCase();
-        this.telefono = telefono;
-        SistemaDeGestionClinica.BD.addVertex(this);
-        ClinicaHash.put(nit,this);
-        clinicaNom.add(this);
-        clinicaTel.add(this);
     }
 
     public int getNit() {

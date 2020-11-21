@@ -2,9 +2,8 @@ package org.example.Controladores;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.example.Paciente;
 import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
@@ -14,12 +13,17 @@ import java.io.IOException;
 public class Ingreso {
     @FXML
     public  TextField identificacion;
-    public  TextField contrasena;
+    public  PasswordField contrasena;
     public  Label novedad;
-    public  Boolean existencia = true;
+    public Button cerrar;
+    public  String existencia="true";
 
     public void Ingresar(ActionEvent event) throws IOException {
         //VALIDAR QUE EL TEXTO INGRESADO TENGA @
+
+        //Limpiar los mensajes de error para mostrar unos nuevos.
+        novedad.setText("");
+
         int cedulaVa;
         Boolean cedula;
 
@@ -50,9 +54,9 @@ public class Ingreso {
             }
         }
 
-        if (existencia.equals(true)){
+        if (existencia.equals("true")){
             gestionarMenus();
-        }else{
+        }else if (existencia.equals("false")){
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Ingreso al sistema.");
             alerta.setHeaderText("Error al ingresar.");
@@ -60,7 +64,9 @@ public class Ingreso {
             alerta.showAndWait();
         }
 
-
+        //Limpiar campos para que no queden los datos si hubo un error
+        identificacion.setText("");
+        contrasena.setText("");
     }
 
     public  void verificarCedula(String identificacion, String clave) throws IOException {
@@ -77,35 +83,35 @@ public class Ingreso {
                  novedad.setText("Contraseña incorrecta.");
              }
         }else{
-            existencia = false;
+            existencia = "false";
         }
     }
 
     public  void verificarCorreo (String identificacion, String clave){
 
         for(Psiquiatra psiquiatra : Psiquiatra.psiquiatraHash.values()){
-            if(psiquiatra.emailPsiquiatra.equals(identificacion)){
+            if(psiquiatra.emailPsiquiatra.equals(identificacion.toLowerCase())){
                 if (psiquiatra.clavePsiquiatra.equals(clave)){
                     SistemaDeGestionClinica.usuario = psiquiatra;
-                    break;
                 }else{
                     novedad.setText("Contraseña incorrecta.");
                 }
+                return;
             }
         }
 
         for(Paciente paciente : Paciente.pacienteHash.values()){
-            if(paciente.email.equals(identificacion)){
+            if(paciente.email.equals(identificacion.toLowerCase())){
                 if (paciente.contrasena.equals(clave)){
                     SistemaDeGestionClinica.usuario = paciente;
-                    break;
                 }else{
                     novedad.setText("Contraseña incorrecta.");
                 }
+                return;
             }
         }
 
-        existencia = false;
+        existencia = "false";
     }
 
     public  void gestionarMenus() throws IOException {
@@ -117,8 +123,10 @@ public class Ingreso {
 
     }
 
-    public void Cancelar(){
-
+    public void Salir(ActionEvent event){
+        //Stage: Contenedor de la escena; ventana,barra de titulo, botones de max-min-cerrar
+        Stage stage = (Stage) cerrar.getScene().getWindow();
+        stage.close();
     }
 
  }

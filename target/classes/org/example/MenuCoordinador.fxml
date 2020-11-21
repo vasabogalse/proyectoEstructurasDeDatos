@@ -9,7 +9,7 @@
       <Label layoutX="272.0" layoutY="24.0" text="Titulo con nombre" />
       <Button layoutX="248.0" layoutY="175.0" mnemonicParsing="false" text="Gestionar clinica" />
       <Button layoutX="408.0" layoutY="175.0" mnemonicParsing="false" text="Gestionar psiquiatra" />
-      <Button layoutX="149.0" layoutY="238.0" mnemonicParsing="false" text="Búsquedas" />
+      <Button layoutX="149.0" layoutY="238.0" mnemonicParsing="false" onAction="#buscar" text="Búsquedas" />
       <Button layoutX="325.0" layoutY="238.0" mnemonicParsing="false" text="Eliminar Paciente" />
    </children>
 </AnchorPane>

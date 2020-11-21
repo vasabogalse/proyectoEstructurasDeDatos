@@ -3,7 +3,6 @@ package org.example;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
-import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Paciente {
@@ -28,7 +27,7 @@ public class Paciente {
         this.idPaciente = idPaciente;
         this.nombres = nombres;
         this.apellidos = apellidos.toLowerCase();
-        this.email = email;
+        this.email = email.toLowerCase();
         this.contrasena = contrasena;
         this.direccion = direccion;
         this.edad = edad;

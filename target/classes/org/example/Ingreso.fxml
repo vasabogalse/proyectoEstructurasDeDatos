@@ -8,10 +8,10 @@
       <Label layoutX="170.0" layoutY="39.0" text="Sistema de Gestión de Clínica de Salud Mental" />
       <Label layoutX="68.0" layoutY="121.0" text="Cédula o correo" />
       <Label layoutX="68.0" layoutY="221.0" text="Contraseña" />
-      <Button layoutX="339.0" layoutY="333.0" mnemonicParsing="false" onAction="#Cancelar" text="Cerrar" />
+      <Button fx:id="cerrar" layoutX="339.0" layoutY="333.0" mnemonicParsing="false" onAction="#Salir" text="Salir" />
       <Button layoutX="194.0" layoutY="333.0" mnemonicParsing="false" onAction="#Ingresar" text="Ingresar" />
       <TextField fx:id="identificacion" layoutX="246.0" layoutY="117.0" />
-      <TextField fx:id="contrasena" layoutX="246.0" layoutY="209.0" />
       <Label fx:id="novedad" layoutX="293.0" layoutY="280.0" text="Errores" />
+      <PasswordField fx:id="contrasena" layoutX="237.0" layoutY="209.0" />
    </children>
 </AnchorPane>
