@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.Ingreso">
+   <children>
+      <Label layoutX="170.0" layoutY="39.0" text="Sistema de Gestión de Clínica de Salud Mental" />
+      <Label layoutX="68.0" layoutY="121.0" text="Cédula o correo" />
+      <Label layoutX="68.0" layoutY="221.0" text="Contraseña" />
+      <Button layoutX="339.0" layoutY="333.0" mnemonicParsing="false" onAction="#Cancelar" text="Cerrar" />
+      <Button layoutX="194.0" layoutY="333.0" mnemonicParsing="false" onAction="#Ingresar" text="Ingresar" />
+      <TextField fx:id="identificacion" layoutX="246.0" layoutY="117.0" />
+      <TextField fx:id="contrasena" layoutX="246.0" layoutY="209.0" />
+      <Label fx:id="novedad" layoutX="293.0" layoutY="280.0" text="Errores" />
+   </children>
+</AnchorPane>

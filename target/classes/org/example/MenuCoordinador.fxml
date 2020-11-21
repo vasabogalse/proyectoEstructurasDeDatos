@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuCoordinador">
+   <children>
+      <Button layoutX="92.0" layoutY="175.0" mnemonicParsing="false" text="Cerrar sesion" />
+      <Label layoutX="272.0" layoutY="24.0" text="Titulo con nombre" />
+      <Button layoutX="248.0" layoutY="175.0" mnemonicParsing="false" text="Gestionar clinica" />
+      <Button layoutX="408.0" layoutY="175.0" mnemonicParsing="false" text="Gestionar psiquiatra" />
+      <Button layoutX="149.0" layoutY="238.0" mnemonicParsing="false" text="Búsquedas" />
+      <Button layoutX="325.0" layoutY="238.0" mnemonicParsing="false" text="Eliminar Paciente" />
+   </children>
+</AnchorPane>
