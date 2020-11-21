@@ -21,7 +21,7 @@ public class Paciente {
     DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static Hashtable<String,Paciente> pacienteHash = new Hashtable<>();
     TreeSet<Paciente> pacienteApel = new TreeSet<>(Ordenamiento.ApePaciente);
-    TreeSet<Paciente> pacienteTel = new TreeSet<>(Ordenamiento.edadPaciente);
+    TreeSet<Paciente> pacienteEdad = new TreeSet<>(Ordenamiento.edadPaciente);
 
     public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaIng, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
         this.idPaciente = idPaciente;
@@ -39,7 +39,7 @@ public class Paciente {
         SistemaDeGestionClinica.BD.addVertex(this);
         pacienteHash.put(idPaciente,this);
         pacienteApel.add(this);
-        pacienteTel.add(this);
+        pacienteEdad.add(this);
     }
 
 

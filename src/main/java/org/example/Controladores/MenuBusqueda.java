@@ -27,6 +27,18 @@ public class MenuBusqueda implements Initializable {
         entidad.setItems(FXCollections.observableArrayList ("Clinica","Paciente","Psiquiatra"));
         //Entidad por defecto
         entidad.setValue("Clinica");
+
+        String selecEntidad = "";
+        selecEntidad = String.valueOf(entidad.getValue());
+        if (selecEntidad.equals("Clinica")){
+            atributo.setItems(FXCollections.observableArrayList("Nit","Nombre","Teléfono"));
+        }else if (selecEntidad.equals("Paciente")){
+            atributo.setItems(FXCollections.observableArrayList("Cédula","Apellido","Edad"));
+        }else if (selecEntidad.equals("Psiquiatra")){
+            atributo.setItems(FXCollections.observableArrayList("Cédula","Apellido","Edad"));
+        }
+
+
     }
 
 

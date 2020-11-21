@@ -5,7 +5,6 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Clinica{
@@ -14,7 +13,6 @@ public class Clinica{
     public String direccion;
     public int telefono;
 
-    public static Graph<Object, DefaultEdge> BD = new SimpleGraph<>(DefaultEdge.class);
     Hashtable<Integer,Clinica> ClinicaHash = new Hashtable<>();
     TreeSet<Clinica> clinicaNom = new TreeSet<>(Ordenamiento.clinicNameOrder);
     TreeSet<Clinica> clinicaTel = new TreeSet<>(Ordenamiento.telClinicOrder);
