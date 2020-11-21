@@ -1,6 +1,6 @@
 <img src="https://www.flaticon.es/svg/static/icons/svg/2913/2913008.svg" width="1500" height="200" />
 
-# Sistema de Gestión de Clínica de Salud Mental
+# Sistema de Gestión de Clínica de Salud Mental.
 
 Este sistema ha sido diseñado como herramienta para la interacción y un acompañamiento cercano entre pacientes y personal médico (psiquiatras) de una institución de salud mental.
 
