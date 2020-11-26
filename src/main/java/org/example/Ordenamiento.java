@@ -61,13 +61,6 @@ public class Ordenamiento {
         }
     };
 
-    //Cita
-    public static final Comparator<Cita> CitaFecha = new Comparator<Cita>() {
-        @Override
-        public int compare(Cita ci1, Cita ci2) {
-            return ci1.fechaCita.compareTo(ci2.fechaCita);
-        }
-    };
 
     //Paciente
     static final Comparator<Paciente> ApePaciente = new Comparator<Paciente>() {

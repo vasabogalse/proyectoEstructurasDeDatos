@@ -40,8 +40,9 @@ public class SistemaDeGestionClinica extends Application {
 
         //Clinica.
         Clinica clinica1 = new Clinica(1, "Nuestra Señora Del Sagrado Corazón", "Cra.50 #62-63", 123456);
-        Clinica clinica2 = new Clinica(2, "Clínica psicológica de Antioquia", "Cl. 47 #80-24", 879034);
+        Clinica clinica2 = new Clinica(2, "Clínica psicológica de Antioquia", "Cl. 47 #80-24", 889034);
         Clinica clinica3 = new Clinica(3, "REMY IPS", "Cra. 50A #59-56", 1011121);
+        Clinica clinica4 = new Clinica(4, "Sagrado Corazón", "Cra.50 #62-63", 123456);
 
 
         //Paciente.
@@ -56,11 +57,6 @@ public class SistemaDeGestionClinica extends Application {
         Psiquiatra Psiquiatra3 = new Psiquiatra("1152472574","Valentina ","Sabogal Serrano","Valentina@gmail.com","369","Femenino","Cl. 69 #86-55",19,"25/07/2001",44208674);
 
 
-        //Historial Clinico.
-        HistorialClinico historialClinico1 = new HistorialClinico(1,"na","na","na");
-
-        //Cita
-
         //Relaciones.
         BD.addEdge(coordinador, clinica1);
         BD.addEdge(coordinador, clinica2);
@@ -71,7 +67,6 @@ public class SistemaDeGestionClinica extends Application {
         BD.addEdge(Psiquiatra1,paciente1);
         BD.addEdge(Psiquiatra2,paciente2);
         BD.addEdge(Psiquiatra3,paciente3);
-        BD.addEdge(paciente1,historialClinico1);
 
         //Recorrer nodos adyacentes.
         //Se utiliza el identificador para distriminar el tipo de los nodos adyacentes que quiero mostrar.
@@ -100,19 +95,16 @@ public class SistemaDeGestionClinica extends Application {
             System.out.println(arista);
         }*/
 
-       launch();
+        launch();
+
     }
 
     /**IDENTIFICADOR DE OBJETOS**/
     public static boolean identificador(Object obj, String TipoObjeto) {
         if(TipoObjeto.toLowerCase().equals("coordinador")){
             return obj instanceof  CoordinadorDeClinica;
-        }else if(TipoObjeto.toLowerCase().equals("cita")){
-            return obj instanceof Cita;
         }else if(TipoObjeto.toLowerCase().equals("clinica")){
             return obj instanceof Clinica;
-        }else if(TipoObjeto.toLowerCase().equals("historial clinico")){
-            return obj instanceof HistorialClinico;
         }else if(TipoObjeto.toLowerCase().equals("paciente")){
             return obj instanceof Paciente;
         }else if(TipoObjeto.toLowerCase().equals("psiquiatra")){

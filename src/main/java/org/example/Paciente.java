@@ -3,6 +3,8 @@ package org.example;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Paciente {
@@ -20,8 +22,8 @@ public class Paciente {
 
     DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static Hashtable<String,Paciente> pacienteHash = new Hashtable<>();
-    TreeSet<Paciente> pacienteApel = new TreeSet<>(Ordenamiento.ApePaciente);
-    TreeSet<Paciente> pacienteEdad = new TreeSet<>(Ordenamiento.edadPaciente);
+    TreeMap<String, LinkedList<Paciente>> pacienteApel = new TreeMap<>();
+    TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
 
     public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaIng, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
         this.idPaciente = idPaciente;
@@ -38,19 +40,15 @@ public class Paciente {
         this.telefonoContactoEmergencia = telefonoContactoEmergencia;
         SistemaDeGestionClinica.BD.addVertex(this);
         pacienteHash.put(idPaciente,this);
-        pacienteApel.add(this);
-        pacienteEdad.add(this);
+      //  pacienteApel.add(this);
+     //   pacienteEdad.add(this);
     }
 
-
-
-
-    @Override
     public boolean equals(Object o) {
         if (this == o){
             return true;
         }
-        if (!(o instanceof Cita )){
+        if (!(o instanceof Paciente )){
             return false;
         }
         Paciente paciente = (Paciente) o; //Objeto que comparo conmigo mismo.
@@ -62,13 +60,18 @@ public class Paciente {
         }
     }
 
-
     @Override
     public String toString() {
-        return "Paciente{" +
-                "idPaciente='" + idPaciente + '\'' +
-                ", nombres='" + nombres + '\'' +
-                '}';
+        return  "Cédula: " + idPaciente + "\n" +
+                "Nombre: " + nombres + "\n" +
+                "Apellidos: " + apellidos + "\n" +
+                "Email: " + email + "\n" +
+                "Dirección: " + direccion + "\n" +
+                "Edad: " + edad + "\n" +
+                "Fecha de nacimiento: " + fechaNacimiento + "\n" +
+                "Teléfono: " + telefono + "\n" +
+                "Nombre contacto emergencia: " + nombreContactoEmergencia + "\n" +
+                "Teléfono contacto emergencia: " + telefonoContactoEmergencia;
     }
 }
 

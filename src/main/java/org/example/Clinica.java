@@ -1,11 +1,8 @@
 package org.example;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
 import java.util.Hashtable;
-import java.util.TreeSet;
+import java.util.LinkedList;
+import java.util.TreeMap;
 
 public class Clinica{
     public int nit;
@@ -13,38 +10,30 @@ public class Clinica{
     public String direccion;
     public int telefono;
 
-    Hashtable<Integer,Clinica> ClinicaHash = new Hashtable<>();
-    TreeSet<Clinica> clinicaNom = new TreeSet<>(Ordenamiento.clinicNameOrder);
-    TreeSet<Clinica> clinicaTel = new TreeSet<>(Ordenamiento.telClinicOrder);
+    public static Hashtable<Integer,Clinica> ClinicaHash = new Hashtable<>();
+    public static TreeMap<String, LinkedList<Clinica>> clinicaNom = new TreeMap<>();
+    public static TreeMap<Integer, LinkedList<Clinica>> clinicaTel = new TreeMap<>();
 
-    public Clinica(int nit, String nombreClinica, String direccion, int telefono) {
+
+    public Clinica(int nit, String nombClinica, String direccion, int telefono) {
         this.nit = nit;
-        this.nombreClinica = nombreClinica.toLowerCase();
+        this.nombreClinica = nombClinica.toLowerCase();
         this.direccion = direccion.toLowerCase();
         this.telefono = telefono;
         SistemaDeGestionClinica.BD.addVertex(this);
         ClinicaHash.put(nit,this);
-        clinicaNom.add(this);
-        clinicaTel.add(this);
+
+        if (!clinicaNom.containsKey(nombreClinica)) {
+            clinicaNom.put(this.nombreClinica, new LinkedList<>());
+        }
+        if (!clinicaTel.containsKey(telefono)){
+            clinicaTel.put(this.telefono,new LinkedList<>());
+        }
+        clinicaNom.get(nombreClinica).add(this);
+        clinicaTel.get(telefono).add(this);
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (!(o instanceof Cita )){
-            return false;
-        }
-        Clinica clinica = (Clinica) o; //Objeto que comparo conmigo mismo.
-        //Criterio de igualdad, el que quiera.
-        if (clinica.nit == this.nit){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     public int getNit() {
         return nit;
@@ -55,11 +44,10 @@ public class Clinica{
 
     @Override
     public String toString() {
-        return "{" + "\n" +
-                " nit : " + nit + "," + "\n" +
-                " nombreClinica : " + nombreClinica + "," + "\n" +
-                " direccion : " + direccion + "," + "\n" +
-                " telefono : " + telefono + "\n" +
-                '}';
+        return  "Nit: " + nit+"\n" +
+                "Nombre: " + nombreClinica + "\n" +
+                "Dirección: " + direccion + "\n" +
+                "Teléfono: " + telefono + "\n"
+              ;
     }
 }

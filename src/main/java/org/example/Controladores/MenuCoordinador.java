@@ -12,4 +12,14 @@ public class MenuCoordinador {
         SistemaDeGestionClinica.setRoot("MenuBusqueda");
     }
 
+    public void gestionarPaciente(ActionEvent event) throws IOException {
+        SistemaDeGestionClinica.setRoot("GestionarPaciente");
+    }
+
+
+
+    public void cerrarSesion(ActionEvent event) throws IOException {
+        SistemaDeGestionClinica.setRoot("Ingreso");
+    }
+
 }

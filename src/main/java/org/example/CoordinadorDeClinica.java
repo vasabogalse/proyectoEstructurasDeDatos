@@ -10,19 +10,14 @@ public class CoordinadorDeClinica{
         this.cedulaCoordinador = cedulaCoordinador;
         this.emailCoordinador = emailCoordinador.toLowerCase();
         this.contrasenaCoordinador = contrasenaCoordinador.toLowerCase();
-
     }
 
 
     @Override
     public String toString() {
-        return "{" + "\n" +
-                " cedulaCoordinador : " + cedulaCoordinador + "," + "\n" +
-                " emailCoordinador : " + emailCoordinador + "," + "\n" +
-                " contrasenaCoordinador : " + contrasenaCoordinador + "," + "\n" +
-                "}";
+        return  "Cédula: " + cedulaCoordinador +  "\n" +
+                "Email: " + emailCoordinador + "\n" ;
     }
 
-    // metodos de la clase
 
 }

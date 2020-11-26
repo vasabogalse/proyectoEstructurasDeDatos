@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuBusqueda">
    <children>
-      <Label layoutX="249.0" layoutY="26.0" text="Menú de búsqueda" />
+      <Label layoutX="249.0" layoutY="26.0" text="Menú de búsqueda." />
       <Label layoutX="29.0" layoutY="70.0" text="Entidad" />
       <Label layoutX="28.0" layoutY="125.0" text="Atributo" />
-      <Label layoutX="36.0" layoutY="183.0" text="Valor" />
-      <ChoiceBox fx:id="entidad" layoutX="99.0" layoutY="66.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="atributo" layoutX="99.0" layoutY="113.0" prefWidth="150.0" />
-      <TextField fx:id="valor" layoutX="100.0" layoutY="171.0" />
+      <Label layoutX="33.0" layoutY="175.0" text="Valor" />
+      <TextField fx:id="valor" layoutX="100.0" layoutY="171.0" prefHeight="25.0" prefWidth="150.0" />
       <Button layoutX="47.0" layoutY="319.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
       <Button layoutX="149.0" layoutY="319.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
       <Label layoutX="401.0" layoutY="53.0" text="Resultados" />
-      <ListView fx:id="resultados" layoutX="300.0" layoutY="100.0" prefHeight="280.0" prefWidth="285.0" />
+      <Label fx:id="novedad" layoutX="31.0" layoutY="231.0" prefHeight="60.0" prefWidth="236.0" wrapText="true" />
+      <ComboBox fx:id="entidad" layoutX="100.0" layoutY="66.0" onAction="#Escoger" prefWidth="150.0" />
+      <ComboBox fx:id="atributo" layoutX="99.0" layoutY="121.0" prefWidth="150.0" />
+      <TextArea fx:id="resultados" layoutX="274.0" layoutY="79.0" prefHeight="267.0" prefWidth="313.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextArea>
    </children>
 </AnchorPane>

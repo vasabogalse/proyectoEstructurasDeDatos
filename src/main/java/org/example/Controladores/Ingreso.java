@@ -55,7 +55,7 @@ public class Ingreso {
         }
 
         if (existencia.equals("true")){
-            gestionarMenus();
+            //gestionarMenus();
         }else if (existencia.equals("false")){
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Ingreso al sistema.");
@@ -114,14 +114,14 @@ public class Ingreso {
         existencia = "false";
     }
 
-    public  void gestionarMenus() throws IOException {
+   /* public  void gestionarMenus() throws IOException {
        if (SistemaDeGestionClinica.identificador(SistemaDeGestionClinica.usuario,"paciente")){
            SistemaDeGestionClinica.setRoot("MenuPaciente");
        }else if (SistemaDeGestionClinica.identificador(SistemaDeGestionClinica.usuario,"psiquiatra")){
            SistemaDeGestionClinica.setRoot("MenuPsiquiatra");
        }
 
-    }
+    }*/
 
     public void Salir(ActionEvent event){
         //Stage: Contenedor de la escena; ventana,barra de titulo, botones de max-min-cerrar
