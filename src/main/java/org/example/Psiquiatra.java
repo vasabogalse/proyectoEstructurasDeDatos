@@ -25,7 +25,7 @@ public class Psiquiatra {
 
     public Psiquiatra(String idPsiquiatra, String nombres, String apellidos, String emailPsiquiatra, String clavePsiquiatra, String sexo, String direccion, int edad, String fechaIng, int tel) {
         this.idPsiquiatra = idPsiquiatra;
-        this.nombres = nombres;
+        this.nombres = nombres.toLowerCase();
         this.apellidos = apellidos.toLowerCase();
         this.emailPsiquiatra = emailPsiquiatra.toLowerCase();
         this.clavePsiquiatra = clavePsiquiatra;
