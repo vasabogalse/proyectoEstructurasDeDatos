@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.TreeMap;
-import java.util.TreeSet;
+
 
 public class Paciente {
     public String idPaciente;

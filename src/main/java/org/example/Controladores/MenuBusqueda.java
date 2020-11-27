@@ -10,7 +10,10 @@ import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MenuBusqueda implements Initializable {
     @FXML
@@ -45,6 +48,7 @@ public class MenuBusqueda implements Initializable {
 
     public void buscar(ActionEvent event) {
         resultados.setEditable(false);
+        // resultados.clear();
 
         if (entidad.getValue() == null || atributo.getValue() == null || valor.getText().equals("")){
             novedad.setText("Campos vacíos, por favor diligencie la información.");
@@ -63,27 +67,33 @@ public class MenuBusqueda implements Initializable {
                 break;
         }
 
-        /*if (valorBusq.equals("")) {
+        if (valorBusq.equals("")) {
             novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
-        }*/
+        }
 
     }
+
+
 
     public void buscarClinica(){
         switch (atributo.getValue()) {
             case "Nit":
                 try {
-                    resultados.setText(Clinica.ClinicaHash.get(Integer.parseInt(valor.getText().trim())).toString());
-                    valorBusq = valor.getText();
+                    Integer.parseInt(valor.getText().trim());
                 } catch (Exception excep) {
                     novedad.setText("El NIT es un número, por favor verifique el valor ingresado.");
+                }
+                if (Clinica.ClinicaHash.containsKey(Integer.parseInt(valor.getText().trim()))){
+                    resultados.setText(Clinica.ClinicaHash.get(Integer.parseInt(valor.getText().trim())).toString());
+                }else{
+                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
                 }
                 break;
             case "Nombre":
                 for (String clave : Clinica.clinicaNom.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
-                        resultados.appendText(Clinica.clinicaNom.get(valorBusq).toString() + "\n");
+                        resultados.appendText(imprimirList(Clinica.clinicaNom.get(valorBusq).toString()));
                     }
                 }
                 break;
@@ -93,7 +103,7 @@ public class MenuBusqueda implements Initializable {
                     for (Integer clave : Clinica.clinicaTel.keySet()) {
                         if (String.valueOf(clave).contains(valor.getText().trim())) {
                             valorBusq = String.valueOf(clave);
-                            resultados.appendText(Clinica.clinicaTel.get(Integer.parseInt(valorBusq)).toString() + "\n");
+                            resultados.appendText(imprimirList(Clinica.clinicaTel.get(Integer.parseInt(valorBusq)).toString()));
                         }
                     }
                 } catch (Exception excep) {
@@ -108,17 +118,21 @@ public class MenuBusqueda implements Initializable {
             case "Cédula":
                 try {
                     Integer.parseInt(valor.getText().trim());
-                    resultados.setText(Psiquiatra.psiquiatraHash.get(valor.getText().trim()).toString());
-                    valorBusq = valor.getText();
                 } catch (Exception excep) {
                     novedad.setText("La cédula es un número, por favor verifique el valor ingresado.");
+                }
+                if (Psiquiatra.psiquiatraHash.containsKey(valor.getText().trim())){
+                    resultados.setText(Psiquiatra.psiquiatraHash.get(valor.getText().trim()).toString());
+
+                }else{
+                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
                 }
                 break;
             case "Apellido":
                 for (String clave : Psiquiatra.psiApell.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
-                        resultados.appendText(Psiquiatra.psiApell.get(valorBusq).toString() + "\n");
+                        resultados.appendText(imprimirList(Psiquiatra.psiApell.get(valorBusq).toString()));
                     }
                 }
                 break;
@@ -128,7 +142,7 @@ public class MenuBusqueda implements Initializable {
                     for (Integer clave : Psiquiatra.psiEdad.keySet()) {
                         if (String.valueOf(clave).contains(valor.getText().trim())) {
                             valorBusq = String.valueOf(clave);
-                            resultados.appendText(Psiquiatra.psiEdad.get(Integer.parseInt(valorBusq)).toString() + "\n");
+                            resultados.appendText(imprimirList(Psiquiatra.psiEdad.get(Integer.parseInt(valorBusq)).toString()));
                         }
                     }
                 } catch (Exception excep) {
@@ -143,17 +157,20 @@ public class MenuBusqueda implements Initializable {
             case "Cédula":
                 try {
                     Integer.parseInt(valor.getText().trim());
-                    resultados.setText(Paciente.pacienteHash.get(valor.getText().trim()).toString());
-                    valorBusq = valor.getText();
                 } catch (Exception excep) {
                     novedad.setText("La cédula es un número, por favor verifique el valor ingresado.");
+                }
+                if (Paciente.pacienteHash.containsKey(valor.getText().trim())){
+                    resultados.setText(Paciente.pacienteHash.get(valor.getText().trim()).toString());
+                }else{
+                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
                 }
                 break;
             case "Apellido":
                 for (String clave : Paciente.pacienteApel.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
-                        resultados.appendText(Paciente.pacienteApel.get(valorBusq).toString() + "\n");
+                        resultados.appendText(imprimirList(Paciente.pacienteApel.get(valorBusq).toString()));
                     }
                 }
                 break;
@@ -163,7 +180,7 @@ public class MenuBusqueda implements Initializable {
                     for (Integer clave : Paciente.pacienteEdad.keySet()) {
                         if (String.valueOf(clave).contains(valor.getText().trim())) {
                             valorBusq = String.valueOf(clave);
-                            resultados.appendText(Paciente.pacienteEdad.get(Integer.parseInt(valorBusq)).toString() + "\n");
+                            resultados.appendText(imprimirList(Paciente.pacienteEdad.get(Integer.parseInt(valorBusq)).toString()));
                         }
                     }
                 } catch (Exception excep) {
@@ -171,6 +188,10 @@ public class MenuBusqueda implements Initializable {
                 }
                 break;
         }
+    }
+
+    public String imprimirList(String list){
+         return list.replace(",", "\n").replace("[", "").replace("]", "\n");
     }
 
     public void volver(ActionEvent event) throws IOException {
