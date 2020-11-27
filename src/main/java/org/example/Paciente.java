@@ -27,7 +27,7 @@ public class Paciente {
 
     public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaIng, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
         this.idPaciente = idPaciente;
-        this.nombres = nombres;
+        this.nombres = nombres.toLowerCase();
         this.apellidos = apellidos.toLowerCase();
         this.email = email.toLowerCase();
         this.contrasena = contrasena;
