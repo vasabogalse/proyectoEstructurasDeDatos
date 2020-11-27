@@ -22,12 +22,12 @@ public class Paciente {
 
     DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static Hashtable<String,Paciente> pacienteHash = new Hashtable<>();
-    TreeMap<String, LinkedList<Paciente>> pacienteApel = new TreeMap<>();
-    TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
+    public static TreeMap<String, LinkedList<Paciente>> pacienteApel = new TreeMap<>();
+    public static TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
 
     public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaIng, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
         this.idPaciente = idPaciente;
-        this.nombres = nombres;
+        this.nombres = nombres.toLowerCase();
         this.apellidos = apellidos.toLowerCase();
         this.email = email.toLowerCase();
         this.contrasena = contrasena;
@@ -40,8 +40,15 @@ public class Paciente {
         this.telefonoContactoEmergencia = telefonoContactoEmergencia;
         SistemaDeGestionClinica.BD.addVertex(this);
         pacienteHash.put(idPaciente,this);
-      //  pacienteApel.add(this);
-     //   pacienteEdad.add(this);
+
+        if (!pacienteApel.containsKey(this.apellidos)) {
+            pacienteApel.put(this.apellidos, new LinkedList<>());
+        }
+        if (!pacienteEdad.containsKey(edad)){
+            pacienteEdad.put(this.edad,new LinkedList<>());
+        }
+        pacienteApel.get(this.apellidos).add(this);
+        pacienteEdad.get(edad).add(this);
     }
 
     public boolean equals(Object o) {
@@ -53,7 +60,7 @@ public class Paciente {
         }
         Paciente paciente = (Paciente) o; //Objeto que comparo conmigo mismo.
         //Criterio de igualdad, el que quiera.
-        if (paciente.idPaciente == this.idPaciente){
+        if (paciente.idPaciente.equals(this.idPaciente)){
             return true;
         }else{
             return false;
@@ -71,7 +78,7 @@ public class Paciente {
                 "Fecha de nacimiento: " + fechaNacimiento + "\n" +
                 "Teléfono: " + telefono + "\n" +
                 "Nombre contacto emergencia: " + nombreContactoEmergencia + "\n" +
-                "Teléfono contacto emergencia: " + telefonoContactoEmergencia;
+                "Teléfono contacto emergencia: " + telefonoContactoEmergencia + "\n";
     }
 }
 

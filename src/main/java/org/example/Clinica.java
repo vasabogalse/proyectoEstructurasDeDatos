@@ -38,9 +38,6 @@ public class Clinica{
     public int getNit() {
         return nit;
     }
-    public void setNit(int nit) {
-        this.nit = nit;
-    }
 
     @Override
     public String toString() {
