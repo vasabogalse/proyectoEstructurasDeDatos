@@ -22,8 +22,8 @@ public class Paciente {
 
     DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static Hashtable<String,Paciente> pacienteHash = new Hashtable<>();
-    TreeMap<String, LinkedList<Paciente>> pacienteApel = new TreeMap<>();
-    TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
+     public static TreeMap<String, LinkedList<Paciente>> pacienteNom = new TreeMap<>();
+    public static TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
 
     public Paciente(String idPaciente, String nombres, String apellidos, String email, String contrasena, String direccion, int edad, String fechaIng, String telefono, String nombreContactoEmergencia, String telefonoContactoEmergencia) {
         this.idPaciente = idPaciente;
@@ -38,11 +38,20 @@ public class Paciente {
         this.telefono = telefono;
         this.nombreContactoEmergencia = nombreContactoEmergencia;
         this.telefonoContactoEmergencia = telefonoContactoEmergencia;
+        String nomCompleto = nombres + " " + apellidos;
         SistemaDeGestionClinica.BD.addVertex(this);
         pacienteHash.put(idPaciente,this);
-      //  pacienteApel.add(this);
-     //   pacienteEdad.add(this);
+
+        if (!pacienteNom.containsKey(nomCompleto)) {
+            pacienteNom.put(nomCompleto, new LinkedList<>());
+        }
+        if (!pacienteEdad.containsKey(edad)){
+            pacienteEdad.put(this.edad,new LinkedList<>());
+        }
+        pacienteNom.get(nomCompleto).add(this);
+        pacienteEdad.get(edad).add(this);
     }
+
 
     public boolean equals(Object o) {
         if (this == o){
