@@ -20,9 +20,8 @@ public class Psiquiatra {
 
     DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static Hashtable<String,Psiquiatra> psiquiatraHash = new Hashtable<>();
-    TreeSet<Psiquiatra> psiApellido = new TreeSet<>(Ordenamiento.apelPsiquiatra);
-    TreeSet<Psiquiatra> psiEdad = new TreeSet<>(Ordenamiento.edadPsiquiatra);
-
+    public static TreeMap<String,LinkedList<Psiquiatra>> psiNombre = new TreeMap<>();
+    public static TreeMap<Integer,LinkedList<Psiquiatra>> psiEdad = new TreeMap<>();
 
     public Psiquiatra(String idPsiquiatra, String nombres, String apellidos, String emailPsiquiatra, String clavePsiquiatra, String sexo, String direccion, int edad, String fechaIng, int tel) {
         this.idPsiquiatra = idPsiquiatra;
@@ -38,11 +37,19 @@ public class Psiquiatra {
         this.tel = tel;
         SistemaDeGestionClinica.BD.addVertex(this);
         psiquiatraHash.put(idPsiquiatra,this);
-        psiApellido.add(this);
-        psiEdad.add(this);
-    }
+        String nomCompleto = nombres + " " + apellidos;
 
+        if (!psiNombre.containsKey(nomCompleto)) {
+            psiNombre.put(nomCompleto, new LinkedList<>());
+        }
+        if (!psiEdad.containsKey(edad)){
+            psiEdad.put(this.edad,new LinkedList<>());
+        }
+        psiNombre.get(nomCompleto).add(this);
+        psiEdad.get(edad).add(this);
+    }    
 
+    
     @Override
     public String toString() {
         return  "Cédula: " + idPsiquiatra + "\n" +
