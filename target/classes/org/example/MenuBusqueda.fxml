@@ -7,19 +7,19 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuBusqueda">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="6.0" prefHeight="17.0" prefWidth="178.0" text="MENÚ DE BÚSQUEDA." wrapText="true" AnchorPane.bottomAnchor="377.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="6.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="100.0" text="Entidad:" textAlignment="CENTER" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="152.0" prefHeight="39.0" prefWidth="66.0" text="Criterio de búsqueda:" textAlignment="CENTER" wrapText="true" />
-      <Label fx:id="EtiquetaValor" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="52.0" prefWidth="78.0" textAlignment="CENTER" wrapText="true" />
-      <TextField fx:id="valor" layoutX="100.0" layoutY="219.0" prefHeight="25.0" prefWidth="150.0" />
-      <Button layoutX="32.0" layoutY="358.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
-      <Button layoutX="175.0" layoutY="358.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="89.0" text="Entidad:" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="127.0" prefHeight="39.0" prefWidth="66.0" text="Criterio de búsqueda:" textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="EtiquetaValor" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="174.0" prefHeight="52.0" prefWidth="78.0" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="valor" layoutX="91.0" layoutY="188.0" prefHeight="25.0" prefWidth="150.0" />
+      <Button layoutX="21.0" layoutY="359.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+      <Button layoutX="165.0" layoutY="359.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="61.0" prefHeight="27.0" prefWidth="141.0" text="RESULTADOS." textAlignment="CENTER" AnchorPane.leftAnchor="363.0" AnchorPane.rightAnchor="96.0">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></Label>
-      <Label fx:id="novedad" layoutX="35.0" layoutY="269.0" prefHeight="60.0" prefWidth="196.0" wrapText="true" />
-      <ComboBox fx:id="entidad" layoutX="100.0" layoutY="96.0" onAction="#EscogerEntidad" prefWidth="150.0" />
-      <ComboBox fx:id="atributo" layoutX="100.0" layoutY="159.0" onAction="#EscogerCriterio" prefWidth="150.0" />
+      <Label fx:id="novedad" layoutX="32.0" layoutY="256.0" prefHeight="60.0" prefWidth="196.0" wrapText="true" />
+      <ComboBox fx:id="entidad" layoutX="91.0" layoutY="85.0" onAction="#itemsAtributo" prefWidth="150.0" />
+      <ComboBox fx:id="atributo" layoutX="91.0" layoutY="134.0" onAction="#mensajeValor" prefWidth="150.0" />
       <TextArea fx:id="resultados" editable="false" layoutX="266.0" layoutY="88.0" prefHeight="312.0" prefWidth="334.0" wrapText="true" />
    </children>
 </AnchorPane>
