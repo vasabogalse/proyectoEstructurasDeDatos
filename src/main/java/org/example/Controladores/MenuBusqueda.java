@@ -8,12 +8,11 @@ import org.example.Clinica;
 import org.example.Paciente;
 import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
+import org.jgrapht.Graphs;
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class MenuBusqueda implements Initializable {
     @FXML
@@ -23,31 +22,49 @@ public class MenuBusqueda implements Initializable {
     public TextField valor;
     public TextArea resultados;
     public Label novedad;
+    public Label EtiquetaValor;
     String selecEntidad;
-    String valorBusq = "";
+    String valorBusq;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         entidad.setItems(FXCollections.observableArrayList ("Clinica","Paciente","Psiquiatra"));
-        //Entidad por defecto
-        //entidad.setValue("Clinica");
     }
 
-    public void Escoger(ActionEvent event){
+    public void EscogerEntidad(ActionEvent event){
         selecEntidad = String.valueOf(entidad.getValue());
         switch (selecEntidad) {
             case "Clinica":
-                atributo.setItems(FXCollections.observableArrayList("Nit", "Nombre", "Teléfono"));
+                atributo.setItems(FXCollections.observableArrayList("Nit", "Nombre", "Teléfono","Psiquiatra","Paciente"));
                 break;
             case "Paciente":
+                atributo.setItems(FXCollections.observableArrayList("Cédula", "Apellido", "Edad","Clinica","Psquiatra"));
             case "Psiquiatra":
-                atributo.setItems(FXCollections.observableArrayList("Cédula", "Apellido", "Edad"));
+                atributo.setItems(FXCollections.observableArrayList("Cédula", "Apellido", "Edad","Clinica","Paciente"));
+                break;
+        }
+    }
+
+    public void EscogerCriterio(ActionEvent event){
+        switch (String.valueOf(atributo.getValue())) {
+            case "Psiquiatra":
+                EtiquetaValor.setText("Cédula psiquiatra: ");
+                break;
+            case "Paciente":
+                EtiquetaValor.setText("Cédula paciente: ");
+                break;
+            case "Clinica":
+                EtiquetaValor.setText("Nit clinica: ");
+                break;
+            default:
+                EtiquetaValor.setText("Valor de búsqueda: ");
                 break;
         }
     }
 
     public void buscar(ActionEvent event) {
         resultados.setEditable(false);
+        valorBusq = "Dato no encontrado";
         // resultados.clear();
 
         if (entidad.getValue() == null || atributo.getValue() == null || valor.getText().equals("")){
@@ -67,26 +84,29 @@ public class MenuBusqueda implements Initializable {
                 break;
         }
 
-        if (valorBusq.equals("")) {
+        if (valorBusq.equals("Dato no encontrado")) {
             novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
         }
 
     }
 
-
-
     public void buscarClinica(){
         switch (atributo.getValue()) {
             case "Nit":
                 try {
-                    Integer.parseInt(valor.getText().trim());
+                    if (Integer.parseInt(valor.getText().trim()) < 0){
+                        novedad.setText("El NIT es un número positivo. ");
+                        valorBusq = "Dato inválido.";
+                        return;
+                    }
                 } catch (Exception excep) {
                     novedad.setText("El NIT es un número, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
                 }
                 if (Clinica.ClinicaHash.containsKey(Integer.parseInt(valor.getText().trim()))){
-                    resultados.setText(Clinica.ClinicaHash.get(Integer.parseInt(valor.getText().trim())).toString());
-                }else{
-                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
+                    valorBusq = valor.getText().trim();
+                    resultados.setText(Clinica.ClinicaHash.get(Integer.parseInt(valorBusq)).toString());
                 }
                 break;
             case "Nombre":
@@ -99,17 +119,63 @@ public class MenuBusqueda implements Initializable {
                 break;
             case "Teléfono":
                 try {
-                    Integer.parseInt(valor.getText());
-                    for (Integer clave : Clinica.clinicaTel.keySet()) {
-                        if (String.valueOf(clave).contains(valor.getText().trim())) {
-                            valorBusq = String.valueOf(clave);
-                            resultados.appendText(imprimirList(Clinica.clinicaTel.get(Integer.parseInt(valorBusq)).toString()));
-                        }
+                    if (Integer.parseInt(valor.getText()) < 0){
+                        novedad.setText("El número de teléfono no puede ser negativo.");
+                        valorBusq = "Dato inválido.";
+                        return;
                     }
                 } catch (Exception excep) {
                     novedad.setText("Número telefónico inválido, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido";
+                    return;
+                }
+                for (Integer clave : Clinica.clinicaTel.keySet()) {
+                    if (String.valueOf(clave).contains(valor.getText().trim())) {
+                        valorBusq = String.valueOf(clave);
+                        resultados.appendText(imprimirList(Clinica.clinicaTel.get(Integer.parseInt(valorBusq)).toString()));
+                    }
                 }
                 break;
+            case "Paciente":
+            case "Psiquiatra":
+                try {
+                    if (Integer.parseInt(valor.getText().trim()) < 0){
+                        novedad.setText("Cédula inválida.");
+                        valorBusq = "Dato inválido";
+                        return;
+                    }
+                } catch (Exception excep) {
+                    novedad.setText("La cédula es un número, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido";
+                    return;
+                }
+                Psiquiatra buscado = null;
+                if (Psiquiatra.psiquiatraHash.containsKey(valor.getText()) && atributo.getValue().equals("Psiquiatra")){
+                    valorBusq = valor.getText();
+                    buscado = Psiquiatra.psiquiatraHash.get(valorBusq);
+                }else if (Paciente.pacienteHash.containsKey(valor.getText()) && atributo.getValue().equals("Paciente")){
+                    valorBusq = valor.getText();
+                    for (Object nodo : Graphs.neighborListOf(SistemaDeGestionClinica.BD, Paciente.pacienteHash.get(valorBusq))){
+                        if(SistemaDeGestionClinica.identificador(nodo,"psiquiatra")){
+                            buscado = (Psiquiatra) nodo;
+                        }
+                    }
+                    if (buscado == null){
+                        novedad.setText("El paciente no es atendido por un psiquiatra,por ende, no tiene asociado una clinica.");
+                        return;
+                    }
+
+                }else{
+                    return;
+                }
+                for (Object nodo : Graphs.neighborListOf(SistemaDeGestionClinica.BD, buscado)){
+                    if(SistemaDeGestionClinica.identificador(nodo,"clinica")){
+                        Clinica clinica = (Clinica) nodo;
+                        resultados.appendText(clinica.toString());
+                        return;
+                    }
+                }
+                novedad.setText("No se encuentra registrado en ninguna clinica.");
         }
     }
 
@@ -117,15 +183,19 @@ public class MenuBusqueda implements Initializable {
         switch (atributo.getValue()) {
             case "Cédula":
                 try {
-                    Integer.parseInt(valor.getText().trim());
+                    if (Integer.parseInt(valor.getText().trim()) < 0){
+                        novedad.setText("Cédula inválida.");
+                        valorBusq = "Dato inválido";
+                        return;
+                    }
                 } catch (Exception excep) {
                     novedad.setText("La cédula es un número, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido";
+                    return;
                 }
                 if (Psiquiatra.psiquiatraHash.containsKey(valor.getText().trim())){
-                    resultados.setText(Psiquiatra.psiquiatraHash.get(valor.getText().trim()).toString());
-
-                }else{
-                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
+                    valorBusq = valor.getText().trim();
+                    resultados.setText(Psiquiatra.psiquiatraHash.get(valorBusq).toString());
                 }
                 break;
             case "Apellido":
@@ -138,15 +208,21 @@ public class MenuBusqueda implements Initializable {
                 break;
             case "Edad":
                 try {
-                    Integer.parseInt(valor.getText());
-                    for (Integer clave : Psiquiatra.psiEdad.keySet()) {
-                        if (String.valueOf(clave).contains(valor.getText().trim())) {
-                            valorBusq = String.valueOf(clave);
-                            resultados.appendText(imprimirList(Psiquiatra.psiEdad.get(Integer.parseInt(valorBusq)).toString()));
-                        }
+                    if (Integer.parseInt(valor.getText()) < 0){
+                     novedad.setText("La edad no puede ser negativa.");
+                     valorBusq = "Dato inválido.";
+                     return;
                     }
                 } catch (Exception excep) {
                     novedad.setText("Edad inválida, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
+                }
+                for (Integer clave : Psiquiatra.psiEdad.keySet()) {
+                    if (String.valueOf(clave).contains(valor.getText().trim())) {
+                        valorBusq = String.valueOf(clave);
+                        resultados.appendText(imprimirList(Psiquiatra.psiEdad.get(Integer.parseInt(valorBusq)).toString()));
+                    }
                 }
                 break;
         }
@@ -156,14 +232,18 @@ public class MenuBusqueda implements Initializable {
         switch (atributo.getValue()) {
             case "Cédula":
                 try {
-                    Integer.parseInt(valor.getText().trim());
+                    if (Integer.parseInt(valor.getText().trim()) < 0){
+                        novedad.setText("Cédula inválida.");
+                        valorBusq = "Dato inválido";
+                        return;
+                    }
                 } catch (Exception excep) {
                     novedad.setText("La cédula es un número, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido";
+                    return;
                 }
                 if (Paciente.pacienteHash.containsKey(valor.getText().trim())){
                     resultados.setText(Paciente.pacienteHash.get(valor.getText().trim()).toString());
-                }else{
-                    novedad.setText("No se encuentra coincidencias con el valor de búsqueda.");
                 }
                 break;
             case "Apellido":
@@ -176,15 +256,21 @@ public class MenuBusqueda implements Initializable {
                 break;
             case "Edad":
                 try {
-                    Integer.parseInt(valor.getText());
-                    for (Integer clave : Paciente.pacienteEdad.keySet()) {
-                        if (String.valueOf(clave).contains(valor.getText().trim())) {
-                            valorBusq = String.valueOf(clave);
-                            resultados.appendText(imprimirList(Paciente.pacienteEdad.get(Integer.parseInt(valorBusq)).toString()));
-                        }
+                    if (Integer.parseInt(valor.getText()) < 0){
+                        novedad.setText("La edad no puede ser negativa.");
+                        valorBusq = "Dato inválido.";
+                        return;
                     }
                 } catch (Exception excep) {
                     novedad.setText("Edad inválida, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
+                }
+               for (Integer clave : Paciente.pacienteEdad.keySet()) {
+                    if (String.valueOf(clave).contains(valor.getText().trim())) {
+                        valorBusq = String.valueOf(clave);
+                        resultados.appendText(imprimirList(Paciente.pacienteEdad.get(Integer.parseInt(valorBusq)).toString()));
+                    }
                 }
                 break;
         }

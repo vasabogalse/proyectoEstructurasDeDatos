@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class SistemaDeGestionClinica extends Application {
         Psiquiatra Psiquiatra1 = new Psiquiatra("1017252071","Andrés Felipe","García Revuelta","Andres@gmail.com","147","Masculino","Cl. 80 #54-20",23,"07/01/1993",8790344);
         Psiquiatra Psiquiatra2 = new Psiquiatra("1036688091","Innis Dapney","Salazar García","Innis@gmail.com","258","Femenino","Cra. 46 #35-14",22,"12/10/1998",4410349);
         Psiquiatra Psiquiatra3 = new Psiquiatra("1152472574","Valentina ","Sabogal Serrano","Valentina@gmail.com","369","Femenino","Cl. 69 #86-55",23,"25/07/1993",44208674);
-        Psiquiatra Psiquiatra4 = new Psiquiatra("946545641","Felipe","García Revuelta","Felipe@gmail.com","777","Masculino","Cl. 80 #54-20",23,"10/01/1993",8797536);
+        Psiquiatra Psiquiatra4 = new Psiquiatra("946145641","Felipe","García Revuelta","Felipe@gmail.com","777","Masculino","Cl. 80 #54-20",23,"10/01/1993",8797536);
 
         //Relaciones.
         BD.addEdge(coordinador, clinica1);
@@ -71,14 +72,14 @@ public class SistemaDeGestionClinica extends Application {
         BD.addEdge(Psiquiatra3,paciente3);
 
         //Recorrer nodos adyacentes.
-        //Se utiliza el identificador para distriminar el tipo de los nodos adyacentes que quiero mostrar.
-       /* for (Object nodo : Graphs.neighborListOf(BD, coordinador)){
+        //Se utiliza el identificador para discriminar el tipo de los nodos adyacentes que quiero mostrar.
+        /* for (Object nodo : Graphs.neighborListOf(BD, buscado)){
             if(identificador(nodo,"clinica")){
                 //Para acceder a los atributos propios de la clase se debe parsear.
                 Clinica clinica = (Clinica) nodo;
                 System.out.println(clinica);
             }
-        }*/
+       }*/
 
         /* for(Object obj : BD.vertexSet()){
             if(identificador(obj,"historial clinico")){
@@ -97,7 +98,7 @@ public class SistemaDeGestionClinica extends Application {
             System.out.println(arista);
         }*/
 
-        launch();
+       launch();
 
     }
 
