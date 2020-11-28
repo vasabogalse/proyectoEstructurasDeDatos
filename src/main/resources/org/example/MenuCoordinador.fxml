@@ -5,11 +5,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuCoordinador">
    <children>
-      <Button layoutX="320.0" layoutY="238.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
-      <Label layoutX="272.0" layoutY="24.0" text="Titulo con nombre" />
-      <Button layoutX="112.0" layoutY="163.0" mnemonicParsing="false" text="Gestionar clinica" />
-      <Button layoutX="239.0" layoutY="163.0" mnemonicParsing="false" text="Gestionar psiquiatra" />
-      <Button layoutX="178.0" layoutY="238.0" mnemonicParsing="false" onAction="#buscar" text="Búsquedas" />
-      <Button layoutX="391.0" layoutY="163.0" mnemonicParsing="false" onAction="#gestionarPaciente" text="Gestionar paciente" />
+      <Button layoutX="337.0" layoutY="238.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión." />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="53.0" text="BIENVENIDO AL SISTEMA DE GESTIÓN CLÍNICA." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="235.0" />
+      <Button layoutX="112.0" layoutY="163.0" mnemonicParsing="false" text="Gestión clínica." />
+      <Button layoutX="247.0" layoutY="163.0" mnemonicParsing="false" text="Gestión psiquiatra." />
+      <Button layoutX="192.0" layoutY="238.0" mnemonicParsing="false" onAction="#buscar" text="Buscador." />
+      <Button layoutX="391.0" layoutY="163.0" mnemonicParsing="false" onAction="#gestionarPaciente" text="Gestión paciente." />
    </children>
 </AnchorPane>
