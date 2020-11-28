@@ -9,6 +9,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import java.io.IOException;
+import java.util.Collections;
 
 public class SistemaDeGestionClinica extends Application {
     private static Scene scene;
@@ -47,7 +48,7 @@ public class SistemaDeGestionClinica extends Application {
         //Paciente.
         Paciente paciente1 = new Paciente("1000194793","Ximena","Castañeda Ochoa","Ximena@gmail.com","123","Cra. 45 #72-56",19,"05/10/2001","7865744","Carlos Lopez","2631551");
         Paciente paciente2 = new Paciente("1008194713","Felipe","Quintero Cano","Felipe@gmail.com","456","Cl. 78 #86-40",25,"14/03/1995","3193274553","Sofia Velez","4181376");
-        Paciente paciente3 = new Paciente("1078694724","Juan Felipe","Rojas Calderon","Juan@gmail.com","789","Cra. 77A #50-30",25,"05/10/1995","5809296","Camila Aguirre","3931851");
+        Paciente paciente3 = new Paciente("1078694724","Juan Felipe","Calderon Rojas","Juan@gmail.com","789","Cra. 77A #50-30",25,"05/10/1995","5809296","Camila Aguirre","3931851");
 
         //Psiquiatra.
         Psiquiatra Psiquiatra1 = new Psiquiatra("1017252071","Andrés Felipe","García Revuelta","Andres@gmail.com","147","Masculino","Cl. 80 #54-20",23,"07/01/1993",8790344);
@@ -96,6 +97,7 @@ public class SistemaDeGestionClinica extends Application {
         }*/
 
        launch();
+
 
     }
 

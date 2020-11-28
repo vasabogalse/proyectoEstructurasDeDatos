@@ -3,14 +3,13 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
-import org.example.Clinica;
-import org.example.Paciente;
-import org.example.Psiquiatra;
-import org.example.SistemaDeGestionClinica;
+import org.example.*;
 import org.jgrapht.Graphs;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 
@@ -115,6 +114,14 @@ public class MenuBusqueda implements Initializable {
                 }
                 break;
             case "Nombre":
+                try{
+                    Integer.parseInt(valor.getText().trim());
+                    novedad.setText("Dato númerico, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
+                }catch(Exception ignored){
+
+                }
                 for (String clave : Clinica.clinicaNom.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
@@ -204,6 +211,14 @@ public class MenuBusqueda implements Initializable {
                 }
                 break;
             case "Apellido":
+                try{
+                    Integer.parseInt(valor.getText().trim());
+                    novedad.setText("Dato númerico, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
+                }catch(Exception ignored){
+
+                }
                 for (String clave : Psiquiatra.psiApell.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
@@ -301,6 +316,14 @@ public class MenuBusqueda implements Initializable {
                 }
                 break;
             case "Apellido":
+                try{
+                    Integer.parseInt(valor.getText().trim());
+                    novedad.setText("Dato númerico, por favor verifique el valor ingresado.");
+                    valorBusq = "Dato inválido.";
+                    return;
+                }catch(Exception ignored){
+
+                }
                 for (String clave : Paciente.pacienteApel.keySet()) {
                     if (clave.contains(valor.getText().trim().toLowerCase())) {
                         valorBusq = clave;
@@ -325,7 +348,7 @@ public class MenuBusqueda implements Initializable {
                         valorBusq = String.valueOf(clave);
                         resultados.appendText(imprimirLista(Paciente.pacienteEdad.get(Integer.parseInt(valorBusq)).toString()));
                     }
-                }
+               }
                 break;
             case "Clinica":
                 try {

@@ -5,13 +5,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.Ingreso">
    <children>
-      <Label layoutX="177.0" layoutY="39.0" text="Sistema de Gestión de Clínica de Salud Mental" />
-      <Label layoutX="68.0" layoutY="121.0" text="Cédula o correo" />
-      <Label layoutX="68.0" layoutY="221.0" text="Contraseña" />
-      <Button fx:id="cerrar" layoutX="339.0" layoutY="333.0" mnemonicParsing="false" onAction="#Salir" text="Salir" />
-      <Button layoutX="194.0" layoutY="333.0" mnemonicParsing="false" onAction="#Ingresar" text="Ingresar" />
-      <TextField fx:id="identificacion" layoutX="246.0" layoutY="117.0" />
-      <Label fx:id="novedad" layoutX="293.0" layoutY="280.0" text="Errores" />
-      <PasswordField fx:id="contrasena" layoutX="237.0" layoutY="209.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="40.0" text="SISTEMA DE GESTIÓN DE CLÍNICAS DE SALUD MENTAL." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="152.0" />
+      <Label layoutX="191.0" layoutY="121.0" text="Cédula o correo:" />
+      <Label layoutX="204.0" layoutY="163.0" text="Contraseña:" />
+      <Button fx:id="cerrar" layoutX="355.0" layoutY="334.0" mnemonicParsing="false" onAction="#Salir" text="Salir" />
+      <Button layoutX="238.0" layoutY="334.0" mnemonicParsing="false" onAction="#Ingresar" text="Ingresar" />
+      <TextField fx:id="identificacion" layoutX="300.0" layoutY="117.0" />
+      <Label fx:id="novedad" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="241.0" prefHeight="39.0" prefWidth="135.0" textAlignment="CENTER" />
+      <PasswordField fx:id="contrasena" layoutX="300.0" layoutY="159.0" />
    </children>
 </AnchorPane>

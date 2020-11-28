@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -17,9 +18,12 @@
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></Label>
-      <Label fx:id="novedad" layoutX="32.0" layoutY="256.0" prefHeight="60.0" prefWidth="196.0" wrapText="true" />
+      <Label fx:id="novedad" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="256.0" prefHeight="60.0" prefWidth="196.0" textAlignment="CENTER" wrapText="true" />
       <ComboBox fx:id="entidad" layoutX="91.0" layoutY="85.0" onAction="#itemsAtributo" prefWidth="150.0" />
       <ComboBox fx:id="atributo" layoutX="91.0" layoutY="134.0" onAction="#mensajeValor" prefWidth="150.0" />
-      <TextArea fx:id="resultados" editable="false" layoutX="266.0" layoutY="88.0" prefHeight="312.0" prefWidth="334.0" wrapText="true" />
+      <TextArea fx:id="resultados" editable="false" layoutX="266.0" layoutY="88.0" prefHeight="312.0" prefWidth="334.0" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor></TextArea>
    </children>
 </AnchorPane>

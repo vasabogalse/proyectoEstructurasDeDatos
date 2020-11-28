@@ -63,7 +63,7 @@ public class Ordenamiento {
 
 
     //Paciente
-    static final Comparator<Paciente> ApePaciente = new Comparator<Paciente>() {
+    public static final Comparator<Paciente> ApePaciente = new Comparator<Paciente>() {
           public int compare(Paciente p1, Paciente p2) {
             return p1.apellidos.compareTo(p2.apellidos);
         }
@@ -79,7 +79,6 @@ public class Ordenamiento {
             }
         }
     };
-
 
 
 }
