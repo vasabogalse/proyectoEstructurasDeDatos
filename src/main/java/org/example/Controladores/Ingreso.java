@@ -27,9 +27,13 @@ public class Ingreso {
         }
 
         //Esta clase compila la expresión regular (Creación del patrón)
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.([a-zA-Z]{2,4})+$");
+        Pattern patron = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.([a-zA-Z]{2,4})+$");
         //Objeto que permite hacer operaciones sobre la secuencia de caracteres que queremos validar. Se crea a partir del patrón.
-        Matcher mather = pattern.matcher(identificacion.getText());
+        Matcher objeto = patron.matcher(identificacion.getText());
+
+        //Expresión regular: El signo + indica que el carácter al que sigue debe aparecer al menos una vez.
+        //se repitan letras (indiferentemente mayúsculas o minúsculas)
+        //[] Agrupa caracteres - {2,4} me indica que el domino tendrá de 2 a 4 letras
 
         try {
             cedulaVa = Integer.parseInt(identificacion.getText());
@@ -38,7 +42,7 @@ public class Ingreso {
                 return;
             }
         } catch (Exception e){
-            if (!mather.matches()){
+            if (!objeto.matches()){
                 novedad.setText("Dato inválido,por favor ingrese la información correspondiente.");
                 return;
             }
