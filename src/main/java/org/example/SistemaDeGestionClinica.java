@@ -9,12 +9,11 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import java.io.IOException;
-import java.util.Collections;
+
 
 public class SistemaDeGestionClinica extends Application {
     private static Scene scene;
     public static Graph<Object, DefaultEdge> BD = new SimpleGraph<>(DefaultEdge.class);
-    public static Object usuario = new Object();
 
 
     @Override
