@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.example.Paciente;
+import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class IngresarPacienteController implements Initializable {
@@ -26,9 +28,16 @@ public class IngresarPacienteController implements Initializable {
     @FXML public TextField edadTextField;
     @FXML public TextField fechaNacimientoTextField;
     @FXML public Label errorLabel;
+    @FXML public ComboBox<String> seleccionPsiquiatraComboBox;
+    public ArrayList<Psiquiatra> psiquiatrasComboBox = new ArrayList<>();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        for (Psiquiatra psiquiatra : Psiquiatra.psiquiatraHash.values()) {
+            seleccionPsiquiatraComboBox.getItems().add(psiquiatra.nombres + " " + psiquiatra.apellidos);
+            psiquiatrasComboBox.add(psiquiatra);
+        }
+    }
 
     public void registrarPaciente(ActionEvent event) throws IOException {
         errorLabel.setText("");
@@ -87,6 +96,10 @@ public class IngresarPacienteController implements Initializable {
         }
 
         Paciente nuevoPaciente = new Paciente(id, nombres, apellidos, email, direccion, edad, fechaNacimiento,telefono, nombreEmergencia, telefonoEmergencia);
+        int indexPsiquiatra = seleccionPsiquiatraComboBox.getSelectionModel().getSelectedIndex();
+        Psiquiatra psiquiatraRelacion = psiquiatrasComboBox.get(indexPsiquiatra);
+        SistemaDeGestionClinica.BD.addEdge(nuevoPaciente, psiquiatraRelacion);
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Creacion satisfactoria");

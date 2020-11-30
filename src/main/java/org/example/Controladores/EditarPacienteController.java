@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.example.Paciente;
+import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +27,8 @@ public class EditarPacienteController implements Initializable {
     @FXML public TextField edadTextField;
     @FXML public TextField fechaNacimientoTextField;
     @FXML public Label errorLabel;
+    @FXML public ComboBox<String> seleccionPsiquiatraComboBox;
+    public ArrayList<Psiquiatra> psiquiatrasComboBox = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
@@ -46,6 +49,16 @@ public class EditarPacienteController implements Initializable {
             fechaNacimientoTextField.setText(pacienteEditar.fechaNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             nombreEmergenciaTextField.setText(pacienteEditar.nombreContactoEmergencia);
             telefonoEmergenciaTextField.setText(pacienteEditar.telefonoContactoEmergencia);
+
+            int c = 0;
+            for (Psiquiatra psiquiatra : Psiquiatra.psiquiatraHash.values()) {
+                seleccionPsiquiatraComboBox.getItems().add(psiquiatra.nombres + " " + psiquiatra.apellidos);
+                psiquiatrasComboBox.add(psiquiatra);
+                if (SistemaDeGestionClinica.BD.containsEdge(pacienteEditar, psiquiatra)) {
+                    seleccionPsiquiatraComboBox.getSelectionModel().select(c);
+                }
+                c++;
+            }
         }
     }
 
@@ -96,8 +109,12 @@ public class EditarPacienteController implements Initializable {
             return;
         }
 
+        int indexPsiquiatra = seleccionPsiquiatraComboBox.getSelectionModel().getSelectedIndex();
+        Psiquiatra psiquiatraRelacion = psiquiatrasComboBox.get(indexPsiquiatra);
+
         Paciente.eliminarPaciente(id);
         Paciente nuevoPaciente = new Paciente(id, nombres, apellidos, email, direccion, edad, fechaNacimiento,telefono, nombreEmergencia, telefonoEmergencia);
+        SistemaDeGestionClinica.BD.addEdge(nuevoPaciente, psiquiatraRelacion);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Edición satisfactoria");

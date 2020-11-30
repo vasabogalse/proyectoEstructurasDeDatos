@@ -18,7 +18,7 @@ public class SistemaDeGestionClinica extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Ingreso"), 640, 480);
+        scene = new Scene(loadFXML("Ingreso"), 768, 622);
         stage.setScene(scene);
         stage.show();
     }

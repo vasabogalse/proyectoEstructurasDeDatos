@@ -3,10 +3,8 @@ package org.example.Controladores;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import org.example.Clinica;
 import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
 import java.io.IOException;
@@ -15,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class IngresarPsiquiatraController implements Initializable {
@@ -29,9 +28,16 @@ public class IngresarPsiquiatraController implements Initializable {
     @FXML public RadioButton masculinoRadioButton;
     @FXML public TextField fechaNacimientoTextField;
     @FXML public Label errorLabel;
+    @FXML public ComboBox<String> seleccionClinicaComboBox;
+    public ArrayList<Clinica> clinicasComboBox = new ArrayList<>();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) { }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        for (Clinica clinica : Clinica.ClinicaHash.values()) {
+            seleccionClinicaComboBox.getItems().add(clinica.nombreClinica);
+            clinicasComboBox.add(clinica);
+        }
+    }
 
     public void registrarPsiquiatra(ActionEvent event) throws IOException {
         errorLabel.setText("");
@@ -108,6 +114,10 @@ public class IngresarPsiquiatraController implements Initializable {
         }
 
         Psiquiatra nuevoPsiquiatra = new Psiquiatra(id, nombres, apellidos, email, sexo, direccion, edadPsiquiatra, fechaNacimiento, telefono);
+        int indexClinica = seleccionClinicaComboBox.getSelectionModel().getSelectedIndex();
+        Clinica clinicaRelacion = clinicasComboBox.get(indexClinica);
+        SistemaDeGestionClinica.BD.addEdge(nuevoPsiquiatra, clinicaRelacion);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Creacion satisfactoria");
         alert.setHeaderText("Creacion satisfactoria");

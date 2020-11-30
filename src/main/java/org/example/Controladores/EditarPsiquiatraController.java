@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.example.Clinica;
+import org.example.Paciente;
 import org.example.Psiquiatra;
 import org.example.SistemaDeGestionClinica;
 import java.io.IOException;
@@ -26,6 +29,8 @@ public class EditarPsiquiatraController<Psquiatra> implements Initializable {
     @FXML public TextField telefonoEditarTextField;
     @FXML public TextField fechaEditarTextField;
     @FXML public Label errorLabel;
+    @FXML public ComboBox<String> seleccionClinicaComboBox;
+    public ArrayList<Clinica> clinicasComboBox = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
@@ -45,6 +50,16 @@ public class EditarPsiquiatraController<Psquiatra> implements Initializable {
             emailEditarTextField.setText(psiquiatraEditar.emailPsiquiatra);
             telefonoEditarTextField.setText(String.valueOf(psiquiatraEditar.tel));
             fechaEditarTextField.setText(psiquiatraEditar.fechaNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+            int c = 0;
+            for (Clinica clinica : Clinica.ClinicaHash.values()) {
+                seleccionClinicaComboBox.getItems().add(clinica.nombreClinica);
+                clinicasComboBox.add(clinica);
+                if (SistemaDeGestionClinica.BD.containsEdge(clinica, psiquiatraEditar)) {
+                    seleccionClinicaComboBox.getSelectionModel().select(c);
+                }
+                c++;
+            }
         }
     }
 
@@ -107,8 +122,26 @@ public class EditarPsiquiatraController<Psquiatra> implements Initializable {
             return;
         }
 
+        //Guardar pacientes con los que tenía relación antes de borrar el vertice psiquiatra a relacionar los pacientes:
+        ArrayList<Paciente> pacientesRelacion = new ArrayList<>();
+        for (Paciente paciente : Paciente.pacienteHash.values()) {
+            if (SistemaDeGestionClinica.BD.containsEdge(paciente, Psiquiatra.psiquiatraHash.get(idEditar))) {
+                pacientesRelacion.add(paciente);
+            }
+        }
+
+        int indexClinica = seleccionClinicaComboBox.getSelectionModel().getSelectedIndex();
+        Clinica clinicaRelacion = clinicasComboBox.get(indexClinica);
+
         Psiquiatra.eliminarPsquiatra(idEditar);
         Psiquiatra nuevoPsiquiatra = new Psiquiatra(idEditar, nombres, apellidos, email, "M", direccion, edadPsiquiatra, fechaNacimiento, telefono);
+        SistemaDeGestionClinica.BD.addEdge(nuevoPsiquiatra, clinicaRelacion);
+
+        //Hacer aristas paciente-psiquiatra de nuevo
+        for (Paciente paciente : pacientesRelacion) {
+            SistemaDeGestionClinica.BD.addEdge(nuevoPsiquiatra, paciente);
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Edición satisfactoria");
         alert.setHeaderText("Edición satisfactoria");
