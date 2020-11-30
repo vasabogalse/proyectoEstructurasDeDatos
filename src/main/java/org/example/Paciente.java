@@ -1,0 +1,107 @@
+package org.example;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+public class Paciente {
+    public String idPaciente;
+    public String nombres;
+    public String apellidos;
+    public String email;
+    public String direccion;
+    public int edad;
+    public LocalDate fechaNacimiento;
+    public String telefono;
+    public String nombreContactoEmergencia;
+    public String telefonoContactoEmergencia;
+
+    public static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static Hashtable<String,Paciente> pacienteHash = new Hashtable<>();
+    public static TreeMap<String, LinkedList<Paciente>> pacienteApel = new TreeMap<>();
+    public static TreeMap<Integer, LinkedList<Paciente>> pacienteEdad = new TreeMap<>();
+
+    public Paciente(String idPaciente, String nombres, String apellidos, String email,  String direccion,
+                    int edad, String fechaIng, String telefono, String nombreContactoEmergencia,
+                    String telefonoContactoEmergencia) {
+        this.idPaciente = idPaciente;
+        this.nombres = nombres.toLowerCase();
+        this.apellidos = apellidos.toLowerCase();
+        this.email = email.toLowerCase();
+        this.direccion = direccion;
+        this.edad = edad;
+        LocalDate fechaNacimiento = LocalDate.parse(fechaIng,formateador);
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.nombreContactoEmergencia = nombreContactoEmergencia;
+        this.telefonoContactoEmergencia = telefonoContactoEmergencia;
+        SistemaDeGestionClinica.BD.addVertex(this);
+        pacienteHash.put(idPaciente,this);
+
+        if (!pacienteApel.containsKey(this.apellidos)) {
+            pacienteApel.put(this.apellidos, new LinkedList<>());
+        }
+        if (!pacienteEdad.containsKey(edad)){
+            pacienteEdad.put(this.edad,new LinkedList<>());
+        }
+        pacienteApel.get(this.apellidos).add(this);
+        pacienteEdad.get(edad).add(this);
+    }
+
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Paciente )){
+            return false;
+        }
+        Paciente paciente = (Paciente) o; //Objeto que comparo conmigo mismo.
+        //Criterio de igualdad, el que quiera.
+        if (paciente.idPaciente.equals(this.idPaciente)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static void eliminarPaciente(String idEliminar) {
+        Paciente pacienteEliminar = pacienteHash.get(idEliminar);
+
+        ListIterator<Paciente> iteratorApellido = pacienteApel.get(pacienteEliminar.apellidos).listIterator();
+        while (iteratorApellido.hasNext()) {
+            Paciente pApellidoIterator = iteratorApellido.next();
+            if (pApellidoIterator.idPaciente.equals(idEliminar)) {
+                iteratorApellido.remove();
+                break;
+            }
+        }
+
+        ListIterator<Paciente> iteratorEdad = pacienteEdad.get(pacienteEliminar.edad).listIterator();
+        while (iteratorEdad.hasNext()) {
+            Paciente pEdadIterator = iteratorEdad.next();
+            if (pEdadIterator.idPaciente.equals(idEliminar)) {
+                iteratorEdad.remove();
+                break;
+            }
+        }
+
+        pacienteHash.remove(idEliminar);
+        SistemaDeGestionClinica.BD.removeVertex(pacienteEliminar);
+    }
+
+    @Override
+    public String toString() {
+        return  "Cédula(ID): " + idPaciente + "\n" +
+                "Nombre: " + nombres + "\n" +
+                "Apellidos: " + apellidos + "\n" +
+                "Email: " + email + "\n" +
+                "Dirección: " + direccion + "\n" +
+                "Edad: " + edad + "\n" +
+                "Fecha de nacimiento: " + fechaNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
+                "Teléfono: " + telefono + "\n" +
+                "Nombre contacto emergencia: " + nombreContactoEmergencia + "\n" +
+                "Teléfono contacto emergencia: " + telefonoContactoEmergencia + "\n" +
+                "-------------------------------------------------------------------------------" + "\n";
+    }
+}
+

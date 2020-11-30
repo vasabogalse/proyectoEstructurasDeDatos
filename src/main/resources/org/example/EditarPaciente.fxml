@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="607.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.EditarPacienteController">
+   <children>
+      <AnchorPane prefHeight="93.0" prefWidth="780.0" style="-fx-background-color: #191747;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label layoutX="300.0" layoutY="32.0" text="Editar paciente" textFill="WHITE" AnchorPane.topAnchor="32.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="180.0" layoutY="154.0" text="ID (cédula):" AnchorPane.leftAnchor="180.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="579.0" layoutY="563.0" mnemonicParsing="false" onAction="#editarPaciente" style="-fx-background-color: #191747;" text="Editar" textFill="WHITE" />
+      <Button layoutX="650.0" layoutY="563.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-color: #191747;" text="Volver" textFill="#fffefe" />
+      <Label fx:id="errorLabel" layoutX="374.0" layoutY="518.0" textFill="#e80606" />
+      <TextField fx:id="idTextField" layoutX="290.0" layoutY="150.0" prefHeight="25.0" prefWidth="224.0" />
+      <Button layoutX="551.0" layoutY="150.0" mnemonicParsing="false" onAction="#buscarPaciente" style="-fx-background-color: #191747;" text="Buscar" textFill="WHITE" />
+      <TextField fx:id="nombresTextField" layoutX="168.0" layoutY="240.0" />
+      <TextField fx:id="apellidosTextField" layoutX="168.0" layoutY="288.0" AnchorPane.topAnchor="288.0" />
+      <TextField fx:id="edadTextField" layoutX="168.0" layoutY="335.0" />
+      <TextField fx:id="direccionTextField" layoutX="168.0" layoutY="382.0" />
+      <TextField fx:id="emailTextField" layoutX="168.0" layoutY="430.0" />
+      <TextField fx:id="telefonoTextField" layoutX="551.0" layoutY="288.0" />
+      <Label layoutX="73.0" layoutY="244.0" text="Nombres:" AnchorPane.leftAnchor="73.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="292.0" text="Apellidos:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="341.0" text="Edad:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="386.0" text="DIreccion:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="73.0" layoutY="434.0" text="E-mail:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="433.0" layoutY="292.0" text="Telefono:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fechaNacimientoTextField" layoutX="551.0" layoutY="240.0" />
+      <Label layoutX="433.0" layoutY="223.0" prefHeight="61.0" prefWidth="118.0" text="Fecha de nacimiento:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="245.0" layoutY="197.0" text="Busca al paciente por ID y edita los campos" />
+      <Label layoutX="433.0" layoutY="322.0" prefHeight="74.0" prefWidth="110.0" text="Nombre de contacto de emergencia:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nombreEmergenciaTextField" layoutX="551.0" layoutY="346.0" />
+      <Label layoutX="433.0" layoutY="393.0" prefHeight="74.0" prefWidth="110.0" text="Telefono contacto de emergencia:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="telefonoEmergenciaTextField" layoutX="551.0" layoutY="417.0" />
+      <Label layoutX="73.0" layoutY="481.0" text="Psiquiatra:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="seleccionPsiquiatraComboBox" layoutX="168.0" layoutY="479.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
