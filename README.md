@@ -75,6 +75,6 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 
 ## Datos de ingreso 📋
 Para ingresar al sistema se puede identificar con el correo o la cédula.
-    - Correo: coordinador@gmail.com
-    - Cédula: 12345678
-    - Contraseña: coordinador
+- Correo: coordinador@gmail.com
+- Cédula: 12345678
+- Contraseña: coordinador
