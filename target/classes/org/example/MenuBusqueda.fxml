@@ -3,21 +3,38 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuBusqueda">
+<AnchorPane prefHeight="499.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controladores.MenuBusqueda">
    <children>
-      <Label layoutX="249.0" layoutY="26.0" text="Menú de búsqueda." />
-      <Label layoutX="29.0" layoutY="70.0" text="Entidad" />
-      <Label layoutX="28.0" layoutY="125.0" text="Atributo" />
-      <Label layoutX="33.0" layoutY="175.0" text="Valor" />
-      <TextField fx:id="valor" layoutX="100.0" layoutY="171.0" prefHeight="25.0" prefWidth="150.0" />
-      <Button layoutX="47.0" layoutY="319.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
-      <Button layoutX="149.0" layoutY="319.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
-      <Label layoutX="401.0" layoutY="53.0" text="Resultados" />
-      <Label fx:id="novedad" layoutX="31.0" layoutY="231.0" prefHeight="60.0" prefWidth="236.0" wrapText="true" />
-      <ComboBox fx:id="entidad" layoutX="100.0" layoutY="66.0" onAction="#Escoger" prefWidth="150.0" />
-      <ComboBox fx:id="atributo" layoutX="99.0" layoutY="121.0" prefWidth="150.0" />
-      <TextArea fx:id="resultados" layoutX="274.0" layoutY="79.0" prefHeight="267.0" prefWidth="313.0">
+      <AnchorPane prefHeight="99.0" prefWidth="717.0" style="-fx-background-color: #191747;" />
+      <Label layoutX="235.0" layoutY="35.0" text="Menú de búsqueda." textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="37.0" layoutY="177.0" text="Entidad:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="222.0" prefHeight="42.0" prefWidth="88.0" text="Criterio de búsqueda:" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="EtiquetaValor" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="272.0" prefHeight="53.0" prefWidth="88.0" text="valor de búsqueda:" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <TextField fx:id="valor" layoutX="132.0" layoutY="286.0" prefHeight="25.0" prefWidth="150.0" />
+      <Button layoutX="77.0" layoutY="427.0" mnemonicParsing="false" onAction="#buscar" style="-fx-background-color: #191747;" text="Buscar" textFill="WHITE" />
+      <Button layoutX="220.0" layoutY="427.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-color: #191747;" text="Volver" textFill="WHITE" />
+      <Label layoutX="472.0" layoutY="128.0" text="Resultados.">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="novedad" layoutX="50.0" layoutY="335.0" prefHeight="73.0" prefWidth="253.0" wrapText="true" />
+      <ComboBox fx:id="entidad" layoutX="132.0" layoutY="174.0" onAction="#itemsAtributo" prefWidth="150.0" />
+      <ComboBox fx:id="atributo" layoutX="132.0" layoutY="231.0" onAction="#mensajeValor" prefWidth="150.0" />
+      <TextArea fx:id="resultados" layoutX="344.0" layoutY="169.0" prefHeight="298.0" prefWidth="352.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></TextArea>

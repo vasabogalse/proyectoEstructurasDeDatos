@@ -1,6 +1,7 @@
 package org.example;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -8,8 +9,7 @@ public class Psiquiatra {
     public String idPsiquiatra;
     public String nombres;
     public String apellidos;
-    public String emailPsiquiatra; //verificar que se pueda ingresar una @
-    public String clavePsiquiatra;
+    public String emailPsiquiatra;
     public String Sexo;
     public String direccion;
     public int edad;
@@ -23,19 +23,20 @@ public class Psiquiatra {
     public static TreeMap<Integer,LinkedList<Psiquiatra>> psiEdad = new TreeMap<>();
 
 
-    public Psiquiatra(String idPsiquiatra, String nombres, String apellidos, String emailPsiquiatra, String clavePsiquiatra, String sexo, String direccion, int edad, String fechaIng, int tel) {
+    public Psiquiatra(){}
+
+    public Psiquiatra(String idPsiquiatra, String nombres, String apellidos, String emailPsiquiatra, String sexo, String direccion, int edad, String fechaIng, int tel) {
         this.idPsiquiatra = idPsiquiatra;
         this.nombres = nombres.toLowerCase();
         this.apellidos = apellidos.toLowerCase();
         this.emailPsiquiatra = emailPsiquiatra.toLowerCase();
-        this.clavePsiquiatra = clavePsiquiatra;
         this.Sexo = sexo;
         this.direccion = direccion;
         this.edad = edad;
-        LocalDate fechaNacimiento = LocalDate.parse(fechaIng,formateador);
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = LocalDate.parse(fechaIng,formateador);
         this.tel = tel;
         SistemaDeGestionClinica.BD.addVertex(this);
+
         psiquiatraHash.put(idPsiquiatra,this);
 
         if (!psiApell.containsKey(this.apellidos)) {
@@ -47,10 +48,35 @@ public class Psiquiatra {
         psiApell.get(this.apellidos).add(this);
         psiEdad.get(edad).add(this);
     }
+    public static void eliminarPsquiatra(String idEliminar) {
+        Psiquiatra psquiatraEliminar = psiquiatraHash.get(idEliminar);
+
+        ListIterator<Psiquiatra> iteratorApellido = psiApell.get(psquiatraEliminar.apellidos).listIterator();
+        while (iteratorApellido.hasNext()) {
+            Psiquiatra pApellidoIterator = iteratorApellido.next();
+            if (pApellidoIterator.idPsiquiatra.equals(idEliminar)) {
+                iteratorApellido.remove();
+                break;
+            }
+        }
+
+        ListIterator<Psiquiatra> iteratorEdad = psiEdad.get(psquiatraEliminar.edad).listIterator();
+        while (iteratorEdad.hasNext()) {
+            Psiquiatra pEdadIterator = iteratorEdad.next();
+            if (pEdadIterator.idPsiquiatra.equals(idEliminar)) {
+                iteratorEdad.remove();
+                break;
+            }
+        }
+
+        psiquiatraHash.remove(idEliminar);
+        SistemaDeGestionClinica.BD.removeVertex(psquiatraEliminar);
+    }
 
 
     @Override
     public String toString() {
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return  "Cédula: " + idPsiquiatra + "\n" +
                 "Nombre: " + nombres + "\n" +
                 "Apellidos: " + apellidos + "\n" +
@@ -58,7 +84,7 @@ public class Psiquiatra {
                 "Email: " + emailPsiquiatra + "\n" +
                 "Dirección: " + direccion + "\n" +
                 "Edad: " + edad + "\n" +
-                "Fecha de nacimiento: " + fechaNacimiento + "\n" +
+                "Fecha de nacimiento: " + formateador.format(fechaNacimiento) + "\n" +
                 "Teléfono: " + tel + "\n";
     }
 

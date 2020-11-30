@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.TreeMap;
 
 public class Clinica{
@@ -33,18 +34,40 @@ public class Clinica{
         clinicaTel.get(telefono).add(this);
     }
 
-
-
     public int getNit() {
         return nit;
     }
 
+    public static void eliminarClinica(String idEliminar) {
+        Clinica clinicaEliminar = ClinicaHash.get(Integer.parseInt(idEliminar));
+
+        ListIterator<Clinica> iteratorNombre = clinicaNom.get(clinicaEliminar.nombreClinica).listIterator();
+        while (iteratorNombre.hasNext()) {
+            Clinica pNombreIterator = iteratorNombre.next();
+            if (pNombreIterator.nit == Integer.parseInt(idEliminar)) {
+                iteratorNombre.remove();
+                break;
+            }
+        }
+
+        ListIterator<Clinica> iteratorTelefono = clinicaTel.get(clinicaEliminar.telefono).listIterator();
+        while (iteratorTelefono.hasNext()) {
+            Clinica pTelefonoIterator = iteratorTelefono.next();
+            if (pTelefonoIterator.nit == Integer.parseInt(idEliminar)) {
+                iteratorTelefono.remove();
+                break;
+            }
+        }
+
+        ClinicaHash.remove(Integer.parseInt(idEliminar));
+        SistemaDeGestionClinica.BD.removeVertex(clinicaEliminar);
+    }
     @Override
     public String toString() {
         return  "Nit: " + nit+"\n" +
                 "Nombre: " + nombreClinica + "\n" +
                 "Dirección: " + direccion + "\n" +
                 "Teléfono: " + telefono + "\n"
-              ;
+                ;
     }
 }
