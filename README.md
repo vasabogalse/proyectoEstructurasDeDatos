@@ -72,3 +72,9 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 - **Valentina Sabogal Serrano** - CC: 1152472574 - Ingeniería de Control - vasabogalse@unal.edu.co
 
 - **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística - xcastaneda@unal.edu.co
+
+## Datos de ingreso 📋
+Para ingresar al sistema se puede identificar con el correo o la cédula.
+    - Correo: coordinador@gmail.com
+    - Cédula: 12345678
+    - Contraseña: coordinador
