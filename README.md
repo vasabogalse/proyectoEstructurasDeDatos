@@ -1,70 +1,86 @@
 <img src="https://www.flaticon.es/svg/static/icons/svg/2913/2913008.svg" width="1500" height="200" />
 
-# Sistema de Gestión de Clínica de Salud Mental
+# Sistema de Gestión de Clínica de Salud Mental.
 
 Este sistema ha sido diseñado como herramienta para la interacción y un acompañamiento cercano entre pacientes y personal médico (psiquiatras) de una institución de salud mental.
 
 Nuestro objetivo principal es administrar de manera eficiente la asignación de citas, particularmente de citas prioritarias (emergencias) a través del registro de emociones para que el paciente pueda tener un constante monitoreo, disminuyendo así las brechas de tiempo en el que paciente se encuentra en un estado mental que pueda significar un peligro para su integridad física.
 
-Dentro del sistema se podrán acceder a distintas funciones dependiendo del rol de usuario con el que se es registrado, siendo estas:
+Para esta segunda entrega el sistema se enfocará en el módulo coordinador de clínica, el cual permite las siguientes funcionalidades:
 
--  Coordinador de Clínica.
--  Psiquiatra.
--  Paciente.
-
-## Pre-requisitos 📋
+## Pre-requisitos.📦  
 - Tener instalado  [Maven](https://maven.apache.org/ "Maven").
 - Tener algún entorno de desarrollo de su elección.
+- Tener una librería para UI de su elección [JavaFx](https://openjfx.io/)
+- Tener librería Jgrapht para el manejo de grafos [Jgrapht](https://jgrapht.org/)
 
-## Contenido📦
 
-## Módulo Coordinador de Clínica.
 
-El Coordinador de Clínica funge la función de administrador, puede gestionar al personal psiquiátrico, el inventario de médicamentos y la información de la clínica a la que pertenece.
+## Módulo Coordinador de Clínica.📋
 
-Sus funciones especificas se detallan a continuación:
-
-### Clínica
-
-- Editar Clínica: El coordinador puede actualizar el nombre, la dirección o el teléfono de su clínica en caso de que alguno de estos datos haya cambiado a lo largo del tiempo sin la necesidad de crear una nueva clínica.
-
-### Psiquiatra
-
-- Registrar Psiquiatra: El coordinador tiene la capacidad de agregar nuevos especialistas a su equipo de profesionales a través de un simple registro que pide información personal del psiquiatra.
-
-- Dar de baja a un psiquiatra registrado: El coordinador también puede dar de baja a algún psquiatra registrado en el sistema.
-
-### Medicamento
-
-- Controlar inventarios: El coordinador tiene la atribución de monitoriar los inventarios de médicamentos, de esa manera él recibe una notificación cuando el inventario de algún medicamento esta demasiado bajo para que pueda reponerlo. También puede eliminar medicamentos del registro.
-
-## Módulo Psiquiatra
-El Psiquiatra es el profesional que trabaja en alguna de las clínicas, su papel es monitoriar de manera directa a los pacientes para su pronta recuperación.
+El Coordinador de Clínica funge la función de administrador, puede gestionar al personal psiquiátrico, información de pacientes y de la clínica a la que pertenecen.
 
 Sus funciones especificas se detallan a continuación:
 
-### Paciente
+### Gestionar Clínica.
+- **Ingresar Clínica:** permite ingresar una nueva clinica con tan solo el nit, nombre, dirección y teléfono de esta.
 
-- Crear y editar historias clínicas:  El psiquiatra es el encargado de mantener el registro de la información de sus pacientes, esta historia clínica esta compuesta por los datos personales del individuo, además de sus antecedentes, procesos y recomendaciones, también puede incluir alguna fórmula médica con médicamentos seleccionados del inventario.
+- **Editar Clínica:** el coordinador puede actualizar el nombre, la dirección o el teléfono de su clínica en caso de que alguno de estos datos haya cambiado a lo largo del tiempo sin la necesidad de crear una nueva clínica.
 
-### Citas
-- Atender y cancelar citas: El psiquiatra tiene la posibilidad de atender o cancelar las citas que tiene en agenda.
+- **Ver Clínica:** imprime una lista con toda la información de las clinicas administradas por ese coordinador.
 
-## Módulo Paciente.
-El paciente es el individuo interesado en el servicio que ofrece la clínica de salud mental, es importante mencionar que para su ingreso al  sistema es necesario que haga un registro donde establecerá un usuario y contraseña.
+- **Eliminar Clínica:** el coordinador puede eliminar del sistema la información de una clinica en caso de que sea necesario.
 
-Sus atributos especificos se detallan a continuación:
-### Psiquiatra
-- Asiganción automática de psiquiatra: El paciente recibirá un psiquiatra por defecto al ingresar al sistema por primera vez.
+### Gestionar Psiquiatra.
+- **Registrar Psiquiatra:** el coordinador tiene la capacidad de agregar nuevos especialistas a su equipo de profesionales a través de un simple registro que pide información personal del psiquiatra. Además, podrá la clínica en la que trabajará este especialista.
 
-### Citas
-- Menejo de citas: La principal ventaja de este sistema con respecto a otros es que se le permitirá al paciente llenar un cuestionario donde, con preguntas de selección simple, él podrá expresar sus emociones. A través de estas respuestas el sistema determinará si el paciente se encuentra en una situación de riesgo y automáticamente se le asignará una cita prioritaria, de otro modo el paciente tiene la libertad de agendar una cita con su psiquiatra asignado en el momento en que el especialista este disponible.
+- **Dar de baja a un psiquiatra registrado:** el coordinador también puede dar de baja a algún psquiatra registrado en el sistema.
 
-También podrá editar sus datos en cualquier momento y si ya no quiere o no necesita los servicios de la clínica puede darse de baja del sistema cuando quiera.
+- **Editar Psiquiatra**: el coordinador podrá ver la información registrada de un psiquiatra en especifico y modificar el campo que desee, incluyendo si se desea cambiar la clínica en la que labora. 
+
+- **Ver psiquiatra**: permite ver la información de todos los psiquiatras registrados en el sistema.
+
+### Gestionar Paciente.
+
+- **Registrar Psiquiatra:** el coordinador tiene la capacidad de agregar nuevos pacientes a través de un simple registro que pide información personal del paciente y tendrá la opción de elegir a su médico tratante.
+
+- **Eliminar paciente:** el coordinador también puede eliminar la información de un paciente en el sistema.
+
+- **Editar Psiquiatra**: el coordinador podrá ver la información registrada de un paciente en especifico y modificar el campo que desee, al igual que cambiar su médico tratante. 
+
+- **Ver psiquiatra**: permite ver la información de todos los pacientes registrados en el sistema.
+
+### Menú de búsquedas.
+El módulo coordinador contará con un buscador que le permitirá visualizar la información registrada de las tres entidades del sistema, podrá elegir entre una entidad, buscar de acuerdo a los criterios posteriormente descritos e ingresar un valor de búsqueda dependiendo el criterio escogido.
+
+- **Clínica:** 
+  - Nit
+  - Nombre
+  - Teléfono
+  - Paciente:permite conocer la clinica en la que se encuentra registrado un paciente, para esto deberá ingresar la cédula de este.
+  - Psiquiatra:permite conocer la clinica en la que labora un psiquiatra, para esto deberá ingresar la cédula del especialista.
+
+- **Psiquiatra:** 
+  - Cédula
+  - Apellidos
+  - Edad
+  - Clínica:muestra la lista de los psiquiatras que laboran en una clínica especifica, para verla se debe ingresar el Nit de la clinica.
+  - Paciente:imprime la información del psiquiatra que atiende al paciente al que le corresponde la cédula ingresada.
+
+- **Paciente:** 
+  - Cédula
+  - Apellidos
+  - Edad
+  - Clínica:muestra la lista de los pacientes registrados en una clínica especifica, para verla se debe ingresar el Nit de la clinica.
+  - Psiquiatra:imprime la información de los apcientes atendidos por el psiquiatra al que le corresponde la cédula ingresada.
+
+
+
 ## Construido con 🛠️
-- [Maven](https://maven.apache.org/ "Maven") - Manejador de dependencias
+- [Maven](https://maven.apache.org/ "Maven") - Manejador de dependencias.
+- [JavaFx](https://jgrapht.org/) - Creador de interfaces.
 
-## Autores ✒️
+## Autores. ✒️
 - **Andrés Felipe García Revuelta** - CC: 1017252071 - Ingeniería Mecánica - anfgarciare@unal.edu.co
 
 - **Innis Dapney Salazar García** - CC: 1036688091 - Ingeniería de Control - isalazar@unal.edu.co
@@ -73,11 +89,12 @@ También podrá editar sus datos en cualquier momento y si ya no quiere o no nec
 
 - **Ximena Castañeda Ochoa** - CC: 1000194793 - Estadística - xcastaneda@unal.edu.co
 
-## Datos de ingreso 📋
+## Datos de ingreso. 📋 
 Para ingresar al sistema se puede identificar con el correo o la cédula.
  - Correo: coordinador@gmail.com
  - Cédula: 12345678
  - Contraseña: coordinador
     
-## Diagrama de clases. 
+## Diagrama de clases. ✒
+- [Diagrama módulo coordinador.](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&page-id=FrsxtxkQGmtcyb0vWY6F&title=DIAGRAMA%20UML%20ESTRUCTURAS%20DE%20DATOS#R%3Cmxfile%20pages%3D%223%22%3E%3Cdiagram%20name%3D%22version3%22%20id%3D%22ZB-Ee254Y14HGx-Qvopn%22%3E7V1pc9q8Fv41mWnvTDqWF5aPQLqkTfumSdqbvl86ri1At8aixmTpr78yXvByAIVYFjHql2LFyFjPo6Ojs%2BnEGM0e3gf2fPqZutg70TX34cQ4O9F109R67L%2Bo5TFu0ZGlxS2TgLhxG1o3XJO%2FOGlMb1sSFy8KN4aUeiGZFxsd6vvYCQttdhDQ%2B%2BJtY%2BoVnzq3J7jScO3YXrX1v8QNp0kr0rT1Hz5gMpmmj%2B6mf5nZ6d1Jw2Jqu%2FQ%2B12S8PTFGAaVh%2FGn2MMJeNHzpwPz45%2BOX3%2FPlvzf0e%2Fj9I3Fvv573T%2BPO3j3lK9k7BNgP6%2B1aj7u%2Bs71lMmDJu4aP6Qhi3x1EQLArn%2FqscTgNZx67QuwjfiDhLfusvbGSqx%2FRVfL57CF%2F8Zhe%2BGHwmPtSdPkj7S%2B6WH9tdZV%2Bj3MUktFa0GXg4G33pUwO7WCCt%2Faod%2BI7sVsgWzLO7zGdYfZD2Q33a4qlvU9z5ErbAuzZIbkrUtROmD7JusuecEkJe2VdS6blKTLMpKdkWlrpddpJ%2FPbJ9%2FKkqHTVNXZ0FQ9PpSv2Iffq66YV657AQON4Gdg3OAnY0Q6Mf7reL5BG7%2Bj78g%2F1i%2FzTjV6j%2FOs8l397cmkf3tYtAdPVfScBDXRgBOx2i6w57XT3l4B6qa%2Bu1awI7FUomCK45mCIH8Ii8RZhQH%2FjEfVosCbmmHheqcn2yMRnlw4jDWbtwzschIRpSIPkDzPiutFjhvdTEuLrub0izT1TCFlbQJe%2Bi929CBg9CD9s5cvGZei0mwq9HKUQQCld28yeAlBPRSV9WB6WN2%2F%2Bc3zI6FYJGaOKjN4oMqiCTDMy%2B2mDvFuvTOXv4YjV8izMptw%2BiqVe6ktrVqymvH36BOafmAFekL%2F2r1VXEUPm0cusXs8anlhnUV%2FLkC7ibTFqVoKibnWeGk3OU72718L2Ikffqoy%2BbsiVkvp%2BasWLHH2zax3a6PePZ%2FR1s6yMSx58o6q6aS2W%2FNn4yxL0pnk8ZC8vs2ZPsjZsVtWcNpO9Yq%2B0ZJO%2FakFqLfkrWo4BjH6z7K%2FqmG1mf0XRgQBolv5HpGaWFR1dtiXEBLTMFrO%2FPP4GYCNslPxWVdFsK%2Fl1rWwm7%2BuS2d87IvtC3zq40a8K%2Fsrgc1ph8zbYnEl2h%2BcMvdE0g9t3Fl1c4oCwl49AF%2BFPSwdgtzvtwOIJdE3rl9hldYu9cNt9WV8lpvZ6JQrWZ%2Ff91B0sxib51Z1%2FD9zBnWX%2B%2BfjttLoZfSIvN%2FHrjd7pC%2BbYoTACWXrvTU9b%2F9OLmBq6xUank%2F0Z7ckWZKa2g1zPjbKlunt%2BGlteLL6lGY%2Beg6Gxoy%2FRMRxVNewDWYQ0ILY38ohPHFoBdXFPZp4du2apH14nf9F5FISQRg5YZ0o898J%2BpMsInEVoO7%2FTq%2BGUPfsv69Ze%2B4TtIEzCI%2FVO4Y7r6JuJtFhpHPgyZRPKmi7sRZjc41DPs%2BcLEusl0S0zNrzEH9IwpLO0o4J3OAtdXF2s3NNpNKTg%2FWrZNGymW5Yc0U0NYLrR6%2Bxk9RV2QtufsHHIHqmXLBQIsI2iDqQnlR5newx73w7xMBrJhRDaQn7sIXEj7qa0NQbshuswIP6EfXj17dPrCpMTDTdlrYfH4UbOLua2w7q6WN1zZq5brpKRiJoo%2B%2B7YW%2FFlylRh7K%2F4FNrhRlV4yAZ0FGluTCnWR%2Bwara9XevKcBuGI%2Box6NllxDDM%2B3%2BOI09uomsjZJ6yjmSjYTdLHIvC7CFkmyD6K9N2AeoPfg%2FE%2F94vJeef2g3c3106rwouxYIydqT0KMAOH%2BjELzhgZFfj1gm%2FpzYEP%2F2QdQt9mC4%2BD3Wj9WRREwEg%2FGWiKBPWSoNuTTQIoCHo4DyjjAJkR9r5U0UA4DZBmyuYBtHVlCqDD%2BndXK4ESBw3wALDqN8wDaFM6ZCr%2FnyWx2YgVOGCdKQLUTACrQZUQ%2Fs1Vy3ZEAIZLpBIUNwUK%2B1qx70nXCKGMlOGYBrOlZ39mCoGTzP93hSZdiwY%2Bcv4pgVD7FlGTriFyOFs8UrZNVi09OxiQeb4SyG8iRpydogotjCotDIACnv0Le5d0QcLVLvYsiO8FHGnb0BeHq8Gr8emicK068Nlkd9i%2BP8hZgV4R93It%2B2PB%2FzoWAneU9d%2B26S4OcN6VPVUBawe8C1p7mAgPFeJCEO%2FxIm6KQhy08v6iQaAQF4G4AQRGwIiLWqy7oE2PvYGCWwDc0kV6v2q9K6nmJSw3uB61E%2BV63DTGNbgeecVCJeWRz%2FFYLslhAHkBWUaeZMdjH7QzEvdddZOpXI%2FcHM3kwEG6HuGfDG0rY99jwgXlfhRJAOnuxz64%2F5ytBMAs8ju9%2BxyjP2Dq6uMF019O9I4Xjdzn3D3F1a4zWS%2F4iip1UUW6kzIrmaZsUHXiyu117AnDFdygrmxQ65n9aj%2BZcBLR0UBa9sdUPLR5rwOUehFHH8S5hJTLatXIn03b3Rx7yrolU8Zz6qUiQ01kAJIBm14kwK1FbO3K8eFo6SAO%2By7vZqIGQ%2BfFz2%2B90Zfz3vTiwfzzJ7y4O30flcncrR%2B0oJQe%2BO7JOO%2FM%2FElxPZg8AL1USM8s54vxpwFUsjPFldGD%2BXfEpUQtoObYNqIeDv9KpOl0S3rK%2FvzriMsk2opBjn85hbhCRWUFbsQKbBTznDo9zn00Sr047TUDp9anshk4z1plBH6awLb4OXooRmALjD736exXgDdRoZ2Bx8Iwlm7ntcBtmWP7IXFt94ws5tSP5XkEcrpAKmxfgmHWgoKFlV32mbBy22WRqMAhC3TO%2BTQkY4ZLMEom76s4oiQyojjxpxGlgUt8to4FbTal7G9Z24MNSPosBz11Hon0%2BtwqvajSIc%2BBdq7bjTLBbDBLDLZz7Fdts11V6XWjWAiv02A5JBgVoNq4QqVTFZvNHhWgV7NpsrhLZZGRYZHpVyql83qtOttostkkgwwOk8yBlARBQNX2lU0mFyysDDJPkmKZBKjfIiNK80fAyQmZSWah0j8FYi%2Ffgw6cHBBVBJmz7xKXKvRFos%2FtQxeGPnB0QZQfNrOJp5AXiHwWxSQRejgOjymEgb3Avq3wF4m%2FLtvAg9Lzsor4uyTAzjoKX8EvBn5Ldu0fZIBuOOzabnudMtJhB7aCTcMOeuZWKThfGDxx9S8190Vu9zT5Wh9Y8CnEDEvqK%2FSFop8uu9LQ74Lgx5v9UWQOdEL6doaDCfYd0m4tUCDMlmz9rlu1ROfmuAK6LqB7vJqcsIQYA7TgTMsVyduMr2ypbvCmRQlc00FL%2FoYijgr%2FmvE3ZIt7ZIA2fIeECfKj6BMbVVWyTwwDOrzrgDAvjgnZckswH3tg3j7IcofwC5vbJmiqDfCERGMRpM7aV20OvxMHsCm9EDcyNxjjojJ9GbrpB4XyXihLL7ONgHOrI5Q9MiO%2BwrkunKVX00bAEdlxhQIFcT0QSy%2BajYBzoPMr8tsZjY9PUEg%2FMzyGU%2Feqo9riTef835tl%2F%2BeZ353fOlfuDbr9CJ%2BWZC8YJExiZ5vrHMxtAzcfmmoKRJp3By2sriYCjhaPj8WZBPbMDqINtJrOzwMZiM%2BGQdafD7Lx0%2F13TL88Lq9vpsubZfCp7%2F08fW7NBt6xSXrdVUchG8ODKZDQ3Rgu%2FfQKCZW%2BKrVO6yuRAKK9X%2BbKizywuzrWWnW%2F02wuhFaVp%2BsVs4KDOiBVSjZEF3Fuiy1tC1E2Z0PoaaRTuUrPIWZDaKAnjbiXG7woKh9iN0czKfByKlQgBGr9Kh9CPPbSK1cgBNraVT5EE%2BhLr22BwKKCKh9COPLyD0NFYD0%2FlQ%2FREP7yvTNAnQOG%2FwI%2FqNApocjL99cAtRRUJkxT8Mv35SAwUlZlwgjd40k%2F4hQh0IUHZsKos2hEUID7NFRxFAA9PsU8GDX7RVh45Gt7Twia%2F1BuVYdfiyQH7xGqAmtigPa%2FpL5dEk6dXERjq0hQOwkOIKFCBw2B80JhpHVtL03F1osjQ5PZFeTc%2BDv88vb%2B0g4737W%2FX8bB%2B%2FEpSIVZuVh1ofy%2BIoRAQnAnW4iTDpChuATz0Sdb7IFsn1MzRMLSKXXQGpTE4q8j%2Fpx11WM2%2B3M1kM%2FwqFoIt20SQBwDTG7LQA2JVGDU0I5kG0UB4RTgrpFQgxAAKQAJ9%2BRUOYW%2FePx5zQPCYoGB2mhZnfMSjCpuTU4VX43bY9jdwpJ2BK7Bpdx8EuZMmO2MVeNknMFPuUMJQoPrsyVlevKWKOWYFIG%2F9EA0uFCbcko3gL30MDSe%2BmzKL1U77vKD0AwwFGGroVFZGUWxQXpIGlzSp1zSKZecoLggigvSg9Tg8l45C0RBJxxV25WjUggxpIevgdX%2FlCPiuds%2FXiu0MD8EWM0rcUMkc1oZIAWBz7v5N4XVcqtu%2FiF0K5AqY2QDxkjd1Pc3Ru53pthLMkbCeRQOdpde%2FqhYZcDgZqjBTdGDOVEM3MeqALrGGCD%2FXDE4iiJKpNwoBI7aRfF0jLlPD6thll%2BeDtBoPn939v7x0%2Bf%2Fnv8a3TszuDbWOmFSCftGpjoCCr00LO0hO5Xagj4XV53XGi0qCiKFsZQRu5yxlXsVC1U4CF5tNfcBmfd4d0PUQq2DfuY41imHr4J3L3i5D%2FyqYQ6D58RX1%2BgcqO9oMGO7srilgqo6n7yJyCbTLBoToOPC6zQlGBzPQ93GTQn%2Btw%2B386twvJh2z78Of44f%2FDMKK5hxCMznsk%2B0pcpllXhbp%2FlBxjeBvxjULVymjbW7xJIoPJuMVwJ%2FMXyuZICd5TEeL1YPqE0GIoECGEyFcIm9uAnYWB7BYaGikG001AiEFpS%2Fju2HxLXdKxySwHbt9oaaCQO2yagh8CdDpvfjNcbUhCpv%2FA%2BqwcYGTldweQ0i9f4VcYvKcCqK2YM0QKGKmjety9HfTiJmGigCZYukPy5zQE0s6nLKBnPLzu6ZXpnqlmp1MKDa%2Bx9CVpPFm%2F1sbst827z3t6zi87IjAw8xjMAClU%2FijrIjLVuc11SvT8k6aPPAht8MKqir8mxrBoxsD%2FuuHbQOf3HINmkoAE9UgsvqBIRJ%2FKzk4pBSD9t%2B62CVPa2lZzZlivS2qkottSXIBr9Rm8PdgHqD34PxP%2FeLyXnn9oN3N9eAqa%2FOJ28Gem6rRB3h7PTj%2BO9fMxzN398ZwaC%2F%2FHF3C7hy2MiwYViv5Qp6MdBbvDJfWEUlS8UHCUGWt1Bm%2BdS1GpGFs9ICnByXaE9W6vmr18dlLqoN4b78bRhYJ5e9QoSvCvrac3edCkB5uHaqC3Ls%2F3Gwl0zekqlFQb0X1Kb0LVcH3HEnmYQFoAsugpylJap%2Fr%2BDfC%2F4u755LFwR%2FD57o0RL9doaDycoLlC7UlyszDOMFa1Jr9n6IH8CaDToLZ9hf2P%2FDOdBfFzdemdsvah7pJwOtdbDL3owZTS78YGVLUBow8c6G5ehW%2FTHxvBH1ovSk9KhvgdBLVwR6oFhIt2glz0q65Cvgnw08twogyvYG6n8Kd8G4mxqvrK8Bd%2FzO%2F%2Blq4RX5%2FQVdve99HXw9t0FZX0KUcWAQBCsAkgHJWeB4xya%2BD7sTvHVccuNgAcOQtgVsAxqSu3xfW%2BMcLmkcB5BFVfTSvW1anqFXzpRY0GXg4OSL60GG%2BkLlvsrVZJmyPMFhpa%2FdYRDsMqA0zN8e2PPpZ%2Bri6I7%2FAw%3D%3D%3C%2Fdiagram%3E%3Cdiagram%20name%3D%22Copy%20of%20version3%22%20id%3D%22c6Fw8WwCgGwhjSb6yBUS%22%3E7V1dc6M4Fv01rspsVVJIgMGPsdPpqZnObKZ7tmZnX7Zoo8SqweDF5Kt%2F%2FUrmw4CuE9lByMFKP4yRsRh0jqSrc6%2BuRvZs%2Bfw5DVaLmyQk0Qhb4fPIvhph7Dq%2Bz%2F7DS17yEuy4Vl5yn9IwL0Pbgm%2F0BykKy9seaEjWjRuzJIkyumoWzpM4JvOsURakafLUvO0uiZpPXQX3RCj4Ng8isfRPGmaLohRZ1vaLnwm9X5SP9spvlkF5d1GwXgRh8lQrsj%2BN7FmaJFn%2Bafk8IxFvvrJh%2FOyHF90%2FWne%2FfF68XFq%2FPj398vt5Xtn1Pj%2Bp3iElcdZt1Tiv%2BjGIHooGK941eylbkMThJQeCXcVJzAqni2wZsSvEPpJnmv2bfbYu3OLqL35VfL56rl%2B8lBdxlr7UfsQv%2Fyrr4xfbn22uyt9JtkLRWuvkIZ2T1%2B7DXsHHIL0nr9XoFjeSsMG1opk%2Fk2RJ2P8nu%2BFpy7Cymyxq3CrLUhIFGX1sMjQoiH5fVVc94Tah7I2xVfTKc2Q7RU0vZT%2B1mpXkL1%2F8rs4JoSrPfqOqvHWEqtiH2qtvizak24OA9ukS0PYl%2BYedI%2BMfxpMGafAYH8o%2FNGnyD5et0hP%2FnPfy70AuHcLbjvnnY0n%2BIQsdGQE9r8ma87F3%2BAiIW3V5br9DoCtQsERwy8GMPGdN4q2zNPmbzJIoSbfEvKNR1CoKInofs8s5Iw1h5dNHkmaUGUiXxRdLGob8MdOnBc3It1WwIc0TswdZWZo8xCEJDyIgfxB5fpUvO6ehc29cFNQohQBKYWs3expA7YvKWETl4uIfpwcMdlvA2CIwuE9gPE0j9n5t%2FOagWo6%2BxzOmtrtg1d8OsSpxqy6r3zHVP7T3yvfKlKzpj%2BD7pirOjxV%2Fl83budORe8XresiSdb4iRv2OnsgTO6ndZyedHDSnfcjGd4XGx7beEbLst6fQ%2Bo7nHlvro9Npfey07XDdjS8KWtaAB%2F6q%2FXWN80jUbwZL9vYs6%2FiaLWEkihdDJrsgVbq6yX%2FYyv1DNr5g5dhA6%2FfLfnGFPmT2C4YOBEC%2F9BdX4oOlf9vQwbpVEHRaK9x2%2B9uAPNgv%2BU9nhYuttkI%2BwZrZX1Z8Aq2PJm679Se6W19c4QqNLynB1gXYmh77htMMXViWLe024xe3JKXs5TnoKsRcZBXGyLGoudhC%2FoU32f55TQ75%2FrhZp7S2iy3LatfVr7Zbsu3dMQMCjS7weKKYSsdCEORi%2F8K3tn%2B4CaqNXdY64%2BprdCBdkOM4Qs390uW9ISYfFuBmkMbWjX8IiPYbdakGUZQ6fqbrLElpEM0iGtN5IoC6fqLLKMjdr0mcfSu%2BwTKGQJZwJ%2Bt8QaPwS%2FCSPHBw1lkw%2F7u8mi7Ys3%2BwaoOt3zdIsyIAEo8bd3zjvyyGi41lQW5LNqGq6Euwzop75kkUBas1ze0PfsuSNS%2BNp0mWJcuyooYHuApO3FxsXNBlvKPolB4xW3nzN2p6pln59fVs9mmsdiXbFo0dZyIYNI4F9A27PWsB%2FeArmWdBfM9arnokbmkXCFBN0RiyoFqPCyLGljjIyJS3%2FVoJ0UVNaYSnNORsL4luX7IbvmUpje%2FZh7N%2F%2FfqTwP3C9i15HpG7bCfL16tgzqr6srnnytmWfC1aghcl7Ld30YZhC2Ykk3jDwCzIdhrJU9agM27TMXMZz9g12l5vLOhVkmazJGbUDOiGY4T1gCfCe8Fr5C5G5j2m3mrweJukL03g3yJkmyDdmdiiuMVocEfmi2CWEoZOEuc0uGJsNOh3i76LdaMPxbhMAzZXzUnIp6x1YwyY4dGlZUjQLQk8XzcJRIWPkWCVJowDdEnZ%2ByaGBsppgCxHNw9EpZHxICVzVn%2B4mQnMcNADDwDBv18e2KLmyceDNf3fAw1YizU44F4ZAnRMAFe3TWhDsuuU48JNguaqwGDfKfZlsK4%2B7CHNc3qXpMuHKLhhBsG86P%2FXjSJs8YbnfkEzIHS%2BRrR0W4i2hLIZ0bacKYpDbzCgcooVkP%2FBGXF1jgRa2CItbIACUfCdRLfJmmabVexVmt8L%2BNheQ18drrasxYdV4QptSpvO2bo%2FrclAZzS83Y79%2BcD%2FUz4IPCas%2FqF1d3WAy87spQXWPeCg6MeG8MwgrgRxXxZxRxXioL73PUlTg7gKxG0gYgVGXNlkDWp67A0M3Arg1j%2Bki%2BpdyzRvYbnDW2mNjLeSeyULb6UkYzrwSsoOGMIuSTmfZDuFhw1sJqh28Wn2SdqgAknDa3H5abyS0hytRoiP45V0QAly45UsuGAckyoJoN0x6YAS5HIzACy5R%2Br6Jkf%2FkhmyL1%2BYZTPC44i33E3tnuY8OL7fmgKGKl1RRbv70oEUSyNOvRNWaXekrwpWSHPMtaltvz47bEQYcTLayKq%2BLAeHIa%2BBgMww6tiDJCeQdhKu7ugDSpvsDWrkaRuWzBKv2ZaGCx1xAdg%2B2PMMAaqeuQZWo8PJskEd9J7sQkKV%2FOlA8mcLvqGm3UPl1sE3dxWVyB7NlgLcSrvntLeYye8oEDZ09px0z3l3GrGPm3jUkU08WlH1eBjYos3Ya1kqhzNw3PO%2BJEdUiGsmsUBGow9r1odLFbSkiy%2B5wkYefpPnH1wgdnYIxHU%2BG3l4v8Hc%2BXjysAvKw3Gy%2FJ6SXVQYZrCyMoy1K8AuqADPgzijYRBe0fUqifORnoNcTp0G248g2ZbkMpJtl7BKS7ZI1WrbBTXbOMnoHcMlnRWd9yyPQuESyzz%2FNEuSNKQxm8fSIQsth8tuB7ABae%2FloAQbUW7x12bptUiHOgeGOW%2F3ygRH984y15w8wNMFN%2FPqjXXntnJFbdSgMh6Lw2a%2FqIh6YRWqaaSa3VJN%2F%2BlFJkI%2BdllPl9s%2BREZOqUG2hFJzJOlFXHBTeSPs2Mg0%2B4xt1bjQvUyjbDkAqnW5TLM220jVIa%2Fd4z4GBbpgxX5Kw8RgrxB7aZe7MuxB4Y4sAxoZ3NXhjsrEivqAh1Q9ZunFrLXWJA4M%2BgrRx7rVnjGo%2FYU0JfNtrL4BXwn4rm6BZwxKfSQMwuG6Z3SDDiz%2BegYdDKvcbNL5jYGTZw4z%2FV7hAs%2FSbuuBu8szwpBMYoO9SuzLRD36sAf3meer%2BxkXBedZ8mlJ0nsSz%2BmwjT91KLvazTpQxyt7uMG5I5x9WQtO1X6ZMajVLdqpz4eMruYR3ZbdM6Wsr3ugarcj8aNBv1v0bd0jvQcH3NGswH3GP7E2NUn%2BlOA%2Flp0BVHlryuhxE5TXKa7S0fvK%2BvXujdSlM%2FZsyEF3u08kUQa6oz2Xt7dDkOOJ%2FirUyw9DRl8dxtrzdHtwMseILmlsUO4IZe3JuD1QYmNvYADuBGDtGbc9UGEJ1gwS1ourxVcN5qGBW49ddJQh7cqm0VaWqtEDNZZVmtynwTJI%2BQLLdOZ3QSy7iC7F884h9iEJpQVfh2dAvrkDv2zDo9lX7%2B0Mmt1%2FY71ntw%2BL9L1mXYp31vuiZCITQf8hT4cWgMOWaAD3Gilfztz1SPmtVtmGwRzSeZyHdApR9B6SXFi5rzFrdxQ9LqNl2glhjjCK3ge1Gxre7tDkTRz9mxStRo2Pk%2B7AB8UcE0evHHntSRB8UOIxcfQ9YK89SYIPCj8mjl4x7vrP4fTBwCoTR98L%2BtpVfR%2BUA9fk2QTfqMRdu87vg%2BKg2T%2FRB%2FjafQATMPLK7J9QuarTfqrmBAy4AvdPmDNOFBBA%2BvhNZQQQBUxh94Tp%2BQr0HN023gSU9eBg65%2FbpeaoZYXUkD2vUx014CN5iwxpeSBuccFb1lCgawroD8OfgKLfqpE4Z5sSyjIx2cqooD0mfwJqgMt2iuNGOndDCHWEkA7SV0YIidMkTj1I%2FwBcJ5IWIVK1%2FW4Cqn5FvPY2BnC%2BzZPLen4ta%2B4VmYmpU4fW%2B5Xh70hrAao230xA9S%2FfpGHg72gjxwHEkN5lr2pgQBYoDeaHlxlqKB8ZZLUCZUHDaOdJhgZ95ejL2gXq0LdEkbhKl96C0UQ4fpAIR4RkQxzt9qljwwtxrPIWtqLbaFYTwIcZ1yhLOUuedMcSsoisHUeBbLID1dVM49JWwgDtoYtVHJUJaOgffe3Bi8gCRWzj21SNvP7wRWTtL1obxVoZH7QHNCILjGdtp5WqbWkxbFDGBu1hjsgCle6agNGwDmdiuXF7q6GG9iBIZEEieAvmU3duHbIYlPVuKPNuVXoH5N4q%2BrXRMFXBLysGOB04t%2BaX%2F%2Fl%2Be2N%2F%2Fez889F%2B%2BIz%2FfBwvz0Hw2QuUyA8Z13c7rQ5B3JOVFzsYykHEwcjmGfdmGszVYG7L5oJXhjko4y6TsDj71%2BCuBndH0mzrAvcdkzvgogJmbwFu46%2FaeXrl1YT%2F24M40rQpvVLYwW2vlCUtFZRu0QF7pRA4nM1J%2BBDVTys3KrY0RdH%2BdozuAywRgnPnmmj83jig%2FShLhOBUujwPw86B4LT91fujLH1opbqeDvqrtkkXzJjfT3%2Bv4h01UgHyXxkZ8t3IYlnPZAfBdP89X%2Fy4Xl4THPydJb%2F9MqPOU7hbh9r2bbM%2B7Rp1RxL1LtanIOqvaFEniXuRc1Yh5LInUyqDHFy7Fd6Gk8S8n75enWGiDXhwubbVIE8Se%2BX9XTrW0FbnXxQ9x7XwouskXT5EQV4ioL1DhrROUYYURo3r6z1HDWnyVOHxjtMUIm3pg40Py%2F9rSzwPeUciQ2LQZs3DqG%2FaEXUDXZJKj1wTafIdTZg8Bq3TkK3ihp3cVR2m%2BgPfS7mgldcrJfMHc0Tu4cDqj2nHoHkZ0mD9R8ra8wQOvFeH7hHErWM49VIQZzQMwq8ko2kQBsPduqAQXP1B6BjS942o%2B25kZQPKkTK5HoPbTVJu%2BJ%2FRsGkkl8Mye5QFGFm8eNc8zb8b8WfZiAPzyqg%2FZGlBIZNkgxadV1Z972SSuFFlc%2Bi1UQykA5c0bKd3pZM0tE8ak9MLXLf5POQAesGxhC1hcHcNDWfVMe4D3k%2Ffre8a73384BHICWAaqU1K6S0DZkFE4jBIB4e%2FOmT1iwo2KASuUsrmgipN%2FDRJIhLEgwNWrmO%2FX7zenxj6RQkbVBCb2WIHqkboHu%2BPQLMo89PV0G9vrDbgqwFfWtNQ5vW0RT2StQ1riO1cb8BXA74rO%2B6rAx9SK42g9W5kZU8AQMpkCBsORd5ErPEj4oP7jfl%2B9pMRmg5CeKJ9mWaDkiWPRGX4rgcdm6QOV1wOgBpxhU9uDOI5iYrO25JiDNQHQe3oX3a9krC9CXTDuVBTYviZXgb%2Bg%2BD3ZNddWBX8DrjqZogys%2FTkOnrdB7BntOkB4Oufvsst9y3wC7OspbaW3dwg%2F17kbekJfv9FF7tMkySre2PSYLW4SULC7%2Fg%2F%3C%2Fdiagram%3E%3Cdiagram%20name%3D%22Diagrama%20final%22%20id%3D%22FrsxtxkQGmtcyb0vWY6F%22%3E7V1bc5s4FP41nml3Jh0ExtiPNU67M5vdyTTd2eRRAcXWFJAr5Njur1%2FJ3AzIjuxYJo2VPgQdhCj6Ph2dG6Tn%2BPHqK4Xz2d8kRFHPtsJVz5n0bLvft4b8l5CsM4kNXCuTTCkOMxmoBHf4F8qFRbcFDlFa68gIiRie14UBSRIUsJoMUkqW9W5PJKrfdQ6nqCW4C2DUlv6HQzbLpcCyqhN%2FIjydFbf2ijMxLHrngnQGQ7LcEjnXPcenhLDsKF75KBLTV0zM%2FXKdht9%2F3vxwpiv%2FbvwwCL%2FdX2WDfTnkkvIZKErYaYfuZ0M%2Fw2iRT1j%2BrGxdzCBKws8CCN5KSMKF4xmLI94C%2FBCtMLvnx9YnN289iFZ%2BPFltN9Z5Q%2FFp8qdOyYIGaE%2B%2FYd4RhTUm5JPwFZEYMbrmHZYV%2FgWJZ1vIFzKKIsjwc50%2FMKfhtByuvMMtwfw5bCtfM1fA8%2FKR8jVzNSgExSjZM%2BUXbkPWHstpjOUNG2MxSKeItcbiB1sPX4k2pDiAIG6LIKDFEIZWrE6LlFHyA%2FkkIrSizROOooYIRnia8GbAqYC4fPyMKMN89X7OT8Q4DMVtxssZZuhuDjdUWHJlxWWULJIQhUfRStwIrfbypQLB3gXCFqWAhFK2tZs9NaAORWXQRuXTpz8MMAOnDYx9TmCGxwKjPuEUpfgXfNwMJaZ3Lpb%2B5jnccc%2BdiLEWjKTZTgzOO%2F92e%2Fqdc04%2FGB2lrn7HybetfmPyR6OOyV8MfCHsHw3clwE4K%2F0Lsh9vziX8v3FfGG2i8VAZd6JZWXSb1nEm3Vux1GzLbS6hAtLDLbWR3WRDcyzdlprXAv8WBlisqBYJ0iWOI5ht%2FiRhd%2FkZS2UpMiK2%2BGCGo%2FAGrslCgJIyGPwoWuMZofgXHxZWVgekLPcN7UGtx524Mr%2F1Zm2j24JFoBTdwJTlfQISRXCe4kwDiC4xn1acjAljJC4Gqtkfpd9mlQZQ4QqChvXTs50vX3z%2FeqBXcTSMetBWG31Lwvu%2BY7%2FI8W%2FciYbJlM9OeUPQuJ0js14HMj01qN8ORpwRCWRoLOY31ULitgHVs8c4LJnsfOZn7xjFyZQffPj3r4%2B7tpeCyBF6YjtpnHLDlQ91s%2Bkz6VeSb%2Fk0CBHh1z5FGwrN%2BD6Ekg3FGGQ796Exn01fqE2%2BI9k%2Bb4Oqvdmk5oQynyScjRBv6IU4xZdI0Hwfe3NVfYDKLbXCy%2Fxc11F%2FiY12X9Mu5raNOM6BhMSPVESStglgkD8l8q6iHmrqhdO5tW0DkiMP5%2FxSHBKDvUbsPdVVrw17me06RjHEkcFdH%2B7AsrsG3pEBH2KKggCTxICvEXx72DX4sgTEGIUwzHAvfCUD%2BulAd%2Ftdg95OKnDQn1Awg%2F9wcGJh6ROz7jVSQOIBnpkC7QwGpwBDHEmSGOx1undW55ZeO1BV%2Bne%2BCAoFjFzHiE5REmD4rrmgD%2BUiVNQdytJITrHCDc4nwtlVteCGmnD2bAnODfgi3Ew0tMOwL2BbJoByML8LrCdXoAW40wbckYAbwUcU3ZIUs42PMaFZX0k%2BqRtch4paGuhav57ULQsogrQIxn74mC3aZ8JHem9LVlopoQ1vp3M33NvhiWF2IYDrw7ZzL9uTOlwo4q5WYtB9Jbqdu9Oe1JfiT2CAfRWwnTvJniwR1oBPsZyjquB42D53knKOrK5hT7%2B3V6G7IwF%2FTH2uUxvpqlnqq7noo%2BDoBRS8Aa9ZYQO6LngbtnNWtyn%2BucCQa6oWDDuKbmwVPN5b0U3duu5x%2B3fz03sL5ThXA%2BWCnKbiUCvIsQuToTQh3m5BzlDm3ouCnIrnpiTnsG1zqM7RQ0tydFkiQ2kwwJTkaEfe7TosMJSGBUxJzhmw97oOGwzlYQNTkqMXd2B1HVEYSjN0KVqZzKxO3CUvr50Zd2nOzpRinQN8t3MbT1p2bUqxdIJeeFedgT5qx492lWJNoORFIkOA1zl2Vtc23khadl0vxDIr%2F%2FTAO13beCNZ1qgB8qXXbRwTqVG04YCuepyR1HbP8%2Fhl0M6kBI9CV9kl1%2FVu3EhqoWdVOZcB7mvqcg5HXL0uR9t6lprlj4TSi4FcH7qqHrezJ8%2Fzug%2BWWFIDXBRvGGxfh%2B2%2BnVgDjm072ufmEwehBZnJA7%2FRPHCrvgCoumfOPvX%2FPhLB5YuijRwgZltO4vvM%2FqpSzjrCXVC0LnR5gcDak9ktFJgJ%2B%2BpjQOcJ3jLbZIL%2B50e%2F8xQvsKQ5XhP%2F041890leYCmUF196BPAYZFWdSm0hQACkTmUWA8w3deNUHgduX1Fj93VFAAGQZmz4I1wCsqrfL9bIgJGixeZoU9xA6on5Igh8sRwod%2FBD3kE4wmFTfZdPI%2FpSjy0mIX7i%2BBkGaDbc7IGi4aaRAW2PzSeEhjjhM0AnyAQeXw48NsKLk5H4pzO8aPebHxvmelzVUmy%2BVfYOw4tA6ogGKFxEcIvdJhyhTNFSTfw%2Bn34FQPouc7AdiCy0m5had2I4cGIOdP4RWADkFSzitYOdiuCyEw%2BHo6z8uVd9K11eycLNAwpTlBidf6b1XlYgdEgFE4jUgqytGmI%2BvCqCN6s%2FfJfZgNUfEHSu%2Fwc%3D%3C%2Fdiagram%3E%3C%2Fmxfile%3E)
 
